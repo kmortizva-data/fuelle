@@ -36,11 +36,31 @@ antes del commit.
 | `## El código, por partes` | Bloques cortos, cada uno con su anotación y su salida real |
 | `## El resultado, medido` | La cifra del módulo, su figura, y qué se esperaba frente a qué salió |
 | `## Ojo` | Las trampas, en viñetas con la trampa en negrita |
+| `## Hazlo tú` | **Obligatoria si el módulo declara `reto` en el temario.** El ejercicio que se resuelve en la propia página |
 | `## Puente metalúrgico` | Analogía **solo** de metalurgia y beneficio de minerales |
 | `## Repaso` | Cinco `### pregunta` tipo entrevista con su respuesta modelo debajo |
 
-El módulo 16 entrega el proyecto en vez de enseñar una idea nueva, así que cambia el ejemplo de
+El módulo 35 entrega el proyecto en vez de enseñar una idea nueva, así que cambia el ejemplo de
 juguete por `## El arco del proyecto`. Es la única excepción y el verificador la conoce.
+
+### `Hazlo tú` es la sección que impide que esto sea un PDF
+
+Veinte de los treinta y cinco módulos la llevan, y el temario declara cuál. La regla es simple:
+**el lector escribe algo y la página le contesta si está bien**, contra los datos reales del
+compresor. No es un cuestionario de opción múltiple, es la consulta corriendo de verdad.
+
+Cada reto lleva tres cosas:
+
+1. **El enunciado en una frase**, con la respuesta esperada bien definida (un número, una tabla
+   corta), nunca «explora un poco».
+2. **Un punto de partida**, que es la consulta del bloque de código de arriba. El lector nunca
+   empieza desde una caja vacía.
+3. **Una pista plegada y la solución plegada**, en ese orden. La solución se ve siempre: quien
+   se atasca no se queda fuera del curso.
+
+La comprobación se hace **contra el resultado, no contra el texto de la consulta**. Hay muchas
+formas de escribir la misma pregunta y todas valen. Comparar cadenas de texto sería castigar por
+no adivinar el estilo del autor.
 
 ### El ejemplo de juguete es obligatorio, va primero, y en SQL es literal
 
@@ -142,34 +162,50 @@ está en `src/ingest/LEEME_failure_reports.md`.
 
 ## 4. Página y diseño
 
-El curso vive en **sala de control**: fondo oscuro nativo, rejilla de puntos, nodos unidos por
-líneas, tipografía grande, números en monoespaciada.
+El encargo de Kevin, textual (2026-08-29): **«no muy escandaloso, que parezca ingeniero, pero que
+demuestres habilidades, que no seas un pdf que se lee de recorrido»**.
 
+Eso se traduce en una regla que ordena todas las decisiones visuales: **la sobriedad va en la
+superficie, la ambición va en lo que la página hace.** Nada de efectos que llamen la atención
+sobre sí mismos. Todo el esfuerzo, en que se pueda tocar y responda de verdad.
+
+El curso vive en **sala de control**: fondo grafito, rejilla de puntos discreta, nodos unidos por
+líneas, números en monoespaciada de instrumento.
+
+- **Los colores no se eligen a ojo.** `src/site/palette.py` los genera en OKLCH y mide el
+  contraste de los treinta y cinco acentos sobre **los dos fondos** antes de dejarlos entrar en
+  `temario.json`. El croma se mantiene bajo a propósito: son colores de instrumento, no neón.
+- **Regla de forma, no negociable.** La serie medida va en línea continua y la simulada en
+  discontinua. **El color nunca es la única pista.** La primera pareja de colores que probé
+  medía 1,22 de contraste entre las dos líneas, o sea que en una impresión eran la misma; por eso
+  el script mide ahora también la separación entre series, y falla si baja de 1,8.
 - **Una sola gramática, tres instrumentos.** Misma rejilla, misma tipografía y los mismos dos
   colores en todo el curso. Cambia el instrumento, nunca el idioma visual.
-- **Una lección no lleva más de un instrumento.** `check_motion.py` lo comprueba, y el
-  instrumento de cada módulo está declarado en `temario.json`.
-- **Los dos colores fijos** son lo medido y lo simulado. Están en todo el curso y no se negocian
-  lección a lección.
-- **Cada módulo lleva su acento y su cifra** en la cabecera. Los dieciséis pasan el contraste
-  **en los dos temas** antes de fijarse, con `check_palette.py`.
+- **Una lección no lleva más de un instrumento**, declarado en `temario.json`.
 - **Dos bordes derechos como máximo.** La medida en píxeles, nunca en `ch`. Listas sangradas con
   `padding`, no con `margin`. Tablas al ancho que necesiten.
 
-### Las animaciones tienen que ganarse el sitio
+### El movimiento es el sospechoso, no el protagonista
 
 Tres condiciones, sin excepción: **estado final visible sin JavaScript**, quietas con
 `prefers-reduced-motion`, y sin librerías externas salvo DuckDB bajo demanda.
 
 Y una prueba antes de añadir cualquiera: **si se quita, ¿se entiende peor?** Si la respuesta es
-no, es decoración y se va.
+no, es decoración y se va. Con esa prueba ya cayeron dos ideas que parecían buenas: el punto que
+viajaba por la tubería y la aguja que subía hasta la cifra. Las dos eran lucimiento.
 
-### La consulta viva
+Quedan tres, y las tres explican algo que en texto cuesta un párrafo: **las dos curvas
+separándose** cuando empieza la fuga, **la perilla del caudal de fuga** que recalcula el ciclo del
+compresor, y **el tramo del grafo que se ilumina** para situar qué construye cada lección.
 
-Siete módulos la llevan (3, 4, 5, 9, 10, 13 y 14), declarado en `temario.json`. El motor se
-descarga **solo al pulsar «pruébalo»**, nunca al cargar la página, y la lección se lee entera sin
-tocarlo. La consulta de partida es siempre la misma que el bloque de código de arriba, para que
-el lector empiece desde algo que ya ha entendido.
+### La consulta viva y el reto
+
+Veintiuno de los treinta y cinco módulos traen interacción, y veinte de ellos un reto
+comprobable. El motor SQL se descarga **solo cuando el lector lo pide**, nunca al cargar la
+página, y la lección se lee entera sin tocarlo.
+
+Esta es la parte que responde a «demuestra habilidades»: un curso de SQL donde las consultas se
+ejecutan de verdad, contra los datos reales, y donde la página sabe si la respuesta es correcta.
 
 ## 5. Proceso
 
@@ -180,14 +216,17 @@ el lector empiece desde algo que ya ha entendido.
 
 ## 6. El orden exacto para una lección nueva
 
-1. Leer lo que `temario.json` le promete al módulo: título, cifra, instrumento, scripts, figuras.
+1. Leer lo que `temario.json` le promete al módulo: título, cifra, instrumento, `reto`, scripts,
+   figuras. Si declara `reto`, la lección lleva `## Hazlo tú` y no se cierra sin él.
 2. Escribir y correr los scripts. **Guardar la salida real** y las cifras en `results/`.
 3. Diseñar el ejemplo de juguete, con números que salgan redondos a mano.
-4. Escribir la lección entera, las diez secciones, en español.
-5. Escribir la gemela inglesa, con los mismos números y los mismos bloques de código.
-6. Generar las figuras en los dos temas y **mirarlas una por una**.
-7. Los verificadores en verde, con un solo comando que sí falla:
+4. Escribir la lección entera en español: las diez secciones, once si hay reto.
+5. **Resolver el reto uno mismo y guardar su respuesta esperada** en `results/`, para que la
+   página pueda comprobarla contra el resultado y no contra el texto de la consulta.
+6. Escribir la gemela inglesa, con los mismos números y los mismos bloques de código.
+7. Generar las figuras en los dos temas y **mirarlas una por una**.
+8. Los verificadores en verde, con un solo comando que sí falla:
    `.venv\Scripts\python.exe src\site\check_all.py`. Correrlos en un bucle de shell no sirve,
    porque el bucle devuelve cero pase lo que pase.
-8. Reconstruir el sitio y revisarlo en el navegador, en escritorio y en móvil.
-9. Commit.
+9. Reconstruir el sitio y revisarlo en el navegador, en escritorio y en móvil.
+10. Commit.

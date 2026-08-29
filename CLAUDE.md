@@ -7,13 +7,19 @@
 
 Kevin aprende ingeniería de datos desde cero (pipelines, lagos de datos, SQL, administración de
 bases de datos) construyendo la columna vertebral de datos de un gemelo digital. El resultado se
-cuenta como curso web bilingüe de 16 módulos, con el método de Sílice.
+cuenta como curso web bilingüe de **35 módulos**, con el método de Sílice.
 
 **El hueco que cierra:** sus cuatro proyectos publicados (Froth, Sílice, Geoestadística,
 Concentra) consumen datos que alguien ya dejó limpios en un CSV. Ninguno muestra de dónde salen.
 
-**El nombre es provisional.** Fuelle, o «Depósito / Reservoir», o el suyo. Decide Kevin.
-Renombrar la carpeta después de crear el entorno rompe rutas, así que se decide antes de la fase 1.
+**Nombre CERRADO el 2026-08-29:** Fuelle. La carpeta no se renombra.
+
+**Sin tope de módulos, por decisión suya el 2026-08-29:** «no te limites en el número de módulos,
+lo que importa es que se explique todo y que cada módulo dure lo que tenga que durar, pero que se
+entienda, de esto no tengo ni las bases, es aprender haciendo». Por eso el temario pasó de 16 a
+35: SQL creció de 2 módulos a 10, y entró una parte 1 de bases que antes se daba por supuesta
+(qué es una tabla, un tipo, dónde viven los datos). **Si un concepto necesita su propio módulo,
+lo tiene.**
 
 ## El mundo del proyecto
 
@@ -91,31 +97,62 @@ rayas y cero emoji. Analogías solo de metalurgia. Bilingüe de nacimiento con p
 
 ## Identidad visual: sala de control
 
-Referencia: Webflow, con carta blanca de Kevin. Fondo oscuro, rejilla de puntos, nodos unidos por
-líneas, tipografía grande, números en monoespaciada. **Un pipeline es literalmente un grafo de
-nodos**, así que la estética no es decorativa.
+Referencia: Webflow, con carta blanca de Kevin. **Su encargo, textual (2026-08-29): «no muy
+escandaloso, que parezca ingeniero, pero que demuestres habilidades, que no seas un pdf que se lee
+de recorrido».**
+
+La regla que ordena todo lo visual: **la sobriedad va en la superficie, la ambición va en lo que
+la página hace.** Fondo grafito, rejilla de puntos discreta, nodos unidos por líneas, números en
+monoespaciada. Un pipeline es literalmente un grafo de nodos, así que la estética no es
+decorativa, pero tampoco llama la atención sobre sí misma.
 
 **Lo que queda vetado por repetido:** papel claro (Sílice, Geoestadística), scrollytelling de
 panel pegajoso (Geoestadística), telón y Lenis (la portada), acento único por curso, y los cuatro
 acentos ya usados (amber de Froth, iron de Sílice, mint de Concentra, gold de Geoestadística).
 
-**Una sola gramática, tres instrumentos.** Misma rejilla, misma tipografía, mismos dos colores en
-todo el curso. Cambia el instrumento, nunca el idioma visual. **Una lección no lleva más de un
-instrumento** y `check_motion.py` lo comprueba.
+### La paleta se calcula, no se elige
 
-| Parte | Instrumento | En el temario |
+`src/site/palette.py` genera los 35 acentos en OKLCH y **mide el contraste sobre los dos fondos**
+antes de dejarlos entrar en `temario.json`. Croma bajo a propósito: colores de instrumento. Los
+35 pasan AA en claro y en oscuro. Salida en `results/palette.json`.
+
+**Bug cazado por el propio script (2026-08-29):** la primera pareja de colores para el gemelo
+(`#8FA9B4` medido contra `#C08A4E` simulado) medía **1,22 de contraste entre las dos líneas**. En
+la figura que remata el curso, alguien daltónico o mirando una impresión veía una sola curva. Se
+rehízo separando los dos colores en luminosidad y por tema (ahora 2,21 en oscuro y 2,24 en claro),
+y se añadió una regla dura: **la serie medida va en línea continua y la simulada en discontinua;
+el color nunca es la única pista.** El script falla si la separación baja de 1,8.
+
+### Una sola gramática, tres instrumentos
+
+Misma rejilla, misma tipografía, mismos dos colores en todo el curso. **Una lección no lleva más
+de un instrumento**, declarado en `temario.json`, y `check_motion.py` lo comprueba.
+
+| Instrumento | Para qué | Módulos |
 |---|---|---|
-| Lago (1 y 2) | Grafo de nodos | 8 módulos |
-| Gemelo (3) | Doble trazo, con el área entre las curvas pintada | 3 módulos |
-| Cifra de cabecera | Carátula de instrumento | 5 módulos |
+| Grafo de nodos | El linaje de los datos y qué construye cada lección | 13 |
+| Carátula | La cifra del módulo | 15 |
+| Doble trazo | La curva medida contra la simulada | 7 |
 
-**Cinco animaciones, cada una explica algo:** el dato viajando por la tubería, el doble trazo
-separándose, la perilla de la fuga, la consulta viva, y la aguja llegando a la cifra. Las tres
-condiciones no negociables: estado final visible sin JavaScript, quietas con
+### El movimiento es el sospechoso, no el protagonista
+
+Prueba antes de añadir cualquier animación: **si se quita, ¿se entiende peor?** Con esa prueba
+cayeron dos que ya estaban en el plan (el punto viajando por la tubería y la aguja subiendo a la
+cifra): eran lucimiento. Quedan tres: **las dos curvas separándose**, **la perilla del caudal de
+fuga**, y **el tramo del grafo que se ilumina**.
+
+Tres condiciones no negociables: estado final visible sin JavaScript, quietas con
 `prefers-reduced-motion`, y sin librerías externas salvo DuckDB bajo demanda.
 
-**La consulta viva:** DuckDB por WebAssembly, cargado solo al pulsar «pruébalo» (unos 3 MB la
-primera vez). Quien solo lee no paga nada. Siete módulos la llevan: 3, 4, 5, 9, 10, 13 y 14.
+### Lo que impide que esto sea un PDF
+
+**21 de 35 módulos traen interacción y 20 traen un reto comprobable.** El reto es una sección
+obligatoria (`## Hazlo tú`) en los módulos que lo declaran: el lector escribe una consulta y **la
+página la ejecuta contra los datos reales y le dice si acertó**, comparando el resultado, nunca el
+texto de la consulta. Punto de partida siempre dado, pista y solución plegadas.
+
+**La consulta viva:** DuckDB por WebAssembly, cargado solo cuando el lector lo pide (unos 3 MB la
+primera vez). Quien solo lee no paga nada.
 
 **Las figuras nacen en dos temas** (claro y oscuro) desde el mismo script, con el patrón que
 Sílice ya usa para los dos idiomas (`figures_i18n.py`): un `figures_theme.py` hermano cambia solo
@@ -123,17 +160,26 @@ los colores y manda cada `savefig` a su fichero. La geometría y los datos no se
 
 ## Estado
 
-### Fase 0 (en curso)
+### Fase 0: COMPLETA (2026-08-29)
 - Carpeta, estructura y git en rama `master`.
-- Dataset descargado y descomprimido (209 MB), y **verificado contra el PDF oficial**.
-- `temario.json` congelado: 16 módulos, 4 partes, 7 interactivos, cifras «por medir» salvo tres.
+- Entorno `.venv` con Python 3.12.10: duckdb 1.5.5, pandas 3.0.5, pyarrow 25.0.1, matplotlib 3.11.1.
+- Dataset descargado y descomprimido (209 MB), **verificado contra el PDF oficial**.
+- `temario.json` congelado: **35 módulos en 7 partes**, 21 interactivos, 20 con reto, cifras «por
+  medir» salvo las seis verificadas.
+- `src/site/palette.py`: los 35 acentos calculados y medidos en los dos temas.
 - `src/ingest/failure_reports.csv` transcrito literal, con su LEEME de erratas.
-- Pendiente: `MANUAL.md`, entorno 3.12, alta en `_INDICE/projects.json`.
+- `src/ingest/inspect_raw.py` corriendo, escribe `results/m01_raw.json`.
+- Alta en `_INDICE/projects.json` (y de paso se registró Geoestadística, que faltaba).
 
 ### Fase 0,5 (siguiente, y es una puerta)
-Maqueta visual de **una sola lección**, con el grafo, la carátula y la consulta viva funcionando.
-**Kevin la aprueba antes de que se escriban las otras quince.** Existe porque descubrir en el
-módulo 9 que la dirección visual no convence costaría rehacer nueve lecciones.
+Maqueta visual de **una sola lección**, con el grafo, la carátula, la consulta viva y el reto
+comprobable funcionando. **Kevin la aprueba antes de que se escriban las otras treinta y cuatro.**
+Existe porque descubrir en el módulo 9 que la dirección visual no convence costaría rehacer nueve
+lecciones. Con 35 módulos, esta puerta vale el doble que antes.
+
+**Candidato a lección de muestra: el módulo 13 (GROUP BY).** Es el que mejor enseña las cuatro
+piezas a la vez: tiene cifra de cabecera, grafo, consulta viva y reto, y su resultado (las horas
+de carga al día) es el número del que cuelga todo el gemelo.
 
 ## Riesgos declarados
 
@@ -151,9 +197,20 @@ módulo 9 que la dirección visual no convence costaría rehacer nueve lecciones
 7. Red corporativa con SSL interceptado: inyectar `truststore` temprano. Consola cp1252: forzar
    UTF-8 en las salidas de Python.
 
+## Decisiones ya cerradas por Kevin
+
+| Cuándo | Qué |
+|---|---|
+| 2026-08-29 | **El nombre es Fuelle.** No se vuelve a preguntar |
+| 2026-08-29 | **Sin tope de módulos.** Cada concepto dura lo que necesite; prima que se entienda |
+| 2026-08-29 | **Dataset MetroPT-3**, con C-MAPSS descartado a sabiendas |
+| 2026-08-29 | **Stack completo por fases**, incluido PostgreSQL con instalador oficial |
+| 2026-08-29 | **Los cuatro entregables**: panel, curso en el portafolio, repo público, informe de un folio |
+| 2026-08-29 | **Diseño sobrio de ingeniero**, con la ambición en la interacción y no en los efectos |
+
 ## Decisiones pendientes de Kevin
 
-- **El nombre** (Fuelle / Depósito / el suyo), antes de la fase 1.
-- 16 módulos, o 14 fundiendo 12 con 13 y 15 con 16.
+- El visto bueno a la maqueta de la fase 0,5, antes de escribir las 34 lecciones restantes.
 - Si el repo público lleva también las lecciones o solo el código del pipeline.
-- El visto bueno a la maqueta de la fase 0,5.
+- Con 35 módulos, si prefiere que el curso se publique **por partes según se cierren** (la parte 3
+  ya es un curso de SQL entero y publicable) o de una vez al final. Recomendación: por partes.
