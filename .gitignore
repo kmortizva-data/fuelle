@@ -1,0 +1,26 @@
+# Datos crudos: se re-descargan de UCI (208 MB), nunca entran al repo
+data/
+
+# El lago se reconstruye entero desde data/ corriendo el pipeline
+lake/
+
+# Entornos
+.venv/
+.venv-*/
+__pycache__/
+*.pyc
+
+# Salidas de dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# Sitio construido: se regenera con build_site.py
+out/
+
+# El motor SQL del navegador se descarga con un script, no se versiona
+assets/duckdb-wasm/
+
+# Windows
+Thumbs.db
+desktop.ini
