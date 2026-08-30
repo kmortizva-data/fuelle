@@ -31,7 +31,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-COURSE_DIR = ROOT / "2_Curso"
+COURSE_DIR = ROOT / "lecciones"
 LESSON_GLOB = "m[0-9][0-9]_*.md"
 
 MAX_WORDS = 32          # one idea per sentence

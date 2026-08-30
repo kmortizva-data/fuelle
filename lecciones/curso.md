@@ -13,8 +13,8 @@ Se empieza sin saber qué es una tabla.
 
 ## Por qué un compresor
 
-Porque el aire comprimido es lo que alimenta las columnas de flotación de una planta, y porque
-una fuga en la red de aire es recuperación perdida sin que ninguna alarma se entere.
+Porque el aire comprimido alimenta las columnas de flotación de una planta. Y porque una fuga en
+la red de aire es recuperación perdida sin que ninguna alarma se entere.
 
 Y por algo que este proyecto va a repetir hasta el final: **la presión no baja cuando hay una
 fuga**, porque el control la sostiene. Lo que sube es cuánto tiene que trabajar el compresor para

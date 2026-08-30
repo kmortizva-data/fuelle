@@ -14,9 +14,11 @@ module: 2
 
 El módulo anterior abrió el archivo y contó las filas. Este mira dentro de una.
 
-Suena elemental y no lo es: casi todo lo que sale mal más adelante nace de haber supuesto que una
-columna guardaba algo que no guardaba. Un número que era texto, un sí o no que se trató como
-cantidad, una fecha que ordenaba alfabéticamente.
+Suena elemental y no lo es. Casi todo lo que falla más adelante nace de una suposición sobre el
+contenido de una columna.
+
+Un número escrito como texto. Un sí o no tratado como cantidad. Una fecha ordenada
+alfabéticamente.
 
 Tres palabras y ya está: dato, tabla y tipo.
 
@@ -57,7 +59,7 @@ Con tres filas, contar valores distintos no basta. Con un millón y medio, sí.
 - **Columna.** La misma señal a lo largo del tiempo. Se llama también campo, o variable.
 - **Tabla.** Filas y columnas juntas, con la promesa de que todas las filas tienen las mismas
   columnas.
-- **Tipo.** Qué clase de valor cabe en una columna: texto, entero, decimal, fecha, sí o no. La
+- **Tipo.** Qué clase de valor cabe en una columna. Texto, entero, decimal, fecha o sí y no. La
   base de datos lo usa para saber qué operaciones tienen sentido.
 - **Grano.** A qué corresponde una fila. Aquí una lectura de diez segundos. Es la pregunta que
   hay que contestar antes de tocar cualquier tabla.
@@ -144,8 +146,8 @@ sube**. Son la misma historia contada por dos sensores.
 
 ## El resultado, medido
 
-**Qué esperábamos.** Que la clasificación medida coincidiera con la ficha, o que apareciese alguna
-señal a medio camino, de esas que la documentación llama digital y en realidad guardan un contador.
+**Qué esperábamos.** Que la clasificación medida coincidiera con la ficha. O que apareciese alguna
+señal a medio camino, de esas que la documentación llama digital y en realidad son un contador.
 
 **Qué salió.** **Siete analógicas y ocho digitales**, exactamente lo que la ficha declara. Cero
 discrepancias. Las digitales toman dos valores clavados, cero y uno, sin un solo caso raro en
@@ -209,9 +211,11 @@ Comprobar y acertar cambia lo que puedes apoyar en ese papel más adelante.
 
 ### Alguien te pasa un CSV donde el pH viene como texto. Qué pasa si no lo conviertes
 
-Que ordena alfabéticamente y compara mal: «10,4» va antes que «9,8» porque el uno va antes que el
-nueve. Los promedios fallarán o darán error, y lo peor es que un orden mal hecho no da error
-ninguno, solo un resultado equivocado con buena cara.
+Que ordena alfabéticamente y compara mal. El texto «10,4» va delante de «9,8», porque el uno va
+delante del nueve.
+
+Los promedios fallarán o darán error. Y lo peor: un orden mal hecho no da error ninguno, solo un
+resultado equivocado con buena cara.
 
 ### En este compresor, un uno en COMP significa que el compresor está trabajando
 

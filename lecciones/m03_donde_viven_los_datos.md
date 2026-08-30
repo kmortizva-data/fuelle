@@ -75,8 +75,8 @@ ejecuciones seguidas del mismo código dieron 203,7 y 143,8 veces entre los extr
 conclusión gruesa aguantaba, pero el número que iba a publicarse no.
 
 Así que se mide siete veces y se publica la mediana, para que un pico aislado no mueva el
-resultado, y también el mínimo y el máximo, porque esconder la variabilidad sería fingir una
-precisión que no existe.
+resultado. Y con ella el mínimo y el máximo: esconder la variabilidad sería fingir una precisión
+que no existe.
 
 ## El código, por partes
 
@@ -126,8 +126,8 @@ del más lento al más rápido: 195.7 veces
 **Qué esperábamos.** Que el fichero de texto fuera el más lento y la base de datos la más rápida.
 Y que el almacén, con su índice, fuera más rápido todavía.
 
-**Qué salió.** Lo primero sí, y por goleada: el fichero de texto tarda **0,587 s**
-y la base de datos **0,003 s**, que son casi doscientas veces.
+**Qué salió.** Lo primero sí, y por goleada: el fichero de texto tarda **0,587 s** y la base de
+datos **0,003 s**. Son **196 veces**.
 
 **El índice no aceleró nada.** El almacén y la base de datos dan medianas de
 0,004 y 0,003 segundos, y **sus rangos se solapan**. Cuando dos
@@ -195,8 +195,8 @@ más lectura de disco, y encima con trabajo de interpretación por medio.
 
 ### Pusiste un índice y no aceleró. Estaba mal puesto
 
-No, estaba puesto sobre la columna correcta. Lo que pasa es que la base de datos es columnar y
-guarda el mínimo y el máximo de cada bloque, así que ya se saltaba lo que no hacía falta. El
+No, estaba puesto sobre la columna correcta. Pasa que la base de datos es columnar y guarda el
+mínimo y el máximo de cada bloque, así que ya se saltaba lo innecesario. El
 índice repetía un trabajo ya hecho y encima ocupaba 17,8 MB. En una base de datos por filas, como
 PostgreSQL, la respuesta habría sido otra, y eso se mide en el módulo 21.
 
@@ -210,5 +210,7 @@ a esta escala, no.
 ### Te dicen «tenemos un data lake» y ves una carpeta con CSV. Qué preguntas
 
 Si están en formato columnar, si están repartidos por alguna fecha o clave, y quién decide qué
-entra. Una carpeta con CSV sueltos es una caja de folios con nombre en inglés. Lo que convierte
-una carpeta en un lago es que las preguntas cuesten poco y que alguien sepa qué hay dentro.
+entra. Una carpeta con CSV sueltos es una caja de folios con nombre en inglés.
+
+Dos cosas convierten una carpeta en un lago: que las preguntas cuesten poco, y que alguien sepa
+qué hay dentro.

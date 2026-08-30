@@ -163,13 +163,18 @@ interval. The commonest is nine seconds, 128,277 times, and next is twelve, 38,3
 print(15_169_480 / 1_516_948)
 ```
 
+```anota
+15_169_480 | the underscores are Python's thousands separators: they change nothing, they just make a long number readable
+/ | ordinary division, the kind that yields decimals; a 9.97 would show
+```
+
 ```salida
 10.0
 ```
 
 Exactly ten, with no stray decimals. That does not happen by chance.
 
-And the first column of the CSV, the one with no name, runs 0, 10, 20, 30. It keeps the original
+And the first column of the CSV, the one with no name, advances in tens. It keeps the original
 record's numbering.
 
 ## The result, measured

@@ -73,9 +73,9 @@ grano, la consulta funciona y el número está mal, que es la peor combinación 
 
 ### Paso 2. Elegir la señal que dice si está trabajando
 
-El fichero trae quince señales y tres de ellas hablan de lo mismo. La ficha oficial dice que
-`DV_eletric` se activa cuando el compresor funciona en carga, que `COMP` se activa cuando **no**
-entra aire, y que la corriente del motor ronda los 7 A en carga.
+El fichero trae quince señales y tres de ellas hablan de lo mismo. La ficha oficial dice esto:
+`DV_eletric` se activa con el compresor en carga, `COMP` se activa cuando **no** entra aire, y la
+corriente del motor ronda los 7 A en carga.
 
 Tres fuentes para un solo hecho piden comprobar que están de acuerdo. Lo hacemos en el paso 4.
 
@@ -150,14 +150,20 @@ LIMIT 6 | corta el resultado en seis filas, después de ordenarlo
 ```salida
 day          lecturas   horas_de_carga
 2020-04-18       8663            23.81
-2020-06-05       8716            15.41
-2020-03-12       8202            13.24
-2020-07-15       8661            11.57
-2020-05-13       8716            11.31
-2020-05-30       8617             8.06
+2020-06-06       7343            20.40
+2020-05-20       7462            20.19
+2020-03-29       7199            20.00
+2020-06-24       7162            15.91
+2020-06-23       7159            15.87
 ```
 
-Seis días. Y cuatro de ellos son fechas de avería documentada.
+Seis días con mucha carga. Pero mira la columna del medio.
+
+Un día entero son 8.640 lecturas, y cinco de estos seis no llegan. Son **días partidos**, en los
+que el registro se cortó. Y aun así aparecen arriba del todo.
+
+Eso no es casualidad ni mala suerte: es la trampa del módulo asomando. Un día con siete mil
+lecturas y muchas horas de carga sube en esta lista igual que uno completo, y no son comparables.
 
 ### Paso 6. El promedio, solo sobre días completos
 
@@ -238,7 +244,8 @@ va de eso.
 **Qué esperábamos.** Un compresor de servicio en un tren debería pasar bastante más tiempo parado
 que trabajando. Un valor de entre dos y cinco horas al día sería lo razonable.
 
-**Qué salió.** **3,42 horas de carga al día**, promediadas sobre los 91 días completos. El rango
+**Qué salió.** **3,42 h contra 23,81 h**: lo que carga el compresor un día normal, promediado
+sobre los 91 días completos, frente a lo que cargó el día de la primera avería. El rango entero
 va de 1,11 a 23,81. Mes a mes:
 
 | mes | días completos | horas de carga |
@@ -346,13 +353,15 @@ y eso conviene comprobarlo antes de defenderlo.
 
 ### El día de más carga fue de 23,81 horas. Cómo sabes que no es un error del sensor
 
-No lo sé por la consulta sola, y ese es el punto. Lo que sé es que esa fecha coincide con una
-avería documentada por la empresa, y que otras tres fechas de avería también están entre las seis
-de más carga. Cuatro coincidencias sobre cuatro no prueban causalidad, pero descartan que sea
-casualidad del sensor.
+No lo sé por la consulta sola, y ese es el punto. Sé que esa fecha coincide con una avería
+documentada por la empresa. Y sé que otras tres fechas de avería están también entre las seis de
+más carga.
+
+Cuatro coincidencias sobre cuatro no prueban causalidad, pero descartan la casualidad del sensor.
 
 ### Alguien te dice que el ciclo de trabajo medio de la flota es 3,4 horas. Qué preguntas
 
-Sobre qué días está calculado. Un promedio sin decir su denominador no significa nada. En este
-mismo fichero, la media sobre los 212 días y la media sobre los 91 completos son dos números
-distintos, y solo uno de los dos responde a la pregunta que se hizo.
+Sobre qué días está calculado. Un promedio sin decir su denominador no significa nada.
+
+En este mismo fichero, la media sobre los 212 días y la media sobre los 91 completos son dos
+números distintos. Solo uno responde a la pregunta que se hizo.

@@ -13,7 +13,8 @@ module: 1
 ## Qué resuelve este módulo
 
 Antes de tocar una sola herramienta hay que saber qué se tiene delante. Este módulo abre el
-archivo, cuenta lo que hay dentro y lo compara con lo que su documentación dice que hay.
+archivo y cuenta lo que hay dentro. Después compara ese recuento con lo que su documentación
+declara.
 
 No coinciden. Esa es la primera lección del curso, y no es sobre datos: es sobre confianza.
 
@@ -68,8 +69,10 @@ de un umbral, arranca y comprime. Cuando llega arriba, para. Y vuelta a empezar.
 
 Ahí está la máquina entera en dos horas de un martes cualquiera. La presión baja despacio,
 porque el tren va consumiendo aire. Toca el umbral, el compresor arranca, y la presión sube casi
-en vertical. Después el motor sigue girando un rato sin comprimir nada, que es lo que la ficha
-llama funcionar en vacío, y por eso la corriente se queda en unos 4 A en vez de caer a cero.
+en vertical.
+
+Después el motor sigue girando un rato sin comprimir nada. La ficha llama a eso funcionar en
+vacío, y por eso la corriente se queda en unos 4 A en vez de caer a cero.
 
 Tres ciclos en dos horas. Ese ritmo es el que hay que vigilar todo el curso.
 
@@ -83,9 +86,11 @@ dos cosas que conviene retener:
 > The data were logged at 1Hz by an onboard embedded device.
 
 Quince millones de mediciones, una por segundo. Y describe las quince señales una a una, con
-detalles que valen oro para más adelante: que el compresor arranca cuando la presión baja de
-**8,2 bar**, que hay una alarma que salta por debajo de **7 bar**, y que el motor consume unos
-7 A en carga y unos 4 A en vacío.
+detalles que valen oro para más adelante.
+
+Tres de esos detalles sostienen medio proyecto. El compresor arranca cuando la presión baja de
+**8,2 bar**. Una alarma salta por debajo de **7 bar**. Y el motor consume unos 7 A en carga
+frente a unos 4 A en vacío.
 
 ### Paso 3. Lo que el fichero trae
 
@@ -163,21 +168,26 @@ intervalo. La más común es de nueve segundos, 128.277 veces, y la siguiente de
 print(15_169_480 / 1_516_948)
 ```
 
+```anota
+15_169_480 | los guiones bajos son separadores de millares de Python: no cambian el valor, solo hacen legible un número largo
+/ | la división normal, la que da decimales; si diera 9,97 se vería
+```
+
 ```salida
 10.0
 ```
 
 Exactamente diez, sin decimales sueltos. Eso no pasa por casualidad.
 
-Y la primera columna del CSV, esa que no tiene nombre, va 0, 10, 20, 30. Conserva la numeración
-del registro original.
+Y la primera columna del CSV, la que no tiene nombre, avanza de diez en diez. Conserva la
+numeración del registro original.
 
 ## El resultado, medido
 
 **Qué esperábamos.** Que el fichero trajera lo que su ficha declara, o algo parecido.
 
-**Qué salió.** La ficha declara **15.169.480** mediciones a 1 Hz. El fichero trae **1.516.948**
-lecturas cada 10 s. El cociente es **10,0000**, y la columna índice conserva la numeración
+**Qué salió.** **15.169.480 → 1.516.948**: eso es lo que la ficha declara a 1 Hz frente a lo que
+el fichero trae cada 10 s. El cociente es **10,0000**, y la columna índice conserva la numeración
 original.
 
 **Qué significa.** El registro original sí fue a un dato por segundo. Lo que se publicó es **una
@@ -251,6 +261,8 @@ el control; lo que se dispara es el esfuerzo por sostenerla.
 
 ### Un compresor no es una planta de flotación. Qué pinta esto en tu portafolio
 
-Pinta que el aire comprimido es lo que alimenta las columnas de flotación, y que una fuga en la
-red de aire es recuperación perdida sin que salte ninguna alarma. La máquina cambia, el problema
-es el mismo: la variable que se controla no delata nada, y la que trabaja para controlarla sí.
+Pinta que el aire comprimido alimenta las columnas de flotación. Una fuga en la red de aire es
+recuperación perdida, y ninguna alarma se entera.
+
+La máquina cambia, el problema es el mismo: la variable controlada no delata nada, y la que
+trabaja para sostenerla sí.

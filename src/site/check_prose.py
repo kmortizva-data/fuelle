@@ -30,7 +30,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-COURSE_DIR = ROOT / "2_Curso"
+COURSE_DIR = ROOT / "lecciones"
 
 # A lesson file is m<NN>_<slug>.md. The pattern is this strict because Windows
 # matches globs case-insensitively, so a loose "m*.md" also picked up MANUAL.md and
@@ -90,7 +90,7 @@ def main() -> None:
     paths = [Path(a) for a in sys.argv[1:]]
     if not paths:
         paths = sorted(COURSE_DIR.glob(LESSON_GLOB))
-        paths += [p for p in (COURSE_DIR / "curso.md", COURSE_DIR / "cerebro.md")
+        paths += [p for p in (COURSE_DIR / "curso.md",)
                   if p.exists()]
     if not paths:
         print("Todavía no hay nada que revisar.")

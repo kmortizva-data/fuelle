@@ -1,4 +1,4 @@
-"""Author tool: check that a lesson follows the anatomy described in 2_Curso/MANUAL.md.
+"""Author tool: check that a lesson follows the anatomy described in MANUAL.md.
 
 A manual nobody checks is a wish list. This turns the structural half of it into something
 that fails on its own, before a commit rather than three rewrites later.
@@ -29,7 +29,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-COURSE_DIR = ROOT / "2_Curso"
+COURSE_DIR = ROOT / "lecciones"
 
 # A lesson file is m<NN>_<slug>.md. The pattern is this strict because Windows
 # matches globs case-insensitively, so a loose "m*.md" also picked up MANUAL.md and
@@ -50,6 +50,12 @@ REQUIRED = [
     "Repaso",
 ]
 
+# Obligatoria solo cuando el módulo declara `reto` en el temario, y va justo
+# antes del puente. Es la sección que impide que el curso sea un PDF, así que
+# si el temario la promete y la lección no la trae, eso es un fallo.
+CHALLENGE = "Hazlo tú"
+CHALLENGE_BEFORE = "Puente metalúrgico"
+
 # The closing module delivers the project instead of teaching a new idea, so it swaps the
 # toy example for the arc of the whole thing.
 BRIEF = "En 30 segundos"
@@ -66,7 +72,7 @@ def promised_figure(path: str, body: str) -> list[str]:
     correction ended up as a footnote in the index instead of in the note that was wrong.
     A module cannot quietly report a different number from the one the plan promised.
     """
-    syllabus = json.loads((COURSE_DIR / "temario.json").read_text(encoding="utf-8"))
+    syllabus = json.loads((ROOT / "temario.json").read_text(encoding="utf-8"))
     match = re.search(r"^module:\s*(\d+)", body, re.M)
     if not match:
         return ["falta 'module: N' en el front matter"]
@@ -181,7 +187,7 @@ def main() -> None:
 
     print(f"\n{'-' * 60}")
     if failures:
-        print(f"{failures} problemas en {len(paths)} lecciones. Ver 2_Curso/MANUAL.md.")
+        print(f"{failures} problemas en {len(paths)} lecciones. Ver MANUAL.md.")
         raise SystemExit(1)
     plural = "lecciones cumplen" if len(paths) > 1 else "lección cumple"
     print(f"{len(paths)} {plural} la anatomía del manual.")

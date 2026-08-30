@@ -20,11 +20,16 @@ if hasattr(sys.stdout, "reconfigure"):
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
-CHECKERS = ["check_numbers", "check_layout", "check_english"]
-# Pendientes de adaptar desde Sílice: check_lesson (la anatomía, con la sección
-# Hazlo tú), check_prose (rayas y emoji), check_clarity (frases enredadas),
-# check_palette (contraste en los dos temas) y check_sql (que cada consulta
-# publicada se ejecute y coincida con su salida).
+CHECKERS = [
+    "check_lesson",    # la anatomía: las diez secciones, y Hazlo tú cuando hay reto
+    "check_prose",     # cero rayas, cero emoji, cero muletillas
+    "check_clarity",   # frases que no se enreden
+    "check_numbers",   # ningún número sin una corrida detrás
+    "check_sql",       # cada consulta publicada corre y su salida dice la verdad
+    "check_palette",   # los acentos calculados, y AA en los dos temas
+    "check_layout",    # la maqueta no vuelve a ser la de Sílice
+    "check_english",   # las dos ediciones dicen los mismos números
+]
 
 
 def main() -> None:

@@ -150,14 +150,20 @@ LIMIT 6 | cuts the result to six rows, after sorting it
 ```salida
 day          lecturas   horas_de_carga
 2020-04-18       8663            23.81
-2020-06-05       8716            15.41
-2020-03-12       8202            13.24
-2020-07-15       8661            11.57
-2020-05-13       8716            11.31
-2020-05-30       8617             8.06
+2020-06-06       7343            20.40
+2020-05-20       7462            20.19
+2020-03-29       7199            20.00
+2020-06-24       7162            15.91
+2020-06-23       7159            15.87
 ```
 
-Six days. And four of them are documented failure dates.
+Six busy days. But look at the middle column.
+
+A whole day is 8,640 readings, and five of these six fall short. They are **partial days**, where
+the record was cut off. And they still show up at the very top.
+
+That is not luck: it is this module's trap surfacing. A day with seven thousand readings and many
+loaded hours climbs this list just like a complete one, and they are not comparable.
 
 ### Step 6. The average, over complete days only
 
@@ -237,8 +243,9 @@ it: you have to group once, keep the result, and group again on top. Module 11 i
 **What we expected.** A service compressor on a train should spend considerably more time stopped
 than working. Somewhere between two and five hours a day would be reasonable.
 
-**What came out.** **3.42 loaded hours a day**, averaged over the 91 complete days. The range runs
-from 1.11 to 23.81. Month by month:
+**What came out.** **3.42 h against 23.81 h**: what the compressor runs loaded on a normal day,
+averaged over the 91 complete days, against what it ran on the day of the first failure. The full
+range goes from 1.11 to 23.81. Month by month:
 
 | month | complete days | loaded hours |
 |---|---|---|
