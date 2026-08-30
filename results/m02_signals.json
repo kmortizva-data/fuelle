@@ -1,0 +1,143 @@
+{
+  "señales": [
+    {
+      "señal": "TP2",
+      "valores_distintos": 5257,
+      "min": -0.032,
+      "max": 10.676,
+      "segun_la_ficha": "analógica",
+      "segun_el_dato": "analógica",
+      "coinciden": true
+    },
+    {
+      "señal": "TP3",
+      "valores_distintos": 3683,
+      "min": 0.73,
+      "max": 10.302,
+      "segun_la_ficha": "analógica",
+      "segun_el_dato": "analógica",
+      "coinciden": true
+    },
+    {
+      "señal": "H1",
+      "valores_distintos": 2665,
+      "min": -0.036,
+      "max": 10.288,
+      "segun_la_ficha": "analógica",
+      "segun_el_dato": "analógica",
+      "coinciden": true
+    },
+    {
+      "señal": "DV_pressure",
+      "valores_distintos": 2257,
+      "min": -0.032,
+      "max": 9.844,
+      "segun_la_ficha": "analógica",
+      "segun_el_dato": "analógica",
+      "coinciden": true
+    },
+    {
+      "señal": "Reservoirs",
+      "valores_distintos": 3682,
+      "min": 0.712,
+      "max": 10.3,
+      "segun_la_ficha": "analógica",
+      "segun_el_dato": "analógica",
+      "coinciden": true
+    },
+    {
+      "señal": "Oil_temperature",
+      "valores_distintos": 2462,
+      "min": 15.4,
+      "max": 89.05,
+      "segun_la_ficha": "analógica",
+      "segun_el_dato": "analógica",
+      "coinciden": true
+    },
+    {
+      "señal": "Motor_current",
+      "valores_distintos": 1809,
+      "min": 0.02,
+      "max": 9.295,
+      "segun_la_ficha": "analógica",
+      "segun_el_dato": "analógica",
+      "coinciden": true
+    },
+    {
+      "señal": "COMP",
+      "valores_distintos": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "segun_la_ficha": "digital",
+      "segun_el_dato": "digital",
+      "coinciden": true
+    },
+    {
+      "señal": "DV_eletric",
+      "valores_distintos": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "segun_la_ficha": "digital",
+      "segun_el_dato": "digital",
+      "coinciden": true
+    },
+    {
+      "señal": "Towers",
+      "valores_distintos": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "segun_la_ficha": "digital",
+      "segun_el_dato": "digital",
+      "coinciden": true
+    },
+    {
+      "señal": "MPG",
+      "valores_distintos": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "segun_la_ficha": "digital",
+      "segun_el_dato": "digital",
+      "coinciden": true
+    },
+    {
+      "señal": "LPS",
+      "valores_distintos": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "segun_la_ficha": "digital",
+      "segun_el_dato": "digital",
+      "coinciden": true
+    },
+    {
+      "señal": "Pressure_switch",
+      "valores_distintos": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "segun_la_ficha": "digital",
+      "segun_el_dato": "digital",
+      "coinciden": true
+    },
+    {
+      "señal": "Oil_level",
+      "valores_distintos": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "segun_la_ficha": "digital",
+      "segun_el_dato": "digital",
+      "coinciden": true
+    },
+    {
+      "señal": "Caudal_impulses",
+      "valores_distintos": 2,
+      "min": 0.0,
+      "max": 1.0,
+      "segun_la_ficha": "digital",
+      "segun_el_dato": "digital",
+      "coinciden": true
+    }
+  ],
+  "n_analogicas_medidas": 7,
+  "n_digitales_medidas": 8,
+  "n_discrepancias": 0,
+  "discrepancias": []
+}

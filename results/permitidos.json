@@ -15,5 +15,8 @@
     "3600": "the toy belt weigher example: 3,600 weighings promised against 360 real. Chosen so the division works by hand",
     "0.0120000000000004": "a literal value quoted from the CSV to show floating point litter. Not a measurement, a quotation",
     "64.03": "the frozen iron assay from the silica project, cited in the metallurgical bridge"
+  },
+  "m02_dato_tabla_tipo": {
+    "10.1": "el pH del cuaderno de juguete: tres lecturas inventadas de una celda de flotación, elegidas para que el tipo de cada columna se vea a simple vista. Se declara como juguete en la propia lección"
   }
 }

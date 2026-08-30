@@ -17,7 +17,8 @@
     "paleta": "results/palette.json, generada por src/site/palette.py en OKLCH y verificada en contraste sobre los dos fondos. Ningún color se elige a ojo.",
     "regla_de_forma": "La serie medida va en línea continua y la simulada en discontinua. El color nunca es la única pista.",
     "movimiento": "Mínimo y funcional. Toda animación tiene que pasar la prueba: si se quita, ¿se entiende peor? Si no, es decoración y se va.",
-    "interaccion": "Cada módulo trae algo que HACER. Los de SQL cierran con un reto que se resuelve en la propia página contra datos reales, y la página comprueba la respuesta."
+    "interaccion": "Cada módulo trae algo que HACER. Los de SQL cierran con un reto que se resuelve en la propia página contra datos reales, y la página comprueba la respuesta.",
+    "retos_desde": "Los retos comprobables empiezan en el módulo 8, con SQL. Antes no hay con qué retar: el mecanismo ejecuta consultas."
   },
   "_hechos_verificados": {
     "_nota": "Comprobados el 2026-08-29 contra el fichero descargado y el PDF oficial del propio zip, y con src/ingest/inspect_raw.py. Son los únicos números que pueden aparecer en una lección sin haber corrido un script.",
@@ -162,14 +163,15 @@
         "light": "#42797C"
       },
       "instrumento": "caratula",
-      "interactivo": true,
-      "reto": "Clasificar cinco señales del compresor en analógica o digital, y decir qué tipo de dato le corresponde a cada una.",
+      "interactivo": false,
+      "reto": null,
       "scripts": [
         "src/ingest/describe_signals.py"
       ],
       "figuras": [
         "fig_m2_analogica_vs_digital"
-      ]
+      ],
+      "_nota_reto": "Sin reto a propósito: el mecanismo de reto ejecuta SQL y SQL no empieza hasta el módulo 8. Retar con un idioma que el lector no ha visto sería castigarle por el orden del temario. Los retos empiezan con la parte 3."
     },
     {
       "number": 3,
