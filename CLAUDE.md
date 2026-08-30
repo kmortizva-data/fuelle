@@ -262,7 +262,13 @@ sirve en varios hilos, comprime como Pages (incluido `application/wasm`, verific
 wasm real servido desde Pages), y **cachea el gzip**, porque comprimir 34 MB cuesta 2,9 s y sin
 caché se pagaban en cada petición.
 
-**Lo que queda sin verificar:** que el motor SQL ejecute una consulta dentro del navegador. El
+**VERIFICADO el 2026-08-30 por Kevin, en su Chrome:** el motor SQL carga y la consulta del
+paso 5 devuelve su tabla de seis días. **La consulta viva funciona.** El bloqueo de los 19
+segundos y el `ERROR: error` eran del panel del navegador de la herramienta, no del proyecto ni
+del servidor. Para verificar cualquier cosa que dependa de DuckDB en el navegador, hay que
+abrirlo en Chrome; el panel no sirve para eso.
+
+**Lo que quedaba sin verificar antes de eso:** que el motor SQL ejecutase una consulta dentro del navegador. El
 código llega hasta `instantiate` (import 0 ms, worker creado 1 ms, objeto creado 1 ms) y ahí se
 queda esperando al wasm. El servidor entrega los 34,25 MB correctamente en 19,2 s medidos con
 `curl`, así que **no es el código ni el servidor**. Falta probarlo en un navegador normal, fuera

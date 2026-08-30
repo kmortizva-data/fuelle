@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{LANG}}">
+<html lang="{{LANG}}" class="no-js" data-assets="../assets">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,67 +7,33 @@
 {{ALTERNATE}}
 <style>
 {{STYLE}}
-:root { --accent: {{ACCENT}}; }
-
-/* El cerebro: el archivo listo para pegar en la memoria de un asistente. */
-.brain { max-width: 100%; margin-top: .4rem; }
-.brain-bar {
-  display: flex; align-items: center; gap: .8rem; flex-wrap: wrap;
-  border: 1px solid var(--rule); border-bottom: 0;
-  padding: .55rem .9rem; background: var(--bench);
+:root { --accent: {{ACCENT_LIGHT}}; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --accent: {{ACCENT_DARK}}; }
 }
-.brain-bar .name { font-family: var(--data); font-size: .74rem; color: var(--accent); letter-spacing: .06em; }
-.brain-bar .size { font-family: var(--data); font-size: .7rem; color: var(--ink-faint); }
-.brain-bar .spacer { flex: 1; }
-.brain-bar button, .brain-bar a.btn {
-  background: none; border: 1px solid var(--rule); border-radius: 2px;
-  color: var(--ink-soft); font-family: var(--data); font-size: .7rem;
-  letter-spacing: .06em; padding: .3rem .7rem; cursor: pointer;
-  text-decoration: none; white-space: nowrap;
-}
-.brain-bar button:hover, .brain-bar a.btn:hover { color: var(--accent); border-color: var(--accent); }
-.brain-bar button.done { color: var(--accent); border-color: var(--accent); }
-.brain pre { margin: 0; max-height: 24rem; overflow: auto; border-left-width: 1px; }
+:root[data-theme="dark"] { --accent: {{ACCENT_DARK}}; }
 </style>
 </head>
 <body>
 <header class="masthead">
   <div class="masthead-inner">
     {{TOPLINK}}
-    <div class="eyebrow">{{EYEBROW}}</div>
-    <h1>{{COURSE_NAME}}</h1>
+    <div class="eyebrow"><b>{{COURSE_NAME}}</b> {{EYEBROW}}</div>
+    <h1>{{COURSE_TITLE}}</h1>
     <p class="standfirst">{{SUBTITLE}}</p>
-    <div class="figure-mark">
-      <span class="figure-value">{{CIFRA_VALUE}}</span>
-      <span class="figure-label">{{CIFRA_LABEL}}</span>
-    </div>
-    <nav class="thread" aria-label="{{UI_THREAD}}">{{THREAD}}</nav>
     <div class="assay">{{ASSAY}}</div>
   </div>
 </header>
 <main class="container">
+<!-- El grafo del lago. No es decoracion: es el mapa de lo que el curso
+     construye, y cada tramo dice que modulos lo levantan. -->
+{{GRAPH}}
 {{CONTENT}}
-<section class="block">
-  <span class="kicker">{{UI_MODULES}}</span>
-  <h2 class="block-title">{{UI_TOC_TITLE}}</h2>
-  <ul class="toc">{{TOC}}</ul>
-</section>
-<section class="block">
-  <span class="kicker">{{UI_MEMORY}}</span>
-  <h2 class="block-title">{{UI_BRAIN_TITLE}}</h2>
-  <p>{{UI_BRAIN_TEXT}}</p>
-  <div class="brain">
-    <div class="brain-bar">
-      <span class="name">{{BRAIN_FILE}}</span>
-      <span class="size">{{BRAIN_SIZE}}</span>
-      <span class="spacer"></span>
-      <button id="copy" type="button" data-copied="{{UI_COPIED}}" data-select="{{UI_SELECT}}" data-label="{{UI_COPY}}">{{UI_COPY}}</button>
-      <a class="btn" href="{{BRAIN_FILE}}" download>{{UI_DOWNLOAD}}</a>
-    </div>
-    <pre><code id="brain">{{BRAIN}}</code></pre>
-  </div>
-</section>
 </main>
+<section class="toc">
+  <h2 class="block-title">{{UI_TOC_TITLE}}</h2>
+  {{TOC}}
+</section>
 <footer class="footer">
   <div class="footer-inner">
     <span>{{COURSE_NAME}}</span>
@@ -75,27 +41,5 @@
     <span>{{UI_SOURCE}}: {{SOURCE_NOTE}}</span>
   </div>
 </footer>
-<script>
-const button = document.getElementById('copy');
-const source = document.getElementById('brain');
-button.addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText(source.textContent);
-  } catch (error) {
-    // file:// without a secure context refuses the clipboard API, so fall back to
-    // selecting the text and letting the reader press the shortcut.
-    const range = document.createRange();
-    range.selectNodeContents(source);
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
-    button.textContent = button.dataset.select;
-    return;
-  }
-  button.textContent = button.dataset.copied;
-  button.classList.add('done');
-  setTimeout(() => { button.textContent = button.dataset.label; button.classList.remove('done'); }, 2000);
-});
-</script>
 </body>
 </html>

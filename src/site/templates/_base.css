@@ -711,3 +711,22 @@ figcaption {
   .thread, .pager, .live-bar, .live-editor { display: none; }
   .live-static { display: block; }
 }
+
+/* --------------------------------------------- el grafo del lago (portada) */
+
+.kicker-inline {
+  display: block;
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 12px;
+}
+.grafo { margin: 24px 0 34px; max-width: 940px; }
+.grafo .node-sub {
+  fill: var(--ink-faint);
+  font-family: var(--data);
+  font-size: 11px;
+}
+.grafo .edge { stroke-width: 1; }
