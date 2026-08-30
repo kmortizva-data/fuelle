@@ -1,0 +1,713 @@
+/* Fuelle: la hoja de estilo del curso.
+ *
+ * Encargo de Kevin (2026-08-29): "no muy escandaloso, que parezca ingeniero, pero que
+ * demuestres habilidades, que no seas un pdf que se lee de recorrido". La regla que sale
+ * de ahi y ordena todo este fichero: LA SOBRIEDAD VA EN LA SUPERFICIE, LA AMBICION VA EN
+ * LO QUE LA PAGINA HACE. Aqui no hay ningun efecto que llame la atencion sobre si mismo.
+ *
+ * Sala de control: fondo grafito, rejilla de puntos discreta, numeros en monoespaciada.
+ * Nada de papel claro (eso es Silice), nada de serif, nada de scrollytelling pegajoso
+ * (eso es Geoestadistica), y ninguno de los cuatro acentos ya gastados en el portafolio.
+ *
+ * Los colores NO se eligen a ojo: src/site/palette.py los genera en OKLCH y mide su
+ * contraste sobre los dos fondos. El --accent lo inyecta cada pagina: es el de su modulo.
+ *
+ * Cero fuentes externas. Carga instantanea, funciona sin red, y no depende de nadie.
+ */
+
+/* ---------------------------------------------------------------- tokens */
+
+:root {
+  /* Tema claro. Es el segundo que se diseño, pero el primero que se declara,
+   * porque asi ningun color vive solo dentro de una media query. */
+  --ground: #f7f5f1;
+  --panel: #efece6;
+  --ink: #1e2225;
+  --ink-soft: #4a5257;
+  --ink-faint: #79838a;
+  --rule: #ddd8d0;
+  --rule-soft: #e8e4dd;
+  --grid: rgba(30, 34, 37, .06);
+  --accent: #46787e;
+
+  /* Las dos series del gemelo. Nunca se distinguen solo por color: la medida va
+   * continua y la simulada discontinua. Ver --dash mas abajo. */
+  --measured: #3d505b;
+  --simulated: #b57542;
+
+  --prose: system-ui, "Segoe UI Variable Text", "Segoe UI", Inter, Roboto,
+           "Helvetica Neue", Arial, sans-serif;
+  --data: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono",
+          "DejaVu Sans Mono", "Liberation Mono", monospace;
+
+  --measure: 680px;   /* la medida de la prosa, en pixeles y nunca en ch */
+  --wide: 1180px;     /* el borde derecho de los bloques anchos */
+  --margin: 132px;    /* la columna donde cuelgan los kickers */
+  --dash: 5 4;        /* el trazo de la serie simulada */
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #14181b;
+    --panel: #1b2024;
+    --ink: #dfe5e8;
+    --ink-soft: #a3aeb4;
+    --ink-faint: #6f7c83;
+    --rule: #2b3237;
+    --rule-soft: #232a2e;
+    --grid: rgba(223, 229, 232, .05);
+    --accent: #8ec2c8;
+    --measured: #cbe2ef;
+    --simulated: #c98754;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground: #14181b;
+  --panel: #1b2024;
+  --ink: #dfe5e8;
+  --ink-soft: #a3aeb4;
+  --ink-faint: #6f7c83;
+  --rule: #2b3237;
+  --rule-soft: #232a2e;
+  --grid: rgba(223, 229, 232, .05);
+  --accent: #8ec2c8;
+  --measured: #cbe2ef;
+  --simulated: #c98754;
+}
+
+/* --------------------------------------------------------------- cimientos */
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--prose);
+  font-size: 17px;
+  line-height: 1.62;
+  /* La rejilla de puntos: es la sala de control, y es discreta a proposito.
+   * Un punto cada 24 px, al 5 o 6 por ciento de opacidad. */
+  background-image: radial-gradient(var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-attachment: fixed;
+}
+
+::selection { background: var(--accent); color: var(--ground); }
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+a:hover { text-decoration-thickness: 2px; }
+
+.masthead-inner, .container, .pager, .footer-inner {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ---------------------------------------------------------------- cabecera */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--ground) 88%, var(--panel));
+  padding: 26px 0 30px;
+}
+
+.eyebrow {
+  font-family: var(--data);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 18px;
+  align-items: baseline;
+  margin-bottom: 18px;
+}
+.eyebrow b { color: var(--accent); font-weight: 600; }
+.eyebrow a { color: var(--ink-faint); text-decoration: none; }
+.eyebrow a:hover { color: var(--accent); text-decoration: underline; }
+
+.masthead h1 {
+  font-size: clamp(28px, 4.4vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -.021em;
+  font-weight: 620;
+  margin: 0 0 12px;
+  max-width: 20ch;
+}
+
+.standfirst {
+  color: var(--ink-soft);
+  font-size: 18px;
+  line-height: 1.55;
+  max-width: var(--measure);
+  margin: 0;
+}
+
+/* La caratula: el instrumento que lleva la cifra del modulo.
+ * No hay aguja animada: era decoracion y cayo en la prueba de "si se quita,
+ * se entiende peor?". La cifra sola dice mas. */
+.assay {
+  margin-top: 26px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 20px 13px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  border-radius: 3px;
+  background: var(--panel);
+}
+.figure-value {
+  font-family: var(--data);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--accent);
+  line-height: 1.15;
+}
+.figure-label {
+  font-size: 13px;
+  color: var(--ink-faint);
+  letter-spacing: .01em;
+}
+.figure-mark {
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ---------------------------------------------------------- cuerpo y bloques */
+
+.container { padding-top: 12px; padding-bottom: 40px; }
+
+/* Cada seccion cuelga de su kicker, que vive en el margen izquierdo y la
+ * clasifica. Es lo que sustituye a los emoji: dice que tipo de bloque es sin
+ * decorar nada. */
+.block {
+  position: relative;
+  padding: 30px 0 4px var(--margin);
+  border-top: 1px solid var(--rule-soft);
+}
+.block:first-child { border-top: 0; }
+
+.kicker {
+  position: absolute;
+  left: 0;
+  top: 34px;
+  width: calc(var(--margin) - 26px);
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-align: right;
+}
+
+.block-title {
+  font-size: 21px;
+  font-weight: 620;
+  letter-spacing: -.012em;
+  margin: 0 0 12px;
+  max-width: var(--measure);
+}
+
+.block p, .block li { max-width: var(--measure); }
+.block p { margin: 0 0 15px; }
+.block p:last-child { margin-bottom: 15px; }
+.block ul, .block ol { padding-left: 22px; margin: 0 0 15px; }
+.block li { margin-bottom: 7px; }
+.block li::marker { color: var(--accent); font-family: var(--data); font-size: .85em; }
+
+h3.sub, h4.sub {
+  font-size: 16px;
+  font-weight: 640;
+  letter-spacing: -.005em;
+  margin: 26px 0 9px;
+  max-width: var(--measure);
+  color: var(--ink);
+}
+h4.sub { font-size: 15px; color: var(--ink-soft); }
+
+blockquote {
+  margin: 0 0 15px;
+  padding-left: 16px;
+  border-left: 2px solid var(--rule);
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+strong, b { font-weight: 640; }
+
+/* El resumen de arriba se lee entero de un vistazo, asi que se distingue. */
+.is-brief ul { list-style: none; padding-left: 0; }
+.is-brief li {
+  padding: 8px 0 8px 20px;
+  border-bottom: 1px solid var(--rule-soft);
+  position: relative;
+}
+.is-brief li::before {
+  content: "";
+  position: absolute;
+  left: 2px; top: 18px;
+  width: 7px; height: 1px;
+  background: var(--accent);
+}
+.is-brief li:last-child { border-bottom: 0; }
+
+.is-result .block-title { color: var(--accent); }
+.is-warning .block-title { color: var(--accent); }
+
+/* ------------------------------------------------------------------ codigo */
+
+pre {
+  max-width: var(--wide);
+  overflow-x: auto;
+  background: var(--panel);
+  border: 1px solid var(--rule-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 3px;
+  padding: 14px 16px;
+  margin: 0 0 14px;
+}
+pre code {
+  font-family: var(--data);
+  font-size: 13.5px;
+  line-height: 1.62;
+  color: var(--ink);
+  white-space: pre;
+}
+p code, li code, dd code, td code {
+  font-family: var(--data);
+  font-size: .89em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--panel);
+  border: 1px solid var(--rule-soft);
+}
+
+/* Lo que el codigo imprime no es codigo: se marca para que nadie confunda
+ * la entrada con la salida. */
+.output {
+  position: relative;
+  margin: 0 0 14px;
+  max-width: var(--wide);
+}
+.output pre {
+  margin: 0;
+  border-left: 3px solid var(--ink-faint);
+  background: transparent;
+}
+.output pre code { color: var(--ink-soft); }
+.output-tag {
+  position: absolute;
+  top: -8px; left: 14px;
+  z-index: 1;
+  font-family: var(--data);
+  font-size: 10px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  background: var(--ground);
+  padding: 0 6px;
+}
+
+/* Los bloques densos se pliegan: la profundidad sigue ahi y deja de ser un muro. */
+details.fold, details {
+  margin: 0 0 14px;
+  max-width: var(--wide);
+}
+details > summary {
+  cursor: pointer;
+  font-family: var(--data);
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--ink-faint);
+  padding: 6px 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before {
+  content: "+";
+  display: inline-block;
+  width: 14px; height: 14px;
+  line-height: 13px;
+  text-align: center;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--accent);
+}
+details[open] > summary::before { content: "\2212"; }
+details > summary:hover { color: var(--accent); }
+
+.annot {
+  margin: 2px 0 4px;
+  padding: 12px 14px;
+  border: 1px solid var(--rule-soft);
+  border-radius: 3px;
+  background: var(--panel);
+}
+.annot dt { margin-bottom: 3px; }
+.annot dt code {
+  font-family: var(--data);
+  font-size: 12.5px;
+  color: var(--accent);
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.annot dd {
+  margin: 0 0 11px;
+  font-size: 15px;
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+.annot dd:last-of-type { margin-bottom: 0; }
+
+/* La seccion de repaso: cada pregunta pliega su respuesta. */
+.is-review details {
+  border-bottom: 1px solid var(--rule-soft);
+  margin: 0;
+}
+.is-review details > summary {
+  font-family: var(--prose);
+  font-size: 16px;
+  color: var(--ink);
+  padding: 12px 0;
+}
+.is-review details > summary:hover { color: var(--accent); }
+.is-review details p { margin: 0 0 12px 22px; color: var(--ink-soft); }
+
+/* ------------------------------------------------------------------ tablas */
+
+.table-wrap { max-width: var(--wide); overflow-x: auto; margin: 0 0 16px; }
+table { border-collapse: collapse; font-size: 15px; }
+th, td {
+  text-align: left;
+  padding: 7px 16px 7px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  vertical-align: top;
+}
+th {
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 500;
+  border-bottom-color: var(--rule);
+}
+tbody tr:last-child td { border-bottom: 0; }
+
+/* ----------------------------------------------------------------- figuras */
+
+figure { margin: 0 0 18px; max-width: var(--wide); }
+figure img { max-width: 100%; height: auto; display: block; border-radius: 3px; }
+figcaption {
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin-top: 8px;
+  max-width: var(--measure);
+  text-align: left;
+}
+
+/* ------------------------------------------------------- hilo, pager y pie */
+
+.thread {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  max-width: var(--wide);
+  margin: 0 auto 4px;
+  padding: 0 28px;
+}
+.thread a, .thread span {
+  font-family: var(--data);
+  font-size: 11px;
+  min-width: 26px;
+  text-align: center;
+  padding: 4px 5px;
+  border: 1px solid var(--rule-soft);
+  border-radius: 2px;
+  text-decoration: none;
+  color: var(--ink-faint);
+}
+.thread a:hover { border-color: var(--accent); color: var(--accent); }
+.thread .now { background: var(--accent); border-color: var(--accent);
+               color: var(--ground); font-weight: 600; }
+.thread .gone { opacity: .45; }
+.thread .starts-part { margin-left: 14px; }
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 26px;
+  padding-bottom: 30px;
+  border-top: 1px solid var(--rule);
+}
+.pager a { text-decoration: none; color: var(--ink); max-width: 44%; }
+.pager a:hover { color: var(--accent); }
+.pager .dir {
+  display: block;
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 3px;
+}
+.pager .next { text-align: right; margin-left: auto; }
+
+.footer {
+  border-top: 1px solid var(--rule);
+  padding: 22px 0 40px;
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+.footer-inner { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.footer a { color: var(--ink-faint); }
+
+.gone { color: var(--ink-faint); }
+
+/* ------------------------------------------------- la consulta viva y el reto */
+
+/* Esto es lo que impide que el curso sea un PDF. El motor SQL no se descarga
+ * hasta que el lector lo pide, asi que quien solo lee no paga nada. */
+.live {
+  max-width: var(--wide);
+  margin: 0 0 18px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--panel);
+  overflow: hidden;
+}
+.live-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.live-editor {
+  width: 100%;
+  border: 0;
+  resize: vertical;
+  min-height: 116px;
+  padding: 13px 15px;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--data);
+  font-size: 13.5px;
+  line-height: 1.62;
+  tab-size: 2;
+}
+.live-editor:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+.live-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 14px;
+  border-top: 1px solid var(--rule-soft);
+  flex-wrap: wrap;
+}
+.live-run {
+  font-family: var(--data);
+  font-size: 12px;
+  letter-spacing: .06em;
+  padding: 7px 15px;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+}
+.live-run:hover { background: var(--accent); color: var(--ground); }
+.live-run[disabled] { opacity: .5; cursor: default; }
+.live-run[disabled]:hover { background: transparent; color: var(--accent); }
+.live-status { font-family: var(--data); font-size: 11.5px; color: var(--ink-faint); }
+.live-out { max-width: 100%; overflow-x: auto; }
+.live-out table { margin: 0; width: 100%; font-size: 13px; }
+.live-out td, .live-out th { padding: 5px 14px 5px 0; }
+.live-out td:first-child, .live-out th:first-child { padding-left: 14px; }
+.live-out td { font-family: var(--data); font-size: 12.5px; }
+.live-err {
+  padding: 11px 15px;
+  font-family: var(--data);
+  font-size: 12.5px;
+  color: var(--simulated);
+  border-top: 1px solid var(--rule-soft);
+}
+
+/* El reto. El lector escribe, la pagina ejecuta y COMPARA EL RESULTADO,
+ * nunca el texto de la consulta: hay muchas formas de preguntar lo mismo. */
+.reto { border-left: 3px solid var(--accent); }
+.reto .live-head { color: var(--accent); }
+.reto-ask {
+  padding: 13px 15px 3px;
+  font-size: 16px;
+  max-width: var(--measure);
+}
+.verdict {
+  padding: 11px 15px;
+  border-top: 1px solid var(--rule-soft);
+  font-family: var(--data);
+  font-size: 12.5px;
+}
+.verdict.ok { color: var(--accent); }
+.verdict.no { color: var(--simulated); }
+
+/* Sin JavaScript la leccion se lee entera: la consulta se ve, el editor no
+ * miente diciendo que se puede pulsar, y la solucion sigue estando plegada. */
+.no-js .live-bar, .no-js .live-editor { display: none; }
+.no-js .live-static { display: block; }
+.live-static { display: none; }
+
+/* ------------------------------------------------------------- instrumentos */
+
+/* El grafo del lago. Un pipeline es literalmente un grafo de nodos, asi que
+ * esto no es decoracion: es el mapa de lo que construye cada leccion. */
+.grafo { max-width: var(--wide); margin: 0 0 20px; }
+.grafo svg { width: 100%; height: auto; display: block; }
+.grafo .node-box { fill: var(--panel); stroke: var(--rule); }
+.grafo .node-box.on { stroke: var(--accent); stroke-width: 1.6; }
+.grafo .node-label {
+  fill: var(--ink-faint);
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.grafo .node-box.on + .node-label, .grafo .node-label.on { fill: var(--accent); }
+.grafo .edge { stroke: var(--rule); fill: none; }
+.grafo .edge.on { stroke: var(--accent); }
+
+/* El doble trazo. La regla que no se negocia: la serie medida va continua y la
+ * simulada discontinua, porque el color NUNCA es la unica pista. */
+.twin { max-width: var(--wide); margin: 0 0 20px; }
+.twin svg { width: 100%; height: auto; display: block; }
+.twin .axis { stroke: var(--rule); fill: none; }
+.twin .tick {
+  fill: var(--ink-faint);
+  font-family: var(--data);
+  font-size: 10px;
+}
+.twin .measured { stroke: var(--measured); fill: none; stroke-width: 1.8; }
+.twin .simulated {
+  stroke: var(--simulated);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-dasharray: var(--dash);
+}
+.twin .gap { fill: var(--simulated); opacity: .16; }
+.twin-key {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-family: var(--data);
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  margin-top: 6px;
+}
+.twin-key i { display: inline-block; width: 22px; height: 0; vertical-align: middle;
+              border-top-width: 2px; border-top-style: solid; margin-right: 7px; }
+.twin-key .k-measured i { border-color: var(--measured); }
+.twin-key .k-simulated i { border-top-style: dashed; border-color: var(--simulated); }
+
+/* La perilla: mover el caudal de fuga y ver al compresor cargar mas seguido.
+ * Es el patron que a Kevin le gusta, la perilla ensena la fisica. */
+.knob { display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+        margin: 0 0 14px; font-family: var(--data); font-size: 12px;
+        color: var(--ink-faint); }
+.knob input[type="range"] { accent-color: var(--accent); flex: 1 1 220px; max-width: 320px; }
+.knob output { color: var(--accent); min-width: 76px; }
+
+/* ------------------------------------------------------------------ indice */
+
+.toc { max-width: var(--wide); margin: 0 auto; padding: 0 28px 20px; }
+.toc .part {
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 30px 0 4px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+.toc a, .toc .pending {
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--rule-soft);
+  text-decoration: none;
+  color: var(--ink);
+}
+.toc a:hover { color: var(--accent); background: var(--panel); }
+.toc .pending { color: var(--ink-faint); }
+.toc .num { font-family: var(--data); font-size: 12px; color: var(--ink-faint); }
+.toc a:hover .num { color: var(--accent); }
+.toc .name small { display: block; color: var(--ink-faint); font-size: 13.5px;
+                   font-weight: 400; margin-top: 2px; max-width: 62ch; }
+.toc .mark { font-family: var(--data); font-size: 11.5px; color: var(--ink-faint);
+             text-align: right; }
+.toc .tag { font-family: var(--data); font-size: 10px; letter-spacing: .09em;
+            text-transform: uppercase; color: var(--accent); }
+
+/* ------------------------------------------------------------------- movil */
+
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .masthead-inner, .container, .pager, .footer-inner, .thread, .toc { padding: 0 18px; }
+  /* El kicker deja de colgar del margen y pasa a ir encima: a 375 px no hay
+   * columna que valga. */
+  .block { padding-left: 0; padding-top: 24px; }
+  .kicker { position: static; width: auto; text-align: left; margin-bottom: 7px; }
+  .thread { gap: 2px; }
+  .thread a, .thread span { min-width: 22px; font-size: 10px; padding: 3px 3px; }
+  .pager { flex-direction: column; gap: 14px; }
+  .pager a, .pager .next { max-width: 100%; text-align: left; margin-left: 0; }
+  .toc a, .toc .pending { grid-template-columns: 30px 1fr; gap: 10px; }
+  .toc .mark { grid-column: 2; text-align: left; }
+  pre { padding: 12px 13px; }
+  pre code { font-size: 12.5px; }
+}
+
+/* ------------------------------------------------------- movimiento y papel */
+
+/* Toda animacion de este curso paso la prueba de "si se quita, se entiende
+ * peor?". Las que no la pasaron no estan aqui. Y con esta preferencia puesta,
+ * todo se queda quieto en su estado final. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  body { background: #fff; color: #000; }
+  .thread, .pager, .live-bar, .live-editor { display: none; }
+  .live-static { display: block; }
+}

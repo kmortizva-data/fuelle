@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{LANG}}">
+<html lang="{{LANG}}" class="no-js" data-assets="../assets">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,13 @@
 {{ALTERNATE}}
 <style>
 {{STYLE}}
-:root { --accent: {{ACCENT}}; }
+/* El acento de este modulo, uno por tema. Los dos salen de src/site/palette.py
+   y los dos pasaron el contraste antes de llegar aqui. */
+:root { --accent: {{ACCENT_LIGHT}}; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --accent: {{ACCENT_DARK}}; }
+}
+:root[data-theme="dark"] { --accent: {{ACCENT_DARK}}; }
 </style>
 </head>
 <body>
@@ -17,14 +23,14 @@
     <div class="eyebrow"><a href="index{{LANG_SUFFIX}}.html">{{COURSE_NAME}}</a> / {{UI_MODULE}} <b>{{MODULE_NUMBER}}</b> {{UI_OF}} {{MODULE_TOTAL}}</div>
     <h1>{{MODULE_TITLE}}</h1>
     <p class="standfirst">{{SUBTITLE}}</p>
-    <div class="figure-mark">
+    <div class="assay">
+      <span class="figure-mark">{{UI_MODULE}} {{MODULE_NUMBER}}</span>
       <span class="figure-value">{{CIFRA_VALUE}}</span>
       <span class="figure-label">{{CIFRA_LABEL}}</span>
     </div>
-    <nav class="thread" aria-label="{{UI_THREAD}}">{{THREAD}}</nav>
-    <div class="assay">{{ASSAY}}</div>
   </div>
 </header>
+<nav class="thread" aria-label="{{UI_THREAD}}">{{THREAD}}</nav>
 <main class="container">
 {{CONTENT}}
 </main>
@@ -36,5 +42,8 @@
     <span>{{UI_SOURCE}}: {{SOURCE_NOTE}}</span>
   </div>
 </footer>
+<!-- El motor SQL no se descarga aqui: este fichero solo conecta los botones.
+     Los 8 MB llegan cuando el lector pulsa, y no antes. -->
+<script type="module" src="live.js"></script>
 </body>
 </html>

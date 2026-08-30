@@ -222,6 +222,41 @@ en escribir y 925 s en calcular una huella SHA256 de 208 MB. Remedido después: 
 969 MB/s**. Fue el antivirus o el indexador escaneando una carpeta recién creada con 209 MB
 nuevos. No cambiar el código por esto; si se repite, excluir la carpeta del antivirus.
 
+### El escáner de JavaScript de esta máquina (2026-08-30, diagnóstico cerrado)
+
+**Servir un fichero `.js` grande cuesta 19 segundos fijos en local, y eso rompe la carga del
+motor SQL en el navegador.** Costó una tarde localizarlo, así que queda escrito.
+
+La prueba que lo demuestra, con **el mismo fichero byte a byte** y tres extensiones:
+
+| Nombre | Tiempo de servicio |
+|---|---|
+| `prueba_worker.txt` | **0,34 s** |
+| `prueba_worker.mjs` | 18,99 s |
+| `duckdb-browser-eh.worker.js` | 19,00 s |
+
+Cincuenta y seis veces más lento por la extensión, comprimido o sin comprimir, en primera y en
+segunda petición. Es un escáner local de JavaScript, de la misma familia que el Control de
+aplicaciones que ya bloquea DLLs de pandas a mitad de import.
+
+**La consecuencia:** el navegador **aborta el arranque de un Worker** que tarda tanto, y el
+síntoma es un `ERROR: error` sin ningún detalle, que no apunta a nada. Con el fichero ya en
+caché, el mismo worker arranca **en 1 ms**.
+
+**No afecta a producción.** En GitHub Pages sirve el servidor de GitHub, sin antivirus de por
+medio, y el fichero se cachea. Solo afecta al desarrollo en esta máquina.
+
+`src/site/serve.py` existe por esto y hace tres cosas que `python -m http.server` no hace:
+sirve en varios hilos, comprime como Pages (incluido `application/wasm`, verificado contra un
+wasm real servido desde Pages), y **cachea el gzip**, porque comprimir 34 MB cuesta 2,9 s y sin
+caché se pagaban en cada petición.
+
+**Lo que queda sin verificar:** que el motor SQL ejecute una consulta dentro del navegador. El
+código llega hasta `instantiate` (import 0 ms, worker creado 1 ms, objeto creado 1 ms) y ahí se
+queda esperando al wasm. El servidor entrega los 34,25 MB correctamente en 19,2 s medidos con
+`curl`, así que **no es el código ni el servidor**. Falta probarlo en un navegador normal, fuera
+del panel, o con la carpeta excluida del antivirus.
+
 ### Fase 0,5 (siguiente, y es una puerta)
 Maqueta visual de **una sola lección**, con el grafo, la carátula, la consulta viva y el reto
 comprobable funcionando. **Kevin la aprueba antes de que se escriban las otras treinta y cuatro.**

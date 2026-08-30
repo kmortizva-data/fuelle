@@ -36,15 +36,16 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-COURSE_DIR = ROOT / "2_Curso"
+COURSE_DIR = ROOT / "lecciones"
 
 # A lesson file is m<NN>_<slug>.md. The pattern is this strict because Windows
 # matches globs case-insensitively, so a loose "m*.md" also picked up MANUAL.md and
 # reported the manual for quoting the very phrases it bans.
 LESSON_GLOB = "m[0-9][0-9]_*.md"
 
-FIGURES_DIR = COURSE_DIR / "figuras"
-OUT_DIR = COURSE_DIR / "out"
+FIGURES_DIR = ROOT / "figuras"
+OUT_DIR = ROOT / "out"
+RESULTS_DIR = ROOT / "results"
 TEMPLATES = Path(__file__).resolve().parent / "templates"
 
 LANGS = ("es", "en")
@@ -78,6 +79,7 @@ SECTION_STYLES = {
         "el código, por partes": ("is-code", "Código"),
         "el resultado, medido": ("is-result", "Resultado"),
         "ojo": ("is-warning", "Trampas"),
+        "hazlo tú": ("is-live", "Hazlo tú"),
         "puente metalúrgico": ("is-bridge", "Analogía"),
         "repaso": ("is-review", "Repaso"),
     },
@@ -91,6 +93,7 @@ SECTION_STYLES = {
         "the code, in parts": ("is-code", "Code"),
         "the result, measured": ("is-result", "Result"),
         "watch out": ("is-warning", "Traps"),
+        "do it yourself": ("is-live", "Your turn"),
         "metallurgical bridge": ("is-bridge", "Analogy"),
         "review": ("is-review", "Review"),
     },
@@ -103,8 +106,8 @@ GLOSSARY_HEADINGS = {"glosario", "glossary"}
 # each language; this is only the chrome around them.
 UI = {
     "es": {
-        "course_name": "Sílice",
-        "page_title": "{title} · Sílice, módulo {n}",
+        "course_name": "Fuelle",
+        "page_title": "{title} · Fuelle, módulo {n}",
         "prints": "sale",
         "line_by_line": "línea por línea, {n} {label}",
         "entry": "entrada", "entries": "entradas",
@@ -115,14 +118,18 @@ UI = {
         "figures": "figuras", "scripts": "scripts",
         "thread": "El arco del proyecto",
         "generated": "generado el", "source": "fuente",
-        "source_note": "los 31 apuntes originales, sus scripts y el CSV de la planta",
+        "source_note": "MetroPT-3, del compresor de un tren del Metro de Oporto (CC BY 4.0)",
+        "run": "correr", "challenge_run": "comprobar",
+        "idle": "el motor se descarga al pulsar",
+        "live_label": "consulta viva", "challenge_label": "reto",
+        "hint": "una pista", "solution": "ver la solución",
         "pending": "pendiente",
         "switch": "English",
         "portfolio": "English summary on the portfolio ↗",
     },
     "en": {
-        "course_name": "Silica",
-        "page_title": "{title} · Silica, module {n}",
+        "course_name": "Bellows",
+        "page_title": "{title} · Bellows, module {n}",
         "prints": "prints",
         "line_by_line": "line by line, {n} {label}",
         "entry": "entry", "entries": "entries",
@@ -133,7 +140,11 @@ UI = {
         "figures": "figures", "scripts": "scripts",
         "thread": "The arc of the project",
         "generated": "generated on", "source": "source",
-        "source_note": "the 31 original notes, their scripts and the plant CSV",
+        "source_note": "MetroPT-3, from a Porto Metro train compressor (CC BY 4.0)",
+        "run": "run", "challenge_run": "check",
+        "idle": "the engine downloads when you press",
+        "live_label": "live query", "challenge_label": "challenge",
+        "hint": "a hint", "solution": "see the solution",
         "pending": "pending",
         "switch": "Español",
         "portfolio": "Resumen en el portafolio ↗",
@@ -179,7 +190,7 @@ def load_style() -> str:
 
 
 def load_syllabus() -> dict:
-    return json.loads((COURSE_DIR / "temario.json").read_text(encoding="utf-8"))
+    return json.loads((ROOT / "temario.json").read_text(encoding="utf-8"))
 
 
 # --------------------------------------------------------------------------- inline
@@ -263,6 +274,17 @@ def render_blocks(lines: list[str]) -> str:
                 label = ui("entry") if len(rows) == 1 else ui("entries")
                 out.append(fold('<dl class="annot">' + "".join(rows) + "</dl>",
                                 ui("line_by_line").format(n=len(rows), label=label)))
+
+            # Un bloque `sql-vivo` es una consulta que el lector puede editar y
+            # correr de verdad, contra los datos reales, dentro de su navegador.
+            # El SQL se imprime siempre, asi que sin JavaScript la leccion se lee
+            # entera; lo que anade el JS es poder tocarla.
+            elif language == "sql-vivo":
+                out.append(live_block(body))
+            # Un bloque `reto` es lo mismo mas un enunciado y una respuesta
+            # esperada. La pagina compara EL RESULTADO, nunca el texto.
+            elif language == "reto":
+                out.append(challenge_block(code))
             else:
                 css_class = f' class="language-{language}"' if language else ""
                 out.append(f"<pre><code{css_class}>{body}</code></pre>")
@@ -312,6 +334,77 @@ def render_blocks(lines: list[str]) -> str:
         out.append(f"<p>{inline(' '.join(paragraph))}</p>")
 
     return "".join(out)
+
+
+# --------------------------------------------------------------- consulta viva
+
+def _editor(sql: str, label: str, run_label: str, extra: str = "", data: str = "") -> str:
+    """El armazon compartido por la consulta viva y el reto.
+
+    El SQL va DOS veces a proposito: en un <pre> que se ve cuando no hay
+    JavaScript, y en el <textarea> que se ve cuando si lo hay. Asi la leccion
+    nunca depende del motor para poder leerse.
+    """
+    return (
+        f'<div class="live{extra}"{data}>'
+        f'<div class="live-head"><span>{html.escape(label)}</span>'
+        f'<span class="live-status">{html.escape(ui("idle"))}</span></div>'
+        f'<pre class="live-static"><code>{sql}</code></pre>'
+        f'<textarea class="live-editor" spellcheck="false" '
+        f'aria-label="{html.escape(label)}">{sql}</textarea>'
+        f'<div class="live-bar"><button type="button" class="live-run">'
+        f'{html.escape(run_label)}</button></div>'
+        f'<div class="live-out"></div>'
+    )
+
+
+def live_block(escaped_sql: str) -> str:
+    return _editor(escaped_sql, ui("live_label"), ui("run")) + "</div>"
+
+
+def challenge_block(lines: list[str]) -> str:
+    """Un reto: enunciado, punto de partida, pista y solucion, todo plegado.
+
+    Campos, uno por linea: `pregunta:`, `inicio:`, `esperado:`, `pista:`,
+    `solucion:`. `esperado` nombra una clave de results/retos.json, que escriben
+    los scripts al resolver el reto; ninguna respuesta se teclea a mano aqui.
+    """
+    fields: dict[str, list[str]] = {}
+    current = None
+    for line in lines:
+        head, sep, rest = line.partition(":")
+        if sep and head.strip() in ("pregunta", "inicio", "esperado", "pista", "solucion"):
+            current = head.strip()
+            fields[current] = [rest.strip()] if rest.strip() else []
+        elif current:
+            fields[current].append(line.rstrip())
+
+    def joined(key: str) -> str:
+        return "\n".join(fields.get(key, [])).strip()
+
+    expected_key = joined("esperado")
+    payload = ""
+    if expected_key:
+        answers = json.loads((RESULTS_DIR / "retos.json").read_text(encoding="utf-8"))
+        if expected_key not in answers:
+            raise SystemExit(
+                f"El reto pide la respuesta «{expected_key}» y no está en "
+                f"results/retos.json. Resuélvelo con su script antes de publicarlo."
+            )
+        payload = (" data-expected='"
+                   + html.escape(json.dumps(answers[expected_key]["rows"]), quote=True)
+                   + "'")
+
+    ask = f'<p class="reto-ask">{inline(joined("pregunta"))}</p>'
+    start = html.escape(joined("inicio"))
+    body = _editor(start, ui("challenge_label"), ui("challenge_run"), " reto", payload)
+    tail = '<div class="verdict"></div>'
+    if joined("pista"):
+        tail += fold(f'<p>{inline(joined("pista"))}</p>', ui("hint"))
+    if joined("solucion"):
+        tail += fold(f'<pre><code>{html.escape(joined("solucion"))}</code></pre>',
+                     ui("solution"))
+    return f'{ask}{body}{tail}</div>'
 
 
 def fold(inner: str, summary: str) -> str:
@@ -443,7 +536,15 @@ def page_name(slug: str, lang: str) -> str:
 
 
 def build_thread(syllabus: dict, current: int | None, lang: str = "es") -> str:
-    """The segment strip: where you are, and what every module measured."""
+    """La tira de módulos: dónde estás, dentro de los 35.
+
+    Silice ponía la cifra de cada módulo dentro de la tira, y con catorce cabía.
+    Con treinta y cinco no cabe, y las cifras de este curso son frases enteras
+    («3,42 h contra 23,81 h»), así que la tira ocupaba tres filas y no se leía.
+
+    Aquí va solo el número. La cifra y el título viven en el `title`, que es donde
+    hacen falta: al pasar por encima, no todo el rato.
+    """
     stems = lesson_stems(syllabus)
     parts = []
     previous_part = None
@@ -452,19 +553,20 @@ def build_thread(syllabus: dict, current: int | None, lang: str = "es") -> str:
         opens_part = module.get("parte") != previous_part and previous_part is not None
         previous_part = module.get("parte")
         edge = ' class="starts-part"' if opens_part else ""
-        label = (f'<span class="n">{number}</span> '
-                 f'<span class="v">{html.escape(cifra_value(module, lang))}</span>')
-        title = html.escape(f"{number}. {module_title(module, lang)}", quote=True)
-        # Whether a module is reachable is decided by its source existing, not by its
-        # output: otherwise the strip depends on the order the pages happen to be built
-        # in, and the first module of a fresh build links to nothing.
+        label = str(number)
+        title = html.escape(
+            f"{number}. {module_title(module, lang)} ({cifra_value(module, lang)})",
+            quote=True,
+        )
         if number == current:
-            parts.append(f'<span{edge} aria-current="page" title="{title}">{label}</span>')
+            parts.append(f'<span class="now{" starts-part" if opens_part else ""}" '
+                         f'aria-current="page" title="{title}">{label}</span>')
         elif is_written(stems[number], lang):
             parts.append(f'<a{edge} href="{page_name(stems[number], lang)}" '
                          f'title="{title}">{label}</a>')
         else:
-            parts.append(f'<span{edge} title="{title} ({UI[lang]["pending"]})">{label}</span>')
+            parts.append(f'<span{edge} title="{title} ({UI[lang]["pending"]})" '
+                         f'class="gone{" starts-part" if opens_part else ""}">{label}</span>')
     return "".join(parts)
 
 
@@ -488,7 +590,6 @@ def build_pager(syllabus: dict, current: int, lang: str = "es") -> str:
 def build_assay(module: dict, lang: str = "es") -> str:
     """What the module is made of. The honest equivalent of Coursera's video counts."""
     counts = [
-        (len(module["apuntes"]), UI[lang]["notes"]),
         (len(module["figuras"]), UI[lang]["figures"]),
         (len(module["scripts"]), UI[lang]["scripts"]),
     ]
@@ -511,7 +612,7 @@ def top_link(slug_or_index: str, lang: str) -> tuple[str, str]:
         alternate = f'<link rel="alternate" hreflang="{twin_lang}" href="{href}">'
         return link, alternate
     if lang == "es":
-        link = ('<a class="portfolio-link" href="https://kmortizva-data.github.io/work/silica.html" '
+        link = ('<a class="portfolio-link" href="https://kmortizva-data.github.io/work/fuelle.html" '
                 f'target="_blank" rel="noopener">{html.escape(UI["es"]["portfolio"])}</a>')
         return link, ""
     return "", ""
@@ -547,7 +648,7 @@ def build_page(source_path: Path, lang: str | None = None) -> Path:
         raise SystemExit(f"{source_path.name} no coincide con el slug del temario "
                          f"({module['slug']}). El temario manda.")
     if lang == "en" and not (source_dir("en") / "curso.md").exists():
-        raise SystemExit("Falta 2_Curso/en/curso.md: sin portada inglesa, una lección "
+        raise SystemExit("Falta lecciones/en/curso.md: sin portada inglesa, una lección "
                          "inglesa enlazaría a un índice que no existe.")
 
     page = (TEMPLATES / "lesson.html").read_text(encoding="utf-8")
@@ -560,7 +661,9 @@ def build_page(source_path: Path, lang: str | None = None) -> Path:
         "{{SUBTITLE}}": module_subtitle(module, lang),
         "{{CIFRA_VALUE}}": cifra_value(module, lang),
         "{{CIFRA_LABEL}}": cifra_label(module, lang),
-        "{{ACCENT}}": module["accent"],
+        "{{ACCENT}}": module["accent"]["dark"],
+        "{{ACCENT_LIGHT}}": module["accent"]["light"],
+        "{{ACCENT_DARK}}": module["accent"]["dark"],
     }
     text_values.update(ui_values(lang))
     link, alternate = top_link(module["slug"], lang)

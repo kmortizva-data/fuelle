@@ -1,0 +1,50 @@
+{
+  "candidates": [
+    {
+      "name": "todo_todas_columnas",
+      "rows": 1516948,
+      "columns": 17,
+      "mb_on_disk": 16.86,
+      "mb_downloaded": 15.38
+    },
+    {
+      "name": "todo_columnas_del_m13",
+      "rows": 1516948,
+      "columns": 5,
+      "mb_on_disk": 6.26,
+      "mb_downloaded": 6.24
+    },
+    {
+      "name": "sin_timestamp",
+      "rows": 1516948,
+      "columns": 4,
+      "mb_on_disk": 1.22,
+      "mb_downloaded": 1.21
+    },
+    {
+      "name": "solo_lo_del_reto",
+      "rows": 1516948,
+      "columns": 2,
+      "mb_on_disk": 0.03,
+      "mb_downloaded": 0.03
+    },
+    {
+      "name": "un_mes_columnas_del_m13",
+      "rows": 216514,
+      "columns": 5,
+      "mb_on_disk": 0.9,
+      "mb_downloaded": 0.9
+    },
+    {
+      "name": "sin_timestamp_ligera",
+      "rows": 1516948,
+      "columns": 3,
+      "mb_on_disk": 0.06,
+      "mb_downloaded": 0.06
+    }
+  ],
+  "chosen": "sin_timestamp_ligera",
+  "sample_avg_loaded_hours": 3.42,
+  "lake_avg_loaded_hours": 3.42,
+  "reproduces": true
+}
