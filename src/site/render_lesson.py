@@ -436,48 +436,51 @@ def render_review(content: str) -> str:
     return "".join(out)
 
 
-def figure_files(name: str, lang: str) -> list[Path]:
-    """The rasterised figures for `name`, in the language asked for.
-
-    A figure is `fig_m9_pca.a3f2c1d0.png` in Spanish and `fig_m9_pca.en.a3f2c1d0.png` in
-    English, so a plain glob of `fig_m9_pca.*.png` matches both and a Spanish page could
-    end up serving the English drawing. The fingerprint is eight hex characters, which is
-    what tells the two apart.
-
-    English falls back to the Spanish figure when its twin has not been drawn yet. That is
-    the honest state while the redraw is in progress: an English caption over a Spanish
-    axis reads worse than it should, but a missing figure reads as a bug.
-    """
-    if not FIGURES_DIR.is_dir():
-        return []
-    spanish = re.compile(rf"^{re.escape(name)}\.[0-9a-f]{{8}}\.png$")
-    english = re.compile(rf"^{re.escape(name)}\.en\.[0-9a-f]{{8}}\.png$")
-    wanted = english if lang == "en" else spanish
-    matches = sorted(p for p in FIGURES_DIR.iterdir() if wanted.match(p.name))
-    if matches or lang != "en":
-        return matches
-    return sorted(p for p in FIGURES_DIR.iterdir() if spanish.match(p.name))
+def _fingerprints() -> dict:
+    """Las huellas que dejó figures_theme al dibujar."""
+    path = ROOT / "results" / "figuras.json"
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def resolve_figure(relative: str, depth: int = 1) -> str:
-    """Turn a {{FIG:name|caption}} directive into a figure.
+    """Convierte {{FIG:nombre|pie}} en una figura de dos temas.
 
-    The lesson asks for `fig_m2_arbol` and the file on disk is `fig_m2_arbol.a3f2c1d0.png`:
-    every figure carries a fingerprint of its own image, so a browser cannot serve a stale
-    copy and a moved fingerprint means the drawing itself moved.
+    Cada figura existe dos veces, `nombre.claro.png` y `nombre.oscuro.png`, porque
+    una figura con fondo de papel dentro de una página en grafito canta como un
+    faro. Van las dos al HTML y el CSS enseña la que toca, que es lo único que
+    responde tanto a la preferencia del sistema como al interruptor manual.
+
+    La huella del contenido va en la URL y no en el nombre del fichero, que es el
+    patrón del portafolio: mata la caché del navegador, y una huella que se mueve
+    significa que el dibujo se movió.
     """
     name, _, caption = relative.partition("|")
     name = name.strip()
-    matches = figure_files(name, _lang)
-    if not matches:
-        print(f"  AVISO: falta la figura {name}")
-        return f'<p class="gone">falta la figura {html.escape(name)}</p>'
-    target = matches[-1]
+    huellas = _fingerprints()
     up = "../" * depth
-    return (f'<figure class="fig"><img src="{up}figuras/{quote(target.name)}" '
-            f'alt="{html.escape(caption.strip() or name)}" loading="lazy">'
-            f'<figcaption>{inline(caption.strip()) or html.escape(name)}</figcaption>'
-            f"</figure>")
+
+    faltan = [t for t in ("claro", "oscuro")
+              if not (FIGURES_DIR / f"{name}.{t}.png").exists()]
+    if faltan:
+        print(f"  AVISO: falta la figura {name} en {', '.join(faltan)}")
+        return f'<p class="gone">falta la figura {html.escape(name)}</p>'
+
+    alt = html.escape(caption.strip() or name.replace("_", " "))
+    imagenes = []
+    for theme in ("claro", "oscuro"):
+        fichero = f"{name}.{theme}.png"
+        version = huellas.get(fichero, "")
+        query = f"?v={version}" if version else ""
+        imagenes.append(
+            f'<img class="fig-{theme}" src="{up}figuras/{quote(fichero)}{query}" '
+            f'alt="{alt}" loading="lazy">'
+        )
+
+    pie = inline(caption.strip()) if caption.strip() else ""
+    pie_html = f"<figcaption>{pie}</figcaption>" if pie else ""
+    return f'<figure class="fig">{"".join(imagenes)}{pie_html}</figure>'
 
 
 def render_document(body: str, styles: dict, figures: bool = True) -> str:

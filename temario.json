@@ -123,10 +123,10 @@
       "title_en": "The brief: a compressor breathing for the whole plant",
       "subtitle_en": "What this machine does, why its failure stops everything, and the four times it really failed",
       "cifra": {
-        "value": "4",
-        "label": "averías reales, todas fugas de aire",
-        "value_en": "4",
-        "label_en": "real failures, all air leaks"
+        "value": "15.169.480 → 1.516.948",
+        "label": "lo que promete la ficha y lo que trae el fichero",
+        "value_en": "15,169,480 → 1,516,948",
+        "label_en": "what the datasheet promises and what the file delivers"
       },
       "accent": {
         "dark": "#8EC2C8",
