@@ -274,6 +274,29 @@ queda esperando al wasm. El servidor entrega los 34,25 MB correctamente en 19,2 
 `curl`, así que **no es el código ni el servidor**. Falta probarlo en un navegador normal, fuera
 del panel, o con la carpeta excluida del antivirus.
 
+### El justificado y sus ríos, medidos (2026-08-30)
+
+Kevin: «obvio el texto está sin justificar y se ve feo». Tenía razón: la regla de la casa dice
+**justificado desde 33rem de columna y rasgado en móvil**, sin `hyphens`, y no se había aplicado.
+Ya está, con el corte en 34rem.
+
+**El coste, medido en el navegador** contando el estiramiento real de los espacios (río = línea
+cuyo hueco medio supera 1,5 veces el espacio natural):
+
+| Reparto de línea | Líneas con río | Peor estiramiento |
+|---|---|---|
+| **por defecto** | **20 %** | **2,39x** |
+| `text-wrap: pretty` | 25,7 % | 2,52x |
+| `text-wrap: balance` | 50 % | 17,9x |
+
+**`pretty` y `balance` empeoran**, así que se queda el reparto por defecto. Ensanchar la columna
+tampoco resuelve: de 646 px a 820 px solo baja del 20 % al 15,2 %, y 820 px ya es demasiado ancho
+para leer cómodo.
+
+Un 20 % de líneas con río es el precio de justificar en español sin partir palabras, y las dos
+reglas que lo causan (justificado sí, guionado no) las fijó Kevin midiendo. Se deja así y se
+declara; si algún día molesta, la única salida real es permitir el guionado.
+
 ### Fase 0,5 (siguiente, y es una puerta)
 Maqueta visual de **una sola lección**, con el grafo, la carátula, la consulta viva y el reto
 comprobable funcionando. **Kevin la aprueba antes de que se escriban las otras treinta.**
