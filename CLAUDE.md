@@ -297,6 +297,31 @@ Un 20 % de líneas con río es el precio de justificar en español sin partir pa
 reglas que lo causan (justificado sí, guionado no) las fijó Kevin midiendo. Se deja así y se
 declara; si algún día molesta, la única salida real es permitir el guionado.
 
+### El doble trazo no puede dibujar la presión (2026-08-30)
+
+Al construir la página de pruebas, el doble trazo dibujaba la presión del depósito y **al mover
+la perilla de la fuga las dos curvas no se separaban**. Medido: 32 px de separación media con
+5 l/min de fuga y 31 px con 40.
+
+No era un fallo del código. Es la tesis del proyecto, cometida contra el propio instrumento: **la
+presión es la variable controlada** y el control la sostiene entre 8,2 y 9,5 pase lo que pase.
+
+Corregido con dos gráficos, y ahora el instrumento demuestra la tesis en vez de ilustrarla:
+
+| Caudal de fuga | Separación en la presión | Separación en el trabajo acumulado |
+|---|---|---|
+| 0 l/min | 0 px | 0 px |
+| 5 | 25,9 | 15,1 |
+| 15 | 24,9 | 32,9 |
+| 30 | 22,8 | 43,6 |
+| 40 | 24,9 | **50,7** |
+
+**Regla para el resto del curso: el doble trazo nunca dibuja una variable controlada.** Dibuja
+trabajo, ciclo o consumo. Aplica a los módulos 23 a 28.
+
+`src/site/build_probe.py` genera `out/prueba_visual.html` y **no se publica**: el espejado del
+portafolio la deja fuera, como `prueba_scrolly.html` en Geoestadística. Se corre a mano.
+
 ### Fase 0,5 (siguiente, y es una puerta)
 Maqueta visual de **una sola lección**, con el grafo, la carátula, la consulta viva y el reto
 comprobable funcionando. **Kevin la aprueba antes de que se escriban las otras treinta.**
