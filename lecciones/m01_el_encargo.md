@@ -167,7 +167,7 @@ print(15_169_480 / 1_516_948)
 10.0
 ```
 
-Exactamente diez. No 9,97 ni 10,3.
+Exactamente diez, sin decimales sueltos. Eso no pasa por casualidad.
 
 Y la primera columna del CSV, esa que no tiene nombre, va 0, 10, 20, 30. Conserva la numeración
 del registro original.
