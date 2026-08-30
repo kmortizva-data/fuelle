@@ -1,0 +1,11 @@
+{
+  "rows": 1516948,
+  "partitions": 212,
+  "size_mb": 22.05,
+  "csv_mb": 208.19,
+  "write_seconds": 12533.88,
+  "fingerprint_seconds": 925.2,
+  "rows_after_second_run": 1516948,
+  "idempotent": true,
+  "compression_ratio": 9.44
+}

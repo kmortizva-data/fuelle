@@ -171,6 +171,57 @@ los colores y manda cada `savefig` a su fichero. La geometría y los datos no se
 - `src/ingest/inspect_raw.py` corriendo, escribe `results/m01_raw.json`.
 - Alta en `_INDICE/projects.json` (y de paso se registró Geoestadística, que faltaba).
 
+### Hallazgos de la fase 0,5 (2026-08-30), todos medidos
+
+**1. Particionar por día, el consejo estándar, es la PEOR opción a esta escala.**
+`src/transform/choose_partition.py` escribió las mismas 1.516.948 filas de cuatro formas:
+
+| Disposición | Ficheros | Tamaño | Escribir | Leer un día |
+|---|---|---|---|---|
+| Un fichero | 1 | 16,84 MB | 1,18 s | 0,021 s |
+| Por mes | 8 | 17,69 MB | 0,99 s | 0,020 s |
+| Por semana | 32 | 17,79 MB | 3,10 s | 0,070 s |
+| Por día | 212 | 22,09 MB | 4,28 s | **0,331 s** |
+
+Por día ocupa un 31 % más y lee **16 veces más lento** justo el caso para el que se supone que
+sirve. La razón: Parquet ya salta bloques con sus estadísticas internas, así que 212 ficheros
+solo añaden sobrecarga de metadatos y de apertura. Las cuatro devuelven las mismas 8.716 filas
+del 5 de junio, así que la comparación es válida. **Es el módulo 6 entero, medido.**
+
+**Consecuencia pedagógica:** `bronze.py` se queda particionando por día a propósito, porque es
+lo que hace todo el mundo. El módulo 6 lo mide, lo desmonta y lo corrige. El curso comete el
+error estándar delante del lector en vez de contarlo ya resuelto.
+
+**2. El ciclo de trabajo delata las averías antes de construir el gemelo.** Un día normal el
+compresor carga **3,42 h** (media de 91 días completos). Los seis días de más carga del semestre:
+
+| Día | Horas | % del día | Qué era |
+|---|---|---|---|
+| 2020-04-18 | **23,81** | 98,9 | avería #1 |
+| 2020-06-05 | 15,41 | 63,6 | avería #3 |
+| 2020-03-12 | 13,24 | 58,1 | **sin documentar** |
+| 2020-07-15 | 11,57 | 48,1 | avería #4 |
+| 2020-05-13 | 11,31 | 46,7 | **sin documentar** |
+| 2020-05-30 | 8,06 | 33,7 | avería #1 (segunda) |
+
+**Las cuatro averías documentadas que están completas en el fichero caen en el top 6.** Una
+consulta de agrupar encuentra lo que el proyecto entero busca. Los dos días sin documentar se
+dicen en voz alta: o son falsas alarmas, o son averías que nadie reportó. El gemelo tendrá que
+ganarle a esto, no solo funcionar.
+
+**3. Dos señales digitales se contradicen en 16.762 lecturas (1,1 %).** `DV_eletric` y `COMP`
+deberían ser opuestas: 6.536 lecturas las tienen las dos activas (carga y sin admisión de aire a
+la vez, imposible) y 10.226 las dos a cero. Material de los módulos 12 y 20.
+
+**4. Solo 91 de 212 días están completos.** Un día lleno son 8.640 lecturas; la mediana es 7.435
+(86 %). Cinco días por debajo del 10 %. El registro tiene huecos constantes, y cualquier media
+diaria hay que calcularla solo sobre días completos o mentirá. Módulo 7.
+
+**5. Un pico de la máquina, no del código.** La primera corrida de `bronze.py` tardó 3,5 horas
+en escribir y 925 s en calcular una huella SHA256 de 208 MB. Remedido después: **0,21 s, unos
+969 MB/s**. Fue el antivirus o el indexador escaneando una carpeta recién creada con 209 MB
+nuevos. No cambiar el código por esto; si se repite, excluir la carpeta del antivirus.
+
 ### Fase 0,5 (siguiente, y es una puerta)
 Maqueta visual de **una sola lección**, con el grafo, la carátula, la consulta viva y el reto
 comprobable funcionando. **Kevin la aprueba antes de que se escriban las otras treinta y cuatro.**

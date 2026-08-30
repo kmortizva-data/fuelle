@@ -12,7 +12,6 @@
   "verdict": "por medir",
   "verdict_en": "to be measured",
   "_verdict_note": "El veredicto se escribe cuando el módulo 32 termine de medir. No se adelanta.",
-
   "_diseno": {
     "_nota": "Kevin, 2026-08-29: 'no muy escandaloso, que parezca ingeniero, pero que demuestres habilidades, que no seas un pdf que se lee de recorrido'. Traducción operativa: paleta apagada de instrumento, movimiento mínimo, e interacción real en cada módulo.",
     "paleta": "results/palette.json, generada por src/site/palette.py en OKLCH y verificada en contraste sobre los dos fondos. Ningún color se elige a ojo.",
@@ -20,7 +19,6 @@
     "movimiento": "Mínimo y funcional. Toda animación tiene que pasar la prueba: si se quita, ¿se entiende peor? Si no, es decoración y se va.",
     "interaccion": "Cada módulo trae algo que HACER. Los de SQL cierran con un reto que se resuelve en la propia página contra datos reales, y la página comprueba la respuesta."
   },
-
   "_hechos_verificados": {
     "_nota": "Comprobados el 2026-08-29 contra el fichero descargado y el PDF oficial del propio zip, y con src/ingest/inspect_raw.py. Son los únicos números que pueden aparecer en una lección sin haber corrido un script.",
     "filas_csv": 1516948,
@@ -35,476 +33,1065 @@
     "escaneo_completo_s": 0.53,
     "umbral_mpg_bar": 8.2,
     "umbral_lps_bar": 7,
-    "corriente_motor_A": {"parado": 0, "en_vacio": 4, "en_carga": 7, "arranque": 9},
+    "corriente_motor_A": {
+      "parado": 0,
+      "en_vacio": 4,
+      "en_carga": 7,
+      "arranque": 9
+    },
     "ficha_declara_puntos": 15169480,
-    "ratio_ficha_sobre_fichero": 10.0
+    "ratio_ficha_sobre_fichero": 10.0,
+    "particionado_medido": "Medido el 2026-08-30 con src/transform/choose_partition.py sobre 1.516.948 filas: un solo fichero 16,84 MB, escritura 1,18 s, leer un dia 0,021 s. Por mes (8 ficheros) 17,69 MB, 0,99 s, 0,020 s. Por semana (32) 17,79 MB, 3,10 s, 0,070 s. Por dia (212) 22,09 MB, 4,28 s, 0,331 s. EL CONSEJO ESTANDAR DE PARTICIONAR POR DIA ES LA PEOR OPCION A ESTA ESCALA: 31% mas grande y 16 veces mas lento leyendo un dia, porque Parquet ya salta bloques con sus estadisticas internas y 212 ficheros solo anaden sobrecarga. Las cuatro disposiciones devuelven las mismas 8.716 filas del 2020-06-05.",
+    "ciclo_de_trabajo": "Medido el 2026-08-30 con src/transform/m13_duty_cycle.py. Dia normal: 3,42 h de carga de media sobre 91 dias completos (rango 1,11 a 23,81). LOS CUATRO DIAS DE AVERIA DOCUMENTADA QUE ESTAN COMPLETOS EN EL FICHERO CAEN EN EL TOP 6 DE CICLO DE TRABAJO: 18-abr 23,81 h (98,9% del dia, averia #1), 5-jun 15,41 h (#3), 15-jul 11,57 h (#4), 30-may 8,06 h (#1 segunda). Dos dias mas del top 6 NO estan documentados como averia: 12-mar 13,24 h y 13-may 11,31 h. Se dicen, no se esconden.",
+    "senales_que_se_contradicen": "DV_eletric y COMP deberian ser opuestas y no lo son siempre: 6.536 lecturas con las dos activas (imposible: carga y sin admision de aire a la vez) y 10.226 con las dos a cero. Son 16.762 lecturas, el 1,1%. Material de los modulos 12 y 20.",
+    "dias_completos": "Solo 91 de 212 dias tienen el 90% o mas de las 8.640 lecturas que cabrian en un dia. Mediana 7.435 lecturas por dia (86%). Reparto: 5 dias por debajo del 10%, 16 entre 10 y 50%, 100 entre 50 y 90%, 91 al 90% o mas. El registro tiene huecos constantes.",
+    "parquet_un_fichero_mb": 16.84,
+    "parquet_por_dia_mb": 22.09
   },
-
   "partes": [
-    {"n": 1, "title": "El encargo y el terreno", "title_en": "The brief and the ground", "modulos": [1, 3]},
-    {"n": 2, "title": "Traer el dato sin romperlo", "title_en": "Bringing the data in without breaking it", "modulos": [4, 7]},
-    {"n": 3, "title": "SQL desde cero", "title_en": "SQL from zero", "modulos": [8, 17]},
-    {"n": 4, "title": "Del crudo a la respuesta", "title_en": "From raw to answer", "modulos": [18, 22]},
-    {"n": 5, "title": "Administrar una base de datos", "title_en": "Running a database", "modulos": [23, 26]},
-    {"n": 6, "title": "El gemelo", "title_en": "The twin", "modulos": [27, 32]},
-    {"n": 7, "title": "La fábrica y la entrega", "title_en": "The factory and the delivery", "modulos": [33, 35]}
+    {
+      "n": 1,
+      "title": "El encargo y el terreno",
+      "title_en": "The brief and the ground",
+      "modulos": [
+        1,
+        3
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Traer el dato sin romperlo",
+      "title_en": "Bringing the data in without breaking it",
+      "modulos": [
+        4,
+        7
+      ]
+    },
+    {
+      "n": 3,
+      "title": "SQL desde cero",
+      "title_en": "SQL from zero",
+      "modulos": [
+        8,
+        17
+      ]
+    },
+    {
+      "n": 4,
+      "title": "Del crudo a la respuesta",
+      "title_en": "From raw to answer",
+      "modulos": [
+        18,
+        22
+      ]
+    },
+    {
+      "n": 5,
+      "title": "Administrar una base de datos",
+      "title_en": "Running a database",
+      "modulos": [
+        23,
+        26
+      ]
+    },
+    {
+      "n": 6,
+      "title": "El gemelo",
+      "title_en": "The twin",
+      "modulos": [
+        27,
+        32
+      ]
+    },
+    {
+      "n": 7,
+      "title": "La fábrica y la entrega",
+      "title_en": "The factory and the delivery",
+      "modulos": [
+        33,
+        35
+      ]
+    }
   ],
-
   "modules": [
     {
-      "number": 1, "slug": "m01_el_encargo", "parte": 1,
+      "number": 1,
+      "slug": "m01_el_encargo",
+      "parte": 1,
       "title": "El encargo: un compresor que respira por toda la planta",
       "subtitle": "Qué hace esta máquina, por qué su avería para todo, y las cuatro veces que falló de verdad",
       "title_en": "The brief: a compressor breathing for the whole plant",
       "subtitle_en": "What this machine does, why its failure stops everything, and the four times it really failed",
-      "cifra": {"value": "4", "label": "averías reales, todas fugas de aire", "value_en": "4", "label_en": "real failures, all air leaks"},
-      "accent": {"dark": "#8EC2C8", "light": "#46787E"},
-      "instrumento": "caratula", "interactivo": false,
+      "cifra": {
+        "value": "4",
+        "label": "averías reales, todas fugas de aire",
+        "value_en": "4",
+        "label_en": "real failures, all air leaks"
+      },
+      "accent": {
+        "dark": "#8EC2C8",
+        "light": "#46787E"
+      },
+      "instrumento": "caratula",
+      "interactivo": false,
       "reto": null,
-      "scripts": ["src/ingest/inspect_raw.py"],
-      "figuras": ["fig_m1_anatomia_del_compresor", "fig_m1_las_cuatro_averias"]
+      "scripts": [
+        "src/ingest/inspect_raw.py"
+      ],
+      "figuras": [
+        "fig_m1_anatomia_del_compresor",
+        "fig_m1_las_cuatro_averias"
+      ]
     },
     {
-      "number": 2, "slug": "m02_dato_tabla_tipo", "parte": 1,
+      "number": 2,
+      "slug": "m02_dato_tabla_tipo",
+      "parte": 1,
       "title": "Qué es un dato, una tabla y un tipo",
       "subtitle": "Las tres palabras sobre las que se apoya todo lo demás, explicadas con las lecturas de este compresor y no con teoría",
       "title_en": "What a value, a table and a type are",
       "subtitle_en": "The three words everything else rests on, explained with this compressor's readings rather than with theory",
-      "cifra": {"value": "15", "label": "señales: 7 que miden, 8 que dicen sí o no", "value_en": "15", "label_en": "signals: 7 that measure, 8 that say yes or no"},
-      "accent": {"dark": "#8BC3C6", "light": "#43797C"},
-      "instrumento": "caratula", "interactivo": true,
+      "cifra": {
+        "value": "15",
+        "label": "señales: 7 que miden, 8 que dicen sí o no",
+        "value_en": "15",
+        "label_en": "signals: 7 that measure, 8 that say yes or no"
+      },
+      "accent": {
+        "dark": "#8BC3C6",
+        "light": "#43797C"
+      },
+      "instrumento": "caratula",
+      "interactivo": true,
       "reto": "Clasificar cinco señales del compresor en analógica o digital, y decir qué tipo de dato le corresponde a cada una.",
-      "scripts": ["src/ingest/describe_signals.py"],
-      "figuras": ["fig_m2_analogica_vs_digital"]
+      "scripts": [
+        "src/ingest/describe_signals.py"
+      ],
+      "figuras": [
+        "fig_m2_analogica_vs_digital"
+      ]
     },
     {
-      "number": 3, "slug": "m03_donde_viven_los_datos", "parte": 1,
+      "number": 3,
+      "slug": "m03_donde_viven_los_datos",
+      "parte": 1,
       "title": "Dónde viven los datos: fichero, base de datos, lago y almacén",
       "subtitle": "Cuatro palabras que se usan como sinónimos y no lo son. Cuál sirve para qué, y por qué este proyecto necesita más de una",
       "title_en": "Where data lives: file, database, lake and warehouse",
       "subtitle_en": "Four words used as synonyms that are not. Which is for what, and why this project needs more than one",
-      "cifra": {"value": "208,2 MB", "label": "en un solo fichero, y por qué eso ya es un problema", "value_en": "208.2 MB", "label_en": "in a single file, and why that is already a problem"},
-      "accent": {"dark": "#89C4C3", "light": "#407A7A"},
-      "instrumento": "grafo", "interactivo": false,
+      "cifra": {
+        "value": "208,2 MB",
+        "label": "en un solo fichero, y por qué eso ya es un problema",
+        "value_en": "208.2 MB",
+        "label_en": "in a single file, and why that is already a problem"
+      },
+      "accent": {
+        "dark": "#89C4C3",
+        "light": "#407A7A"
+      },
+      "instrumento": "grafo",
+      "interactivo": false,
       "reto": null,
       "scripts": [],
-      "figuras": ["fig_m3_cuatro_sitios"]
+      "figuras": [
+        "fig_m3_cuatro_sitios"
+      ]
     },
     {
-      "number": 4, "slug": "m04_bronce", "parte": 2,
+      "number": 4,
+      "slug": "m04_bronce",
+      "parte": 2,
       "title": "Bronce: el crudo es sagrado",
       "subtitle": "La primera capa no limpia, no arregla y no interpreta. Guarda lo que llegó, tal y como llegó, y esa disciplina te salva más tarde",
       "title_en": "Bronze: raw is sacred",
       "subtitle_en": "The first layer does not clean, fix or interpret. It keeps what arrived exactly as it arrived, and that discipline saves you later",
-      "cifra": {"value": "por medir", "label": "particiones diarias escritas", "value_en": "to be measured", "label_en": "daily partitions written"},
-      "accent": {"dark": "#87C5C1", "light": "#3B7874"},
-      "instrumento": "grafo", "interactivo": false,
+      "cifra": {
+        "value": "por medir",
+        "label": "particiones diarias escritas",
+        "value_en": "to be measured",
+        "label_en": "daily partitions written"
+      },
+      "accent": {
+        "dark": "#87C5C1",
+        "light": "#3B7874"
+      },
+      "instrumento": "grafo",
+      "interactivo": false,
       "reto": null,
-      "scripts": ["src/ingest/bronze.py"],
-      "figuras": ["fig_m4_capas", "fig_m4_bronce_particiones"]
+      "scripts": [
+        "src/ingest/bronze.py"
+      ],
+      "figuras": [
+        "fig_m4_capas",
+        "fig_m4_bronce_particiones"
+      ]
     },
     {
-      "number": 5, "slug": "m05_idempotencia", "parte": 2,
+      "number": 5,
+      "slug": "m05_idempotencia",
+      "parte": 2,
       "title": "Correr dos veces sin duplicar nada",
       "subtitle": "Qué es la huella de un fichero, qué es ser idempotente, y por qué un proceso que no lo es acaba mintiéndote en los totales",
       "title_en": "Running twice without duplicating anything",
       "subtitle_en": "What a file fingerprint is, what idempotent means, and why a process that is not will eventually lie to you in the totals",
-      "cifra": {"value": "por medir", "label": "filas tras correr la ingesta tres veces", "value_en": "to be measured", "label_en": "rows after running ingestion three times"},
-      "accent": {"dark": "#86C6BD", "light": "#3D7B74"},
-      "instrumento": "grafo", "interactivo": false,
+      "cifra": {
+        "value": "por medir",
+        "label": "filas tras correr la ingesta tres veces",
+        "value_en": "to be measured",
+        "label_en": "rows after running ingestion three times"
+      },
+      "accent": {
+        "dark": "#86C6BD",
+        "light": "#3D7B74"
+      },
+      "instrumento": "grafo",
+      "interactivo": false,
       "reto": null,
-      "scripts": ["src/ingest/fingerprint.py"],
-      "figuras": ["fig_m5_idempotencia"]
+      "scripts": [
+        "src/ingest/fingerprint.py"
+      ],
+      "figuras": [
+        "fig_m5_idempotencia"
+      ]
     },
     {
-      "number": 6, "slug": "m06_particionar", "parte": 2,
+      "number": 6,
+      "slug": "m06_particionar",
+      "parte": 2,
       "title": "Partir por fecha: qué es particionar y con qué tamaño",
       "subtitle": "Guardar el mismo dato en carpetas por día hace que una pregunta lea la centésima parte. El tamaño se elige mirando la curva, no copiando un valor por defecto",
       "title_en": "Splitting by date: what partitioning is and at what size",
       "subtitle_en": "Storing the same data in folders by day makes a question read a hundredth of it. The size is chosen by reading the curve, not by copying a default",
-      "cifra": {"value": "por medir", "label": "el tamaño de partición que sale de la curva", "value_en": "to be measured", "label_en": "the partition size the curve points to"},
-      "accent": {"dark": "#86C6BA", "light": "#39796E"},
-      "instrumento": "grafo", "interactivo": false,
+      "cifra": {
+        "value": "0,021 s contra 0,331 s",
+        "label": "leer un día sin particionar y particionando por día",
+        "value_en": "0.021 s against 0.331 s",
+        "label_en": "reading one day unpartitioned and partitioned by day"
+      },
+      "accent": {
+        "dark": "#86C6BA",
+        "light": "#39796E"
+      },
+      "instrumento": "grafo",
+      "interactivo": false,
       "reto": null,
-      "scripts": ["src/transform/choose_partition.py"],
-      "figuras": ["fig_m6_curva_de_particion"]
+      "scripts": [
+        "src/transform/choose_partition.py"
+      ],
+      "figuras": [
+        "fig_m6_curva_de_particion"
+      ]
     },
     {
-      "number": 7, "slug": "m07_filas_contra_columnas", "parte": 2,
+      "number": 7,
+      "slug": "m07_filas_contra_columnas",
+      "parte": 2,
       "title": "Filas contra columnas: CSV frente a Parquet",
       "subtitle": "Por qué el formato en que guardas cambia el tiempo de una pregunta en un factor grande, con el cronómetro puesto en tu máquina",
       "title_en": "Rows against columns: CSV versus Parquet",
       "subtitle_en": "Why the format you store in changes the time of a question by a large factor, timed on your own machine",
-      "cifra": {"value": "por medir", "label": "veces más rápido que el CSV", "value_en": "to be measured", "label_en": "times faster than the CSV"},
-      "accent": {"dark": "#86C7B5", "light": "#39796A"},
-      "instrumento": "grafo", "interactivo": false,
+      "cifra": {
+        "value": "por medir",
+        "label": "veces más rápido que el CSV",
+        "value_en": "to be measured",
+        "label_en": "times faster than the CSV"
+      },
+      "accent": {
+        "dark": "#86C7B5",
+        "light": "#39796A"
+      },
+      "instrumento": "grafo",
+      "interactivo": false,
       "reto": null,
-      "scripts": ["src/transform/benchmark_formats.py"],
-      "figuras": ["fig_m7_csv_vs_parquet", "fig_m7_filas_vs_columnas"]
+      "scripts": [
+        "src/transform/benchmark_formats.py"
+      ],
+      "figuras": [
+        "fig_m7_csv_vs_parquet",
+        "fig_m7_filas_vs_columnas"
+      ]
     },
     {
-      "number": 8, "slug": "m08_primera_consulta", "parte": 3,
+      "number": 8,
+      "slug": "m08_primera_consulta",
+      "parte": 3,
       "title": "Tu primera consulta: SELECT y FROM",
       "subtitle": "Seis lecturas de un depósito resueltas a mano, y después las mismas dos palabras contra un millón y medio de filas",
       "title_en": "Your first query: SELECT and FROM",
       "subtitle_en": "Six receiver readings solved by hand, then those same two words against a million and a half rows",
-      "cifra": {"value": "por medir", "label": "segundos en la primera consulta real", "value_en": "to be measured", "label_en": "seconds on the first real query"},
-      "accent": {"dark": "#87C7B1", "light": "#3A7A66"},
-      "instrumento": "caratula", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "segundos en la primera consulta real",
+        "value_en": "to be measured",
+        "label_en": "seconds on the first real query"
+      },
+      "accent": {
+        "dark": "#87C7B1",
+        "light": "#3A7A66"
+      },
+      "instrumento": "caratula",
+      "interactivo": true,
       "reto": "Pedir dos columnas concretas del compresor y las diez primeras filas.",
-      "scripts": ["src/transform/queries_m08.sql"],
-      "figuras": ["fig_m8_anatomia_de_una_consulta"]
+      "scripts": [
+        "src/transform/queries_m08.sql"
+      ],
+      "figuras": [
+        "fig_m8_anatomia_de_una_consulta"
+      ]
     },
     {
-      "number": 9, "slug": "m09_filtrar", "parte": 3,
+      "number": 9,
+      "slug": "m09_filtrar",
+      "parte": 3,
       "title": "Filtrar filas: WHERE, y el vacío que no es cero",
       "subtitle": "Quedarse con lo que interesa. Y la trampa que hace fallar a todo el que empieza: un dato ausente no vale cero, y no se compara como tal",
       "title_en": "Filtering rows: WHERE, and the empty that is not zero",
       "subtitle_en": "Keeping only what matters. And the trap that catches every beginner: a missing value is not zero, and does not compare like one",
-      "cifra": {"value": "por medir", "label": "filas por debajo del umbral de arranque", "value_en": "to be measured", "label_en": "rows below the start threshold"},
-      "accent": {"dark": "#88C7AD", "light": "#3C7A62"},
-      "instrumento": "caratula", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "filas por debajo del umbral de arranque",
+        "value_en": "to be measured",
+        "label_en": "rows below the start threshold"
+      },
+      "accent": {
+        "dark": "#88C7AD",
+        "light": "#3C7A62"
+      },
+      "instrumento": "caratula",
+      "interactivo": true,
       "reto": "Encontrar todas las lecturas en que la alarma de baja presión estaba activa.",
-      "scripts": ["src/transform/queries_m09.sql"],
-      "figuras": ["fig_m9_null_no_es_cero"]
+      "scripts": [
+        "src/transform/queries_m09.sql"
+      ],
+      "figuras": [
+        "fig_m9_null_no_es_cero"
+      ]
     },
     {
-      "number": 10, "slug": "m10_tipos", "parte": 3,
+      "number": 10,
+      "slug": "m10_tipos",
+      "parte": 3,
       "title": "Tipos y conversiones: cuando 8,2 no es 8,2",
       "subtitle": "Texto, entero, decimal y fecha. Por qué los decimales de este fichero traen basura pegada, y qué hace un ordenador cuando le pides sumar peras con texto",
       "title_en": "Types and casting: when 8.2 is not 8.2",
       "subtitle_en": "Text, integer, decimal and date. Why this file's decimals carry litter, and what a computer does when you ask it to add text to pears",
-      "cifra": {"value": "por medir", "label": "decimales con basura de coma flotante", "value_en": "to be measured", "label_en": "decimals carrying floating point litter"},
-      "accent": {"dark": "#8BC7A8", "light": "#3F7A5D"},
-      "instrumento": "caratula", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "decimales con basura de coma flotante",
+        "value_en": "to be measured",
+        "label_en": "decimals carrying floating point litter"
+      },
+      "accent": {
+        "dark": "#8BC7A8",
+        "light": "#3F7A5D"
+      },
+      "instrumento": "caratula",
+      "interactivo": true,
       "reto": "Convertir una marca de tiempo escrita como texto en una fecha de verdad, y comprobar que ordena bien.",
-      "scripts": ["src/transform/queries_m10.sql"],
-      "figuras": ["fig_m10_coma_flotante"]
+      "scripts": [
+        "src/transform/queries_m10.sql"
+      ],
+      "figuras": [
+        "fig_m10_coma_flotante"
+      ]
     },
     {
-      "number": 11, "slug": "m11_ordenar", "parte": 3,
+      "number": 11,
+      "slug": "m11_ordenar",
+      "parte": 3,
       "title": "Ordenar y limitar: ORDER BY y LIMIT",
       "subtitle": "Los diez momentos de más presión del semestre. Ordenar parece trivial y es donde más se tarda cuando la tabla es grande",
       "title_en": "Sorting and limiting: ORDER BY and LIMIT",
       "subtitle_en": "The ten highest pressure moments of the half year. Sorting looks trivial and is where a big table spends the most time",
-      "cifra": {"value": "por medir", "label": "presión máxima registrada, en bar", "value_en": "to be measured", "label_en": "highest pressure on record, in bar"},
-      "accent": {"dark": "#8DC7A3", "light": "#427A59"},
-      "instrumento": "caratula", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "presión máxima registrada, en bar",
+        "value_en": "to be measured",
+        "label_en": "highest pressure on record, in bar"
+      },
+      "accent": {
+        "dark": "#8DC7A3",
+        "light": "#427A59"
+      },
+      "instrumento": "caratula",
+      "interactivo": true,
       "reto": "Sacar los cinco momentos de mayor temperatura de aceite del periodo.",
-      "scripts": ["src/transform/queries_m11.sql"],
+      "scripts": [
+        "src/transform/queries_m11.sql"
+      ],
       "figuras": []
     },
     {
-      "number": 12, "slug": "m12_case", "parte": 3,
+      "number": 12,
+      "slug": "m12_case",
+      "parte": 3,
       "title": "Decidir dentro de la consulta: CASE",
       "subtitle": "Traducir números a estados. Aquí nace la columna que el resto del curso usa sin parar: parado, en vacío, o en carga",
       "title_en": "Deciding inside the query: CASE",
       "subtitle_en": "Turning numbers into states. This is where the column the rest of the course leans on is born: off, offloaded, or loaded",
-      "cifra": {"value": "por medir", "label": "reparto del tiempo entre los tres estados", "value_en": "to be measured", "label_en": "how time splits across the three states"},
-      "accent": {"dark": "#91C79E", "light": "#467954"},
-      "instrumento": "caratula", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "reparto del tiempo entre los tres estados",
+        "value_en": "to be measured",
+        "label_en": "how time splits across the three states"
+      },
+      "accent": {
+        "dark": "#91C79E",
+        "light": "#467954"
+      },
+      "instrumento": "caratula",
+      "interactivo": true,
       "reto": "Escribir la regla que convierte la corriente del motor en uno de los tres estados.",
-      "scripts": ["src/transform/queries_m12.sql"],
-      "figuras": ["fig_m12_tres_estados"]
+      "scripts": [
+        "src/transform/queries_m12.sql"
+      ],
+      "figuras": [
+        "fig_m12_tres_estados"
+      ]
     },
     {
-      "number": 13, "slug": "m13_agrupar", "parte": 3,
+      "number": 13,
+      "slug": "m13_agrupar",
+      "parte": 3,
       "title": "Agrupar y resumir: GROUP BY",
       "subtitle": "De un millón y medio de lecturas a una tabla de siete meses que cabe en la pantalla. Contar, sumar, promediar, y el error de promediar promedios",
       "title_en": "Grouping and summarising: GROUP BY",
       "subtitle_en": "From a million and a half readings to a seven month table that fits on screen. Counting, summing, averaging, and the mistake of averaging averages",
-      "cifra": {"value": "por medir", "label": "horas de carga al día", "value_en": "to be measured", "label_en": "loaded hours per day"},
-      "accent": {"dark": "#95C699", "light": "#4B794F"},
-      "instrumento": "caratula", "interactivo": true,
+      "cifra": {
+        "value": "3,42 h contra 23,81 h",
+        "label": "carga en un día normal y en el de la avería",
+        "value_en": "3.42 h against 23.81 h",
+        "label_en": "loaded time on a normal day and on the failure day"
+      },
+      "accent": {
+        "dark": "#95C699",
+        "light": "#4B794F"
+      },
+      "instrumento": "caratula",
+      "interactivo": true,
       "reto": "Calcular cuántas horas al día trabajó el compresor en carga, mes a mes.",
-      "scripts": ["src/transform/queries_m13.sql"],
-      "figuras": ["fig_m13_ciclo_de_trabajo_diario"]
+      "scripts": [
+        "src/transform/queries_m13.sql"
+      ],
+      "figuras": [
+        "fig_m13_ciclo_de_trabajo_diario"
+      ]
     },
     {
-      "number": 14, "slug": "m14_having_y_el_orden", "parte": 3,
+      "number": 14,
+      "slug": "m14_having_y_el_orden",
+      "parte": 3,
       "title": "Filtrar grupos, y el orden real en que SQL trabaja",
       "subtitle": "Por qué WHERE no sirve para filtrar un promedio, y por qué SQL no se ejecuta en el orden en que se escribe. Entender esto arregla la mitad de los errores",
       "title_en": "Filtering groups, and the real order SQL works in",
       "subtitle_en": "Why WHERE cannot filter an average, and why SQL does not run in the order you write it. Understanding this fixes half your errors",
-      "cifra": {"value": "por medir", "label": "días por encima del ciclo de trabajo normal", "value_en": "to be measured", "label_en": "days above the normal duty cycle"},
-      "accent": {"dark": "#99C594", "light": "#4F784B"},
-      "instrumento": "caratula", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "días por encima del ciclo de trabajo normal",
+        "value_en": "to be measured",
+        "label_en": "days above the normal duty cycle"
+      },
+      "accent": {
+        "dark": "#99C594",
+        "light": "#4F784B"
+      },
+      "instrumento": "caratula",
+      "interactivo": true,
       "reto": "Encontrar los días en que el compresor trabajó más de lo normal, filtrando por el promedio y no por la fila.",
-      "scripts": ["src/transform/queries_m14.sql"],
-      "figuras": ["fig_m14_orden_de_ejecucion"]
+      "scripts": [
+        "src/transform/queries_m14.sql"
+      ],
+      "figuras": [
+        "fig_m14_orden_de_ejecucion"
+      ]
     },
     {
-      "number": 15, "slug": "m15_subconsultas", "parte": 3,
+      "number": 15,
+      "slug": "m15_subconsultas",
+      "parte": 3,
       "title": "Consultas dentro de consultas: subconsultas y WITH",
       "subtitle": "Partir un problema grande en pasos con nombre. La herramienta que convierte una consulta ilegible de veinte líneas en tres bloques que se entienden",
       "title_en": "Queries inside queries: subqueries and WITH",
       "subtitle_en": "Breaking a big problem into named steps. The tool that turns an unreadable twenty line query into three blocks you can follow",
-      "cifra": {"value": "por medir", "label": "pasos con nombre en la consulta del ciclo", "value_en": "to be measured", "label_en": "named steps in the duty cycle query"},
-      "accent": {"dark": "#9EC48F", "light": "#577A49"},
-      "instrumento": "caratula", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "pasos con nombre en la consulta del ciclo",
+        "value_en": "to be measured",
+        "label_en": "named steps in the duty cycle query"
+      },
+      "accent": {
+        "dark": "#9EC48F",
+        "light": "#577A49"
+      },
+      "instrumento": "caratula",
+      "interactivo": true,
       "reto": "Reescribir una consulta anidada usando WITH, y comprobar que da exactamente lo mismo.",
-      "scripts": ["src/transform/queries_m15.sql"],
+      "scripts": [
+        "src/transform/queries_m15.sql"
+      ],
       "figuras": []
     },
     {
-      "number": 16, "slug": "m16_joins", "parte": 3,
+      "number": 16,
+      "slug": "m16_joins",
+      "parte": 3,
       "title": "Juntar tablas: los JOIN, y el que te miente",
       "subtitle": "Cruzar la telemetría con los partes de avería. Qué es una clave, por qué un JOIN mal hecho multiplica filas en silencio, y cómo se detecta",
       "title_en": "Joining tables: JOINs, and the one that lies to you",
       "subtitle_en": "Crossing telemetry with the failure reports. What a key is, why a bad JOIN silently multiplies rows, and how to catch it",
-      "cifra": {"value": "por medir", "label": "filas antes y después del cruce", "value_en": "to be measured", "label_en": "rows before and after the join"},
-      "accent": {"dark": "#A3C38B", "light": "#5C7944"},
-      "instrumento": "grafo", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "filas antes y después del cruce",
+        "value_en": "to be measured",
+        "label_en": "rows before and after the join"
+      },
+      "accent": {
+        "dark": "#A3C38B",
+        "light": "#5C7944"
+      },
+      "instrumento": "grafo",
+      "interactivo": true,
       "reto": "Marcar cada lectura del compresor con la avería a la que pertenece, si pertenece a alguna.",
-      "scripts": ["src/transform/queries_m16.sql"],
-      "figuras": ["fig_m16_tipos_de_join", "fig_m16_join_que_multiplica"]
+      "scripts": [
+        "src/transform/queries_m16.sql"
+      ],
+      "figuras": [
+        "fig_m16_tipos_de_join",
+        "fig_m16_join_que_multiplica"
+      ]
     },
     {
-      "number": 17, "slug": "m17_ventanas", "parte": 3,
+      "number": 17,
+      "slug": "m17_ventanas",
+      "parte": 3,
       "title": "Mirar la fila de al lado: funciones de ventana",
       "subtitle": "Comparar cada lectura con la anterior. Sin esto no hay series de tiempo, y con esto se mide un arranque, una parada y un hueco",
       "title_en": "Looking at the row next door: window functions",
       "subtitle_en": "Comparing each reading with the one before. Without this there are no time series; with it you can measure a start, a stop and a gap",
-      "cifra": {"value": "179.426", "label": "huecos irregulares que solo se ven así", "value_en": "179,426", "label_en": "irregular gaps only visible this way"},
-      "accent": {"dark": "#A8C287", "light": "#617840"},
-      "instrumento": "caratula", "interactivo": true,
+      "cifra": {
+        "value": "179.426",
+        "label": "huecos irregulares que solo se ven así",
+        "value_en": "179,426",
+        "label_en": "irregular gaps only visible this way"
+      },
+      "accent": {
+        "dark": "#A8C287",
+        "light": "#617840"
+      },
+      "instrumento": "caratula",
+      "interactivo": true,
       "reto": "Contar cuántas veces arrancó el compresor en un día, detectando el cambio de estado entre filas consecutivas.",
-      "scripts": ["src/transform/queries_m17.sql"],
-      "figuras": ["fig_m17_lag_y_hueco"]
+      "scripts": [
+        "src/transform/queries_m17.sql"
+      ],
+      "figuras": [
+        "fig_m17_lag_y_hueco"
+      ]
     },
     {
-      "number": 18, "slug": "m18_plata", "parte": 4,
+      "number": 18,
+      "slug": "m18_plata",
+      "parte": 4,
       "title": "Plata: limpiar, tipar y remuestrear",
       "subtitle": "Aquí se decide qué es un dato bueno, y la decisión queda escrita en código en vez de en la cabeza de alguien",
       "title_en": "Silver: clean, type and resample",
       "subtitle_en": "This is where a good record gets defined, and the definition lives in code instead of in somebody's head",
-      "cifra": {"value": "por medir", "label": "filas que sobreviven a la limpieza", "value_en": "to be measured", "label_en": "rows that survive cleaning"},
-      "accent": {"dark": "#ADC183", "light": "#66773C"},
-      "instrumento": "grafo", "interactivo": false,
+      "cifra": {
+        "value": "por medir",
+        "label": "filas que sobreviven a la limpieza",
+        "value_en": "to be measured",
+        "label_en": "rows that survive cleaning"
+      },
+      "accent": {
+        "dark": "#ADC183",
+        "light": "#66773C"
+      },
+      "instrumento": "grafo",
+      "interactivo": false,
       "reto": null,
-      "scripts": ["src/transform/silver.py"],
-      "figuras": ["fig_m18_huecos", "fig_m18_remuestreo"]
+      "scripts": [
+        "src/transform/silver.py"
+      ],
+      "figuras": [
+        "fig_m18_huecos",
+        "fig_m18_remuestreo"
+      ]
     },
     {
-      "number": 19, "slug": "m19_otras_fuentes", "parte": 4,
+      "number": 19,
+      "slug": "m19_otras_fuentes",
+      "parte": 4,
       "title": "Las otras fuentes: el clima y unos partes con erratas",
       "subtitle": "El aire que entra al compresor viene de la calle, así que el tiempo importa. Y los partes de mantenimiento llegan con fallos de fábrica que no se corrigen",
       "title_en": "The other sources: weather, and reports with errata",
       "subtitle_en": "The air entering the compressor comes off the street, so weather matters. And the maintenance reports arrive with factory faults that are not fixed",
-      "cifra": {"value": "3", "label": "fuentes, tres frecuencias, tres formatos", "value_en": "3", "label_en": "sources, three frequencies, three formats"},
-      "accent": {"dark": "#B3BF80", "light": "#6B7539"},
-      "instrumento": "grafo", "interactivo": true,
+      "cifra": {
+        "value": "3",
+        "label": "fuentes, tres frecuencias, tres formatos",
+        "value_en": "3",
+        "label_en": "sources, three frequencies, three formats"
+      },
+      "accent": {
+        "dark": "#B3BF80",
+        "light": "#6B7539"
+      },
+      "instrumento": "grafo",
+      "interactivo": true,
       "reto": "Cruzar la temperatura de la calle con la del aceite del compresor y ver si se siguen.",
-      "scripts": ["src/ingest/weather.py", "src/ingest/failures.py"],
-      "figuras": ["fig_m19_tres_frecuencias"]
+      "scripts": [
+        "src/ingest/weather.py",
+        "src/ingest/failures.py"
+      ],
+      "figuras": [
+        "fig_m19_tres_frecuencias"
+      ]
     },
     {
-      "number": 20, "slug": "m20_calidad", "parte": 4,
+      "number": 20,
+      "slug": "m20_calidad",
+      "parte": 4,
       "title": "Calidad de datos: pruebas y contratos",
       "subtitle": "Qué pasa el lunes cuando llega una columna nueva o la presión viene en otra unidad. Un contrato es una promesa que la máquina comprueba sola",
       "title_en": "Data quality: tests and contracts",
       "subtitle_en": "What happens on Monday when a new column arrives or pressure comes in different units. A contract is a promise a machine checks by itself",
-      "cifra": {"value": "por medir", "label": "pruebas de datos en verde", "value_en": "to be measured", "label_en": "data tests passing"},
-      "accent": {"dark": "#B7BE7E", "light": "#6F7436"},
-      "instrumento": "grafo", "interactivo": false,
+      "cifra": {
+        "value": "por medir",
+        "label": "pruebas de datos en verde",
+        "value_en": "to be measured",
+        "label_en": "data tests passing"
+      },
+      "accent": {
+        "dark": "#B7BE7E",
+        "light": "#6F7436"
+      },
+      "instrumento": "grafo",
+      "interactivo": false,
       "reto": null,
-      "scripts": ["src/transform/contracts.py"],
-      "figuras": ["fig_m20_contrato_roto"]
+      "scripts": [
+        "src/transform/contracts.py"
+      ],
+      "figuras": [
+        "fig_m20_contrato_roto"
+      ]
     },
     {
-      "number": 21, "slug": "m21_oro_dbt", "parte": 4,
+      "number": 21,
+      "slug": "m21_oro_dbt",
+      "parte": 4,
       "title": "Oro con dbt: modelar en SQL y que el linaje se dibuje solo",
       "subtitle": "Las tablas que responden preguntas, escritas en el SQL que ya sabes, con su documentación y su mapa de dependencias generados por la herramienta",
       "title_en": "Gold with dbt: model in SQL and let lineage draw itself",
       "subtitle_en": "The tables that answer questions, written in the SQL you now know, with docs and a dependency map the tool generates",
-      "cifra": {"value": "por medir", "label": "modelos en el mapa de dependencias", "value_en": "to be measured", "label_en": "models in the dependency map"},
-      "accent": {"dark": "#BCBC7C", "light": "#737234"},
-      "instrumento": "grafo", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "modelos en el mapa de dependencias",
+        "value_en": "to be measured",
+        "label_en": "models in the dependency map"
+      },
+      "accent": {
+        "dark": "#BCBC7C",
+        "light": "#737234"
+      },
+      "instrumento": "grafo",
+      "interactivo": true,
       "reto": "Añadir un modelo nuevo y ver aparecer su nodo en el mapa sin dibujar nada a mano.",
-      "scripts": ["dbt/models/"],
-      "figuras": ["fig_m21_linaje_dbt"]
+      "scripts": [
+        "dbt/models/"
+      ],
+      "figuras": [
+        "fig_m21_linaje_dbt"
+      ]
     },
     {
-      "number": 22, "slug": "m22_viaje_en_el_tiempo", "parte": 4,
+      "number": 22,
+      "slug": "m22_viaje_en_el_tiempo",
+      "parte": 4,
       "title": "Viaje en el tiempo: ver los datos como eran",
       "subtitle": "Un formato de tabla abierto guarda cada versión. Volver al 5 de junio y consultar el lago tal y como estaba ese día, sin haber guardado ni una copia",
       "title_en": "Time travel: seeing the data as it was",
       "subtitle_en": "An open table format keeps every version. Go back to June 5th and query the lake as it stood, without having kept a single copy",
-      "cifra": {"value": "por medir", "label": "versiones guardadas de la tabla", "value_en": "to be measured", "label_en": "stored versions of the table"},
-      "accent": {"dark": "#C1BA7B", "light": "#777133"},
-      "instrumento": "grafo", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "versiones guardadas de la tabla",
+        "value_en": "to be measured",
+        "label_en": "stored versions of the table"
+      },
+      "accent": {
+        "dark": "#C1BA7B",
+        "light": "#777133"
+      },
+      "instrumento": "grafo",
+      "interactivo": true,
       "reto": "Consultar la misma tabla en dos versiones distintas y ver en qué se diferencian.",
-      "scripts": ["src/transform/table_format.py"],
-      "figuras": ["fig_m22_historial_de_versiones"]
+      "scripts": [
+        "src/transform/table_format.py"
+      ],
+      "figuras": [
+        "fig_m22_historial_de_versiones"
+      ]
     },
     {
-      "number": 23, "slug": "m23_postgres", "parte": 5,
+      "number": 23,
+      "slug": "m23_postgres",
+      "parte": 5,
       "title": "PostgreSQL: instalar, conectar, y en qué se diferencia",
       "subtitle": "Hasta aquí la base de datos era un fichero. Ahora es un servicio que atiende a varios a la vez, y eso cambia todas las reglas",
       "title_en": "PostgreSQL: install, connect, and how it differs",
       "subtitle_en": "Until now the database was a file. Now it is a service serving several people at once, and that changes every rule",
-      "cifra": {"value": "por medir", "label": "segundos en cargar el mismo dato en el servidor", "value_en": "to be measured", "label_en": "seconds to load the same data into the server"},
-      "accent": {"dark": "#C5B87B", "light": "#7B6F33"},
-      "instrumento": "caratula", "interactivo": false,
+      "cifra": {
+        "value": "por medir",
+        "label": "segundos en cargar el mismo dato en el servidor",
+        "value_en": "to be measured",
+        "label_en": "seconds to load the same data into the server"
+      },
+      "accent": {
+        "dark": "#C5B87B",
+        "light": "#7B6F33"
+      },
+      "instrumento": "caratula",
+      "interactivo": false,
       "reto": null,
-      "scripts": ["src/transform/postgres_setup.sql"],
-      "figuras": ["fig_m23_fichero_vs_servicio"]
+      "scripts": [
+        "src/transform/postgres_setup.sql"
+      ],
+      "figuras": [
+        "fig_m23_fichero_vs_servicio"
+      ]
     },
     {
-      "number": 24, "slug": "m24_esquema", "parte": 5,
+      "number": 24,
+      "slug": "m24_esquema",
+      "parte": 5,
       "title": "Diseñar el esquema: claves, relaciones y restricciones",
       "subtitle": "Decirle a la base de datos qué es imposible, para que no te deje escribirlo. Una presión negativa o una avería sin equipo no deberían poder existir",
       "title_en": "Designing the schema: keys, relations and constraints",
       "subtitle_en": "Telling the database what is impossible, so it will not let you write it. A negative pressure or a failure with no machine should not be able to exist",
-      "cifra": {"value": "por medir", "label": "escrituras imposibles que la base rechaza", "value_en": "to be measured", "label_en": "impossible writes the database rejects"},
-      "accent": {"dark": "#C9B77B", "light": "#7E6E33"},
-      "instrumento": "grafo", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "escrituras imposibles que la base rechaza",
+        "value_en": "to be measured",
+        "label_en": "impossible writes the database rejects"
+      },
+      "accent": {
+        "dark": "#C9B77B",
+        "light": "#7E6E33"
+      },
+      "instrumento": "grafo",
+      "interactivo": true,
       "reto": "Intentar meter un dato imposible y leer el error que devuelve la base.",
-      "scripts": ["src/transform/postgres_schema.sql"],
-      "figuras": ["fig_m24_esquema"]
+      "scripts": [
+        "src/transform/postgres_schema.sql"
+      ],
+      "figuras": [
+        "fig_m24_esquema"
+      ]
     },
     {
-      "number": 25, "slug": "m25_indices", "parte": 5,
+      "number": 25,
+      "slug": "m25_indices",
+      "parte": 5,
       "title": "Índices: medir antes y después",
       "subtitle": "Qué es un índice, por qué acelera unas preguntas y frena las escrituras, y cómo se lee el plan que la base de datos te enseña si se lo pides",
       "title_en": "Indexes: measure before and after",
       "subtitle_en": "What an index is, why it speeds some questions and slows writes, and how to read the plan the database shows you if you ask",
-      "cifra": {"value": "por medir", "label": "veces más rápida la consulta con índice", "value_en": "to be measured", "label_en": "times faster with the index"},
-      "accent": {"dark": "#CCB57C", "light": "#816C35"},
-      "instrumento": "caratula", "interactivo": false,
+      "cifra": {
+        "value": "por medir",
+        "label": "veces más rápida la consulta con índice",
+        "value_en": "to be measured",
+        "label_en": "times faster with the index"
+      },
+      "accent": {
+        "dark": "#CCB57C",
+        "light": "#816C35"
+      },
+      "instrumento": "caratula",
+      "interactivo": false,
       "reto": null,
-      "scripts": ["src/transform/postgres_bench.py"],
-      "figuras": ["fig_m25_indice_antes_despues"]
+      "scripts": [
+        "src/transform/postgres_bench.py"
+      ],
+      "figuras": [
+        "fig_m25_indice_antes_despues"
+      ]
     },
     {
-      "number": 26, "slug": "m26_mantenimiento", "parte": 5,
+      "number": 26,
+      "slug": "m26_mantenimiento",
+      "parte": 5,
       "title": "Usuarios, copias de seguridad y mantenimiento",
       "subtitle": "Quién entra y a qué. Y la prueba que casi nadie hace: restaurar la copia de verdad, porque una copia sin restaurar no es una copia",
       "title_en": "Users, backups and maintenance",
       "subtitle_en": "Who gets in and to what. And the test almost nobody runs: actually restoring the backup, because a backup never restored is not a backup",
-      "cifra": {"value": "por medir", "label": "minutos en restaurar la base entera", "value_en": "to be measured", "label_en": "minutes to restore the whole database"},
-      "accent": {"dark": "#CFB47E", "light": "#846B37"},
-      "instrumento": "caratula", "interactivo": false,
+      "cifra": {
+        "value": "por medir",
+        "label": "minutos en restaurar la base entera",
+        "value_en": "to be measured",
+        "label_en": "minutes to restore the whole database"
+      },
+      "accent": {
+        "dark": "#CFB47E",
+        "light": "#846B37"
+      },
+      "instrumento": "caratula",
+      "interactivo": false,
       "reto": null,
-      "scripts": ["src/transform/postgres_admin.sql"],
-      "figuras": ["fig_m26_copia_y_restauracion"]
+      "scripts": [
+        "src/transform/postgres_admin.sql"
+      ],
+      "figuras": [
+        "fig_m26_copia_y_restauracion"
+      ]
     },
     {
-      "number": 27, "slug": "m27_que_es_un_gemelo", "parte": 6,
+      "number": 27,
+      "slug": "m27_que_es_un_gemelo",
+      "parte": 6,
       "title": "Qué es un gemelo digital, y qué no",
       "subtitle": "No es un dibujo en tres dimensiones ni un panel bonito. Es un modelo que corre en paralelo a la máquina y cuya discrepancia significa algo",
       "title_en": "What a digital twin is, and what it is not",
       "subtitle_en": "Not a three dimensional drawing nor a pretty dashboard. It is a model running alongside the machine, whose disagreement means something",
-      "cifra": {"value": "por medir", "label": "qué tiene que acertar el gemelo para servir", "value_en": "to be measured", "label_en": "what the twin must get right to be useful"},
-      "accent": {"dark": "#D2B280", "light": "#896C3C"},
-      "instrumento": "doble-trazo", "interactivo": false,
+      "cifra": {
+        "value": "por medir",
+        "label": "qué tiene que acertar el gemelo para servir",
+        "value_en": "to be measured",
+        "label_en": "what the twin must get right to be useful"
+      },
+      "accent": {
+        "dark": "#D2B280",
+        "light": "#896C3C"
+      },
+      "instrumento": "doble-trazo",
+      "interactivo": false,
       "reto": null,
       "scripts": [],
-      "figuras": ["fig_m27_gemelo_y_residual"]
+      "figuras": [
+        "fig_m27_gemelo_y_residual"
+      ]
     },
     {
-      "number": 28, "slug": "m28_fisica", "parte": 6,
+      "number": 28,
+      "slug": "m28_fisica",
+      "parte": 6,
       "title": "La física del compresor: depósito, presostato y motor",
       "subtitle": "Un depósito que se llena y se vacía, un interruptor que arranca a 8,2 bar, y un motor que consume distinto según lo que esté haciendo. Nada más",
       "title_en": "Compressor physics: receiver, pressure switch and motor",
       "subtitle_en": "A vessel that fills and empties, a switch that fires at 8.2 bar, and a motor drawing different current depending on what it is doing. Nothing more",
-      "cifra": {"value": "8,2 bar", "label": "el umbral que arranca el compresor", "value_en": "8.2 bar", "label_en": "the threshold that starts the compressor"},
-      "accent": {"dark": "#D4B183", "light": "#8B6B3F"},
-      "instrumento": "doble-trazo", "interactivo": true,
+      "cifra": {
+        "value": "8,2 bar",
+        "label": "el umbral que arranca el compresor",
+        "value_en": "8.2 bar",
+        "label_en": "the threshold that starts the compressor"
+      },
+      "accent": {
+        "dark": "#D4B183",
+        "light": "#8B6B3F"
+      },
+      "instrumento": "doble-trazo",
+      "interactivo": true,
       "reto": "Calcular a mano cuánto tarda el depósito en bajar de 8,2 bar con un consumo dado.",
-      "scripts": ["src/twin/model.py"],
-      "figuras": ["fig_m28_balance_del_deposito"]
+      "scripts": [
+        "src/twin/model.py"
+      ],
+      "figuras": [
+        "fig_m28_balance_del_deposito"
+      ]
     },
     {
-      "number": 29, "slug": "m29_simular", "parte": 6,
+      "number": 29,
+      "slug": "m29_simular",
+      "parte": 6,
       "title": "Simular: avanzar el modelo paso a paso",
       "subtitle": "Qué significa integrar en el tiempo, por qué el tamaño del paso cambia el resultado, y cómo se comprueba que la simulación no se ha ido de madre",
       "title_en": "Simulating: stepping the model through time",
       "subtitle_en": "What integrating in time means, why the step size changes the answer, and how to check the simulation has not run away",
-      "cifra": {"value": "por medir", "label": "el paso de tiempo que sale de la prueba", "value_en": "to be measured", "label_en": "the time step the test points to"},
-      "accent": {"dark": "#D6B086", "light": "#8D6A42"},
-      "instrumento": "doble-trazo", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "el paso de tiempo que sale de la prueba",
+        "value_en": "to be measured",
+        "label_en": "the time step the test points to"
+      },
+      "accent": {
+        "dark": "#D6B086",
+        "light": "#8D6A42"
+      },
+      "instrumento": "doble-trazo",
+      "interactivo": true,
       "reto": "Mover el paso de tiempo y ver a partir de cuál la simulación deja de parecerse a sí misma.",
-      "scripts": ["src/twin/simulate.py"],
-      "figuras": ["fig_m29_ciclo_carga_vacio", "fig_m29_paso_de_tiempo"]
+      "scripts": [
+        "src/twin/simulate.py"
+      ],
+      "figuras": [
+        "fig_m29_ciclo_carga_vacio",
+        "fig_m29_paso_de_tiempo"
+      ]
     },
     {
-      "number": 30, "slug": "m30_calibrar", "parte": 6,
+      "number": 30,
+      "slug": "m30_calibrar",
+      "parte": 6,
       "title": "Calibrar: los parámetros salen de los datos",
       "subtitle": "El volumen del depósito y el caudal del compresor no se inventan. Se buscan hasta que el gemelo respira como el original, y después se declara dónde falla",
       "title_en": "Calibrating: parameters come from the data",
       "subtitle_en": "Receiver volume and compressor flow are not invented. They are searched for until the twin breathes like the original, and then you declare where it fails",
-      "cifra": {"value": "por medir", "label": "error del gemelo en periodo sano", "value_en": "to be measured", "label_en": "twin error over a healthy period"},
-      "accent": {"dark": "#D7AF8A", "light": "#8E6946"},
-      "instrumento": "doble-trazo", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "error del gemelo en periodo sano",
+        "value_en": "to be measured",
+        "label_en": "twin error over a healthy period"
+      },
+      "accent": {
+        "dark": "#D7AF8A",
+        "light": "#8E6946"
+      },
+      "instrumento": "doble-trazo",
+      "interactivo": true,
       "reto": "Mover los parámetros a mano y tratar de bajar el error por debajo del que encontró el ajuste automático.",
-      "scripts": ["src/twin/calibrate.py"],
-      "figuras": ["fig_m30_ajuste", "fig_m30_gemelo_vs_real_sano"]
+      "scripts": [
+        "src/twin/calibrate.py"
+      ],
+      "figuras": [
+        "fig_m30_ajuste",
+        "fig_m30_gemelo_vs_real_sano"
+      ]
     },
     {
-      "number": 31, "slug": "m31_residual", "parte": 6,
+      "number": 31,
+      "slug": "m31_residual",
+      "parte": 6,
       "title": "El residual delata la fuga",
       "subtitle": "La presión no cambia, porque el control la sostiene. Lo que cambia es cuánto trabaja el compresor para sostenerla, y esa diferencia sí se ve",
       "title_en": "The residual gives the leak away",
       "subtitle_en": "Pressure does not change, because the control loop holds it. What changes is how hard the compressor works to hold it, and that difference does show",
-      "cifra": {"value": "por medir", "label": "cuánto se separan gemelo y realidad en la fuga", "value_en": "to be measured", "label_en": "how far twin and reality part during the leak"},
-      "accent": {"dark": "#D8AE8D", "light": "#8E684A"},
-      "instrumento": "doble-trazo", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "cuánto se separan gemelo y realidad en la fuga",
+        "value_en": "to be measured",
+        "label_en": "how far twin and reality part during the leak"
+      },
+      "accent": {
+        "dark": "#D8AE8D",
+        "light": "#8E684A"
+      },
+      "instrumento": "doble-trazo",
+      "interactivo": true,
       "reto": "Mover el caudal de fuga y ver a partir de qué tamaño el gemelo la nota.",
-      "scripts": ["src/twin/residual.py"],
-      "figuras": ["fig_m31_residual"]
+      "scripts": [
+        "src/twin/residual.py"
+      ],
+      "figuras": [
+        "fig_m31_residual"
+      ]
     },
     {
-      "number": 32, "slug": "m32_veredicto", "parte": 6,
+      "number": 32,
+      "slug": "m32_veredicto",
+      "parte": 6,
       "title": "El veredicto: cuatro averías y cuántas falsas alarmas",
       "subtitle": "Contra las cuatro fechas reales, y contra el rival que hay que batir: una alarma de umbral corriente. Si el gemelo no le gana, se dice",
       "title_en": "The verdict: four failures and how many false alarms",
       "subtitle_en": "Against the four real dates, and against the rival to beat: an ordinary threshold alarm. If the twin does not win, that is what gets published",
-      "cifra": {"value": "por medir", "label": "días de antelación, y falsas alarmas por mes", "value_en": "to be measured", "label_en": "days of warning, and false alarms per month"},
-      "accent": {"dark": "#D8AD91", "light": "#8F684E"},
-      "instrumento": "doble-trazo", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "días de antelación, y falsas alarmas por mes",
+        "value_en": "to be measured",
+        "label_en": "days of warning, and false alarms per month"
+      },
+      "accent": {
+        "dark": "#D8AD91",
+        "light": "#8F684E"
+      },
+      "instrumento": "doble-trazo",
+      "interactivo": true,
       "reto": "Mover el umbral de aviso y ver el intercambio entre antelación y falsas alarmas.",
-      "scripts": ["src/twin/evaluate.py"],
-      "figuras": ["fig_m32_cuatro_averias", "fig_m32_antelacion_vs_falsas"]
+      "scripts": [
+        "src/twin/evaluate.py"
+      ],
+      "figuras": [
+        "fig_m32_cuatro_averias",
+        "fig_m32_antelacion_vs_falsas"
+      ]
     },
     {
-      "number": 33, "slug": "m33_orquestar", "parte": 7,
+      "number": 33,
+      "slug": "m33_orquestar",
+      "parte": 7,
       "title": "Que todo esto corra solo",
       "subtitle": "Un orquestador conoce el orden, reintenta lo que falla y rellena hacia atrás. Borrar el lago entero y verlo reconstruirse es la única prueba que vale",
       "title_en": "Making all of this run by itself",
       "subtitle_en": "An orchestrator knows the order, retries what fails and backfills. Deleting the whole lake and watching it rebuild is the only proof that counts",
-      "cifra": {"value": "por medir", "label": "minutos en reconstruir el lago desde cero", "value_en": "to be measured", "label_en": "minutes to rebuild the lake from scratch"},
-      "accent": {"dark": "#D8AD95", "light": "#8F6752"},
-      "instrumento": "grafo", "interactivo": false,
+      "cifra": {
+        "value": "por medir",
+        "label": "minutos en reconstruir el lago desde cero",
+        "value_en": "to be measured",
+        "label_en": "minutes to rebuild the lake from scratch"
+      },
+      "accent": {
+        "dark": "#D8AD95",
+        "light": "#8F6752"
+      },
+      "instrumento": "grafo",
+      "interactivo": false,
       "reto": null,
-      "scripts": ["src/orchestration/definitions.py"],
-      "figuras": ["fig_m33_grafo_de_activos"]
+      "scripts": [
+        "src/orchestration/definitions.py"
+      ],
+      "figuras": [
+        "fig_m33_grafo_de_activos"
+      ]
     },
     {
-      "number": 34, "slug": "m34_panel", "parte": 7,
+      "number": 34,
+      "slug": "m34_panel",
+      "parte": 7,
       "title": "El panel del gemelo",
       "subtitle": "Lo que ve alguien que no va a leer treinta y cinco módulos: una perilla, dos curvas, y el momento en que se separan",
       "title_en": "The twin's panel",
       "subtitle_en": "What someone who will not read thirty five modules sees: one knob, two curves, and the moment they part",
-      "cifra": {"value": "por medir", "label": "segundos hasta entender qué pasa", "value_en": "to be measured", "label_en": "seconds to understand what is happening"},
-      "accent": {"dark": "#D8AC99", "light": "#8F6756"},
-      "instrumento": "doble-trazo", "interactivo": true,
+      "cifra": {
+        "value": "por medir",
+        "label": "segundos hasta entender qué pasa",
+        "value_en": "to be measured",
+        "label_en": "seconds to understand what is happening"
+      },
+      "accent": {
+        "dark": "#D8AC99",
+        "light": "#8F6756"
+      },
+      "instrumento": "doble-trazo",
+      "interactivo": true,
       "reto": null,
-      "scripts": ["app/panel.py"],
-      "figuras": ["fig_m34_panel"]
+      "scripts": [
+        "app/panel.py"
+      ],
+      "figuras": [
+        "fig_m34_panel"
+      ]
     },
     {
-      "number": 35, "slug": "m35_entregar", "parte": 7,
+      "number": 35,
+      "slug": "m35_entregar",
+      "parte": 7,
       "title": "Entregar, y decir qué se rompería",
       "subtitle": "El folio con el veredicto, el repo, y la parte honesta: qué de todo esto aguantaría una planta de verdad y qué no",
       "title_en": "Delivering, and saying what would break",
       "subtitle_en": "The one page verdict, the repo, and the honest part: what of all this would survive a real plant, and what would not",
-      "cifra": {"value": "por medir", "label": "el veredicto del proyecto", "value_en": "to be measured", "label_en": "the project verdict"},
-      "accent": {"dark": "#D7AC9D", "light": "#8E6759"},
-      "instrumento": "caratula", "interactivo": false,
+      "cifra": {
+        "value": "por medir",
+        "label": "el veredicto del proyecto",
+        "value_en": "to be measured",
+        "label_en": "the project verdict"
+      },
+      "accent": {
+        "dark": "#D7AC9D",
+        "light": "#8E6759"
+      },
+      "instrumento": "caratula",
+      "interactivo": false,
       "reto": null,
       "scripts": [],
-      "figuras": ["fig_m35_arco_del_proyecto"]
+      "figuras": [
+        "fig_m35_arco_del_proyecto"
+      ]
     }
   ]
 }

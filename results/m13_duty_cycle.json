@@ -1,0 +1,1650 @@
+{
+  "seconds_per_reading": 10,
+  "top_days": [
+    {
+      "day": "2020-04-18",
+      "readings": 8663,
+      "loaded_hours": 23.81,
+      "loaded_pct": 98.9,
+      "documented_failure": "#1"
+    },
+    {
+      "day": "2020-06-05",
+      "readings": 8716,
+      "loaded_hours": 15.41,
+      "loaded_pct": 63.6,
+      "documented_failure": "#3"
+    },
+    {
+      "day": "2020-03-12",
+      "readings": 8202,
+      "loaded_hours": 13.24,
+      "loaded_pct": 58.1,
+      "documented_failure": null
+    },
+    {
+      "day": "2020-07-15",
+      "readings": 8661,
+      "loaded_hours": 11.57,
+      "loaded_pct": 48.1,
+      "documented_failure": "#4"
+    },
+    {
+      "day": "2020-05-13",
+      "readings": 8716,
+      "loaded_hours": 11.31,
+      "loaded_pct": 46.7,
+      "documented_failure": null
+    },
+    {
+      "day": "2020-05-30",
+      "readings": 8617,
+      "loaded_hours": 8.06,
+      "loaded_pct": 33.7,
+      "documented_failure": "#1 (second)"
+    },
+    {
+      "day": "2020-03-27",
+      "readings": 8716,
+      "loaded_hours": 6.86,
+      "loaded_pct": 28.3,
+      "documented_failure": null
+    },
+    {
+      "day": "2020-07-22",
+      "readings": 8305,
+      "loaded_hours": 6.23,
+      "loaded_pct": 27.0,
+      "documented_failure": null
+    },
+    {
+      "day": "2020-06-25",
+      "readings": 8272,
+      "loaded_hours": 5.74,
+      "loaded_pct": 25.0,
+      "documented_failure": null
+    },
+    {
+      "day": "2020-05-18",
+      "readings": 8435,
+      "loaded_hours": 4.61,
+      "loaded_pct": 19.7,
+      "documented_failure": null
+    }
+  ],
+  "documented_failure_days_complete": [
+    "2020-04-18",
+    "2020-05-30",
+    "2020-06-05",
+    "2020-07-15"
+  ],
+  "documented_in_top_6": [
+    "2020-04-18",
+    "2020-05-30",
+    "2020-06-05",
+    "2020-07-15"
+  ],
+  "readings_in_a_full_day": 8640,
+  "days_total": 212,
+  "days_complete": 91,
+  "avg_loaded_hours": 3.42,
+  "min_loaded_hours": 1.11,
+  "max_loaded_hours": 23.81,
+  "by_month": [
+    {
+      "month": "2020-02",
+      "days": 11,
+      "avg_loaded_hours": 1.45
+    },
+    {
+      "month": "2020-03",
+      "days": 15,
+      "avg_loaded_hours": 3.58
+    },
+    {
+      "month": "2020-04",
+      "days": 11,
+      "avg_loaded_hours": 4.27
+    },
+    {
+      "month": "2020-05",
+      "days": 13,
+      "avg_loaded_hours": 3.61
+    },
+    {
+      "month": "2020-06",
+      "days": 16,
+      "avg_loaded_hours": 4.02
+    },
+    {
+      "month": "2020-07",
+      "days": 13,
+      "avg_loaded_hours": 3.78
+    },
+    {
+      "month": "2020-08",
+      "days": 12,
+      "avg_loaded_hours": 2.81
+    }
+  ],
+  "signal_agreement": [
+    {
+      "dv_eletric": 0.0,
+      "comp": 1.0,
+      "readings": 1263084,
+      "current_min": 0.02,
+      "current_avg": 1.34,
+      "current_max": 8.68
+    },
+    {
+      "dv_eletric": 1.0,
+      "comp": 0.0,
+      "readings": 237102,
+      "current_min": 0.02,
+      "current_avg": 5.73,
+      "current_max": 9.3
+    },
+    {
+      "dv_eletric": 0.0,
+      "comp": 0.0,
+      "readings": 10226,
+      "current_min": 0.04,
+      "current_avg": 2.69,
+      "current_max": 5.58
+    },
+    {
+      "dv_eletric": 1.0,
+      "comp": 1.0,
+      "readings": 6536,
+      "current_min": 0.03,
+      "current_avg": 3.91,
+      "current_max": 8.32
+    }
+  ],
+  "daily": [
+    {
+      "day": "2020-02-01",
+      "readings": 7144,
+      "loaded_readings": 434,
+      "loaded_hours": 1.21,
+      "loaded_pct": 6.1
+    },
+    {
+      "day": "2020-02-02",
+      "readings": 7031,
+      "loaded_readings": 464,
+      "loaded_hours": 1.29,
+      "loaded_pct": 6.6
+    },
+    {
+      "day": "2020-02-03",
+      "readings": 8716,
+      "loaded_readings": 455,
+      "loaded_hours": 1.26,
+      "loaded_pct": 5.2
+    },
+    {
+      "day": "2020-02-04",
+      "readings": 8717,
+      "loaded_readings": 536,
+      "loaded_hours": 1.49,
+      "loaded_pct": 6.1
+    },
+    {
+      "day": "2020-02-05",
+      "readings": 7437,
+      "loaded_readings": 510,
+      "loaded_hours": 1.42,
+      "loaded_pct": 6.9
+    },
+    {
+      "day": "2020-02-06",
+      "readings": 4939,
+      "loaded_readings": 293,
+      "loaded_hours": 0.81,
+      "loaded_pct": 5.9
+    },
+    {
+      "day": "2020-02-07",
+      "readings": 7052,
+      "loaded_readings": 484,
+      "loaded_hours": 1.34,
+      "loaded_pct": 6.9
+    },
+    {
+      "day": "2020-02-08",
+      "readings": 8689,
+      "loaded_readings": 677,
+      "loaded_hours": 1.88,
+      "loaded_pct": 7.8
+    },
+    {
+      "day": "2020-02-09",
+      "readings": 7279,
+      "loaded_readings": 477,
+      "loaded_hours": 1.33,
+      "loaded_pct": 6.6
+    },
+    {
+      "day": "2020-02-10",
+      "readings": 7468,
+      "loaded_readings": 437,
+      "loaded_hours": 1.21,
+      "loaded_pct": 5.9
+    },
+    {
+      "day": "2020-02-11",
+      "readings": 7431,
+      "loaded_readings": 480,
+      "loaded_hours": 1.33,
+      "loaded_pct": 6.5
+    },
+    {
+      "day": "2020-02-12",
+      "readings": 7353,
+      "loaded_readings": 476,
+      "loaded_hours": 1.32,
+      "loaded_pct": 6.5
+    },
+    {
+      "day": "2020-02-13",
+      "readings": 7528,
+      "loaded_readings": 500,
+      "loaded_hours": 1.39,
+      "loaded_pct": 6.6
+    },
+    {
+      "day": "2020-02-14",
+      "readings": 6932,
+      "loaded_readings": 462,
+      "loaded_hours": 1.28,
+      "loaded_pct": 6.7
+    },
+    {
+      "day": "2020-02-15",
+      "readings": 8716,
+      "loaded_readings": 488,
+      "loaded_hours": 1.36,
+      "loaded_pct": 5.6
+    },
+    {
+      "day": "2020-02-16",
+      "readings": 8716,
+      "loaded_readings": 401,
+      "loaded_hours": 1.11,
+      "loaded_pct": 4.6
+    },
+    {
+      "day": "2020-02-17",
+      "readings": 7095,
+      "loaded_readings": 353,
+      "loaded_hours": 0.98,
+      "loaded_pct": 5.0
+    },
+    {
+      "day": "2020-02-18",
+      "readings": 8716,
+      "loaded_readings": 489,
+      "loaded_hours": 1.36,
+      "loaded_pct": 5.6
+    },
+    {
+      "day": "2020-02-19",
+      "readings": 7225,
+      "loaded_readings": 339,
+      "loaded_hours": 0.94,
+      "loaded_pct": 4.7
+    },
+    {
+      "day": "2020-02-20",
+      "readings": 7113,
+      "loaded_readings": 401,
+      "loaded_hours": 1.11,
+      "loaded_pct": 5.6
+    },
+    {
+      "day": "2020-02-21",
+      "readings": 8716,
+      "loaded_readings": 486,
+      "loaded_hours": 1.35,
+      "loaded_pct": 5.6
+    },
+    {
+      "day": "2020-02-22",
+      "readings": 8716,
+      "loaded_readings": 543,
+      "loaded_hours": 1.51,
+      "loaded_pct": 6.2
+    },
+    {
+      "day": "2020-02-23",
+      "readings": 7105,
+      "loaded_readings": 465,
+      "loaded_hours": 1.29,
+      "loaded_pct": 6.5
+    },
+    {
+      "day": "2020-02-24",
+      "readings": 5893,
+      "loaded_readings": 288,
+      "loaded_hours": 0.8,
+      "loaded_pct": 4.9
+    },
+    {
+      "day": "2020-02-25",
+      "readings": 8716,
+      "loaded_readings": 516,
+      "loaded_hours": 1.43,
+      "loaded_pct": 5.9
+    },
+    {
+      "day": "2020-02-26",
+      "readings": 7244,
+      "loaded_readings": 425,
+      "loaded_hours": 1.18,
+      "loaded_pct": 5.9
+    },
+    {
+      "day": "2020-02-27",
+      "readings": 8464,
+      "loaded_readings": 566,
+      "loaded_hours": 1.57,
+      "loaded_pct": 6.7
+    },
+    {
+      "day": "2020-02-28",
+      "readings": 8699,
+      "loaded_readings": 588,
+      "loaded_hours": 1.63,
+      "loaded_pct": 6.8
+    },
+    {
+      "day": "2020-03-01",
+      "readings": 7263,
+      "loaded_readings": 845,
+      "loaded_hours": 2.35,
+      "loaded_pct": 11.6
+    },
+    {
+      "day": "2020-03-02",
+      "readings": 7570,
+      "loaded_readings": 1234,
+      "loaded_hours": 3.43,
+      "loaded_pct": 16.3
+    },
+    {
+      "day": "2020-03-03",
+      "readings": 7252,
+      "loaded_readings": 1238,
+      "loaded_hours": 3.44,
+      "loaded_pct": 17.1
+    },
+    {
+      "day": "2020-03-04",
+      "readings": 8668,
+      "loaded_readings": 1106,
+      "loaded_hours": 3.07,
+      "loaded_pct": 12.8
+    },
+    {
+      "day": "2020-03-05",
+      "readings": 8691,
+      "loaded_readings": 1434,
+      "loaded_hours": 3.98,
+      "loaded_pct": 16.5
+    },
+    {
+      "day": "2020-03-06",
+      "readings": 7557,
+      "loaded_readings": 1727,
+      "loaded_hours": 4.8,
+      "loaded_pct": 22.9
+    },
+    {
+      "day": "2020-03-07",
+      "readings": 3043,
+      "loaded_readings": 467,
+      "loaded_hours": 1.3,
+      "loaded_pct": 15.3
+    },
+    {
+      "day": "2020-03-08",
+      "readings": 8716,
+      "loaded_readings": 845,
+      "loaded_hours": 2.35,
+      "loaded_pct": 9.7
+    },
+    {
+      "day": "2020-03-09",
+      "readings": 7502,
+      "loaded_readings": 1099,
+      "loaded_hours": 3.05,
+      "loaded_pct": 14.6
+    },
+    {
+      "day": "2020-03-10",
+      "readings": 8076,
+      "loaded_readings": 1323,
+      "loaded_hours": 3.68,
+      "loaded_pct": 16.4
+    },
+    {
+      "day": "2020-03-11",
+      "readings": 5226,
+      "loaded_readings": 1240,
+      "loaded_hours": 3.44,
+      "loaded_pct": 23.7
+    },
+    {
+      "day": "2020-03-12",
+      "readings": 8202,
+      "loaded_readings": 4765,
+      "loaded_hours": 13.24,
+      "loaded_pct": 58.1
+    },
+    {
+      "day": "2020-03-13",
+      "readings": 8700,
+      "loaded_readings": 792,
+      "loaded_hours": 2.2,
+      "loaded_pct": 9.1
+    },
+    {
+      "day": "2020-03-14",
+      "readings": 6990,
+      "loaded_readings": 747,
+      "loaded_hours": 2.08,
+      "loaded_pct": 10.7
+    },
+    {
+      "day": "2020-03-15",
+      "readings": 3746,
+      "loaded_readings": 423,
+      "loaded_hours": 1.18,
+      "loaded_pct": 11.3
+    },
+    {
+      "day": "2020-03-16",
+      "readings": 7072,
+      "loaded_readings": 514,
+      "loaded_hours": 1.43,
+      "loaded_pct": 7.3
+    },
+    {
+      "day": "2020-03-17",
+      "readings": 8551,
+      "loaded_readings": 597,
+      "loaded_hours": 1.66,
+      "loaded_pct": 7.0
+    },
+    {
+      "day": "2020-03-18",
+      "readings": 8717,
+      "loaded_readings": 599,
+      "loaded_hours": 1.66,
+      "loaded_pct": 6.9
+    },
+    {
+      "day": "2020-03-19",
+      "readings": 7668,
+      "loaded_readings": 519,
+      "loaded_hours": 1.44,
+      "loaded_pct": 6.8
+    },
+    {
+      "day": "2020-03-20",
+      "readings": 6359,
+      "loaded_readings": 492,
+      "loaded_hours": 1.37,
+      "loaded_pct": 7.7
+    },
+    {
+      "day": "2020-03-21",
+      "readings": 8255,
+      "loaded_readings": 829,
+      "loaded_hours": 2.3,
+      "loaded_pct": 10.0
+    },
+    {
+      "day": "2020-03-22",
+      "readings": 8717,
+      "loaded_readings": 850,
+      "loaded_hours": 2.36,
+      "loaded_pct": 9.8
+    },
+    {
+      "day": "2020-03-23",
+      "readings": 8716,
+      "loaded_readings": 672,
+      "loaded_hours": 1.87,
+      "loaded_pct": 7.7
+    },
+    {
+      "day": "2020-03-24",
+      "readings": 7684,
+      "loaded_readings": 634,
+      "loaded_hours": 1.76,
+      "loaded_pct": 8.3
+    },
+    {
+      "day": "2020-03-25",
+      "readings": 8716,
+      "loaded_readings": 779,
+      "loaded_hours": 2.16,
+      "loaded_pct": 8.9
+    },
+    {
+      "day": "2020-03-26",
+      "readings": 8716,
+      "loaded_readings": 1163,
+      "loaded_hours": 3.23,
+      "loaded_pct": 13.3
+    },
+    {
+      "day": "2020-03-27",
+      "readings": 8716,
+      "loaded_readings": 2469,
+      "loaded_hours": 6.86,
+      "loaded_pct": 28.3
+    },
+    {
+      "day": "2020-03-28",
+      "readings": 3536,
+      "loaded_readings": 1340,
+      "loaded_hours": 3.72,
+      "loaded_pct": 37.9
+    },
+    {
+      "day": "2020-03-29",
+      "readings": 7199,
+      "loaded_readings": 7199,
+      "loaded_hours": 20.0,
+      "loaded_pct": 100.0
+    },
+    {
+      "day": "2020-03-30",
+      "readings": 5907,
+      "loaded_readings": 687,
+      "loaded_hours": 1.91,
+      "loaded_pct": 11.6
+    },
+    {
+      "day": "2020-03-31",
+      "readings": 8717,
+      "loaded_readings": 1115,
+      "loaded_hours": 3.1,
+      "loaded_pct": 12.8
+    },
+    {
+      "day": "2020-04-01",
+      "readings": 4816,
+      "loaded_readings": 560,
+      "loaded_hours": 1.56,
+      "loaded_pct": 11.6
+    },
+    {
+      "day": "2020-04-02",
+      "readings": 3853,
+      "loaded_readings": 423,
+      "loaded_hours": 1.18,
+      "loaded_pct": 11.0
+    },
+    {
+      "day": "2020-04-03",
+      "readings": 7275,
+      "loaded_readings": 681,
+      "loaded_hours": 1.89,
+      "loaded_pct": 9.4
+    },
+    {
+      "day": "2020-04-04",
+      "readings": 7794,
+      "loaded_readings": 711,
+      "loaded_hours": 1.98,
+      "loaded_pct": 9.1
+    },
+    {
+      "day": "2020-04-05",
+      "readings": 8716,
+      "loaded_readings": 871,
+      "loaded_hours": 2.42,
+      "loaded_pct": 10.0
+    },
+    {
+      "day": "2020-04-06",
+      "readings": 7045,
+      "loaded_readings": 1199,
+      "loaded_hours": 3.33,
+      "loaded_pct": 17.0
+    },
+    {
+      "day": "2020-04-07",
+      "readings": 7989,
+      "loaded_readings": 802,
+      "loaded_hours": 2.23,
+      "loaded_pct": 10.0
+    },
+    {
+      "day": "2020-04-08",
+      "readings": 7155,
+      "loaded_readings": 598,
+      "loaded_hours": 1.66,
+      "loaded_pct": 8.4
+    },
+    {
+      "day": "2020-04-09",
+      "readings": 6962,
+      "loaded_readings": 511,
+      "loaded_hours": 1.42,
+      "loaded_pct": 7.3
+    },
+    {
+      "day": "2020-04-10",
+      "readings": 8716,
+      "loaded_readings": 812,
+      "loaded_hours": 2.26,
+      "loaded_pct": 9.3
+    },
+    {
+      "day": "2020-04-11",
+      "readings": 7229,
+      "loaded_readings": 776,
+      "loaded_hours": 2.16,
+      "loaded_pct": 10.7
+    },
+    {
+      "day": "2020-04-12",
+      "readings": 7125,
+      "loaded_readings": 4553,
+      "loaded_hours": 12.65,
+      "loaded_pct": 63.9
+    },
+    {
+      "day": "2020-04-13",
+      "readings": 3501,
+      "loaded_readings": 295,
+      "loaded_hours": 0.82,
+      "loaded_pct": 8.4
+    },
+    {
+      "day": "2020-04-14",
+      "readings": 6329,
+      "loaded_readings": 437,
+      "loaded_hours": 1.21,
+      "loaded_pct": 6.9
+    },
+    {
+      "day": "2020-04-15",
+      "readings": 8433,
+      "loaded_readings": 717,
+      "loaded_hours": 1.99,
+      "loaded_pct": 8.5
+    },
+    {
+      "day": "2020-04-16",
+      "readings": 8027,
+      "loaded_readings": 774,
+      "loaded_hours": 2.15,
+      "loaded_pct": 9.6
+    },
+    {
+      "day": "2020-04-17",
+      "readings": 6301,
+      "loaded_readings": 150,
+      "loaded_hours": 0.42,
+      "loaded_pct": 2.4
+    },
+    {
+      "day": "2020-04-18",
+      "readings": 8663,
+      "loaded_readings": 8572,
+      "loaded_hours": 23.81,
+      "loaded_pct": 98.9
+    },
+    {
+      "day": "2020-04-19",
+      "readings": 8555,
+      "loaded_readings": 1497,
+      "loaded_hours": 4.16,
+      "loaded_pct": 17.5
+    },
+    {
+      "day": "2020-04-20",
+      "readings": 7477,
+      "loaded_readings": 4743,
+      "loaded_hours": 13.18,
+      "loaded_pct": 63.4
+    },
+    {
+      "day": "2020-04-21",
+      "readings": 6802,
+      "loaded_readings": 773,
+      "loaded_hours": 2.15,
+      "loaded_pct": 11.4
+    },
+    {
+      "day": "2020-04-22",
+      "readings": 8256,
+      "loaded_readings": 622,
+      "loaded_hours": 1.73,
+      "loaded_pct": 7.5
+    },
+    {
+      "day": "2020-04-23",
+      "readings": 7369,
+      "loaded_readings": 559,
+      "loaded_hours": 1.55,
+      "loaded_pct": 7.6
+    },
+    {
+      "day": "2020-04-24",
+      "readings": 8423,
+      "loaded_readings": 579,
+      "loaded_hours": 1.61,
+      "loaded_pct": 6.9
+    },
+    {
+      "day": "2020-04-25",
+      "readings": 429,
+      "loaded_readings": 240,
+      "loaded_hours": 0.67,
+      "loaded_pct": 55.9
+    },
+    {
+      "day": "2020-04-27",
+      "readings": 6778,
+      "loaded_readings": 638,
+      "loaded_hours": 1.77,
+      "loaded_pct": 9.4
+    },
+    {
+      "day": "2020-04-28",
+      "readings": 6809,
+      "loaded_readings": 534,
+      "loaded_hours": 1.48,
+      "loaded_pct": 7.8
+    },
+    {
+      "day": "2020-04-29",
+      "readings": 8017,
+      "loaded_readings": 967,
+      "loaded_hours": 2.69,
+      "loaded_pct": 12.1
+    },
+    {
+      "day": "2020-04-30",
+      "readings": 3890,
+      "loaded_readings": 305,
+      "loaded_hours": 0.85,
+      "loaded_pct": 7.8
+    },
+    {
+      "day": "2020-05-01",
+      "readings": 962,
+      "loaded_readings": 165,
+      "loaded_hours": 0.46,
+      "loaded_pct": 17.2
+    },
+    {
+      "day": "2020-05-02",
+      "readings": 8441,
+      "loaded_readings": 969,
+      "loaded_hours": 2.69,
+      "loaded_pct": 11.5
+    },
+    {
+      "day": "2020-05-03",
+      "readings": 8716,
+      "loaded_readings": 739,
+      "loaded_hours": 2.05,
+      "loaded_pct": 8.5
+    },
+    {
+      "day": "2020-05-04",
+      "readings": 7427,
+      "loaded_readings": 556,
+      "loaded_hours": 1.54,
+      "loaded_pct": 7.5
+    },
+    {
+      "day": "2020-05-05",
+      "readings": 7382,
+      "loaded_readings": 539,
+      "loaded_hours": 1.5,
+      "loaded_pct": 7.3
+    },
+    {
+      "day": "2020-05-06",
+      "readings": 7942,
+      "loaded_readings": 608,
+      "loaded_hours": 1.69,
+      "loaded_pct": 7.7
+    },
+    {
+      "day": "2020-05-07",
+      "readings": 8024,
+      "loaded_readings": 606,
+      "loaded_hours": 1.68,
+      "loaded_pct": 7.6
+    },
+    {
+      "day": "2020-05-08",
+      "readings": 8118,
+      "loaded_readings": 670,
+      "loaded_hours": 1.86,
+      "loaded_pct": 8.3
+    },
+    {
+      "day": "2020-05-09",
+      "readings": 7657,
+      "loaded_readings": 655,
+      "loaded_hours": 1.82,
+      "loaded_pct": 8.6
+    },
+    {
+      "day": "2020-05-10",
+      "readings": 329,
+      "loaded_readings": 158,
+      "loaded_hours": 0.44,
+      "loaded_pct": 48.0
+    },
+    {
+      "day": "2020-05-11",
+      "readings": 7260,
+      "loaded_readings": 509,
+      "loaded_hours": 1.41,
+      "loaded_pct": 7.0
+    },
+    {
+      "day": "2020-05-12",
+      "readings": 8518,
+      "loaded_readings": 589,
+      "loaded_hours": 1.64,
+      "loaded_pct": 6.9
+    },
+    {
+      "day": "2020-05-13",
+      "readings": 8716,
+      "loaded_readings": 4072,
+      "loaded_hours": 11.31,
+      "loaded_pct": 46.7
+    },
+    {
+      "day": "2020-05-14",
+      "readings": 6342,
+      "loaded_readings": 816,
+      "loaded_hours": 2.27,
+      "loaded_pct": 12.9
+    },
+    {
+      "day": "2020-05-15",
+      "readings": 8363,
+      "loaded_readings": 609,
+      "loaded_hours": 1.69,
+      "loaded_pct": 7.3
+    },
+    {
+      "day": "2020-05-16",
+      "readings": 8615,
+      "loaded_readings": 737,
+      "loaded_hours": 2.05,
+      "loaded_pct": 8.6
+    },
+    {
+      "day": "2020-05-17",
+      "readings": 2847,
+      "loaded_readings": 688,
+      "loaded_hours": 1.91,
+      "loaded_pct": 24.2
+    },
+    {
+      "day": "2020-05-18",
+      "readings": 8435,
+      "loaded_readings": 1659,
+      "loaded_hours": 4.61,
+      "loaded_pct": 19.7
+    },
+    {
+      "day": "2020-05-19",
+      "readings": 7410,
+      "loaded_readings": 2247,
+      "loaded_hours": 6.24,
+      "loaded_pct": 30.3
+    },
+    {
+      "day": "2020-05-20",
+      "readings": 7462,
+      "loaded_readings": 7268,
+      "loaded_hours": 20.19,
+      "loaded_pct": 97.4
+    },
+    {
+      "day": "2020-05-21",
+      "readings": 6516,
+      "loaded_readings": 1204,
+      "loaded_hours": 3.34,
+      "loaded_pct": 18.5
+    },
+    {
+      "day": "2020-05-22",
+      "readings": 7233,
+      "loaded_readings": 1263,
+      "loaded_hours": 3.51,
+      "loaded_pct": 17.5
+    },
+    {
+      "day": "2020-05-23",
+      "readings": 8458,
+      "loaded_readings": 1629,
+      "loaded_hours": 4.53,
+      "loaded_pct": 19.3
+    },
+    {
+      "day": "2020-05-24",
+      "readings": 210,
+      "loaded_readings": 38,
+      "loaded_hours": 0.11,
+      "loaded_pct": 18.1
+    },
+    {
+      "day": "2020-05-25",
+      "readings": 6902,
+      "loaded_readings": 1223,
+      "loaded_hours": 3.4,
+      "loaded_pct": 17.7
+    },
+    {
+      "day": "2020-05-26",
+      "readings": 5606,
+      "loaded_readings": 235,
+      "loaded_hours": 0.65,
+      "loaded_pct": 4.2
+    },
+    {
+      "day": "2020-05-27",
+      "readings": 7096,
+      "loaded_readings": 0,
+      "loaded_hours": 0.0,
+      "loaded_pct": 0.0
+    },
+    {
+      "day": "2020-05-28",
+      "readings": 8436,
+      "loaded_readings": 1087,
+      "loaded_hours": 3.02,
+      "loaded_pct": 12.9
+    },
+    {
+      "day": "2020-05-29",
+      "readings": 7466,
+      "loaded_readings": 1180,
+      "loaded_hours": 3.28,
+      "loaded_pct": 15.8
+    },
+    {
+      "day": "2020-05-30",
+      "readings": 8617,
+      "loaded_readings": 2901,
+      "loaded_hours": 8.06,
+      "loaded_pct": 33.7
+    },
+    {
+      "day": "2020-05-31",
+      "readings": 7294,
+      "loaded_readings": 850,
+      "loaded_hours": 2.36,
+      "loaded_pct": 11.7
+    },
+    {
+      "day": "2020-06-01",
+      "readings": 8523,
+      "loaded_readings": 1271,
+      "loaded_hours": 3.53,
+      "loaded_pct": 14.9
+    },
+    {
+      "day": "2020-06-02",
+      "readings": 5131,
+      "loaded_readings": 792,
+      "loaded_hours": 2.2,
+      "loaded_pct": 15.4
+    },
+    {
+      "day": "2020-06-03",
+      "readings": 7976,
+      "loaded_readings": 1214,
+      "loaded_hours": 3.37,
+      "loaded_pct": 15.2
+    },
+    {
+      "day": "2020-06-04",
+      "readings": 8716,
+      "loaded_readings": 904,
+      "loaded_hours": 2.51,
+      "loaded_pct": 10.4
+    },
+    {
+      "day": "2020-06-05",
+      "readings": 8716,
+      "loaded_readings": 5546,
+      "loaded_hours": 15.41,
+      "loaded_pct": 63.6
+    },
+    {
+      "day": "2020-06-06",
+      "readings": 7343,
+      "loaded_readings": 7343,
+      "loaded_hours": 20.4,
+      "loaded_pct": 100.0
+    },
+    {
+      "day": "2020-06-07",
+      "readings": 4888,
+      "loaded_readings": 4888,
+      "loaded_hours": 13.58,
+      "loaded_pct": 100.0
+    },
+    {
+      "day": "2020-06-08",
+      "readings": 4232,
+      "loaded_readings": 1015,
+      "loaded_hours": 2.82,
+      "loaded_pct": 24.0
+    },
+    {
+      "day": "2020-06-09",
+      "readings": 7286,
+      "loaded_readings": 907,
+      "loaded_hours": 2.52,
+      "loaded_pct": 12.4
+    },
+    {
+      "day": "2020-06-10",
+      "readings": 7919,
+      "loaded_readings": 991,
+      "loaded_hours": 2.75,
+      "loaded_pct": 12.5
+    },
+    {
+      "day": "2020-06-11",
+      "readings": 8398,
+      "loaded_readings": 1005,
+      "loaded_hours": 2.79,
+      "loaded_pct": 12.0
+    },
+    {
+      "day": "2020-06-12",
+      "readings": 7245,
+      "loaded_readings": 407,
+      "loaded_hours": 1.13,
+      "loaded_pct": 5.6
+    },
+    {
+      "day": "2020-06-13",
+      "readings": 8717,
+      "loaded_readings": 1159,
+      "loaded_hours": 3.22,
+      "loaded_pct": 13.3
+    },
+    {
+      "day": "2020-06-14",
+      "readings": 8684,
+      "loaded_readings": 1133,
+      "loaded_hours": 3.15,
+      "loaded_pct": 13.0
+    },
+    {
+      "day": "2020-06-15",
+      "readings": 8359,
+      "loaded_readings": 1038,
+      "loaded_hours": 2.88,
+      "loaded_pct": 12.4
+    },
+    {
+      "day": "2020-06-16",
+      "readings": 8235,
+      "loaded_readings": 1093,
+      "loaded_hours": 3.04,
+      "loaded_pct": 13.3
+    },
+    {
+      "day": "2020-06-17",
+      "readings": 5240,
+      "loaded_readings": 775,
+      "loaded_hours": 2.15,
+      "loaded_pct": 14.8
+    },
+    {
+      "day": "2020-06-18",
+      "readings": 6912,
+      "loaded_readings": 1410,
+      "loaded_hours": 3.92,
+      "loaded_pct": 20.4
+    },
+    {
+      "day": "2020-06-19",
+      "readings": 8656,
+      "loaded_readings": 1428,
+      "loaded_hours": 3.97,
+      "loaded_pct": 16.5
+    },
+    {
+      "day": "2020-06-20",
+      "readings": 8506,
+      "loaded_readings": 1270,
+      "loaded_hours": 3.53,
+      "loaded_pct": 14.9
+    },
+    {
+      "day": "2020-06-21",
+      "readings": 7422,
+      "loaded_readings": 942,
+      "loaded_hours": 2.62,
+      "loaded_pct": 12.7
+    },
+    {
+      "day": "2020-06-22",
+      "readings": 7274,
+      "loaded_readings": 2720,
+      "loaded_hours": 7.56,
+      "loaded_pct": 37.4
+    },
+    {
+      "day": "2020-06-23",
+      "readings": 7159,
+      "loaded_readings": 5712,
+      "loaded_hours": 15.87,
+      "loaded_pct": 79.8
+    },
+    {
+      "day": "2020-06-24",
+      "readings": 7162,
+      "loaded_readings": 5727,
+      "loaded_hours": 15.91,
+      "loaded_pct": 80.0
+    },
+    {
+      "day": "2020-06-25",
+      "readings": 8272,
+      "loaded_readings": 2068,
+      "loaded_hours": 5.74,
+      "loaded_pct": 25.0
+    },
+    {
+      "day": "2020-06-26",
+      "readings": 8678,
+      "loaded_readings": 1013,
+      "loaded_hours": 2.81,
+      "loaded_pct": 11.7
+    },
+    {
+      "day": "2020-06-27",
+      "readings": 3183,
+      "loaded_readings": 369,
+      "loaded_hours": 1.02,
+      "loaded_pct": 11.6
+    },
+    {
+      "day": "2020-06-28",
+      "readings": 317,
+      "loaded_readings": 91,
+      "loaded_hours": 0.25,
+      "loaded_pct": 28.7
+    },
+    {
+      "day": "2020-06-29",
+      "readings": 8677,
+      "loaded_readings": 1060,
+      "loaded_hours": 2.94,
+      "loaded_pct": 12.2
+    },
+    {
+      "day": "2020-06-30",
+      "readings": 8688,
+      "loaded_readings": 990,
+      "loaded_hours": 2.75,
+      "loaded_pct": 11.4
+    },
+    {
+      "day": "2020-07-01",
+      "readings": 8715,
+      "loaded_readings": 978,
+      "loaded_hours": 2.72,
+      "loaded_pct": 11.2
+    },
+    {
+      "day": "2020-07-02",
+      "readings": 8717,
+      "loaded_readings": 1232,
+      "loaded_hours": 3.42,
+      "loaded_pct": 14.1
+    },
+    {
+      "day": "2020-07-03",
+      "readings": 8093,
+      "loaded_readings": 1002,
+      "loaded_hours": 2.78,
+      "loaded_pct": 12.4
+    },
+    {
+      "day": "2020-07-04",
+      "readings": 8693,
+      "loaded_readings": 1012,
+      "loaded_hours": 2.81,
+      "loaded_pct": 11.6
+    },
+    {
+      "day": "2020-07-05",
+      "readings": 8716,
+      "loaded_readings": 1053,
+      "loaded_hours": 2.93,
+      "loaded_pct": 12.1
+    },
+    {
+      "day": "2020-07-06",
+      "readings": 5906,
+      "loaded_readings": 991,
+      "loaded_hours": 2.75,
+      "loaded_pct": 16.8
+    },
+    {
+      "day": "2020-07-07",
+      "readings": 4001,
+      "loaded_readings": 642,
+      "loaded_hours": 1.78,
+      "loaded_pct": 16.0
+    },
+    {
+      "day": "2020-07-08",
+      "readings": 3107,
+      "loaded_readings": 1090,
+      "loaded_hours": 3.03,
+      "loaded_pct": 35.1
+    },
+    {
+      "day": "2020-07-09",
+      "readings": 7518,
+      "loaded_readings": 1171,
+      "loaded_hours": 3.25,
+      "loaded_pct": 15.6
+    },
+    {
+      "day": "2020-07-10",
+      "readings": 7157,
+      "loaded_readings": 1176,
+      "loaded_hours": 3.27,
+      "loaded_pct": 16.4
+    },
+    {
+      "day": "2020-07-11",
+      "readings": 5253,
+      "loaded_readings": 826,
+      "loaded_hours": 2.29,
+      "loaded_pct": 15.7
+    },
+    {
+      "day": "2020-07-12",
+      "readings": 5609,
+      "loaded_readings": 927,
+      "loaded_hours": 2.58,
+      "loaded_pct": 16.5
+    },
+    {
+      "day": "2020-07-13",
+      "readings": 7434,
+      "loaded_readings": 1134,
+      "loaded_hours": 3.15,
+      "loaded_pct": 15.3
+    },
+    {
+      "day": "2020-07-14",
+      "readings": 3563,
+      "loaded_readings": 765,
+      "loaded_hours": 2.13,
+      "loaded_pct": 21.5
+    },
+    {
+      "day": "2020-07-15",
+      "readings": 8661,
+      "loaded_readings": 4166,
+      "loaded_hours": 11.57,
+      "loaded_pct": 48.1
+    },
+    {
+      "day": "2020-07-16",
+      "readings": 8642,
+      "loaded_readings": 1417,
+      "loaded_hours": 3.94,
+      "loaded_pct": 16.4
+    },
+    {
+      "day": "2020-07-17",
+      "readings": 7279,
+      "loaded_readings": 1478,
+      "loaded_hours": 4.11,
+      "loaded_pct": 20.3
+    },
+    {
+      "day": "2020-07-18",
+      "readings": 8697,
+      "loaded_readings": 1038,
+      "loaded_hours": 2.88,
+      "loaded_pct": 11.9
+    },
+    {
+      "day": "2020-07-19",
+      "readings": 8677,
+      "loaded_readings": 1026,
+      "loaded_hours": 2.85,
+      "loaded_pct": 11.8
+    },
+    {
+      "day": "2020-07-20",
+      "readings": 8688,
+      "loaded_readings": 907,
+      "loaded_hours": 2.52,
+      "loaded_pct": 10.4
+    },
+    {
+      "day": "2020-07-21",
+      "readings": 8163,
+      "loaded_readings": 651,
+      "loaded_hours": 1.81,
+      "loaded_pct": 8.0
+    },
+    {
+      "day": "2020-07-22",
+      "readings": 8305,
+      "loaded_readings": 2242,
+      "loaded_hours": 6.23,
+      "loaded_pct": 27.0
+    },
+    {
+      "day": "2020-07-23",
+      "readings": 7245,
+      "loaded_readings": 871,
+      "loaded_hours": 2.42,
+      "loaded_pct": 12.0
+    },
+    {
+      "day": "2020-07-24",
+      "readings": 6899,
+      "loaded_readings": 838,
+      "loaded_hours": 2.33,
+      "loaded_pct": 12.1
+    },
+    {
+      "day": "2020-07-25",
+      "readings": 6119,
+      "loaded_readings": 740,
+      "loaded_hours": 2.06,
+      "loaded_pct": 12.1
+    },
+    {
+      "day": "2020-07-26",
+      "readings": 6448,
+      "loaded_readings": 803,
+      "loaded_hours": 2.23,
+      "loaded_pct": 12.5
+    },
+    {
+      "day": "2020-07-27",
+      "readings": 7349,
+      "loaded_readings": 964,
+      "loaded_hours": 2.68,
+      "loaded_pct": 13.1
+    },
+    {
+      "day": "2020-07-28",
+      "readings": 6785,
+      "loaded_readings": 902,
+      "loaded_hours": 2.51,
+      "loaded_pct": 13.3
+    },
+    {
+      "day": "2020-07-29",
+      "readings": 7802,
+      "loaded_readings": 967,
+      "loaded_hours": 2.69,
+      "loaded_pct": 12.4
+    },
+    {
+      "day": "2020-07-30",
+      "readings": 7278,
+      "loaded_readings": 970,
+      "loaded_hours": 2.69,
+      "loaded_pct": 13.3
+    },
+    {
+      "day": "2020-07-31",
+      "readings": 7119,
+      "loaded_readings": 1219,
+      "loaded_hours": 3.39,
+      "loaded_pct": 17.1
+    },
+    {
+      "day": "2020-08-01",
+      "readings": 8684,
+      "loaded_readings": 953,
+      "loaded_hours": 2.65,
+      "loaded_pct": 11.0
+    },
+    {
+      "day": "2020-08-02",
+      "readings": 7473,
+      "loaded_readings": 843,
+      "loaded_hours": 2.34,
+      "loaded_pct": 11.3
+    },
+    {
+      "day": "2020-08-03",
+      "readings": 3947,
+      "loaded_readings": 666,
+      "loaded_hours": 1.85,
+      "loaded_pct": 16.9
+    },
+    {
+      "day": "2020-08-04",
+      "readings": 2800,
+      "loaded_readings": 306,
+      "loaded_hours": 0.85,
+      "loaded_pct": 10.9
+    },
+    {
+      "day": "2020-08-05",
+      "readings": 5672,
+      "loaded_readings": 677,
+      "loaded_hours": 1.88,
+      "loaded_pct": 11.9
+    },
+    {
+      "day": "2020-08-06",
+      "readings": 8653,
+      "loaded_readings": 979,
+      "loaded_hours": 2.72,
+      "loaded_pct": 11.3
+    },
+    {
+      "day": "2020-08-07",
+      "readings": 8708,
+      "loaded_readings": 939,
+      "loaded_hours": 2.61,
+      "loaded_pct": 10.8
+    },
+    {
+      "day": "2020-08-08",
+      "readings": 7909,
+      "loaded_readings": 810,
+      "loaded_hours": 2.25,
+      "loaded_pct": 10.2
+    },
+    {
+      "day": "2020-08-09",
+      "readings": 7688,
+      "loaded_readings": 890,
+      "loaded_hours": 2.47,
+      "loaded_pct": 11.6
+    },
+    {
+      "day": "2020-08-10",
+      "readings": 8716,
+      "loaded_readings": 1039,
+      "loaded_hours": 2.89,
+      "loaded_pct": 11.9
+    },
+    {
+      "day": "2020-08-11",
+      "readings": 7122,
+      "loaded_readings": 824,
+      "loaded_hours": 2.29,
+      "loaded_pct": 11.6
+    },
+    {
+      "day": "2020-08-12",
+      "readings": 8512,
+      "loaded_readings": 1072,
+      "loaded_hours": 2.98,
+      "loaded_pct": 12.6
+    },
+    {
+      "day": "2020-08-13",
+      "readings": 8676,
+      "loaded_readings": 1097,
+      "loaded_hours": 3.05,
+      "loaded_pct": 12.6
+    },
+    {
+      "day": "2020-08-14",
+      "readings": 7200,
+      "loaded_readings": 871,
+      "loaded_hours": 2.42,
+      "loaded_pct": 12.1
+    },
+    {
+      "day": "2020-08-15",
+      "readings": 6868,
+      "loaded_readings": 852,
+      "loaded_hours": 2.37,
+      "loaded_pct": 12.4
+    },
+    {
+      "day": "2020-08-16",
+      "readings": 6209,
+      "loaded_readings": 777,
+      "loaded_hours": 2.16,
+      "loaded_pct": 12.5
+    },
+    {
+      "day": "2020-08-17",
+      "readings": 8116,
+      "loaded_readings": 1061,
+      "loaded_hours": 2.95,
+      "loaded_pct": 13.1
+    },
+    {
+      "day": "2020-08-18",
+      "readings": 8207,
+      "loaded_readings": 904,
+      "loaded_hours": 2.51,
+      "loaded_pct": 11.0
+    },
+    {
+      "day": "2020-08-19",
+      "readings": 7392,
+      "loaded_readings": 1241,
+      "loaded_hours": 3.45,
+      "loaded_pct": 16.8
+    },
+    {
+      "day": "2020-08-20",
+      "readings": 5742,
+      "loaded_readings": 783,
+      "loaded_hours": 2.17,
+      "loaded_pct": 13.6
+    },
+    {
+      "day": "2020-08-21",
+      "readings": 7380,
+      "loaded_readings": 994,
+      "loaded_hours": 2.76,
+      "loaded_pct": 13.5
+    },
+    {
+      "day": "2020-08-22",
+      "readings": 6780,
+      "loaded_readings": 888,
+      "loaded_hours": 2.47,
+      "loaded_pct": 13.1
+    },
+    {
+      "day": "2020-08-23",
+      "readings": 1871,
+      "loaded_readings": 484,
+      "loaded_hours": 1.34,
+      "loaded_pct": 25.9
+    },
+    {
+      "day": "2020-08-24",
+      "readings": 8659,
+      "loaded_readings": 1275,
+      "loaded_hours": 3.54,
+      "loaded_pct": 14.7
+    },
+    {
+      "day": "2020-08-25",
+      "readings": 6660,
+      "loaded_readings": 878,
+      "loaded_hours": 2.44,
+      "loaded_pct": 13.2
+    },
+    {
+      "day": "2020-08-26",
+      "readings": 7936,
+      "loaded_readings": 922,
+      "loaded_hours": 2.56,
+      "loaded_pct": 11.6
+    },
+    {
+      "day": "2020-08-27",
+      "readings": 7334,
+      "loaded_readings": 919,
+      "loaded_hours": 2.55,
+      "loaded_pct": 12.5
+    },
+    {
+      "day": "2020-08-28",
+      "readings": 8190,
+      "loaded_readings": 1103,
+      "loaded_hours": 3.06,
+      "loaded_pct": 13.5
+    },
+    {
+      "day": "2020-08-29",
+      "readings": 7131,
+      "loaded_readings": 1041,
+      "loaded_hours": 2.89,
+      "loaded_pct": 14.6
+    },
+    {
+      "day": "2020-08-30",
+      "readings": 7354,
+      "loaded_readings": 1014,
+      "loaded_hours": 2.82,
+      "loaded_pct": 13.8
+    },
+    {
+      "day": "2020-08-31",
+      "readings": 6845,
+      "loaded_readings": 858,
+      "loaded_hours": 2.38,
+      "loaded_pct": 12.5
+    },
+    {
+      "day": "2020-09-01",
+      "readings": 530,
+      "loaded_readings": 55,
+      "loaded_hours": 0.15,
+      "loaded_pct": 10.4
+    }
+  ]
+}

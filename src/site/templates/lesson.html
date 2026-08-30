@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{PAGE_TITLE}}</title>
+{{ALTERNATE}}
+<style>
+{{STYLE}}
+:root { --accent: {{ACCENT}}; }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    {{TOPLINK}}
+    <div class="eyebrow"><a href="index{{LANG_SUFFIX}}.html">{{COURSE_NAME}}</a> / {{UI_MODULE}} <b>{{MODULE_NUMBER}}</b> {{UI_OF}} {{MODULE_TOTAL}}</div>
+    <h1>{{MODULE_TITLE}}</h1>
+    <p class="standfirst">{{SUBTITLE}}</p>
+    <div class="figure-mark">
+      <span class="figure-value">{{CIFRA_VALUE}}</span>
+      <span class="figure-label">{{CIFRA_LABEL}}</span>
+    </div>
+    <nav class="thread" aria-label="{{UI_THREAD}}">{{THREAD}}</nav>
+    <div class="assay">{{ASSAY}}</div>
+  </div>
+</header>
+<main class="container">
+{{CONTENT}}
+</main>
+<nav class="pager">{{PAGER}}</nav>
+<footer class="footer">
+  <div class="footer-inner">
+    <span>{{COURSE_NAME}} / {{UI_MODULE}} {{MODULE_NUMBER}}</span>
+    <span>{{UI_GENERATED}} {{GENERATED}}</span>
+    <span>{{UI_SOURCE}}: {{SOURCE_NOTE}}</span>
+  </div>
+</footer>
+</body>
+</html>
