@@ -15,7 +15,7 @@ The official datasheet says three different signals should all say "loaded":
 Three sources for one fact is an invitation to check they agree, so step 1 does
 exactly that instead of trusting the PDF.
 
-Run:  .venv\\Scripts\\python.exe src\\transform\\m13_duty_cycle.py
+Run:  .venv\\Scripts\\python.exe src\\transform\\m10_duty_cycle.py
 """
 
 from __future__ import annotations
@@ -31,7 +31,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 PROJECT = Path(__file__).resolve().parents[2]
 BRONZE = PROJECT / "lake" / "bronze" / "telemetry"
-RESULTS = PROJECT / "results" / "m13_duty_cycle.json"
+RESULTS = PROJECT / "results" / "m10_duty_cycle.json"
 
 SECONDS_PER_READING = 10  # measured in module 1, not assumed
 

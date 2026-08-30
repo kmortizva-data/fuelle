@@ -7,7 +7,7 @@
 
 Kevin aprende ingeniería de datos desde cero (pipelines, lagos de datos, SQL, administración de
 bases de datos) construyendo la columna vertebral de datos de un gemelo digital. El resultado se
-cuenta como curso web bilingüe de **35 módulos**, con el método de Sílice.
+cuenta como curso web bilingüe de **31 módulos**, con el método de Sílice.
 
 **El hueco que cierra:** sus cuatro proyectos publicados (Froth, Sílice, Geoestadística,
 Concentra) consumen datos que alguien ya dejó limpios en un CSV. Ninguno muestra de dónde salen.
@@ -17,9 +17,20 @@ Concentra) consumen datos que alguien ya dejó limpios en un CSV. Ninguno muestr
 **Sin tope de módulos, por decisión suya el 2026-08-29:** «no te limites en el número de módulos,
 lo que importa es que se explique todo y que cada módulo dure lo que tenga que durar, pero que se
 entienda, de esto no tengo ni las bases, es aprender haciendo». Por eso el temario pasó de 16 a
-35: SQL creció de 2 módulos a 10, y entró una parte 1 de bases que antes se daba por supuesta
-(qué es una tabla, un tipo, dónde viven los datos). **Si un concepto necesita su propio módulo,
-lo tiene.**
+35, con una parte 1 de bases que antes se daba por supuesta.
+
+**Recorte de SQL, 2026-08-30.** Kevin preguntó si SQL hacía falta de verdad. La respuesta honesta
+que se le dio: **el gemelo no usa SQL en absoluto** (parte 6, Python puro), el lake tampoco lo
+necesita para existir (se podría hacer todo con polars), pero dbt y PostgreSQL sí lo exigen, y
+sobre todo lo exige el mercado, que filtra por SQL antes de mirar un portafolio.
+
+Con eso delante eligió **recortar SQL a lo esencial**: de 10 módulos a 6. El curso pasó de 35 a
+**31**, y el gemelo se adelantó del módulo 27 al **23**.
+
+**Lo que NO se borró.** Los conceptos de los cuatro módulos que desaparecen se integraron en los
+que quedan, y cada módulo declara en `absorbe` lo que tiene que caber. Las subconsultas eran
+innegociables: la lección de agrupar ya usaba una para filtrar los días incompletos, así que
+quitarlas habría dejado un agujero en una lección ya escrita y verificada.
 
 ## El mundo del proyecto
 
@@ -112,9 +123,9 @@ acentos ya usados (amber de Froth, iron de Sílice, mint de Concentra, gold de G
 
 ### La paleta se calcula, no se elige
 
-`src/site/palette.py` genera los 35 acentos en OKLCH y **mide el contraste sobre los dos fondos**
+`src/site/palette.py` genera los 31 acentos en OKLCH y **mide el contraste sobre los dos fondos**
 antes de dejarlos entrar en `temario.json`. Croma bajo a propósito: colores de instrumento. Los
-35 pasan AA en claro y en oscuro. Salida en `results/palette.json`.
+31 pasan AA en claro y en oscuro. Salida en `results/palette.json`.
 
 **Bug cazado por el propio script (2026-08-29):** la primera pareja de colores para el gemelo
 (`#8FA9B4` medido contra `#C08A4E` simulado) medía **1,22 de contraste entre las dos líneas**. En
@@ -146,7 +157,7 @@ Tres condiciones no negociables: estado final visible sin JavaScript, quietas co
 
 ### Lo que impide que esto sea un PDF
 
-**21 de 35 módulos traen interacción y 20 traen un reto comprobable.** El reto es una sección
+**Los 6 módulos de SQL y otros varios traen interacción, y cada uno de los de SQL trae un reto comprobable.** El reto es una sección
 obligatoria (`## Hazlo tú`) en los módulos que lo declaran: el lector escribe una consulta y **la
 página la ejecuta contra los datos reales y le dice si acertó**, comparando el resultado, nunca el
 texto de la consulta. Punto de partida siempre dado, pista y solución plegadas.
@@ -164,9 +175,9 @@ los colores y manda cada `savefig` a su fichero. La geometría y los datos no se
 - Carpeta, estructura y git en rama `master`.
 - Entorno `.venv` con Python 3.12.10: duckdb 1.5.5, pandas 3.0.5, pyarrow 25.0.1, matplotlib 3.11.1.
 - Dataset descargado y descomprimido (209 MB), **verificado contra el PDF oficial**.
-- `temario.json` congelado: **35 módulos en 7 partes**, 21 interactivos, 20 con reto, cifras «por
+- `temario.json`: **31 módulos en 7 partes**, con la parte de SQL recortada a 6 el 2026-08-30, cifras «por
   medir» salvo las seis verificadas.
-- `src/site/palette.py`: los 35 acentos calculados y medidos en los dos temas.
+- `src/site/palette.py` + `apply_palette.py`: los 31 acentos calculados y medidos en los dos temas.
 - `src/ingest/failure_reports.csv` transcrito literal, con su LEEME de erratas.
 - `src/ingest/inspect_raw.py` corriendo, escribe `results/m01_raw.json`.
 - Alta en `_INDICE/projects.json` (y de paso se registró Geoestadística, que faltaba).
@@ -259,13 +270,18 @@ del panel, o con la carpeta excluida del antivirus.
 
 ### Fase 0,5 (siguiente, y es una puerta)
 Maqueta visual de **una sola lección**, con el grafo, la carátula, la consulta viva y el reto
-comprobable funcionando. **Kevin la aprueba antes de que se escriban las otras treinta y cuatro.**
+comprobable funcionando. **Kevin la aprueba antes de que se escriban las otras treinta.**
 Existe porque descubrir en el módulo 9 que la dirección visual no convence costaría rehacer nueve
-lecciones. Con 35 módulos, esta puerta vale el doble que antes.
+lecciones. Con 31 módulos, esta puerta sigue valiendo el doble que con dieciséis.
 
-**Candidato a lección de muestra: el módulo 13 (GROUP BY).** Es el que mejor enseña las cuatro
-piezas a la vez: tiene cifra de cabecera, grafo, consulta viva y reto, y su resultado (las horas
-de carga al día) es el número del que cuelga todo el gemelo.
+**Lección de muestra: el módulo 10 (GROUP BY), escrita y construida.** Era el 13 antes del
+recorte. Es la que mejor enseña las piezas a la vez: cifra de cabecera, consulta viva y reto, y
+su resultado (las horas de carga al día) es el número del que cuelga todo el gemelo.
+
+**Error propio corregido el 2026-08-30:** la lección publicaba 8.435 lecturas para el 13 de mayo
+y el valor real es 8.716. No fue un problema de datos: `results/` siempre dijo 8.716, fue un
+fallo al copiar el número a la prosa. Es exactamente lo que `check_numbers.py` atraparía, y
+todavía no está construido, así que **subirlo de prioridad**.
 
 ## Riesgos declarados
 
@@ -298,5 +314,5 @@ de carga al día) es el número del que cuelga todo el gemelo.
 
 - El visto bueno a la maqueta de la fase 0,5, antes de escribir las 34 lecciones restantes.
 - Si el repo público lleva también las lecciones o solo el código del pipeline.
-- Con 35 módulos, si prefiere que el curso se publique **por partes según se cierren** (la parte 3
+- Con 31 módulos, si prefiere que el curso se publique **por partes según se cierren** (la parte 3
   ya es un curso de SQL entero y publicable) o de una vez al final. Recomendación: por partes.

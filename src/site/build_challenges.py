@@ -31,9 +31,9 @@ SECONDS_PER_READING = 10
 FULL_DAY_READINGS = 8640
 
 CHALLENGES = {
-    # Módulo 13: agrupar. El reto pide el promedio mes a mes, que obliga a
+    # Módulo 10: agrupar. El reto pide el promedio mes a mes, que obliga a
     # agrupar dos veces: primero por día para tener las horas, y luego por mes.
-    "m13_horas_por_mes": f"""
+    "m10_horas_por_mes": f"""
         SELECT strftime(day, '%Y-%m')      AS mes,
                round(avg(horas), 2)        AS horas_de_carga
         FROM (

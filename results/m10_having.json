@@ -1,0 +1,35 @@
+{
+  "sql": "SELECT day, count(*) AS lecturas, round(sum(CASE WHEN DV_eletric = 1 THEN 1 ELSE 0 END) * 10 / 3600.0, 2) AS horas_de_carga FROM telemetria GROUP BY day HAVING count(*) > 0.9 * 8640 ORDER BY horas_de_carga DESC LIMIT 6",
+  "rows": [
+    [
+      "2020-04-18",
+      8663,
+      23.81
+    ],
+    [
+      "2020-06-05",
+      8716,
+      15.41
+    ],
+    [
+      "2020-03-12",
+      8202,
+      13.24
+    ],
+    [
+      "2020-07-15",
+      8661,
+      11.57
+    ],
+    [
+      "2020-05-13",
+      8716,
+      11.31
+    ],
+    [
+      "2020-05-30",
+      8617,
+      8.06
+    ]
+  ]
+}

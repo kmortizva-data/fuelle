@@ -1,5 +1,5 @@
 ---
-module: 13
+module: 10
 ---
 
 ## En 30 segundos
@@ -122,7 +122,7 @@ corriente acompaña. Las dos últimas no deberían existir.
 
 **16.762 lecturas, el 1,1 %, tienen las dos señales diciendo lo mismo.** Seis mil de ellas
 afirman que el compresor está en carga y que no entra aire a la vez, cosa imposible. Se apunta y
-se sigue: el módulo 20 se ocupa de esto. Para contar horas, un 1,1 % no cambia la respuesta.
+se sigue: el módulo 16 se ocupa de esto. Para contar horas, un 1,1 % no cambia la respuesta.
 
 ### Paso 5. Agrupar por día
 
@@ -153,7 +153,7 @@ day          lecturas   horas_de_carga
 2020-06-05       8716            15.41
 2020-03-12       8202            13.24
 2020-07-15       8661            11.57
-2020-05-13       8435            11.31
+2020-05-13       8716            11.31
 2020-05-30       8617             8.06
 ```
 
@@ -186,6 +186,52 @@ WHERE lecturas > 0.9 * 8640 | se queda solo con los días que tienen al menos el
 media   minimo   maximo
  3.42     1.11    23.81
 ```
+
+### Paso 7. Filtrar grupos con HAVING, y el orden en que SQL trabaja
+
+En el paso 5 la consulta salió sin filtrar días incompletos. Si intentas añadirle un `WHERE`
+para quedarte solo con los días completos, no funciona.
+
+La razón está en el orden. **SQL no se ejecuta en el orden en que se escribe.** Primero coge las
+filas (`FROM`), luego las filtra una a una (`WHERE`), después las reparte en montones
+(`GROUP BY`), y solo entonces existe algo llamado «cuántas lecturas tiene este día».
+
+`WHERE` llega demasiado pronto: cuando actúa, los montones todavía no existen. Para filtrar
+montones hay otra palabra.
+
+```sql
+SELECT day,
+       count(*) AS lecturas,
+       round(sum(CASE WHEN DV_eletric = 1 THEN 1 ELSE 0 END) * 10 / 3600.0, 2) AS horas_de_carga
+FROM telemetria
+GROUP BY day
+HAVING count(*) > 0.9 * 8640
+ORDER BY horas_de_carga DESC
+LIMIT 6;
+```
+
+```anota
+HAVING | filtra montones, no filas; solo se puede usar después de GROUP BY
+count(*) > 0.9 * 8640 | la misma condición del paso 6, pero sin necesitar la consulta de dentro
+```
+
+```salida
+day          lecturas   horas_de_carga
+2020-04-18       8663            23.81
+2020-06-05       8716            15.41
+2020-03-12       8202            13.24
+2020-07-15       8661            11.57
+2020-05-13       8716            11.31
+2020-05-30       8617             8.06
+```
+
+Mismo resultado que el paso 5, pero ahora con la garantía de que ningún día partido se ha
+colado. Y más corto que el paso 6, que necesitaba una consulta dentro de otra.
+
+Entonces, ¿por qué el paso 6 usaba esa consulta anidada? Porque allí el promedio se calculaba
+**sobre un valor que ya era el resultado de agrupar**. Eso es un segundo nivel, y `HAVING` no
+llega: hace falta agrupar una vez, guardar el resultado, y volver a agrupar encima. El módulo 11
+va de eso.
 
 ## El resultado, medido
 
@@ -230,6 +276,9 @@ reportó. No se sabe, y se dice.
   distinto en cuanto hay algún hueco.
 - **Una columna que no está en `GROUP BY` no puede salir en `SELECT`** sin decir cómo se resume.
   Es el error que más sale al empezar, y el mensaje que devuelve la base de datos lo explica bien.
+- **`WHERE` no puede filtrar un promedio.** El orden real es `FROM`, `WHERE`, `GROUP BY`,
+  `HAVING`, `SELECT`, `ORDER BY`, `LIMIT`. Cuando `WHERE` actúa, los montones aún no existen.
+  Entender ese orden arregla la mitad de los errores de quien empieza.
 - **El grano cambia debajo de tus pies.** Después de agrupar por día, una fila ya no es una
   lectura. Todo lo que escribas a partir de ahí tiene que contar con eso.
 
@@ -244,7 +293,7 @@ inicio: SELECT day,
 FROM telemetria
 GROUP BY day
 ORDER BY day;
-esperado: m13_horas_por_mes
+esperado: m10_horas_por_mes
 pista: Hay que agrupar dos veces. Primero por día, para tener las horas de cada día, y después por mes para promediarlas. La consulta de dentro va entre paréntesis después de FROM, como en el paso 6. Para sacar el mes de una fecha, `strftime(day, '%Y-%m')`.
 solucion: SELECT strftime(day, '%Y-%m') AS mes,
        round(avg(horas), 2) AS horas_de_carga

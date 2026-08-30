@@ -28,7 +28,7 @@ BRONZE = PROJECT / "lake" / "bronze" / "telemetry"
 SAMPLES = PROJECT / "assets" / "muestras"
 RESULTS = PROJECT / "results" / "sample.json"
 
-# What module 13 actually asks of the data. Anything beyond this is weight the
+# What module 10 actually asks of the data. Anything beyond this is weight the
 # reader pays for and never uses.
 NEEDED = ["timestamp", "day", "DV_eletric", "COMP", "Motor_current"]
 
@@ -78,10 +78,10 @@ def main() -> None:
     # 212 and compresses to almost nothing. Measuring that is the point here.
     candidates = [
         ("todo_todas_columnas", [], ""),
-        ("todo_columnas_del_m13", NEEDED, ""),
+        ("todo_columnas_del_m10", NEEDED, ""),
         ("sin_timestamp", ["day", "DV_eletric", "COMP", "Motor_current"], ""),
         ("solo_lo_del_reto", ["day", "DV_eletric"], ""),
-        ("un_mes_columnas_del_m13", NEEDED, "day >= DATE '2020-06-01' AND day < DATE '2020-07-01'"),
+        ("un_mes_columnas_del_m10", NEEDED, "day >= DATE '2020-06-01' AND day < DATE '2020-07-01'"),
     ]
 
     measured = [write(con, name, cols, where) for name, cols, where in candidates]
@@ -113,7 +113,7 @@ def main() -> None:
         """
     ).fetchone()[0]
 
-    published = json.load(io.open(PROJECT / "results" / "m13_duty_cycle.json",
+    published = json.load(io.open(PROJECT / "results" / "m10_duty_cycle.json",
                                   encoding="utf-8"))["avg_loaded_hours"]
     reproduces = abs(avg - published) < 0.005
 
