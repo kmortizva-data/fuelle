@@ -79,8 +79,17 @@ def _trim(value: str) -> str:
     return f"{entero}.{decimal}" if decimal else entero
 
 
-def harvest(value, out: set) -> None:
+# Claves cuyo valor es código, no medición. Sus números son constantes que el
+# propio análisis escribió (3600 segundos por hora, 8640 lecturas por día), y
+# contarlas como medidas abría un agujero: cualquier cifra que apareciese en
+# algún SQL guardado pasaba la puerta sin haber sido medida jamás.
+CODIGO = {"sql", "query", "consulta", "code", "codigo", "script", "scripts"}
+
+
+def harvest(value, out: set, key: str | None = None) -> None:
     """Todos los números que hay dentro de un JSON, a cualquier profundidad."""
+    if key and key.lower() in CODIGO:
+        return
     if isinstance(value, bool):
         return
     if isinstance(value, (int, float)):
@@ -97,11 +106,11 @@ def harvest(value, out: set) -> None:
                 out.add(c)
         return
     if isinstance(value, dict):
-        for v in value.values():
-            harvest(v, out)
+        for k, v in value.items():
+            harvest(v, out, k)
     elif isinstance(value, list):
         for v in value:
-            harvest(v, out)
+            harvest(v, out, key)
 
 
 def measured() -> set:
@@ -139,9 +148,19 @@ def prose(text: str) -> list[tuple[int, str]]:
     return out
 
 
+def clave(path: Path) -> str:
+    """La clave de excepciones, con el idioma dentro.
+
+    Las dos ediciones comparten nombre de fichero, así que sin esto una excepción
+    declarada en español tapaba en silencio el mismo número en la inglesa. Cada
+    edición declara las suyas y se ve cuál falta.
+    """
+    return path.stem + ("_en" if path.parent.name == "en" else "")
+
+
 def check(path: Path, known: set, excepciones: dict) -> list[str]:
     text = io.open(path, encoding="utf-8").read()
-    permitidos = excepciones.get(path.stem, {})
+    permitidos = excepciones.get(clave(path), {})
     problems = []
     for line_no, line in prose(text):
         for m in NUMBER.finditer(line):

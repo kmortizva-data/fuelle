@@ -1,17 +1,19 @@
 {
   "_comment": "Los únicos números que pueden aparecer en una lección sin salir de un script, cada uno con su razón escrita. Declarar una excepción cuesta una línea; inventarse un dato cuesta la credibilidad del curso. Si una razón no se puede escribir en una frase, el número no es una excepción: es un error.",
-
   "m01_el_encargo": {
     "3600": "el ejemplo de juguete de la balanza de cinta: 3.600 pesadas prometidas contra 360 reales. Números elegidos para que la división salga a mano",
     "0.0120000000000004": "un valor literal del CSV, copiado carácter por carácter para enseñar la basura de coma flotante. No es una medición, es una cita",
     "64.03": "la ley de hierro congelada del proyecto de sílice, citada en el puente metalúrgico. Es un dato de otro proyecto, ya verificado allí"
   },
-
   "m10_agrupar": {
     "3600": "los segundos que tiene una hora. Es una constante de conversión, no una medida"
   },
-
   "m10_agrupar_en": {
     "3600": "seconds in an hour, a conversion constant rather than a measurement"
+  },
+  "m01_el_encargo_en": {
+    "3600": "the toy belt weigher example: 3,600 weighings promised against 360 real. Chosen so the division works by hand",
+    "0.0120000000000004": "a literal value quoted from the CSV to show floating point litter. Not a measurement, a quotation",
+    "64.03": "the frozen iron assay from the silica project, cited in the metallurgical bridge"
   }
 }
