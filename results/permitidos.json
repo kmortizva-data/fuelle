@@ -3,7 +3,8 @@
   "m01_el_encargo": {
     "3600": "el ejemplo de juguete de la balanza de cinta: 3.600 pesadas prometidas contra 360 reales. Números elegidos para que la división salga a mano",
     "0.0120000000000004": "un valor literal del CSV, copiado carácter por carácter para enseñar la basura de coma flotante. No es una medición, es una cita",
-    "64.03": "la ley de hierro congelada del proyecto de sílice, citada en el puente metalúrgico. Es un dato de otro proyecto, ya verificado allí"
+    "64.03": "la ley de hierro congelada del proyecto de sílice, citada en el puente metalúrgico. Es un dato de otro proyecto, ya verificado allí",
+    "360": "el ejemplo de juguete de la balanza: las 360 filas que trae el fichero frente a las 3.600 prometidas"
   },
   "m10_agrupar": {
     "3600": "los segundos que tiene una hora. Es una constante de conversión, no una medida"
@@ -14,9 +15,14 @@
   "m01_el_encargo_en": {
     "3600": "the toy belt weigher example: 3,600 weighings promised against 360 real. Chosen so the division works by hand",
     "0.0120000000000004": "a literal value quoted from the CSV to show floating point litter. Not a measurement, a quotation",
-    "64.03": "the frozen iron assay from the silica project, cited in the metallurgical bridge"
+    "64.03": "the frozen iron assay from the silica project, cited in the metallurgical bridge",
+    "360": "the toy balance example: the 360 rows the file holds against the 3,600 promised"
   },
   "m02_dato_tabla_tipo": {
     "10.1": "el pH del cuaderno de juguete: tres lecturas inventadas de una celda de flotación, elegidas para que el tipo de cada columna se vea a simple vista. Se declara como juguete en la propia lección"
+  },
+  "m03_donde_viven_los_datos": {
+    "203.7": "una corrida anterior del mismo script, citada para enseñar cuánto bailan los tiempos medidos una sola vez. Es la razón de que ahora se midan siete",
+    "143.8": "la corrida siguiente a la anterior, con el mismo código y sin tocar nada. Las dos juntas justifican la mediana de siete"
   }
 }

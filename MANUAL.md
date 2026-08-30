@@ -143,6 +143,17 @@ oficial, y están listados en `temario.json` bajo `_hechos_verificados`.
 
 **Si un número no cuadra con lo que se esperaba, se reporta, no se ajusta.**
 
+### Dos reglas que salieron de pelearse con el verificador
+
+**Los números derivados se calculan en el script, no en la prosa.** Si una lección quiere decir
+que el índice costó 17,8 MB de más, esa resta la hace el script y la guarda; escribirla a mano
+en el texto la deja sin respaldo y, peor, la deja sin actualizar cuando el dato cambie.
+
+**Los tiempos no se citan en la prosa, solo en el bloque `salida`.** Un tiempo medido no se
+repite: dos corridas seguidas del mismo código dieron 203,7 y 143,8 veces entre extremos. Se
+miden varias veces, se publica la mediana con su rango, y la prosa habla de conclusiones y de
+órdenes de magnitud. El bloque de salida es de una corrida concreta y la lección lo dice.
+
 ### La fidelidad del original manda
 
 Los partes de avería vienen con erratas de fábrica (dos filas numeradas `#1`, un mantenimiento

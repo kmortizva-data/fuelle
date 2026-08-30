@@ -182,10 +182,10 @@
       "title_en": "Where data lives: file, database, lake and warehouse",
       "subtitle_en": "Four words used as synonyms that are not. Which is for what, and why this project needs more than one",
       "cifra": {
-        "value": "208,2 MB",
-        "label": "en un solo fichero, y por qué eso ya es un problema",
-        "value_en": "208.2 MB",
-        "label_en": "in a single file, and why that is already a problem"
+        "value": "192 veces",
+        "label": "entre el sitio más lento y el más rápido, con la misma pregunta",
+        "value_en": "192 times",
+        "label_en": "between the slowest and fastest place, same question"
       },
       "accent": {
         "dark": "#89C4C3",
@@ -194,7 +194,10 @@
       "instrumento": "grafo",
       "interactivo": false,
       "reto": null,
-      "scripts": [],
+      "scripts": [
+        "src/ingest/donde_viven.py",
+        "src/figures_module3.py"
+      ],
       "figuras": [
         "fig_m3_cuatro_sitios"
       ]

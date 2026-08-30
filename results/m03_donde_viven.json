@@ -1,0 +1,50 @@
+{
+  "dia": "2020-06-05",
+  "sitios": [
+    {
+      "sitio": "un fichero de texto",
+      "formato": "CSV",
+      "mb": 208.19,
+      "mediana_s": 0.587,
+      "min_s": 0.563,
+      "max_s": 0.617,
+      "filas": 8716
+    },
+    {
+      "sitio": "un lago de ficheros",
+      "formato": "Parquet particionado",
+      "mb": 22.08,
+      "mediana_s": 0.229,
+      "min_s": 0.191,
+      "max_s": 0.31,
+      "filas": 8716
+    },
+    {
+      "sitio": "una base de datos",
+      "formato": "DuckDB",
+      "mb": 50.01,
+      "mediana_s": 0.003,
+      "min_s": 0.002,
+      "max_s": 0.004,
+      "filas": 8716
+    },
+    {
+      "sitio": "un almacén",
+      "formato": "DuckDB con índice",
+      "mb": 67.76,
+      "mediana_s": 0.004,
+      "min_s": 0.003,
+      "max_s": 0.006,
+      "filas": 8716
+    }
+  ],
+  "todos_coinciden": true,
+  "filas_ese_dia": 8716,
+  "repeticiones": 7,
+  "veces_entre_extremos": 195.7,
+  "veces_redondeadas": 196,
+  "mas_lento": "un fichero de texto",
+  "mas_rapido": "una base de datos",
+  "mb_de_mas_del_indice": 17.8,
+  "veces_indice_mas_lento": 1.33
+}

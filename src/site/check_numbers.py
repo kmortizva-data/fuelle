@@ -56,8 +56,15 @@ def canonical(raw: str) -> str | None:
 
     tail = body[last + 1:]
     groups = re.split(r"[.,]", body)
-    if len(tail) == 3 and all(len(g) == 3 for g in groups[1:]):
-        entero = "".join(groups)          # separador de millares
+    # Un separador de millares no puede llevar un cero solo delante: «0,003» es
+    # tres milésimas, no cero mil tres. Sin esta condición el verificador pedía
+    # justificar tiempos como 0,003 s que sí estaban medidos, que es la clase de
+    # falso positivo que hace que una puerta deje de creerse.
+    parece_millares = (len(tail) == 3
+                       and all(len(g) == 3 for g in groups[1:])
+                       and groups[0] != "0")
+    if parece_millares:
+        entero = "".join(groups)
         return entero if len(entero) >= 4 else None
 
     entero = re.sub(r"[.,]", "", body[:last]) or "0"
@@ -135,6 +142,12 @@ def allowed() -> dict:
     return json.loads(io.open(ALLOWED, encoding="utf-8").read())
 
 
+# Lo que va en negrita es lo que el autor está afirmando, así que se comprueba
+# aunque sea pequeño. Sin esto, un «203 veces» inventado pasaba la puerta por
+# tener solo tres cifras, y ese es justo el número que titula un módulo.
+NEGRITA = re.compile(r"\*\*(.+?)\*\*", re.S)
+
+
 def prose(text: str) -> list[tuple[int, str]]:
     """La prosa con su número de línea, sin bloques de código ni fechas."""
     out, inside = [], False
@@ -163,8 +176,14 @@ def check(path: Path, known: set, excepciones: dict) -> list[str]:
     permitidos = excepciones.get(clave(path), {})
     problems = []
     for line_no, line in prose(text):
+        destacados = {n for trozo in NEGRITA.findall(line)
+                      for n in NUMBER.findall(trozo)}
         for m in NUMBER.finditer(line):
-            value = canonical(m.group())
+            crudo = m.group()
+            value = canonical(crudo)
+            if value is None and crudo in destacados:
+                # Va en negrita: se afirma, así que se comprueba igual.
+                value = _trim(crudo.replace(".", "").replace(",", "."))
             if value is None or value in known or value in permitidos:
                 continue
             problems.append(
