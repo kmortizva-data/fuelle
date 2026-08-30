@@ -1,63 +1,100 @@
 /* Fuelle: la hoja de estilo del curso.
  *
- * Encargo de Kevin (2026-08-29): "no muy escandaloso, que parezca ingeniero, pero que
- * demuestres habilidades, que no seas un pdf que se lee de recorrido". La regla que sale
- * de ahi y ordena todo este fichero: LA SOBRIEDAD VA EN LA SUPERFICIE, LA AMBICION VA EN
- * LO QUE LA PAGINA HACE. Aqui no hay ningun efecto que llame la atencion sobre si mismo.
+ * REESCRITA ENTERA el 2026-08-30. La primera versión heredó la plantilla de Sílice
+ * junto con su motor, y Kevin la vio y dijo: "se parece a las otras 20 páginas de
+ * portafolio, el landing, coursera, silica, se ve y se siente igual". Tenía razón.
+ * Medido: mismo ancho de prosa (680), mismo ancho de bloques (1180), misma columna
+ * de margen (132), misma secuencia de cabecera, 36 clases compartidas de 40.
+ * Cambiar papel por grafito no toca la silueta, y la silueta es lo que se siente.
  *
- * Sala de control: fondo grafito, rejilla de puntos discreta, numeros en monoespaciada.
- * Nada de papel claro (eso es Silice), nada de serif, nada de scrollytelling pegajoso
- * (eso es Geoestadistica), y ninguno de los cuatro acentos ya gastados en el portafolio.
+ * Los cuatro sitios de Kevin son una columna de texto centrada, sin barra lateral,
+ * sin rejilla y sin nada pegajoso. Este es lo contrario: PANEL DE CONTROL. Una barra
+ * fija a la izquierda con los instrumentos siempre a la vista, y el contenido a su
+ * derecha. Ninguna de las tres medidas heredadas aparece aquí, y check_layout.py
+ * falla si alguna reaparece.
  *
- * Los colores NO se eligen a ojo: src/site/palette.py los genera en OKLCH y mide su
- * contraste sobre los dos fondos. El --accent lo inyecta cada pagina: es el de su modulo.
- *
- * Cero fuentes externas. Carga instantanea, funciona sin red, y no depende de nadie.
+ * El encargo que ordena las decisiones sigue siendo el mismo: "no muy escandaloso,
+ * que parezca ingeniero, pero que demuestres habilidades, que no seas un pdf que se
+ * lee de recorrido". La sobriedad va en la superficie, la ambición en lo que hace.
  */
 
-/* ---------------------------------------------------------------- tokens */
+/* --------------------------------------------------------------- tipografía */
+
+/* IBM Plex, autoalojada, OFL-1.1. Los cuatro sitios de Kevin usan la fuente del
+ * sistema, y eso es la otra mitad del "se siente igual". Plex tiene aire de
+ * documentación de ingeniería, que es exactamente el encargo.
+ *
+ * Cinco cortes y no tres: sin las semi-negritas el navegador falsifica la negrita
+ * engordando el trazo, y en una fuente técnica se nota enseguida. 289 KB en total,
+ * que se pueden bajar a unos 60 recortando al alfabeto latino con fonttools si
+ * llega a molestar. */
+@font-face {
+  font-family: "Plex Cond";
+  src: url("../assets/fonts/PlexSansCondensed-SemiBold.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Plex";
+  src: url("../assets/fonts/PlexSans-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Plex";
+  src: url("../assets/fonts/PlexSans-SemiBold.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Plex Mono";
+  src: url("../assets/fonts/PlexMono-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Plex Mono";
+  src: url("../assets/fonts/PlexMono-SemiBold.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+/* ------------------------------------------------------------------ tokens */
 
 :root {
-  /* Tema claro. Es el segundo que se diseño, pero el primero que se declara,
-   * porque asi ningun color vive solo dentro de una media query. */
-  --ground: #f7f5f1;
-  --panel: #efece6;
-  --ink: #1e2225;
-  --ink-soft: #4a5257;
-  --ink-faint: #79838a;
-  --rule: #ddd8d0;
-  --rule-soft: #e8e4dd;
-  --grid: rgba(30, 34, 37, .06);
+  --ground: #f4f2ee;
+  --panel: #e9e6e0;
+  --stage: #fbfaf8;
+  --ink: #191d20;
+  --ink-soft: #4c545a;
+  --ink-faint: #7c868d;
+  --rule: #d6d1c8;
+  --rule-soft: #e4e0d8;
+  --grid: rgba(25, 29, 32, .05);
   --accent: #46787e;
-
-  /* Las dos series del gemelo. Nunca se distinguen solo por color: la medida va
-   * continua y la simulada discontinua. Ver --dash mas abajo. */
   --measured: #3d505b;
   --simulated: #b57542;
 
-  --prose: system-ui, "Segoe UI Variable Text", "Segoe UI", Inter, Roboto,
-           "Helvetica Neue", Arial, sans-serif;
-  --data: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono",
-          "DejaVu Sans Mono", "Liberation Mono", monospace;
+  --prose: "Plex", system-ui, "Segoe UI", Roboto, sans-serif;
+  --display: "Plex Cond", "Plex", system-ui, sans-serif;
+  --data: "Plex Mono", "Cascadia Mono", Consolas, monospace;
 
-  --measure: 680px;   /* la medida de la prosa, en pixeles y nunca en ch */
-  --wide: 1180px;     /* el borde derecho de los bloques anchos */
-  --margin: 132px;    /* la columna donde cuelgan los kickers */
-  --dash: 5 4;        /* el trazo de la serie simulada */
+  /* Medidas NUEVAS. Ninguna puede coincidir con las heredadas de Sílice
+   * (680 de prosa, 1180 de bloques, 132 de margen): volver a ellas es volver a
+   * la misma página, y hay un verificador que lo impide. */
+  --rail: 268px;      /* la barra fija, que ninguno de los otros sitios tiene */
+  --read: 646px;      /* la medida de la prosa, en píxeles y nunca en ch */
+  --block: 980px;     /* el borde derecho de los bloques anchos */
 
   color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --ground: #14181b;
-    --panel: #1b2024;
-    --ink: #dfe5e8;
-    --ink-soft: #a3aeb4;
-    --ink-faint: #6f7c83;
-    --rule: #2b3237;
-    --rule-soft: #232a2e;
-    --grid: rgba(223, 229, 232, .05);
+    --ground: #101417;
+    --panel: #171c20;
+    --stage: #14181b;
+    --ink: #e2e7ea;
+    --ink-soft: #a6b0b6;
+    --ink-faint: #717e85;
+    --rule: #293036;
+    --rule-soft: #20272b;
+    --grid: rgba(226, 231, 234, .045);
     --accent: #8ec2c8;
     --measured: #cbe2ef;
     --simulated: #c98754;
@@ -65,14 +102,15 @@
 }
 
 :root[data-theme="dark"] {
-  --ground: #14181b;
-  --panel: #1b2024;
-  --ink: #dfe5e8;
-  --ink-soft: #a3aeb4;
-  --ink-faint: #6f7c83;
-  --rule: #2b3237;
-  --rule-soft: #232a2e;
-  --grid: rgba(223, 229, 232, .05);
+  --ground: #101417;
+  --panel: #171c20;
+  --stage: #14181b;
+  --ink: #e2e7ea;
+  --ink-soft: #a6b0b6;
+  --ink-faint: #717e85;
+  --rule: #293036;
+  --rule-soft: #20272b;
+  --grid: rgba(226, 231, 234, .045);
   --accent: #8ec2c8;
   --measured: #cbe2ef;
   --simulated: #c98754;
@@ -81,257 +119,310 @@
 /* --------------------------------------------------------------- cimientos */
 
 * { box-sizing: border-box; }
-
 html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--ground);
+  background: var(--stage);
   color: var(--ink);
   font-family: var(--prose);
-  font-size: 17px;
-  line-height: 1.62;
-  /* La rejilla de puntos: es la sala de control, y es discreta a proposito.
-   * Un punto cada 24 px, al 5 o 6 por ciento de opacidad. */
-  background-image: radial-gradient(var(--grid) 1px, transparent 1px);
-  background-size: 24px 24px;
-  background-attachment: fixed;
+  font-size: 16.5px;
+  line-height: 1.6;
 }
 
 ::selection { background: var(--accent); color: var(--ground); }
+a { color: var(--accent); text-underline-offset: .18em; }
 
-a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: .18em; }
-a:hover { text-decoration-thickness: 2px; }
-
-.masthead-inner, .container, .pager, .footer-inner {
-  max-width: var(--wide);
-  margin: 0 auto;
-  padding: 0 28px;
+/* LA REJILLA. Esto es lo que ninguno de los otros cuatro sitios tiene, y es la
+ * razón de que la página deje de sentirse igual: el texto ya no está centrado en
+ * la ventana, está al lado de un panel de instrumentos. */
+.shell {
+  display: grid;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  min-height: 100vh;
 }
 
-/* ---------------------------------------------------------------- cabecera */
+/* -------------------------------------------------- la barra de instrumentos */
 
-.masthead {
-  border-bottom: 1px solid var(--rule);
-  background: color-mix(in srgb, var(--ground) 88%, var(--panel));
-  padding: 26px 0 30px;
+.panel {
+  position: sticky;   /* lo primero pegajoso de todo el portafolio */
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 22px 20px 22px;
+  background: var(--panel);
+  border-right: 1px solid var(--rule);
+  background-image: radial-gradient(var(--grid) 1px, transparent 1px);
+  background-size: 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.eyebrow {
+.panel-brand {
+  font-family: var(--display);
+  font-size: 19px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  display: block;
+}
+.panel-brand small {
+  display: block;
   font-family: var(--data);
-  font-size: 12px;
+  font-size: 10px;
   letter-spacing: .08em;
+  color: var(--ink-faint);
+  text-transform: none;
+  margin-top: 4px;
+}
+
+.panel-label {
+  font-family: var(--data);
+  font-size: 9.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 10px;
+}
+
+/* El grafo del lago, EN VERTICAL. Antes iba horizontal y solo en la portada;
+ * aquí acompaña al lector todo el curso y marca en qué capa está. */
+.rail-step {
+  display: grid;
+  grid-template-columns: 15px 1fr auto;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 0;
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--ink-faint);
+  text-decoration: none;
+  position: relative;
+}
+.rail-step .dot {
+  width: 9px; height: 9px;
+  border: 1px solid var(--ink-faint);
+  border-radius: 50%;
+  justify-self: center;
+}
+.rail-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 7px; top: 25px;
+  width: 1px; height: calc(100% - 17px);
+  background: var(--rule);
+}
+.rail-step.done { color: var(--ink-soft); }
+.rail-step.done .dot { background: var(--ink-faint); border-color: var(--ink-faint); }
+.rail-step.here { color: var(--accent); }
+.rail-step.here .dot { background: var(--accent); border-color: var(--accent); }
+.rail-step .range { font-size: 9.5px; opacity: .75; }
+
+/* La cifra del módulo ya no es una caja en una cabecera gigante: vive aquí y se
+ * queda a la vista mientras se lee la lección entera. */
+.panel-figure { border-top: 1px solid var(--rule); padding-top: 14px; }
+.panel-figure .v {
+  display: block;
+  font-family: var(--data);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--accent);
+}
+.panel-figure .l {
+  display: block;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ink-faint);
+  margin-top: 5px;
+}
+
+.panel-progress {
+  margin-top: auto;
+  border-top: 1px solid var(--rule);
+  padding-top: 13px;
+  font-family: var(--data);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+.panel-progress b { color: var(--ink); font-weight: 600; }
+.panel-bar { height: 2px; background: var(--rule); margin-top: 7px; }
+.panel-bar i { display: block; height: 2px; background: var(--accent); }
+
+.panel-nav { display: flex; gap: 7px; flex-wrap: wrap; }
+.panel-nav a {
+  font-family: var(--data);
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  padding: 6px 9px;
+  border: 1px solid var(--rule);
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+.panel-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ------------------------------------------------------------- el contenido */
+
+.stage { background: var(--stage); padding: 0 0 54px; min-width: 0; }
+.stage-inner { max-width: var(--block); padding: 0 40px; }
+
+/* La cabecera ya no ocupa media pantalla: una línea de identificación y el
+ * título. La cifra y la navegación se fueron a la barra. */
+.head {
+  padding: 30px 0 20px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 4px;
+}
+.head-id {
+  font-family: var(--data);
+  font-size: 10.5px;
+  letter-spacing: .13em;
   text-transform: uppercase;
   color: var(--ink-faint);
   display: flex;
-  flex-wrap: wrap;
-  gap: 0 18px;
+  gap: 14px;
   align-items: baseline;
-  margin-bottom: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
-.eyebrow b { color: var(--accent); font-weight: 600; }
-.eyebrow a { color: var(--ink-faint); text-decoration: none; }
-.eyebrow a:hover { color: var(--accent); text-decoration: underline; }
-
-.masthead h1 {
-  font-size: clamp(28px, 4.4vw, 44px);
-  line-height: 1.12;
-  letter-spacing: -.021em;
-  font-weight: 620;
-  margin: 0 0 12px;
-  max-width: 20ch;
+.head-id b { color: var(--accent); font-weight: 600; }
+.head h1 {
+  font-family: var(--display);
+  font-size: clamp(26px, 3.3vw, 37px);
+  line-height: 1.08;
+  font-weight: 600;
+  margin: 0 0 10px;
+  max-width: 22ch;
 }
-
-.standfirst {
+.head .standfirst {
   color: var(--ink-soft);
-  font-size: 18px;
-  line-height: 1.55;
-  max-width: var(--measure);
+  font-size: 16.5px;
+  line-height: 1.5;
+  max-width: var(--read);
   margin: 0;
 }
 
-/* La caratula: el instrumento que lleva la cifra del modulo.
- * No hay aguja animada: era decoracion y cayo en la prueba de "si se quita,
- * se entiende peor?". La cifra sola dice mas. */
-.assay {
-  margin-top: 26px;
-  display: inline-flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 14px 20px 13px;
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--accent);
-  border-radius: 3px;
-  background: var(--panel);
-}
-.figure-value {
-  font-family: var(--data);
-  font-size: clamp(20px, 3vw, 28px);
-  font-weight: 600;
-  letter-spacing: -.01em;
-  color: var(--accent);
-  line-height: 1.15;
-}
-.figure-label {
-  font-size: 13px;
-  color: var(--ink-faint);
-  letter-spacing: .01em;
-}
-.figure-mark {
-  font-family: var(--data);
-  font-size: 11px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-}
-
-/* ---------------------------------------------------------- cuerpo y bloques */
-
-.container { padding-top: 12px; padding-bottom: 40px; }
-
-/* Cada seccion cuelga de su kicker, que vive en el margen izquierdo y la
- * clasifica. Es lo que sustituye a los emoji: dice que tipo de bloque es sin
- * decorar nada. */
-.block {
-  position: relative;
-  padding: 30px 0 4px var(--margin);
-  border-top: 1px solid var(--rule-soft);
-}
-.block:first-child { border-top: 0; }
+/* Las secciones ya no cuelgan de un margen de 132 px: la etiqueta va encima, en
+ * un recuadro pequeño, y el texto empieza en el borde. */
+.block { padding: 26px 0 2px; border-top: 1px solid var(--rule-soft); }
+.block:first-of-type { border-top: 0; }
 
 .kicker {
-  position: absolute;
-  left: 0;
-  top: 34px;
-  width: calc(var(--margin) - 26px);
+  display: inline-block;
   font-family: var(--data);
-  font-size: 11px;
-  letter-spacing: .1em;
+  font-size: 9.5px;
+  letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  text-align: right;
+  border: 1px solid var(--rule);
+  padding: 2px 7px;
+  margin-bottom: 11px;
 }
 
 .block-title {
-  font-size: 21px;
-  font-weight: 620;
-  letter-spacing: -.012em;
-  margin: 0 0 12px;
-  max-width: var(--measure);
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 11px;
+  max-width: var(--read);
 }
 
-.block p, .block li { max-width: var(--measure); }
-.block p { margin: 0 0 15px; }
-.block p:last-child { margin-bottom: 15px; }
-.block ul, .block ol { padding-left: 22px; margin: 0 0 15px; }
-.block li { margin-bottom: 7px; }
-.block li::marker { color: var(--accent); font-family: var(--data); font-size: .85em; }
+.block p, .block li { max-width: var(--read); }
+.block p { margin: 0 0 14px; }
+.block ul, .block ol { padding-left: 21px; margin: 0 0 14px; }
+.block li { margin-bottom: 6px; }
+.block li::marker { color: var(--accent); font-family: var(--data); font-size: .82em; }
 
 h3.sub, h4.sub {
-  font-size: 16px;
-  font-weight: 640;
-  letter-spacing: -.005em;
-  margin: 26px 0 9px;
-  max-width: var(--measure);
-  color: var(--ink);
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 600;
+  margin: 24px 0 8px;
+  max-width: var(--read);
 }
 h4.sub { font-size: 15px; color: var(--ink-soft); }
 
 blockquote {
-  margin: 0 0 15px;
-  padding-left: 16px;
+  margin: 0 0 14px;
+  padding-left: 15px;
   border-left: 2px solid var(--rule);
   color: var(--ink-soft);
-  max-width: var(--measure);
+  max-width: var(--read);
 }
+strong, b { font-weight: 600; }
 
-strong, b { font-weight: 640; }
-
-/* El resumen de arriba se lee entero de un vistazo, asi que se distingue. */
 .is-brief ul { list-style: none; padding-left: 0; }
 .is-brief li {
-  padding: 8px 0 8px 20px;
+  padding: 8px 0 8px 18px;
   border-bottom: 1px solid var(--rule-soft);
   position: relative;
 }
 .is-brief li::before {
   content: "";
   position: absolute;
-  left: 2px; top: 18px;
-  width: 7px; height: 1px;
+  left: 0; top: 17px;
+  width: 8px; height: 1px;
   background: var(--accent);
 }
 .is-brief li:last-child { border-bottom: 0; }
+.is-result .block-title, .is-warning .block-title { color: var(--accent); }
 
-.is-result .block-title { color: var(--accent); }
-.is-warning .block-title { color: var(--accent); }
-
-/* ------------------------------------------------------------------ codigo */
+/* ------------------------------------------------------------------ código */
 
 pre {
-  max-width: var(--wide);
+  max-width: var(--block);
   overflow-x: auto;
   background: var(--panel);
   border: 1px solid var(--rule-soft);
-  border-left: 3px solid var(--accent);
-  border-radius: 3px;
-  padding: 14px 16px;
-  margin: 0 0 14px;
+  border-left: 2px solid var(--accent);
+  padding: 13px 15px;
+  margin: 0 0 13px;
 }
 pre code {
   font-family: var(--data);
-  font-size: 13.5px;
-  line-height: 1.62;
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--ink);
   white-space: pre;
 }
 p code, li code, dd code, td code {
   font-family: var(--data);
-  font-size: .89em;
-  padding: 1px 5px;
-  border-radius: 3px;
+  font-size: .87em;
+  padding: 1px 4px;
   background: var(--panel);
   border: 1px solid var(--rule-soft);
 }
 
-/* Lo que el codigo imprime no es codigo: se marca para que nadie confunda
- * la entrada con la salida. */
-.output {
-  position: relative;
-  margin: 0 0 14px;
-  max-width: var(--wide);
-}
-.output pre {
-  margin: 0;
-  border-left: 3px solid var(--ink-faint);
-  background: transparent;
-}
+.output { position: relative; margin: 0 0 13px; max-width: var(--block); }
+.output pre { margin: 0; border-left: 2px solid var(--ink-faint); background: transparent; }
 .output pre code { color: var(--ink-soft); }
 .output-tag {
   position: absolute;
-  top: -8px; left: 14px;
+  top: -7px; left: 13px;
   z-index: 1;
   font-family: var(--data);
-  font-size: 10px;
-  letter-spacing: .11em;
+  font-size: 9px;
+  letter-spacing: .13em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  background: var(--ground);
-  padding: 0 6px;
+  background: var(--stage);
+  padding: 0 5px;
 }
 
-/* Los bloques densos se pliegan: la profundidad sigue ahi y deja de ser un muro. */
-details.fold, details {
-  margin: 0 0 14px;
-  max-width: var(--wide);
-}
+details.fold, details { margin: 0 0 13px; max-width: var(--block); }
 details > summary {
   cursor: pointer;
   font-family: var(--data);
-  font-size: 12px;
-  letter-spacing: .04em;
+  font-size: 11px;
+  letter-spacing: .05em;
   color: var(--ink-faint);
-  padding: 6px 0;
+  padding: 5px 0;
   list-style: none;
   display: flex;
   align-items: center;
@@ -340,12 +431,10 @@ details > summary {
 details > summary::-webkit-details-marker { display: none; }
 details > summary::before {
   content: "+";
-  display: inline-block;
-  width: 14px; height: 14px;
-  line-height: 13px;
+  width: 13px; height: 13px;
+  line-height: 12px;
   text-align: center;
   border: 1px solid var(--rule);
-  border-radius: 2px;
   color: var(--accent);
 }
 details[open] > summary::before { content: "\2212"; }
@@ -353,156 +442,88 @@ details > summary:hover { color: var(--accent); }
 
 .annot {
   margin: 2px 0 4px;
-  padding: 12px 14px;
+  padding: 11px 13px;
   border: 1px solid var(--rule-soft);
-  border-radius: 3px;
   background: var(--panel);
 }
 .annot dt { margin-bottom: 3px; }
 .annot dt code {
   font-family: var(--data);
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--accent);
   background: transparent;
   border: 0;
   padding: 0;
 }
-.annot dd {
-  margin: 0 0 11px;
-  font-size: 15px;
-  color: var(--ink-soft);
-  max-width: var(--measure);
-}
+.annot dd { margin: 0 0 10px; font-size: 14.5px; color: var(--ink-soft); max-width: var(--read); }
 .annot dd:last-of-type { margin-bottom: 0; }
 
-/* La seccion de repaso: cada pregunta pliega su respuesta. */
-.is-review details {
-  border-bottom: 1px solid var(--rule-soft);
-  margin: 0;
-}
+.is-review details { border-bottom: 1px solid var(--rule-soft); margin: 0; }
 .is-review details > summary {
   font-family: var(--prose);
-  font-size: 16px;
+  font-size: 15.5px;
   color: var(--ink);
-  padding: 12px 0;
+  padding: 11px 0;
 }
 .is-review details > summary:hover { color: var(--accent); }
-.is-review details p { margin: 0 0 12px 22px; color: var(--ink-soft); }
+.is-review details p { margin: 0 0 11px 21px; color: var(--ink-soft); }
 
 /* ------------------------------------------------------------------ tablas */
 
-.table-wrap { max-width: var(--wide); overflow-x: auto; margin: 0 0 16px; }
-table { border-collapse: collapse; font-size: 15px; }
+.table-wrap { max-width: var(--block); overflow-x: auto; margin: 0 0 15px; }
+table { border-collapse: collapse; font-size: 14.5px; }
 th, td {
   text-align: left;
-  padding: 7px 16px 7px 0;
+  padding: 6px 15px 6px 0;
   border-bottom: 1px solid var(--rule-soft);
   vertical-align: top;
 }
 th {
   font-family: var(--data);
-  font-size: 11px;
-  letter-spacing: .07em;
+  font-size: 10px;
+  letter-spacing: .09em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  font-weight: 500;
+  font-weight: 400;
   border-bottom-color: var(--rule);
 }
 tbody tr:last-child td { border-bottom: 0; }
 
-/* ----------------------------------------------------------------- figuras */
-
-figure { margin: 0 0 18px; max-width: var(--wide); }
-figure img { max-width: 100%; height: auto; display: block; border-radius: 3px; }
-figcaption {
-  font-size: 13px;
-  color: var(--ink-faint);
-  margin-top: 8px;
-  max-width: var(--measure);
-  text-align: left;
-}
-
-/* ------------------------------------------------------- hilo, pager y pie */
-
-.thread {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
-  max-width: var(--wide);
-  margin: 0 auto 4px;
-  padding: 0 28px;
-}
-.thread a, .thread span {
-  font-family: var(--data);
-  font-size: 11px;
-  min-width: 26px;
-  text-align: center;
-  padding: 4px 5px;
-  border: 1px solid var(--rule-soft);
-  border-radius: 2px;
-  text-decoration: none;
-  color: var(--ink-faint);
-}
-.thread a:hover { border-color: var(--accent); color: var(--accent); }
-.thread .now { background: var(--accent); border-color: var(--accent);
-               color: var(--ground); font-weight: 600; }
-.thread .gone { opacity: .45; }
-.thread .starts-part { margin-left: 14px; }
-
-.pager {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding-top: 26px;
-  padding-bottom: 30px;
-  border-top: 1px solid var(--rule);
-}
-.pager a { text-decoration: none; color: var(--ink); max-width: 44%; }
-.pager a:hover { color: var(--accent); }
-.pager .dir {
-  display: block;
-  font-family: var(--data);
-  font-size: 11px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: 3px;
-}
-.pager .next { text-align: right; margin-left: auto; }
+figure { margin: 0 0 17px; max-width: var(--block); }
+figure img { max-width: 100%; height: auto; display: block; }
+figcaption { font-size: 12.5px; color: var(--ink-faint); margin-top: 7px; max-width: var(--read); }
 
 .footer {
   border-top: 1px solid var(--rule);
-  padding: 22px 0 40px;
-  font-size: 13px;
+  margin-top: 32px;
+  padding: 18px 0 0;
+  font-size: 12px;
   color: var(--ink-faint);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 20px;
 }
-.footer-inner { display: flex; flex-wrap: wrap; gap: 6px 22px; }
 .footer a { color: var(--ink-faint); }
-
 .gone { color: var(--ink-faint); }
 
-/* ------------------------------------------------- la consulta viva y el reto */
+/* ---------------------------------------------- la consulta viva y el reto */
 
-/* Esto es lo que impide que el curso sea un PDF. El motor SQL no se descarga
- * hasta que el lector lo pide, asi que quien solo lee no paga nada. */
 .live {
-  max-width: var(--wide);
-  margin: 0 0 18px;
+  max-width: var(--block);
+  margin: 0 0 17px;
   border: 1px solid var(--rule);
-  border-radius: 3px;
   background: var(--panel);
-  overflow: hidden;
 }
 .live-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 9px 14px;
+  padding: 8px 13px;
   border-bottom: 1px solid var(--rule-soft);
   font-family: var(--data);
-  font-size: 11px;
-  letter-spacing: .09em;
+  font-size: 10px;
+  letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--ink-faint);
 }
@@ -510,13 +531,13 @@ figcaption {
   width: 100%;
   border: 0;
   resize: vertical;
-  min-height: 116px;
-  padding: 13px 15px;
+  min-height: 112px;
+  padding: 12px 14px;
   background: transparent;
   color: var(--ink);
   font-family: var(--data);
-  font-size: 13.5px;
-  line-height: 1.62;
+  font-size: 13px;
+  line-height: 1.6;
   tab-size: 2;
 }
 .live-editor:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
@@ -524,17 +545,17 @@ figcaption {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 9px 14px;
+  padding: 8px 13px;
   border-top: 1px solid var(--rule-soft);
   flex-wrap: wrap;
 }
 .live-run {
   font-family: var(--data);
-  font-size: 12px;
-  letter-spacing: .06em;
-  padding: 7px 15px;
+  font-size: 11px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding: 7px 14px;
   border: 1px solid var(--accent);
-  border-radius: 3px;
   background: transparent;
   color: var(--accent);
   cursor: pointer;
@@ -542,161 +563,127 @@ figcaption {
 .live-run:hover { background: var(--accent); color: var(--ground); }
 .live-run[disabled] { opacity: .5; cursor: default; }
 .live-run[disabled]:hover { background: transparent; color: var(--accent); }
-.live-status { font-family: var(--data); font-size: 11.5px; color: var(--ink-faint); }
+.live-status { font-family: var(--data); font-size: 10.5px; color: var(--ink-faint); }
 .live-out { max-width: 100%; overflow-x: auto; }
-.live-out table { margin: 0; width: 100%; font-size: 13px; }
-.live-out td, .live-out th { padding: 5px 14px 5px 0; }
-.live-out td:first-child, .live-out th:first-child { padding-left: 14px; }
-.live-out td { font-family: var(--data); font-size: 12.5px; }
+.live-out table { margin: 0; width: 100%; font-size: 12.5px; }
+.live-out td, .live-out th { padding: 5px 13px 5px 0; }
+.live-out td:first-child, .live-out th:first-child { padding-left: 13px; }
+.live-out td { font-family: var(--data); font-size: 12px; }
 .live-err {
-  padding: 11px 15px;
+  padding: 10px 14px;
   font-family: var(--data);
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--simulated);
   border-top: 1px solid var(--rule-soft);
 }
 
-/* El reto. El lector escribe, la pagina ejecuta y COMPARA EL RESULTADO,
- * nunca el texto de la consulta: hay muchas formas de preguntar lo mismo. */
-.reto { border-left: 3px solid var(--accent); }
+.reto { border-left: 2px solid var(--accent); }
 .reto .live-head { color: var(--accent); }
-.reto-ask {
-  padding: 13px 15px 3px;
-  font-size: 16px;
-  max-width: var(--measure);
-}
+.reto-ask { padding: 12px 14px 2px; font-size: 15.5px; max-width: var(--read); }
 .verdict {
-  padding: 11px 15px;
+  padding: 10px 14px;
   border-top: 1px solid var(--rule-soft);
   font-family: var(--data);
-  font-size: 12.5px;
+  font-size: 12px;
 }
 .verdict.ok { color: var(--accent); }
 .verdict.no { color: var(--simulated); }
 
-/* Sin JavaScript la leccion se lee entera: la consulta se ve, el editor no
- * miente diciendo que se puede pulsar, y la solucion sigue estando plegada. */
 .no-js .live-bar, .no-js .live-editor { display: none; }
 .no-js .live-static { display: block; }
 .live-static { display: none; }
 
-/* ------------------------------------------------------------- instrumentos */
+/* ---------------------------------------------------------- el doble trazo */
 
-/* El grafo del lago. Un pipeline es literalmente un grafo de nodos, asi que
- * esto no es decoracion: es el mapa de lo que construye cada leccion. */
-.grafo { max-width: var(--wide); margin: 0 0 20px; }
-.grafo svg { width: 100%; height: auto; display: block; }
-.grafo .node-box { fill: var(--panel); stroke: var(--rule); }
-.grafo .node-box.on { stroke: var(--accent); stroke-width: 1.6; }
-.grafo .node-label {
-  fill: var(--ink-faint);
-  font-family: var(--data);
-  font-size: 11px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.grafo .node-box.on + .node-label, .grafo .node-label.on { fill: var(--accent); }
-.grafo .edge { stroke: var(--rule); fill: none; }
-.grafo .edge.on { stroke: var(--accent); }
-
-/* El doble trazo. La regla que no se negocia: la serie medida va continua y la
- * simulada discontinua, porque el color NUNCA es la unica pista. */
-.twin { max-width: var(--wide); margin: 0 0 20px; }
+.twin { max-width: var(--block); margin: 0 0 18px; }
 .twin svg { width: 100%; height: auto; display: block; }
 .twin .axis { stroke: var(--rule); fill: none; }
-.twin .tick {
-  fill: var(--ink-faint);
-  font-family: var(--data);
-  font-size: 10px;
-}
+.twin .tick { fill: var(--ink-faint); font-family: var(--data); font-size: 10px; }
 .twin .measured { stroke: var(--measured); fill: none; stroke-width: 1.8; }
-.twin .simulated {
-  stroke: var(--simulated);
-  fill: none;
-  stroke-width: 1.8;
-  stroke-dasharray: var(--dash);
-}
+.twin .simulated { stroke: var(--simulated); fill: none; stroke-width: 1.8; stroke-dasharray: 5 4; }
 .twin .gap { fill: var(--simulated); opacity: .16; }
-.twin-key {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  font-family: var(--data);
-  font-size: 11.5px;
-  color: var(--ink-faint);
-  margin-top: 6px;
-}
-.twin-key i { display: inline-block; width: 22px; height: 0; vertical-align: middle;
+.twin-key { display: flex; gap: 20px; flex-wrap: wrap; font-family: var(--data);
+            font-size: 11px; color: var(--ink-faint); margin-top: 6px; }
+.twin-key i { display: inline-block; width: 20px; height: 0; vertical-align: middle;
               border-top-width: 2px; border-top-style: solid; margin-right: 7px; }
 .twin-key .k-measured i { border-color: var(--measured); }
 .twin-key .k-simulated i { border-top-style: dashed; border-color: var(--simulated); }
 
-/* La perilla: mover el caudal de fuga y ver al compresor cargar mas seguido.
- * Es el patron que a Kevin le gusta, la perilla ensena la fisica. */
-.knob { display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-        margin: 0 0 14px; font-family: var(--data); font-size: 12px;
-        color: var(--ink-faint); }
-.knob input[type="range"] { accent-color: var(--accent); flex: 1 1 220px; max-width: 320px; }
-.knob output { color: var(--accent); min-width: 76px; }
+.knob { display: flex; align-items: center; gap: 13px; flex-wrap: wrap; margin: 0 0 13px;
+        font-family: var(--data); font-size: 11px; color: var(--ink-faint); }
+.knob input[type="range"] { accent-color: var(--accent); flex: 1 1 200px; max-width: 300px; }
+.knob output { color: var(--accent); min-width: 72px; }
 
-/* ------------------------------------------------------------------ indice */
+/* -------------------------------------------------------- índice del curso */
 
-.toc { max-width: var(--wide); margin: 0 auto; padding: 0 28px 20px; }
+.toc { max-width: var(--block); }
 .toc .part {
   font-family: var(--data);
-  font-size: 11px;
-  letter-spacing: .11em;
+  font-size: 10px;
+  letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  margin: 30px 0 4px;
-  padding-top: 12px;
+  margin: 26px 0 2px;
+  padding-top: 11px;
   border-top: 1px solid var(--rule);
 }
 .toc a, .toc .pending {
   display: grid;
-  grid-template-columns: 42px 1fr auto;
-  gap: 16px;
+  grid-template-columns: 34px 1fr auto;
+  gap: 15px;
   align-items: baseline;
-  padding: 10px 4px;
+  padding: 9px 6px 9px 8px;
   border-bottom: 1px solid var(--rule-soft);
+  border-left: 2px solid transparent;
   text-decoration: none;
   color: var(--ink);
 }
-.toc a:hover { color: var(--accent); background: var(--panel); }
+.toc a:hover { border-left-color: var(--accent); background: var(--panel); color: var(--accent); }
 .toc .pending { color: var(--ink-faint); }
 .toc .num { font-family: var(--data); font-size: 12px; color: var(--ink-faint); }
 .toc a:hover .num { color: var(--accent); }
-.toc .name small { display: block; color: var(--ink-faint); font-size: 13.5px;
-                   font-weight: 400; margin-top: 2px; max-width: 62ch; }
-.toc .mark { font-family: var(--data); font-size: 11.5px; color: var(--ink-faint);
-             text-align: right; }
-.toc .tag { font-family: var(--data); font-size: 10px; letter-spacing: .09em;
-            text-transform: uppercase; color: var(--accent); }
+.toc .name { font-family: var(--display); font-size: 16px; }
+.toc .name small { display: block; font-family: var(--prose); color: var(--ink-faint);
+                   font-size: 13px; font-weight: 400; margin-top: 2px; max-width: 60ch; }
+.toc .mark { font-family: var(--data); font-size: 11px; color: var(--ink-faint); text-align: right; }
+.toc .tag { font-family: var(--data); font-size: 9.5px; letter-spacing: .1em;
+            text-transform: uppercase; color: var(--ink-faint); }
 
-/* ------------------------------------------------------------------- movil */
+/* ------------------------------------------------------------------- móvil */
 
-@media (max-width: 760px) {
+/* La barra deja de ser barra: pasa a cabecera compacta arriba, con los tramos en
+ * horizontal. La rejilla se colapsa a una columna. */
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+  .panel {
+    position: static;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+    padding: 13px 18px;
+  }
+  .panel-label { display: none; }
+  .panel .rail { display: flex; gap: 0 5px; flex-wrap: wrap; }
+  .rail-step { grid-template-columns: 11px auto; padding: 3px 0; font-size: 9.5px; }
+  .rail-step .range { display: none; }
+  .rail-step:not(:last-child)::after { display: none; }
+  .panel-figure { border-top: 0; padding-top: 0; }
+  .panel-figure .v { font-size: 13.5px; }
+  .panel-figure .l { display: none; }
+  .panel-progress { margin: 0; border-top: 0; padding-top: 0; }
+  .panel-bar { display: none; }
+  .stage-inner { padding: 0 18px; }
   body { font-size: 16px; }
-  .masthead-inner, .container, .pager, .footer-inner, .thread, .toc { padding: 0 18px; }
-  /* El kicker deja de colgar del margen y pasa a ir encima: a 375 px no hay
-   * columna que valga. */
-  .block { padding-left: 0; padding-top: 24px; }
-  .kicker { position: static; width: auto; text-align: left; margin-bottom: 7px; }
-  .thread { gap: 2px; }
-  .thread a, .thread span { min-width: 22px; font-size: 10px; padding: 3px 3px; }
-  .pager { flex-direction: column; gap: 14px; }
-  .pager a, .pager .next { max-width: 100%; text-align: left; margin-left: 0; }
-  .toc a, .toc .pending { grid-template-columns: 30px 1fr; gap: 10px; }
-  .toc .mark { grid-column: 2; text-align: left; }
-  pre { padding: 12px 13px; }
+  .head { padding-top: 22px; }
   pre code { font-size: 12.5px; }
 }
 
-/* ------------------------------------------------------- movimiento y papel */
+/* ------------------------------------------------------ movimiento y papel */
 
-/* Toda animacion de este curso paso la prueba de "si se quita, se entiende
- * peor?". Las que no la pasaron no estan aqui. Y con esta preferencia puesta,
- * todo se queda quieto en su estado final. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .001ms !important;
@@ -707,26 +694,8 @@ figcaption {
 }
 
 @media print {
-  body { background: #fff; color: #000; }
-  .thread, .pager, .live-bar, .live-editor { display: none; }
+  .shell { display: block; }
+  .panel, .live-bar, .live-editor { display: none; }
   .live-static { display: block; }
+  body { background: #fff; color: #000; }
 }
-
-/* --------------------------------------------- el grafo del lago (portada) */
-
-.kicker-inline {
-  display: block;
-  font-family: var(--data);
-  font-size: 11px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: 12px;
-}
-.grafo { margin: 24px 0 34px; max-width: 940px; }
-.grafo .node-sub {
-  fill: var(--ink-faint);
-  font-family: var(--data);
-  font-size: 11px;
-}
-.grafo .edge { stroke-width: 1; }

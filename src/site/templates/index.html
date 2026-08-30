@@ -15,31 +15,54 @@
 </style>
 </head>
 <body>
-<header class="masthead">
-  <div class="masthead-inner">
-    {{TOPLINK}}
-    <div class="eyebrow"><b>{{COURSE_NAME}}</b> {{EYEBROW}}</div>
-    <h1>{{COURSE_TITLE}}</h1>
-    <p class="standfirst">{{SUBTITLE}}</p>
-    <div class="assay">{{ASSAY}}</div>
-  </div>
-</header>
-<main class="container">
-<!-- El grafo del lago. No es decoracion: es el mapa de lo que el curso
-     construye, y cada tramo dice que modulos lo levantan. -->
-{{GRAPH}}
-{{CONTENT}}
-</main>
-<section class="toc">
-  <h2 class="block-title">{{UI_TOC_TITLE}}</h2>
-  {{TOC}}
-</section>
-<footer class="footer">
-  <div class="footer-inner">
-    <span>{{COURSE_NAME}}</span>
-    <span>{{UI_GENERATED}} {{GENERATED}}</span>
-    <span>{{UI_SOURCE}}: {{SOURCE_NOTE}}</span>
-  </div>
-</footer>
+<div class="shell">
+
+  <aside class="panel">
+    <span class="panel-brand">{{COURSE_TITLE}}
+      <small>{{EYEBROW}}</small></span>
+
+    <nav class="rail" aria-label="{{UI_RAIL}}">
+      <p class="panel-label">{{UI_RAIL}}</p>
+      {{RAIL}}
+    </nav>
+
+    <div class="panel-figure">
+      <span class="v">{{WRITTEN}} / {{TOTAL}}</span>
+      <span class="l">{{UI_WRITTEN}}</span>
+    </div>
+
+    <div class="panel-progress">
+      {{TOTAL}} {{UI_MODULES}} · {{PARTS}} {{UI_PARTS}}
+      <span class="panel-bar"><i style="width: {{PROGRESS}}%"></i></span>
+    </div>
+
+    <nav class="panel-nav">{{TOPLINK}}</nav>
+  </aside>
+
+  <main class="stage">
+    <div class="stage-inner">
+      <header class="head">
+        <p class="head-id"><b>{{UI_COURSE}}</b> <span>{{TOTAL}} {{UI_MODULES}}</span></p>
+        <h1>{{HEADLINE}}</h1>
+        <p class="standfirst">{{SUBTITLE}}</p>
+      </header>
+
+      {{CONTENT}}
+
+      <section class="block">
+        <span class="kicker">{{UI_TOC_KICKER}}</span>
+        <h2 class="block-title">{{UI_TOC_TITLE}}</h2>
+        <div class="toc">{{TOC}}</div>
+      </section>
+
+      <footer class="footer">
+        <span>{{COURSE_NAME}}</span>
+        <span>{{UI_GENERATED}} {{GENERATED}}</span>
+        <span>{{UI_SOURCE}}: {{SOURCE_NOTE}}</span>
+      </footer>
+    </div>
+  </main>
+
+</div>
 </body>
 </html>

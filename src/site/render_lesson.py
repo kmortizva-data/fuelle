@@ -125,6 +125,9 @@ UI = {
         "hint": "una pista", "solution": "ver la solución",
         "pending": "pendiente",
         "switch": "English",
+        "rail": "el lago", "part": "parte:", "written": "lecciones escritas",
+        "modules_word": "módulos", "parts_word": "partes", "course": "el curso",
+        "toc_kicker": "Temario",
         "portfolio": "English summary on the portfolio ↗",
     },
     "en": {
@@ -147,6 +150,9 @@ UI = {
         "hint": "a hint", "solution": "see the solution",
         "pending": "pending",
         "switch": "Español",
+        "rail": "the lake", "part": "part:", "written": "lessons written",
+        "modules_word": "modules", "parts_word": "parts", "course": "the course",
+        "toc_kicker": "Syllabus",
         "portfolio": "Resumen en el portafolio ↗",
     },
 }
@@ -534,6 +540,54 @@ def is_written(slug: str, lang: str) -> bool:
 def page_name(slug: str, lang: str) -> str:
     return f"{quote(slug)}{suffix(lang)}.html"
 
+# Los tramos del lago y los módulos que trabajan sobre cada capa. Viven aquí
+# porque los usan las dos plantillas: la barra de la lección y la del índice.
+#
+# Los rangos son explícitos y no derivados de las partes, porque las partes no
+# calzan con las capas: los seis módulos de SQL consultan bronce sin ser una capa
+# aparte, y los cuatro de PostgreSQL viven sobre oro. Derivarlos de las partes
+# dejaba diez módulos fuera del mapa con dos tramos solapados.
+STAGES = [
+    ("CRUDO", "RAW", (1, 3)),
+    ("BRONCE", "BRONZE", (4, 13)),
+    ("PLATA", "SILVER", (14, 16)),
+    ("ORO", "GOLD", (17, 22)),
+    ("GEMELO", "TWIN", (23, 31)),
+]
+
+
+def build_rail(current: int | None, lang: str) -> str:
+    """El grafo del lago en vertical, para la barra de instrumentos.
+
+    Marca qué capa se está construyendo. Sustituye a la tira de números, que con
+    treinta y un módulos ocupaba tres filas y no decía nada del recorrido.
+    """
+    rows = []
+    for label_es, label_en, (lo, hi) in STAGES:
+        label = label_es if lang == "es" else label_en
+        if current is None:
+            state = ""
+        elif lo <= current <= hi:
+            state = " here"
+        elif current > hi:
+            state = " done"
+        else:
+            state = ""
+        rango = f"{lo}-{hi}" if lo != hi else str(lo)
+        rows.append(
+            f'<span class="rail-step{state}"><i class="dot"></i>'
+            f'<span>{html.escape(label)}</span>'
+            f'<span class="range">{rango}</span></span>'
+        )
+    return "".join(rows)
+
+
+def part_title(syllabus: dict, module: dict, lang: str) -> str:
+    parte = next((p for p in syllabus["partes"] if p["n"] == module.get("parte")), None)
+    if not parte:
+        return ""
+    return (parte.get("title_en") or parte["title"]) if lang == "en" else parte["title"]
+
 
 def build_thread(syllabus: dict, current: int | None, lang: str = "es") -> str:
     """La tira de módulos: dónde estás, dentro de los 35.
@@ -571,20 +625,28 @@ def build_thread(syllabus: dict, current: int | None, lang: str = "es") -> str:
 
 
 def build_pager(syllabus: dict, current: int, lang: str = "es") -> str:
-    modules = {m["number"]: m for m in syllabus["modules"]}
+    """Anterior y siguiente, compactos, porque ahora viven en la barra.
+
+    La versión heredada imprimía el título entero de cada vecino, que en una
+    columna de 268 px no cabe. Aquí van el número y la flecha, y el título entra
+    en el `title` para quien pase por encima.
+    """
     stems = lesson_stems(syllabus)
-    parts = []
-    for number, direction, css in ((current - 1, UI[lang]["prev"], "prev"),
-                                   (current + 1, UI[lang]["next"], "next")):
-        module = modules.get(number)
-        if not module or not is_written(stems[number], lang):
+    numbers = sorted(stems)
+    position = numbers.index(current)
+    links = []
+    for offset, arrow in ((-1, "\u2190"), (1, "\u2192")):
+        index = position + offset
+        if not (0 <= index < len(numbers)):
             continue
-        parts.append(
-            f'<a class="{css}" href="{page_name(stems[number], lang)}">'
-            f'<span class="dir">{direction}</span>'
-            f'{number}. {html.escape(module_title(module, lang))}</a>'
-        )
-    return "".join(parts)
+        number = numbers[index]
+        if not is_written(stems[number], lang):
+            continue
+        title = html.escape(f"{number}. {module_title(syllabus['modules'][number - 1], lang)}",
+                            quote=True)
+        label = f"{arrow} {number}" if offset < 0 else f"{number} {arrow}"
+        links.append(f'<a href="{page_name(stems[number], lang)}" title="{title}">{label}</a>')
+    return "".join(links)
 
 
 def build_assay(module: dict, lang: str = "es") -> str:
@@ -626,6 +688,13 @@ def ui_values(lang: str) -> dict[str, str]:
         "{{UI_MODULE}}": UI[lang]["module"],
         "{{UI_OF}}": UI[lang]["of"],
         "{{UI_THREAD}}": UI[lang]["thread"],
+        "{{UI_RAIL}}": UI[lang]["rail"],
+        "{{UI_PART}}": UI[lang]["part"],
+        "{{UI_WRITTEN}}": UI[lang]["written"],
+        "{{UI_MODULES}}": UI[lang]["modules_word"],
+        "{{UI_PARTS}}": UI[lang]["parts_word"],
+        "{{UI_COURSE}}": UI[lang]["course"],
+        "{{UI_TOC_KICKER}}": UI[lang]["toc_kicker"],
         "{{UI_GENERATED}}": UI[lang]["generated"],
         "{{UI_SOURCE}}": UI[lang]["source"],
         "{{SOURCE_NOTE}}": UI[lang]["source_note"],
@@ -661,6 +730,8 @@ def build_page(source_path: Path, lang: str | None = None) -> Path:
         "{{SUBTITLE}}": module_subtitle(module, lang),
         "{{CIFRA_VALUE}}": cifra_value(module, lang),
         "{{CIFRA_LABEL}}": cifra_label(module, lang),
+        "{{PART_TITLE}}": part_title(syllabus, module, lang),
+        "{{PROGRESS}}": str(round(100 * number / len(syllabus["modules"]))),
         "{{ACCENT}}": module["accent"]["dark"],
         "{{ACCENT_LIGHT}}": module["accent"]["light"],
         "{{ACCENT_DARK}}": module["accent"]["dark"],
@@ -670,9 +741,8 @@ def build_page(source_path: Path, lang: str | None = None) -> Path:
     html_values = {
         "{{STYLE}}": load_style(),
         "{{CONTENT}}": render_document(body, SECTION_STYLES[lang]),
-        "{{THREAD}}": build_thread(syllabus, number, lang),
+        "{{RAIL}}": build_rail(number, lang),
         "{{PAGER}}": build_pager(syllabus, number, lang),
-        "{{ASSAY}}": build_assay(module, lang),
         "{{TOPLINK}}": link,
         "{{ALTERNATE}}": alternate,
     }

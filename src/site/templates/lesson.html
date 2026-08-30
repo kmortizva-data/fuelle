@@ -7,8 +7,8 @@
 {{ALTERNATE}}
 <style>
 {{STYLE}}
-/* El acento de este modulo, uno por tema. Los dos salen de src/site/palette.py
-   y los dos pasaron el contraste antes de llegar aqui. */
+/* El acento de este módulo, uno por tema. Los dos salen de src/site/palette.py
+   y los dos pasaron el contraste antes de llegar aquí. */
 :root { --accent: {{ACCENT_LIGHT}}; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) { --accent: {{ACCENT_DARK}}; }
@@ -17,32 +17,52 @@
 </style>
 </head>
 <body>
-<header class="masthead">
-  <div class="masthead-inner">
-    {{TOPLINK}}
-    <div class="eyebrow"><a href="index{{LANG_SUFFIX}}.html">{{COURSE_NAME}}</a> / {{UI_MODULE}} <b>{{MODULE_NUMBER}}</b> {{UI_OF}} {{MODULE_TOTAL}}</div>
-    <h1>{{MODULE_TITLE}}</h1>
-    <p class="standfirst">{{SUBTITLE}}</p>
-    <div class="assay">
-      <span class="figure-mark">{{UI_MODULE}} {{MODULE_NUMBER}}</span>
-      <span class="figure-value">{{CIFRA_VALUE}}</span>
-      <span class="figure-label">{{CIFRA_LABEL}}</span>
+<div class="shell">
+
+  <!-- La barra de instrumentos. No se mueve al bajar: el tramo del lago, la cifra
+       del módulo y el avance se quedan a la vista mientras se lee. -->
+  <aside class="panel">
+    <a class="panel-brand" href="index{{LANG_SUFFIX}}.html">{{COURSE_NAME}}
+      <small>{{UI_MODULE}} {{MODULE_NUMBER}} {{UI_OF}} {{MODULE_TOTAL}}</small></a>
+
+    <nav class="rail" aria-label="{{UI_THREAD}}">
+      <p class="panel-label">{{UI_RAIL}}</p>
+      {{RAIL}}
+    </nav>
+
+    <div class="panel-figure">
+      <span class="v">{{CIFRA_VALUE}}</span>
+      <span class="l">{{CIFRA_LABEL}}</span>
     </div>
-  </div>
-</header>
-<nav class="thread" aria-label="{{UI_THREAD}}">{{THREAD}}</nav>
-<main class="container">
-{{CONTENT}}
-</main>
-<nav class="pager">{{PAGER}}</nav>
-<footer class="footer">
-  <div class="footer-inner">
-    <span>{{COURSE_NAME}} / {{UI_MODULE}} {{MODULE_NUMBER}}</span>
-    <span>{{UI_GENERATED}} {{GENERATED}}</span>
-    <span>{{UI_SOURCE}}: {{SOURCE_NOTE}}</span>
-  </div>
-</footer>
-<!-- El motor SQL no se descarga aqui: este fichero solo conecta los botones.
+
+    <div class="panel-progress">
+      <b>{{MODULE_NUMBER}}</b> {{UI_OF}} {{MODULE_TOTAL}}
+      <span class="panel-bar"><i style="width: {{PROGRESS}}%"></i></span>
+    </div>
+
+    <nav class="panel-nav">{{PAGER}}{{TOPLINK}}</nav>
+  </aside>
+
+  <main class="stage">
+    <div class="stage-inner">
+      <header class="head">
+        <p class="head-id"><b>{{MODULE_NUMBER}}</b> <span>{{UI_PART}} {{PART_TITLE}}</span></p>
+        <h1>{{MODULE_TITLE}}</h1>
+        <p class="standfirst">{{SUBTITLE}}</p>
+      </header>
+
+      {{CONTENT}}
+
+      <footer class="footer">
+        <span>{{COURSE_NAME}} / {{UI_MODULE}} {{MODULE_NUMBER}}</span>
+        <span>{{UI_GENERATED}} {{GENERATED}}</span>
+        <span>{{UI_SOURCE}}: {{SOURCE_NOTE}}</span>
+      </footer>
+    </div>
+  </main>
+
+</div>
+<!-- El motor SQL no se descarga aquí: este fichero solo conecta los botones.
      Los 8 MB llegan cuando el lector pulsa, y no antes. -->
 <script type="module" src="live.js"></script>
 </body>

@@ -26,7 +26,7 @@ from render_lesson import (  # noqa: E402
     COURSE_DIR, OUT_DIR, ROOT, TEMPLATES, UI, build_page, build_thread,
     cifra_value, is_written, load_style, load_syllabus, module_subtitle,
     module_title, page_name, render_document, set_language, source_dir,
-    suffix, top_link, ui_values, SECTION_STYLES,
+    suffix, top_link, ui_values, SECTION_STYLES, STAGES, build_rail,
 )
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -67,67 +67,6 @@ INDEX_UI = {
         "graph_title": "What the course builds",
     },
 }
-
-# Los tramos del grafo y los módulos que trabajan sobre cada capa. El curso
-# camina de izquierda a derecha, así que el grafo también.
-#
-# Los rangos son explícitos y no derivados de las partes, porque las partes no
-# calzan con las capas: los seis módulos de SQL consultan la capa de bronce sin
-# ser una capa aparte, y los cuatro de PostgreSQL viven sobre la de oro. La
-# primera versión los derivaba de las partes y dejaba diez módulos fuera del
-# mapa, con dos tramos solapados. Estos cubren del 1 al 31 sin huecos.
-STAGES = [
-    ("CRUDO", "RAW", (1, 3)),
-    ("BRONCE", "BRONZE", (4, 13)),
-    ("PLATA", "SILVER", (14, 16)),
-    ("ORO", "GOLD", (17, 22)),
-    ("GEMELO", "TWIN", (23, 31)),
-]
-
-
-def build_graph(syllabus: dict, lang: str) -> str:
-    """El grafo del lago, en SVG generado, sin imágenes ni librerías.
-
-    Se dibuja con las medidas calculadas aquí para que no dependa de una fuente
-    concreta ni de un tamaño de ventana, y para que su estado final se vea sin
-    JavaScript, que es la condición de toda pieza visual de este curso.
-    """
-    box_w, box_h, gap = 148, 46, 34
-    width = len(STAGES) * box_w + (len(STAGES) - 1) * gap
-    height = 108
-    y = 30
-
-    pieces = []
-    for i, (es, en, (lo, hi)) in enumerate(STAGES):
-        x = i * (box_w + gap)
-        label = es if lang == "es" else en
-
-        if i:  # la línea que llega desde el nodo anterior
-            x0 = x - gap
-            pieces.append(
-                f'<path class="edge" d="M {x0} {y + box_h / 2} H {x}" />'
-                f'<path class="edge" d="M {x - 7} {y + box_h / 2 - 4} '
-                f'l 7 4 l -7 4" />'
-            )
-
-        rango = f"{lo}-{hi}" if lo != hi else str(lo)
-
-        pieces.append(
-            f'<rect class="node-box" x="{x}" y="{y}" width="{box_w}" height="{box_h}" rx="3" />'
-            f'<text class="node-label" x="{x + box_w / 2}" y="{y + 27}" '
-            f'text-anchor="middle">{html.escape(label)}</text>'
-            f'<text class="node-sub" x="{x + box_w / 2}" y="{y + box_h + 18}" '
-            f'text-anchor="middle">{html.escape(rango)}</text>'
-        )
-
-    return (
-        f'<div class="grafo">'
-        f'<span class="kicker-inline">{html.escape(INDEX_UI[lang]["graph_title"])}</span>'
-        f'<svg viewBox="0 0 {width} {height}" role="img" '
-        f'aria-label="{html.escape(INDEX_UI[lang]["graph_title"])}">'
-        f'{"".join(pieces)}</svg></div>'
-    )
-
 
 def build_toc(syllabus: dict, lang: str) -> str:
     """Cada módulo con su cifra, agrupados por parte y diciendo cuál está escrito."""
@@ -172,9 +111,8 @@ def build_index(syllabus: dict, written: int, lang: str) -> Path:
         if lang == "en" else syllabus["course_name"]
     subtitle = (syllabus.get("course_subtitle_en") or syllabus["course_subtitle"]) \
         if lang == "en" else syllabus["course_subtitle"]
-
-    assay = (f"<span class=\"figure-value\">{written} / {total}</span>"
-             f"<span class=\"figure-label\">{strings['lessons_written']}</span>")
+    headline = (syllabus.get("course_headline_en") or syllabus["course_headline"]) \
+        if lang == "en" else syllabus["course_headline"]
 
     # El acento de la portada es el del primer módulo: el arranque del arco.
     first = syllabus["modules"][0]["accent"]
@@ -184,7 +122,12 @@ def build_index(syllabus: dict, written: int, lang: str) -> Path:
         "{{COURSE_TITLE}}": name,
         "{{EYEBROW}}": strings["eyebrow"],
         "{{SUBTITLE}}": subtitle,
+        "{{HEADLINE}}": headline,
         "{{UI_TOC_TITLE}}": strings["toc_title"],
+        "{{WRITTEN}}": str(written),
+        "{{TOTAL}}": str(total),
+        "{{PARTS}}": str(len(syllabus["partes"])),
+        "{{PROGRESS}}": str(round(100 * written / total)),
         "{{ACCENT_LIGHT}}": first["light"],
         "{{ACCENT_DARK}}": first["dark"],
     }
@@ -193,9 +136,8 @@ def build_index(syllabus: dict, written: int, lang: str) -> Path:
     html_values = {
         "{{STYLE}}": load_style(),
         "{{CONTENT}}": render_document(body, COURSE_SECTION_STYLES[lang], figures=False),
-        "{{GRAPH}}": build_graph(syllabus, lang),
+        "{{RAIL}}": build_rail(None, lang),
         "{{TOC}}": build_toc(syllabus, lang),
-        "{{ASSAY}}": assay,
         "{{TOPLINK}}": link,
         "{{ALTERNATE}}": alternate,
     }

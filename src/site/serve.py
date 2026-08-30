@@ -54,6 +54,7 @@ class Handler(SimpleHTTPRequestHandler):
         ".wasm": "application/wasm",
         ".mjs": "text/javascript",
         ".parquet": "application/vnd.apache.parquet",
+        ".woff2": "font/woff2",
     }
 
     def end_headers(self):

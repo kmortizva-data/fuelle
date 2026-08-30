@@ -1012,5 +1012,7 @@
       ]
     }
   ],
-  "_recorte_sql": "2026-08-30, decisión de Kevin: la parte de SQL pasó de diez módulos a seis, porque el gemelo no usa SQL y diez módulos eran mucho camino antes de llegar a él. NO se borraron los conceptos de los cuatro módulos que desaparecen: los tipos, el orden de ejecución y las subconsultas se integran en los que quedan, y cada módulo declara en `absorbe` lo que tiene que caber dentro. Las subconsultas eran innegociables: la lección de agrupar ya usa una para filtrar los días incompletos. El curso pasó de 35 módulos a 31 y el gemelo se adelantó del módulo 27 al 23."
+  "_recorte_sql": "2026-08-30, decisión de Kevin: la parte de SQL pasó de diez módulos a seis, porque el gemelo no usa SQL y diez módulos eran mucho camino antes de llegar a él. NO se borraron los conceptos de los cuatro módulos que desaparecen: los tipos, el orden de ejecución y las subconsultas se integran en los que quedan, y cada módulo declara en `absorbe` lo que tiene que caber dentro. Las subconsultas eran innegociables: la lección de agrupar ya usa una para filtrar los días incompletos. El curso pasó de 35 módulos a 31 y el gemelo se adelantó del módulo 27 al 23.",
+  "course_headline": "Un compresor, cuatro averías y un lago de datos",
+  "course_headline_en": "One compressor, four failures and a data lake"
 }

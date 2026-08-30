@@ -24,3 +24,6 @@ assets/duckdb-wasm/
 # Windows
 Thumbs.db
 desktop.ini
+
+# Las fuentes SI se versionan (289 KB): sin ellas el sitio se ve con otra letra
+# y deja de parecerse a lo aprobado. El motor SQL no, porque son 35 MB.
