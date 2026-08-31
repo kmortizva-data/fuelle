@@ -64,5 +64,29 @@
   },
   "m13_ventanas": {
     "5.16": "los MB que cuesta la columna timestamp en el lago entero, medidos en el modulo 7 y citados aqui para justificar por que esta leccion usa un solo dia"
+  },
+  "m09_tipos_y_decisiones_en": {
+    "8.202": "un valor del ejemplo de juguete, copiado del reparto real de TP2 alrededor de 8,2 que mide queries_m09.py",
+    "8.198": "idem, el vecino por debajo",
+    "0.4987": "la ley de cobre del puente metalurgico, dos cifras inventadas a proposito para ilustrar que nadie mide exactamente 0,5",
+    "0.5013": "idem, la de arriba",
+    "8.25": "el extremo superior de un BETWEEN escrito en la prosa como ejemplo de como se pregunta bien",
+    "8.15": "el extremo inferior de ese mismo BETWEEN",
+    "8.31": "una lectura del ejemplo de juguete, elegida para que no caiga en 8,20 y el recuento a mano salga en tres",
+    "8.200": "el mismo 8,2 del ejemplo de juguete escrito con tres decimales, para que las tres filas se vean alineadas",
+    "8.1999999999999993": "el valor binario que se cita en el repaso al explicar por que DOUBLE no es exacto. Es una cita del tipo, no una medida del fichero"
+  },
+  "m08_primera_consulta_en": {
+    "8640": "las lecturas de un dia lleno a 10 s, una constante del muestreo que el modulo 4 mide"
+  },
+  "m11_consultas_por_pasos_en": {
+    "90": "la recuperacion del ejemplo de juguete: 1,8 t de cobre sobre 2 t, numeros elegidos para que salga redondo a mano"
+  },
+  "m12_juntar_tablas_en": {
+    "300": "la suma correcta del ejemplo de juguete, 100 mas 200 toneladas",
+    "400": "la suma inflada del mismo ejemplo despues de cruzar, con las 100 t de T1 contadas dos veces. Numeros elegidos para que la diferencia salte a la vista"
+  },
+  "m13_ventanas_en": {
+    "5.16": "los MB que cuesta la columna timestamp en el lago entero, medidos en el modulo 7 y citados aqui para justificar por que esta leccion usa un solo dia"
   }
 }
