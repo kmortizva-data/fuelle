@@ -1,50 +1,41 @@
 {
-  "candidates": [
-    {
-      "name": "todo_todas_columnas",
-      "rows": 1516948,
-      "columns": 17,
-      "mb_on_disk": 16.86,
-      "mb_downloaded": 15.38
-    },
-    {
-      "name": "todo_columnas_del_m13",
-      "rows": 1516948,
-      "columns": 5,
-      "mb_on_disk": 6.26,
-      "mb_downloaded": 6.24
-    },
-    {
-      "name": "sin_timestamp",
-      "rows": 1516948,
-      "columns": 4,
-      "mb_on_disk": 1.22,
-      "mb_downloaded": 1.21
-    },
-    {
-      "name": "solo_lo_del_reto",
-      "rows": 1516948,
-      "columns": 2,
-      "mb_on_disk": 0.03,
-      "mb_downloaded": 0.03
-    },
-    {
-      "name": "un_mes_columnas_del_m13",
-      "rows": 216514,
-      "columns": 5,
-      "mb_on_disk": 0.9,
-      "mb_downloaded": 0.9
-    },
+  "muestras": [
     {
       "name": "sin_timestamp_ligera",
       "rows": 1516948,
       "columns": 3,
-      "mb_on_disk": 0.06,
-      "mb_downloaded": 0.06
+      "kb_on_disk": 64.3,
+      "kb_downloaded": 56.3,
+      "para": "módulos 10 y 11: agrupar y WITH"
+    },
+    {
+      "name": "sql",
+      "rows": 1516948,
+      "columns": 6,
+      "kb_on_disk": 2202.1,
+      "kb_downloaded": 2186.9,
+      "para": "módulos 8, 9 y 12: filtrar, tipos y JOIN"
+    },
+    {
+      "name": "un_dia",
+      "rows": 8716,
+      "columns": 5,
+      "kb_on_disk": 42.9,
+      "kb_downloaded": 42.3,
+      "para": "módulo 13: funciones de ventana"
+    },
+    {
+      "name": "averias",
+      "rows": 4,
+      "columns": 6,
+      "kb_on_disk": 1.2,
+      "kb_downloaded": 0.7
     }
   ],
-  "chosen": "sin_timestamp_ligera",
+  "un_dia": "2020-06-05",
+  "motor_mb": 7.74,
   "sample_avg_loaded_hours": 3.42,
   "lake_avg_loaded_hours": 3.42,
-  "reproduces": true
+  "reproduces": true,
+  "coinciden_con_el_lago": true
 }

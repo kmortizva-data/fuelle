@@ -19,7 +19,20 @@
  */
 
 const BASE = document.documentElement.dataset.assets || "../assets";
-const SAMPLE_NAME = "muestra.parquet";
+
+/* Que tablas necesita ESTA leccion, declaradas por la pagina como
+ * "vista=fichero.parquet,vista=fichero.parquet".
+ *
+ * No todas las lecciones necesitan lo mismo y la diferencia es grande: la
+ * muestra del modulo 13 lleva la hora exacta y la de los demas no, porque la
+ * hora cuesta 5,16 MB si se lleva el lago entero. Cada pagina baja lo suyo. */
+const TABLES = (document.documentElement.dataset.tablas || "telemetria=sin_timestamp_ligera.parquet")
+  .split(",")
+  .map((pair) => {
+    const [view, file] = pair.split("=");
+    return { view: view.trim(), file: file.trim() };
+  })
+  .filter((t) => t.view && t.file);
 
 let dbPromise = null;
 
@@ -37,15 +50,14 @@ function boot(onProgress) {
     await db.instantiate(`${BASE}/duckdb-wasm/duckdb-eh.wasm`);
 
     onProgress("trayendo los datos del compresor");
-    const sample = await fetch(`${BASE}/muestras/${SAMPLE_NAME}`);
-    if (!sample.ok) throw new Error(`no se pudo leer la muestra (${sample.status})`);
-    const bytes = new Uint8Array(await sample.arrayBuffer());
-    await db.registerFileBuffer("muestra.parquet", bytes);
-
     const con = await db.connect();
-    await con.query(
-      `CREATE VIEW telemetria AS SELECT * FROM read_parquet('muestra.parquet')`
-    );
+    for (const { view, file } of TABLES) {
+      const sample = await fetch(`${BASE}/muestras/${file}`);
+      if (!sample.ok) throw new Error(`no se pudo leer ${file} (${sample.status})`);
+      const bytes = new Uint8Array(await sample.arrayBuffer());
+      await db.registerFileBuffer(file, bytes);
+      await con.query(`CREATE VIEW ${view} AS SELECT * FROM read_parquet('${file}')`);
+    }
     return con;
   })();
 

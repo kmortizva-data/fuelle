@@ -347,7 +347,8 @@
       "accent": {
         "dark": "#88C7AD",
         "light": "#3C7A62"
-      }
+      },
+      "muestra": "sql"
     },
     {
       "number": 9,
@@ -380,7 +381,8 @@
       "accent": {
         "dark": "#8BC7A7",
         "light": "#3F7A5D"
-      }
+      },
+      "muestra": "sql"
     },
     {
       "number": 10,
@@ -413,7 +415,8 @@
       "accent": {
         "dark": "#8EC7A2",
         "light": "#437958"
-      }
+      },
+      "muestra": "sin_timestamp_ligera"
     },
     {
       "number": 11,
@@ -443,7 +446,8 @@
       "accent": {
         "dark": "#92C69C",
         "light": "#487952"
-      }
+      },
+      "muestra": "sin_timestamp_ligera"
     },
     {
       "number": 12,
@@ -476,7 +480,11 @@
       "accent": {
         "dark": "#97C697",
         "light": "#4D784D"
-      }
+      },
+      "muestra": "sql",
+      "tablas_extra": [
+        "averias"
+      ]
     },
     {
       "number": 13,
@@ -508,7 +516,8 @@
       "accent": {
         "dark": "#9CC591",
         "light": "#557A4B"
-      }
+      },
+      "muestra": "un_dia"
     },
     {
       "number": 14,

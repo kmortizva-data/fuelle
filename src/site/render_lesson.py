@@ -350,6 +350,27 @@ def render_blocks(lines: list[str]) -> str:
     return "".join(out)
 
 
+# --------------------------------------------------------- que muestra se baja
+
+# Cada modulo declara en `temario.json` que muestra necesita, porque no todos
+# necesitan lo mismo y la mas cara pesa cuarenta veces mas que la mas barata.
+# El modulo 13 necesita la hora exacta, que cuesta 5,16 MB si se lleva el lago
+# entero, asi que se lleva un solo dia. Los demas no necesitan la hora.
+MUESTRA_POR_DEFECTO = "sin_timestamp_ligera"
+
+
+def tables_for(module: dict) -> str:
+    """`vista=fichero.parquet`, separadas por comas, para que lo lea live.js.
+
+    Se emite siempre, tambien en los modulos sin consulta viva: no cuesta nada y
+    evita que anadir un bloque `sql-vivo` a una leccion exija tocar la plantilla.
+    """
+    pares = [f"telemetria={module.get('muestra', MUESTRA_POR_DEFECTO)}.parquet"]
+    for extra in module.get("tablas_extra", []):
+        pares.append(f"{extra}={extra}.parquet")
+    return ",".join(pares)
+
+
 # ------------------------------------------------------------------- diagramas
 
 def diagram_block(lines: list[str]) -> str:
@@ -780,6 +801,7 @@ def build_page(source_path: Path, lang: str | None = None) -> Path:
         "{{ACCENT}}": module["accent"]["dark"],
         "{{ACCENT_LIGHT}}": module["accent"]["light"],
         "{{ACCENT_DARK}}": module["accent"]["dark"],
+        "{{TABLAS}}": tables_for(module),
     }
     text_values.update(ui_values(lang))
     link, alternate = top_link(module["slug"], lang)

@@ -26,6 +26,7 @@ CHECKERS = [
     "check_clarity",   # frases que no se enreden
     "check_numbers",   # ningún número sin una corrida detrás
     "check_sql",       # cada consulta publicada corre y su salida dice la verdad
+    "check_muestras",  # y corre contra la muestra que el lector se baja, no solo contra el lago
     "check_palette",   # los acentos calculados, y AA en los dos temas
     "check_layout",    # la maqueta no vuelve a ser la de Sílice
     "check_english",   # las dos ediciones dicen los mismos números
