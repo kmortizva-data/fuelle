@@ -46,18 +46,47 @@ def strip_code(text: str) -> str:
     return "\n".join(out)
 
 
-def code_blocks(text: str) -> list[str]:
-    blocks, current, inside = [], [], False
+def code_blocks(text: str) -> list[tuple[str, str]]:
+    """Los bloques cercados con su lenguaje: [(lenguaje, contenido), ...].
+
+    El lenguaje hace falta para saber qué se traduce y qué no. Sin él, la
+    comparación solo podía contar bloques, que es lo que hacía antes.
+    """
+    blocks, current, inside, lang = [], [], False, ""
     for line in text.splitlines():
         if line.startswith("```"):
             if inside:
-                blocks.append("\n".join(current))
+                blocks.append((lang, "\n".join(current)))
                 current = []
+            else:
+                lang = line[3:].strip()
             inside = not inside
             continue
         if inside:
             current.append(line)
     return blocks
+
+
+# Los campos de un bloque `reto` que son código y no prosa: si se traducen, el
+# reto deja de comprobarse contra la misma respuesta en las dos ediciones.
+RETO_LITERAL = ("inicio", "esperado", "solucion")
+
+
+def reto_code(body: str) -> dict[str, str]:
+    campos, actual = {}, None
+    for line in body.splitlines():
+        head, sep, rest = line.partition(":")
+        if sep and head.strip() in ("pregunta", "inicio", "esperado", "pista", "solucion"):
+            actual = head.strip()
+            campos[actual] = [rest.strip()] if rest.strip() else []
+        elif actual:
+            campos[actual].append(line.rstrip())
+    return {k: "\n".join(v).strip() for k, v in campos.items() if k in RETO_LITERAL}
+
+
+def fragments(body: str) -> list[str]:
+    """Los fragmentos de código de un bloque `anota`, sin sus explicaciones."""
+    return [line.split("|")[0].strip() for line in body.splitlines() if "|" in line]
 
 
 def canonical(number: str) -> str:
@@ -108,10 +137,30 @@ def check(spanish: Path, english: Path) -> list[str]:
             f"{len(en_code)} en inglés"
         )
     else:
-        for i, (a, b) in enumerate(zip(es_code, en_code), 1):
-            # Los bloques `anota` sí se traducen; el resto va literal.
-            if a != b and not a.startswith(("SELECT", "sum(", "day ", "DV_eletric")):
+        # El cuerpo de este bucle estaba vacío: comparaba y no decía nada, así
+        # que durante seis lecciones la puerta solo contó bloques. Ahora sí
+        # compara, y distingue lo que se traduce de lo que va literal.
+        for i, ((lang_es, a), (lang_en, b)) in enumerate(zip(es_code, en_code), 1):
+            if lang_es != lang_en:
+                problems.append(
+                    f"{spanish.name}: el bloque {i} es «{lang_es}» en español y "
+                    f"«{lang_en}» en inglés")
                 continue
+            if lang_es == "anota":
+                # Se traduce la explicación, nunca el fragmento anotado.
+                if fragments(a) != fragments(b):
+                    problems.append(
+                        f"{spanish.name}: la anotación {i} no anota los mismos "
+                        f"fragmentos en las dos ediciones")
+            elif lang_es == "reto":
+                if reto_code(a) != reto_code(b):
+                    problems.append(
+                        f"{spanish.name}: el reto {i} no lleva el mismo punto de partida, "
+                        f"respuesta esperada o solución en las dos ediciones")
+            elif a != b:
+                problems.append(
+                    f"{spanish.name}: el bloque {i} de «{lang_es}» no es idéntico. "
+                    f"El código y las salidas no se traducen")
 
     es_numbers, en_numbers = numbers(es), numbers(en)
     missing = es_numbers - en_numbers

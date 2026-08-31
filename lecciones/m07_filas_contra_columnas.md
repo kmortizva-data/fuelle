@@ -232,9 +232,9 @@ cayendo.
 **Y contar filas queda fuera de esa comparación a propósito.** Parquet no lee ni un dato para
 contestarla: el número de filas está escrito en la cabecera del fichero. Así que ahí no se
 comparan dos formas de leer, se compara leer 208 MB contra no leer nada. El factor sale enorme y
-además **baila mucho entre corridas**, porque el lado de Parquet está en el suelo de lo que el
-reloj distingue. Tres corridas de este mismo banco dieron 156, 141 y 283, y por eso ese número no
-titula nada.
+además **baila mucho entre corridas**: en esta salió de **129 veces** y en otra pasó del doble.
+El lado de Parquet está en el suelo de lo que el reloj distingue, así que ese número no titula
+nada.
 
 **Y el resultado que no esperaba nadie.** Las mismas **1.516.948 filas** ocupan **16,83 MB con
 las 17 columnas y 0,03 MB con 2**. Quinientas sesenta y una veces menos, sin quitar una sola fila.
@@ -271,9 +271,9 @@ otro modo: el reparto por columnas predice el tamaño antes de escribirlo.
   mejor que una de números con un millón. Lo que importa es cuánto se repite, no si es texto.
 - **Los tiempos de la salida son de una corrida concreta.** En otra máquina saldrán distintos. Lo
   que aguanta es la pendiente: la ventaja de Parquet se encoge al pedir más columnas.
-- **Cuanto más rápida es una medida, menos fiable es su factor.** El de contar filas fue de 156 a
-  283 entre corridas, porque mide algo tan corto que domina el ruido de la máquina. Los otros dos
-  apenas se movieron.
+- **Cuanto más rápida es una medida, menos fiable es su factor.** El de contar filas llegó a más
+  que doblarse entre corridas, porque mide algo tan corto que domina el ruido de la máquina. Los
+  otros dos apenas se movieron.
 
 ## Puente metalúrgico
 
@@ -297,11 +297,11 @@ Por filas, cada registro va completo y detrás va el siguiente. Por columnas, to
 una misma columna van juntos y luego empieza la siguiente columna. El contenido es el mismo y lo
 que cambia es qué hace falta leer para contestar una pregunta.
 
-### Por qué la ventaja de Parquet baja de 156 veces a 20
+### Por qué la ventaja de Parquet baja de 54 veces a 25
 
-Porque la ventaja consiste en no leer las columnas que no se piden. Contando filas no hace falta
-ninguna, así que gana por goleada. Pidiendo siete de diecisiete ya hay que leer casi la mitad del
-fichero, y la ventaja se encoge hasta lo que aporta el formato binario frente al texto.
+Porque la ventaja consiste en no leer las columnas que no se piden. Con una sola columna se lee
+una diecisieteava parte del fichero. Pidiendo siete de diecisiete ya hay que leer casi la mitad,
+y la ventaja se encoge hasta lo que aporta el formato binario frente al texto.
 
 ### Las mismas filas ocupan 16,83 MB o 0,03 MB. Cómo puede ser
 

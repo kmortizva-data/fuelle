@@ -337,6 +337,73 @@ y el valor real es 8.716. No fue un problema de datos: `results/` siempre dijo 8
 fallo al copiar el número a la prosa. Es exactamente lo que `check_numbers.py` atraparía, y
 todavía no está construido, así que **subirlo de prioridad**.
 
+### Parte 2 cerrada (2026-08-31): módulos 4 a 7, y las ocho lecciones en los dos idiomas
+
+**Ocho lecciones de 31, las ocho en español y en inglés.** Módulos 1 a 7 más el 10 de muestra.
+Los ocho verificadores en verde, y cada uno probado rompiéndolo.
+
+**`src/medir.py` es ahora la única forma de medir del proyecto.** `measure()` da la mediana de
+siete corridas con su rango, y `distinguishable()` devuelve falso cuando dos rangos se solapan.
+Los tres scripts que cronometran la usan. La regla que deja escrita: **cuando dos rangos se
+pisan, no hay diferencia que contar**, por lejos que queden las medianas.
+
+**Se ganó el sueldo el primer día.** Remedir el módulo 6 con ella tumbó lo que decía la corrida
+única: por mes leía en 0,020 s contra 0,021 s de un fichero, así que los números viejos daban
+ganador a particionar por mes. Con mediana de siete, por mes va de 0,016 a 0,085 y un fichero de
+0,012 a 0,017: **se solapan, no se distinguen**. Y particionar por día, que sigue siendo el peor,
+es 12,2 veces más lento y no 16.
+
+**Números viejos que estaban mal y ya no:**
+
+| Dónde | Decía | Dice |
+|---|---|---|
+| `bronze.json` escritura | 12.533,88 s (pico del antivirus) | 4,035 s |
+| `bronze.json` huella | 925,2 s | 0,422 s, 494 MB/s |
+| Módulo 6, leer un día | 0,021 contra 0,331 s | 0,014 contra 0,171 s |
+| Módulo 3, entre extremos | 196 veces | 186 veces |
+
+**Hallazgos de la parte 2, todos medidos:**
+
+1. **Las 212 particiones no son 212 días iguales.** Un día lleno son 8.640 lecturas; la mediana
+   es 7.437, solo 91 días pasan del 90 % y 5 no llegan al 10 %. La mayor pesa 16 veces la menor.
+   Y hay **49 días que pasan de 8.640**, porque el muestreo real tiene saltos de nueve segundos.
+2. **La ingesta ingenua triplica y nadie avisa.** Tres corridas dejan 4.550.844 filas donde hay
+   1.516.948. La media aguanta igual, que es lo que hace el fallo invisible.
+3. **Un byte cambiado mueve 126 de los 256 bits de la huella.** El 49,2 %, que es lo que se
+   espera de una huella sana.
+4. **El peso de un Parquet no está en las filas.** Las mismas 1.516.948 filas ocupan 16,83 MB con
+   17 columnas y 0,03 MB con 2. `timestamp` es el 30,4 % del fichero él solo, con 1.516.948
+   valores distintos; las ocho digitales juntas no llegan al 1 %.
+5. **La contabilidad del fichero predice su tamaño.** Las cuatro columnas de la escalera suman
+   3.969,4 KB según `parquet_metadata` y el fichero mide 4.095,0 KB. Un 3,1 %, que es la cabecera.
+
+**Cifra retirada por inestable.** El factor de contar filas (CSV contra Parquet) dio 156, 141,
+283 y 129 en cuatro corridas, porque Parquet contesta desde la cabecera sin leer un dato y la
+medida está en el suelo del reloj. **No titula nada**; se publican las dos estables, 54 veces con
+una columna y 25 con siete. Regla: cuanto más rápida es una medida, menos fiable es su factor.
+
+**Bloque `diagrama` nuevo en el renderizador**, para esquemas conceptuales como las capas del
+lago. Emite HTML y no SVG a propósito: un SVG tendría que llevar sus colores dentro (o dos
+versiones, una por tema) y no se reordenaría en móvil. Con cajas de HTML el tema y el ancho los
+resuelve el CSS. Medido a 375 px: se apilan y la flecha gira, sin desbordamiento.
+
+**Dos bugs en los verificadores, los dos encontrados porque acusaban a una lección correcta:**
+
+- `check_sql` leía el 2 de `avg(TP2)` y el 128 de `int128` como datos publicados. Ahora se salta
+  la cabecera de las cajas de DuckDB, y no cuenta dígitos pegados a letras (el 3 de `TP3`).
+- **`check_english` tenía el cuerpo del bucle vacío**: comparaba bloques de código y no decía
+  nada, así que durante seis lecciones solo contó cuántos había. Ahora compara de verdad, y
+  distingue lo que se traduce (las explicaciones de `anota`, la prosa de un `reto`) de lo que va
+  literal (SQL, salidas, el punto de partida y la solución de un reto).
+
+**Regla de escritura nueva, salida de `bronze.py`:** una afirmación sobre el código se comprueba
+o se acota. `bronze.py` decía ser idempotente y lo es, pero por la vía barata, borrando la
+carpeta antes de escribir. Eso no prueba nada sobre una tubería que añade, así que la afirmación
+se acotó a lo que enseña y el experimento de verdad vive en `fingerprint.py`.
+
+**Deuda saldada:** los módulos 2 y 3 ya tienen su gemela inglesa. Las ocho parejas pasan la
+puerta de paridad.
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo

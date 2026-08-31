@@ -30,5 +30,15 @@
   },
   "m07_filas_contra_columnas": {
     "20,20,20,20": "la fila de leyes del ejemplo de juguete, cuatro turnos con la misma ley. Numeros elegidos para que la repeticion se vea a simple vista"
+  },
+  "m02_dato_tabla_tipo_en": {
+    "10.1": "the mean pH of the toy example, worked out by hand from three round readings"
+  },
+  "m03_donde_viven_los_datos_en": {
+    "203.7": "the factor a single timed run reported, quoted to show why one reading is not a measurement. It is a discarded measurement, kept as the anecdote that justifies the median of seven",
+    "143.8": "the second run of that same pair, the one that proved the first was not reproducible"
+  },
+  "m04_bronce_en": {
+    "0.0120000000000004": "the same literal CSV value module 1 quotes, repeated here to say that bronze does not touch it. It is a quotation, not a measurement"
   }
 }
