@@ -119,5 +119,43 @@
     ],
     "sql": "SELECT strftime(day, '%Y-%m') AS mes, round(avg(horas), 2) AS horas_de_carga FROM ( SELECT day, count(*) AS lecturas, sum(CASE WHEN DV_eletric = 1 THEN 1 ELSE 0 END) * 10 / 3600.0 AS horas FROM telemetria GROUP BY day ) WHERE lecturas > 0.9 * 8640 GROUP BY mes ORDER BY mes",
     "muestra": "sin_timestamp_ligera"
+  },
+  "m11_con_with": {
+    "columns": [
+      "mes",
+      "horas_de_carga"
+    ],
+    "rows": [
+      [
+        "2020-02",
+        1.45
+      ],
+      [
+        "2020-03",
+        3.58
+      ],
+      [
+        "2020-04",
+        4.27
+      ],
+      [
+        "2020-05",
+        3.61
+      ],
+      [
+        "2020-06",
+        4.02
+      ],
+      [
+        "2020-07",
+        3.78
+      ],
+      [
+        "2020-08",
+        2.81
+      ]
+    ],
+    "sql": "WITH por_dia AS ( SELECT day, count(*) AS lecturas, sum(CASE WHEN DV_eletric = 1 THEN 1 ELSE 0 END) * 10 / 3600.0 AS horas FROM telemetria GROUP BY day ), dias_completos AS ( SELECT * FROM por_dia WHERE lecturas > 0.9 * 8640 ) SELECT strftime(day, '%Y-%m') AS mes, round(avg(horas), 2) AS horas_de_carga FROM dias_completos GROUP BY mes ORDER BY mes",
+    "muestra": "sin_timestamp_ligera"
   }
 }

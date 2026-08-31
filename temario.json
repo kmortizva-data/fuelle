@@ -426,10 +426,10 @@
       "title_en": "Queries in steps: subqueries and WITH",
       "subtitle_en": "Breaking a big problem into named steps. What turns an unreadable twenty line query into three blocks you can follow",
       "cifra": {
-        "value": "por medir",
-        "label": "pasos con nombre en la consulta del ciclo",
-        "value_en": "to be measured",
-        "label_en": "named steps in the duty cycle query"
+        "value": "2 pasos con nombre",
+        "label": "en que se parte la consulta del ciclo, sin coste medible",
+        "value_en": "2 named steps",
+        "label_en": "the duty cycle query splits into, at no measurable cost"
       },
       "instrumento": "caratula",
       "interactivo": true,
@@ -439,7 +439,7 @@
         "WITH"
       ],
       "scripts": [
-        "src/transform/queries_m11.sql"
+        "src/transform/queries_m11.py"
       ],
       "figuras": [],
       "accent": {

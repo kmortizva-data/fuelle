@@ -1,0 +1,51 @@
+{
+  "filas_del_resultado": 7,
+  "dan_lo_mismo": true,
+  "corridas": 7,
+  "anidada": {
+    "mediana_s": 0.0234,
+    "min_s": 0.0187,
+    "max_s": 0.031,
+    "corridas": 7
+  },
+  "con_with": {
+    "mediana_s": 0.0214,
+    "min_s": 0.0193,
+    "max_s": 0.0222,
+    "corridas": 7
+  },
+  "hay_diferencia_de_tiempo": false,
+  "pasos_con_nombre": 2,
+  "lineas_anidada": 12,
+  "lineas_con_with": 15,
+  "resultado": [
+    [
+      "2020-02",
+      1.45
+    ],
+    [
+      "2020-03",
+      3.58
+    ],
+    [
+      "2020-04",
+      4.27
+    ],
+    [
+      "2020-05",
+      3.61
+    ],
+    [
+      "2020-06",
+      4.02
+    ],
+    [
+      "2020-07",
+      3.78
+    ],
+    [
+      "2020-08",
+      2.81
+    ]
+  ]
+}

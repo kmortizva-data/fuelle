@@ -54,5 +54,8 @@
     "8.31": "una lectura del ejemplo de juguete, elegida para que no caiga en 8,20 y el recuento a mano salga en tres",
     "8.200": "el mismo 8,2 del ejemplo de juguete escrito con tres decimales, para que las tres filas se vean alineadas",
     "8.1999999999999993": "el valor binario que se cita en el repaso al explicar por que DOUBLE no es exacto. Es una cita del tipo, no una medida del fichero"
+  },
+  "m11_consultas_por_pasos": {
+    "90": "la recuperacion del ejemplo de juguete: 1,8 t de cobre sobre 2 t, numeros elegidos para que salga redondo a mano"
   }
 }

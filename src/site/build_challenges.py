@@ -35,6 +35,7 @@ MUESTRA_DE = {
     "m08_alarma_con_presion": "sql",
     "m09_horas_por_estado": "sql",
     "m10_horas_por_mes": "sin_timestamp_ligera",
+    "m11_con_with": "sin_timestamp_ligera",
 }
 
 SECONDS_PER_READING = 10
@@ -75,6 +76,27 @@ CHALLENGES = {
             GROUP BY day
         )
         WHERE lecturas > 0.9 * {FULL_DAY_READINGS}
+        GROUP BY mes
+        ORDER BY mes
+    """,
+    # Modulo 11: la misma respuesta que el reto del modulo 10, pero escrita por
+    # pasos. Que el resultado esperado sea identico no es casualidad: el reto
+    # consiste justamente en que la reescritura no cambie nada.
+    "m11_con_with": f"""
+        WITH por_dia AS (
+            SELECT day,
+                   count(*) AS lecturas,
+                   sum(CASE WHEN DV_eletric = 1 THEN 1 ELSE 0 END)
+                       * {SECONDS_PER_READING} / 3600.0 AS horas
+            FROM telemetria
+            GROUP BY day
+        ),
+        dias_completos AS (
+            SELECT * FROM por_dia WHERE lecturas > 0.9 * {FULL_DAY_READINGS}
+        )
+        SELECT strftime(day, '%Y-%m')  AS mes,
+               round(avg(horas), 2)    AS horas_de_carga
+        FROM dias_completos
         GROUP BY mes
         ORDER BY mes
     """,
