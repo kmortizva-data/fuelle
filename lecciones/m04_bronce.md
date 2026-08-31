@@ -184,7 +184,7 @@ en el código se pierde en cuanto alguien copia la carpeta a otro sitio.
 
 ## El resultado, medido
 
-{{FIG:fig_m4_bronce_particiones}}
+{{FIG:fig_m04_bronce_particiones}}
 
 **Qué esperábamos.** Una copia más pequeña y 212 carpetas más o menos del mismo tamaño.
 

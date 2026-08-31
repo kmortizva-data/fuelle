@@ -96,8 +96,8 @@ def main() -> None:
         for spine in ("left", "bottom"):
             ax.spines[spine].set_linewidth(0.8)
 
-    figura("fig_m1_las_cuatro_averias", dibujar, ancho=9.2, alto=3.6, module=1)
-    guardar_huellas(["fig_m1_las_cuatro_averias"])
+    figura("fig_m01_las_cuatro_averias", dibujar, ancho=9.2, alto=3.6, module=1)
+    guardar_huellas(["fig_m01_las_cuatro_averias"])
     print()
     print(f"  días completos   {len(completos)}")
     print(f"  días parciales   {len(parciales)}")
@@ -165,8 +165,8 @@ def anatomia() -> None:
         for spine in ("left", "bottom"):
             ax.spines[spine].set_linewidth(0.8)
 
-    figura("fig_m1_anatomia_del_compresor", dibujar, ancho=9.2, alto=3.2, module=1)
-    guardar_huellas(["fig_m1_anatomia_del_compresor"])
+    figura("fig_m01_anatomia_del_compresor", dibujar, ancho=9.2, alto=3.2, module=1)
+    guardar_huellas(["fig_m01_anatomia_del_compresor"])
     print(f"  ventana: {t[0]} a {t[-1]}  ({len(t)} lecturas)")
     print(f"  presión: {min(presion):.2f} a {max(presion):.2f} bar")
     print(f"  ciclos de carga en la ventana: "

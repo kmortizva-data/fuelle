@@ -129,7 +129,7 @@ thousand values. The last eight take exactly two.
 
 ### Step 5. See the difference drawn
 
-{{FIG:fig_m2_analogica_vs_digital}}
+{{FIG:fig_m02_analogica_vs_digital}}
 
 The same hour, two signals. Above, the panel pressure, falling slowly, rising sharply when the
 compressor starts, and falling again. Below, the intake valve, which only knows how to sit at

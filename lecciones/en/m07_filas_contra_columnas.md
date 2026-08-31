@@ -216,7 +216,7 @@ The number of rows does not change in any of the four. It is always 1,516,948.
 
 ## The result, measured
 
-{{FIG:fig_m7_csv_vs_parquet}}
+{{FIG:fig_m07_csv_vs_parquet}}
 
 **What we expected.** That Parquet would beat the CSV, and that the advantage would be similar
 across the three questions.
@@ -240,7 +240,7 @@ resolves, so that number heads nothing.
 columns and 0.03 MB with 2**. Five hundred and sixty one times less, without removing a single
 row.
 
-{{FIG:fig_m7_filas_vs_columnas}}
+{{FIG:fig_m07_filas_vs_columnas}}
 
 **What it means.** The weight of a data file is not in how many rows it has. It is in **how much
 the values of its columns repeat**, and the figure shows it in both its panels at once.

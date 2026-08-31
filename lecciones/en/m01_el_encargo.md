@@ -62,7 +62,7 @@ train stops. That is why it carries sensors.
 Its job is simple to describe: keep a receiver full of air. When pressure drops below a threshold,
 it starts and compresses. When it reaches the top, it stops. And round again.
 
-{{FIG:fig_m1_anatomia_del_compresor}}
+{{FIG:fig_m01_anatomia_del_compresor}}
 
 There is the whole machine over two hours of an ordinary Tuesday. Pressure falls slowly, because
 the train keeps consuming air. It touches the threshold, the compressor starts, and pressure rises
@@ -191,7 +191,7 @@ But anyone coding on the assumption of 1 Hz will get every time calculation ten 
 
 And the four failures, which are this project's ground truth:
 
-{{FIG:fig_m1_las_cuatro_averias}}
+{{FIG:fig_m01_las_cuatro_averias}}
 
 Each dot is a day. The height is the hours the compressor spent actually working. The dotted line
 is the mean, **3.42 hours**. The four rings are the days carrying a failure report, and all four

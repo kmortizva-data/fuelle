@@ -140,8 +140,8 @@
         "src/ingest/inspect_raw.py"
       ],
       "figuras": [
-        "fig_m1_anatomia_del_compresor",
-        "fig_m1_las_cuatro_averias"
+        "fig_m01_anatomia_del_compresor",
+        "fig_m01_las_cuatro_averias"
       ]
     },
     {
@@ -169,7 +169,7 @@
         "src/ingest/describe_signals.py"
       ],
       "figuras": [
-        "fig_m2_analogica_vs_digital"
+        "fig_m02_analogica_vs_digital"
       ],
       "_nota_reto": "Sin reto a propósito: el mecanismo de reto ejecuta SQL y SQL no empieza hasta el módulo 8. Retar con un idioma que el lector no ha visto sería castigarle por el orden del temario. Los retos empiezan con la parte 3."
     },
@@ -199,7 +199,7 @@
         "src/figures_module3.py"
       ],
       "figuras": [
-        "fig_m3_cuatro_sitios"
+        "fig_m03_cuatro_sitios"
       ]
     },
     {
@@ -227,7 +227,7 @@
         "src/ingest/bronze.py"
       ],
       "figuras": [
-        "fig_m4_bronce_particiones"
+        "fig_m04_bronce_particiones"
       ]
     },
     {
@@ -255,7 +255,7 @@
         "src/ingest/fingerprint.py"
       ],
       "figuras": [
-        "fig_m5_idempotencia"
+        "fig_m05_idempotencia"
       ]
     },
     {
@@ -283,7 +283,7 @@
         "src/transform/choose_partition.py"
       ],
       "figuras": [
-        "fig_m6_curva_de_particion"
+        "fig_m06_curva_de_particion"
       ]
     },
     {
@@ -311,8 +311,8 @@
         "src/transform/benchmark_formats.py"
       ],
       "figuras": [
-        "fig_m7_csv_vs_parquet",
-        "fig_m7_filas_vs_columnas"
+        "fig_m07_csv_vs_parquet",
+        "fig_m07_filas_vs_columnas"
       ]
     },
     {
@@ -543,8 +543,8 @@
         "src/transform/silver.py"
       ],
       "figuras": [
-        "fig_m18_huecos",
-        "fig_m18_remuestreo"
+        "fig_m14_huecos",
+        "fig_m14_remuestreo"
       ]
     },
     {
@@ -573,7 +573,7 @@
         "src/ingest/failures.py"
       ],
       "figuras": [
-        "fig_m19_tres_frecuencias"
+        "fig_m15_tres_frecuencias"
       ]
     },
     {
@@ -601,7 +601,7 @@
         "src/transform/contracts.py"
       ],
       "figuras": [
-        "fig_m20_contrato_roto"
+        "fig_m16_contrato_roto"
       ]
     },
     {
@@ -629,7 +629,7 @@
         "dbt/models/"
       ],
       "figuras": [
-        "fig_m21_linaje_dbt"
+        "fig_m17_linaje_dbt"
       ]
     },
     {
@@ -657,7 +657,7 @@
         "src/transform/table_format.py"
       ],
       "figuras": [
-        "fig_m22_historial_de_versiones"
+        "fig_m18_historial_de_versiones"
       ]
     },
     {
@@ -685,7 +685,7 @@
         "src/transform/postgres_setup.sql"
       ],
       "figuras": [
-        "fig_m23_fichero_vs_servicio"
+        "fig_m19_fichero_vs_servicio"
       ]
     },
     {
@@ -713,7 +713,7 @@
         "src/transform/postgres_schema.sql"
       ],
       "figuras": [
-        "fig_m24_esquema"
+        "fig_m20_esquema"
       ]
     },
     {
@@ -741,7 +741,7 @@
         "src/transform/postgres_bench.py"
       ],
       "figuras": [
-        "fig_m25_indice_antes_despues"
+        "fig_m21_indice_antes_despues"
       ]
     },
     {
@@ -769,7 +769,7 @@
         "src/transform/postgres_admin.sql"
       ],
       "figuras": [
-        "fig_m26_copia_y_restauracion"
+        "fig_m22_copia_y_restauracion"
       ]
     },
     {
@@ -795,7 +795,7 @@
       "reto": null,
       "scripts": [],
       "figuras": [
-        "fig_m27_gemelo_y_residual"
+        "fig_m23_gemelo_y_residual"
       ]
     },
     {
@@ -823,7 +823,7 @@
         "src/twin/model.py"
       ],
       "figuras": [
-        "fig_m28_balance_del_deposito"
+        "fig_m24_balance_del_deposito"
       ]
     },
     {
@@ -851,8 +851,8 @@
         "src/twin/simulate.py"
       ],
       "figuras": [
-        "fig_m29_ciclo_carga_vacio",
-        "fig_m29_paso_de_tiempo"
+        "fig_m25_ciclo_carga_vacio",
+        "fig_m25_paso_de_tiempo"
       ]
     },
     {
@@ -880,8 +880,8 @@
         "src/twin/calibrate.py"
       ],
       "figuras": [
-        "fig_m30_ajuste",
-        "fig_m30_gemelo_vs_real_sano"
+        "fig_m26_ajuste",
+        "fig_m26_gemelo_vs_real_sano"
       ]
     },
     {
@@ -909,7 +909,7 @@
         "src/twin/residual.py"
       ],
       "figuras": [
-        "fig_m31_residual"
+        "fig_m27_residual"
       ]
     },
     {
@@ -937,8 +937,8 @@
         "src/twin/evaluate.py"
       ],
       "figuras": [
-        "fig_m32_cuatro_averias",
-        "fig_m32_antelacion_vs_falsas"
+        "fig_m28_cuatro_averias",
+        "fig_m28_antelacion_vs_falsas"
       ]
     },
     {
@@ -966,7 +966,7 @@
         "src/orchestration/definitions.py"
       ],
       "figuras": [
-        "fig_m33_grafo_de_activos"
+        "fig_m29_grafo_de_activos"
       ]
     },
     {
@@ -994,7 +994,7 @@
         "app/panel.py"
       ],
       "figuras": [
-        "fig_m34_panel"
+        "fig_m30_panel"
       ]
     },
     {
@@ -1020,7 +1020,7 @@
       "reto": null,
       "scripts": [],
       "figuras": [
-        "fig_m35_arco_del_proyecto"
+        "fig_m31_arco_del_proyecto"
       ]
     }
   ],

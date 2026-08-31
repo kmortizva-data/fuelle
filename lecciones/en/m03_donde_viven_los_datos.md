@@ -130,7 +130,7 @@ index vs no index distinguishable: False (plain 0.003 s (from 0.002 to 0.005), i
 
 ## The result, measured
 
-{{FIG:fig_m3_cuatro_sitios}}
+{{FIG:fig_m03_cuatro_sitios}}
 
 **What we expected.** That the text file would be the slowest and the database the fastest. And
 that the warehouse, with its index, would be faster still.

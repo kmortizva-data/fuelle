@@ -131,7 +131,7 @@ ocho últimas toman exactamente dos.
 
 ### Paso 5. Ver la diferencia dibujada
 
-{{FIG:fig_m2_analogica_vs_digital}}
+{{FIG:fig_m02_analogica_vs_digital}}
 
 La misma hora, dos señales. Arriba la presión del panel, que baja despacio, sube de golpe cuando
 el compresor arranca y vuelve a bajar. Abajo la válvula de admisión, que solo sabe estar en cero

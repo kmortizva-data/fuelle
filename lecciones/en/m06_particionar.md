@@ -148,7 +148,7 @@ Nobody wrote that last line: the script decided it by comparing the ranges.
 
 ## The result, measured
 
-{{FIG:fig_m6_curva_de_particion}}
+{{FIG:fig_m06_curva_de_particion}}
 
 **What we expected.** That partitioning by day would win. It is the standard advice and the
 question is for exactly one day. The logic looks solid: with the day's data in its own folder,

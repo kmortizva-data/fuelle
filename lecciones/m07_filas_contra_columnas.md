@@ -216,7 +216,7 @@ El número de filas no cambia en ninguna de las cuatro. Es siempre 1.516.948.
 
 ## El resultado, medido
 
-{{FIG:fig_m7_csv_vs_parquet}}
+{{FIG:fig_m07_csv_vs_parquet}}
 
 **Qué esperábamos.** Que Parquet ganara al CSV, y que la ventaja fuera parecida en las tres
 preguntas.
@@ -239,7 +239,7 @@ nada.
 **Y el resultado que no esperaba nadie.** Las mismas **1.516.948 filas** ocupan **16,83 MB con
 las 17 columnas y 0,03 MB con 2**. Quinientas sesenta y una veces menos, sin quitar una sola fila.
 
-{{FIG:fig_m7_filas_vs_columnas}}
+{{FIG:fig_m07_filas_vs_columnas}}
 
 **Qué significa.** El peso de un fichero de datos no está en cuántas filas tiene. Está en **cuánto
 se repiten los valores de sus columnas**, y la figura lo enseña en sus dos paneles a la vez.

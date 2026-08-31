@@ -148,7 +148,7 @@ Esa última línea no la escribió nadie: la decidió el script comparando los r
 
 ## El resultado, medido
 
-{{FIG:fig_m6_curva_de_particion}}
+{{FIG:fig_m06_curva_de_particion}}
 
 **Qué esperábamos.** Que particionar por día ganara. Es el consejo estándar y la pregunta es
 justo por un día. La lógica parece sólida: con los datos del día en su propia carpeta, no hay que

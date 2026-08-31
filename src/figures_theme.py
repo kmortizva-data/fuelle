@@ -17,7 +17,7 @@ Uso desde un script de figuras:
     def dibujar(fig, ax, c):
         ax.plot(x, y, color=c["accent"])
 
-    figura("fig_m1_averias", dibujar, ancho=9, alto=3.4)
+    figura("fig_m01_averias", dibujar, ancho=9, alto=3.4)
 
 `figura` llama a `dibujar` una vez por tema y guarda las dos versiones.
 """

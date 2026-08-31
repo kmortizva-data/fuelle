@@ -184,7 +184,7 @@ Las dos huellas no se parecen en nada, y eso es exactamente lo que se le pide a 
 
 ## El resultado, medido
 
-{{FIG:fig_m5_idempotencia}}
+{{FIG:fig_m05_idempotencia}}
 
 **Qué esperábamos.** Que la ingesta ingenua duplicara y que la huella lo impidiera. Las dos cosas
 eran predecibles, y por eso el experimento vale: si alguna hubiera salido de otra forma, habría

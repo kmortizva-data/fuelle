@@ -45,7 +45,7 @@ def main() -> None:
     # Dos paneles compartiendo el eje del tiempo, así que no vale `figura()`,
     # que crea un solo eje. Se repite su bucle de temas a mano.
     FIGURES.mkdir(exist_ok=True)
-    name = "fig_m2_analogica_vs_digital"
+    name = "fig_m02_analogica_vs_digital"
     for theme in ("claro", "oscuro"):
         c = colours(theme, module=2)
         with plt.rc_context(_style(theme, c)):

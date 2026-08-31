@@ -64,8 +64,8 @@ def main() -> None:
         ax.grid(axis="y", zorder=0)
         ax.legend(loc="upper left", frameon=False, fontsize=8)
 
-    figura("fig_m5_idempotencia", dibujar, ancho=8.4, alto=3.2, module=5)
-    guardar_huellas(["fig_m5_idempotencia"])
+    figura("fig_m05_idempotencia", dibujar, ancho=8.4, alto=3.2, module=5)
+    guardar_huellas(["fig_m05_idempotencia"])
     print(f"  sin huella acaba en {d['filas_naive_al_final']:,}, "
           f"con huella en {d['filas_guarded_al_final']:,}")
 

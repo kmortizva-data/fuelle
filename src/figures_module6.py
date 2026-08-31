@@ -52,7 +52,7 @@ def main() -> None:
     tamaños = [c["size_mb"] for c in capas]
     etiquetas = [NOMBRES[c["layout"]] for c in capas]
 
-    name = "fig_m6_curva_de_particion"
+    name = "fig_m06_curva_de_particion"
     FIGURES.mkdir(exist_ok=True)
     for theme in ("claro", "oscuro"):
         c = colours(theme, module=6)

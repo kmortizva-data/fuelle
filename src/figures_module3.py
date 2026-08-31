@@ -44,7 +44,7 @@ def main() -> None:
     altos = [s["max_s"] - s["mediana_s"] for s in sitios]
     y = range(len(sitios))
 
-    name = "fig_m3_cuatro_sitios"
+    name = "fig_m03_cuatro_sitios"
     FIGURES.mkdir(exist_ok=True)
     for theme in ("claro", "oscuro"):
         c = colours(theme, module=3)

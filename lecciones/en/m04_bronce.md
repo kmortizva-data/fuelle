@@ -184,7 +184,7 @@ in the code is lost the moment somebody copies the folder elsewhere.
 
 ## The result, measured
 
-{{FIG:fig_m4_bronce_particiones}}
+{{FIG:fig_m04_bronce_particiones}}
 
 **What we expected.** A smaller copy and 212 folders of roughly the same size.
 

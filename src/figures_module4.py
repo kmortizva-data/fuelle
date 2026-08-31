@@ -59,8 +59,8 @@ def main() -> None:
         ax.grid(axis="y", zorder=0)
         ax.set_xlim(dias[0], dias[-1])
 
-    figura("fig_m4_bronce_particiones", dibujar, ancho=9.2, alto=3.0, module=4)
-    guardar_huellas(["fig_m4_bronce_particiones"])
+    figura("fig_m04_bronce_particiones", dibujar, ancho=9.2, alto=3.0, module=4)
+    guardar_huellas(["fig_m04_bronce_particiones"])
     print(f"  {datos['particiones']} particiones, mediana {datos['lecturas_mediana']:,}, "
           f"{datos['dias_completos']} por encima del 90 %")
 

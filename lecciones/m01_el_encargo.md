@@ -65,7 +65,7 @@ tren se para. Por eso lleva sensores.
 Su trabajo es sencillo de describir: mantener un depósito lleno de aire. Cuando la presión baja
 de un umbral, arranca y comprime. Cuando llega arriba, para. Y vuelta a empezar.
 
-{{FIG:fig_m1_anatomia_del_compresor}}
+{{FIG:fig_m01_anatomia_del_compresor}}
 
 Ahí está la máquina entera en dos horas de un martes cualquiera. La presión baja despacio,
 porque el tren va consumiendo aire. Toca el umbral, el compresor arranca, y la presión sube casi
@@ -196,7 +196,7 @@ programa suponiendo 1 Hz, todos sus cálculos de tiempo saldrán diez veces mal.
 
 Y las cuatro averías, que son la verdad terreno del proyecto:
 
-{{FIG:fig_m1_las_cuatro_averias}}
+{{FIG:fig_m01_las_cuatro_averias}}
 
 Cada punto es un día. La altura son las horas que el compresor pasó trabajando de verdad. La
 línea de puntos es la media, **3,42 horas**. Los cuatro círculos son los días con parte de

@@ -185,7 +185,7 @@ The two fingerprints look nothing alike, and that is exactly what one is asked f
 
 ## The result, measured
 
-{{FIG:fig_m5_idempotencia}}
+{{FIG:fig_m05_idempotencia}}
 
 **What we expected.** That the naive ingestion would duplicate and that the fingerprint would
 prevent it. Both were predictable, and that is why the experiment is worth running: had either

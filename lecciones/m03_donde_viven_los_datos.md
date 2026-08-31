@@ -129,7 +129,7 @@ index vs no index distinguishable: False (plain 0.003 s (from 0.002 to 0.005), i
 
 ## El resultado, medido
 
-{{FIG:fig_m3_cuatro_sitios}}
+{{FIG:fig_m03_cuatro_sitios}}
 
 **Qué esperábamos.** Que el fichero de texto fuera el más lento y la base de datos la más rápida.
 Y que el almacén, con su índice, fuera más rápido todavía.

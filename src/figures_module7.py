@@ -40,7 +40,7 @@ PREGUNTAS = {
 
 
 def csv_contra_parquet(datos: dict) -> str:
-    name = "fig_m7_csv_vs_parquet"
+    name = "fig_m07_csv_vs_parquet"
     preguntas = datos["preguntas"]
     etiquetas = [PREGUNTAS[p["pregunta"]] for p in preguntas]
     csv = [p["csv_s"] for p in preguntas]
@@ -79,7 +79,7 @@ def csv_contra_parquet(datos: dict) -> str:
 
 
 def filas_contra_columnas(datos: dict) -> str:
-    name = "fig_m7_filas_vs_columnas"
+    name = "fig_m07_filas_vs_columnas"
     pesos = datos["pesos_por_columna"]
     nombres = [p["columna"] for p in pesos]
     kb = [p["kb"] for p in pesos]
