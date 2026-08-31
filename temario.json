@@ -527,10 +527,10 @@
       "title_en": "Silver: clean, type and resample",
       "subtitle_en": "This is where a good record gets defined, and the definition lives in code instead of in somebody's head",
       "cifra": {
-        "value": "por medir",
-        "label": "filas que sobreviven a la limpieza",
-        "value_en": "to be measured",
-        "label_en": "rows that survive cleaning"
+        "value": "337.653 huecos",
+        "label": "casillas de la rejilla sin ninguna lectura, el 18,3 %",
+        "value_en": "337,653 holes",
+        "label_en": "grid slots with no reading in them, 18.3 %"
       },
       "accent": {
         "dark": "#A2C48C",

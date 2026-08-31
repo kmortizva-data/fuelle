@@ -1,0 +1,39 @@
+{
+  "filas_bronce": 1516948,
+  "decimales": 3,
+  "paso_segundos": 10,
+  "valores_redondeados": {
+    "TP2": 1296720,
+    "TP3": 11327,
+    "H1": 240280,
+    "DV_pressure": 1495497,
+    "Reservoirs": 11263,
+    "Oil_temperature": 685271,
+    "Motor_current": 1107027
+  },
+  "valores_redondeados_TP2": 1296720,
+  "por_ciento_TP2_con_ruido": 85.5,
+  "lecturas_contradictorias": 16762,
+  "colisiones_al_ajustar": 12841,
+  "por_ciento_contradictorias": 1.1,
+  "casillas_de_la_rejilla": 1841760,
+  "filas_plata": 1841760,
+  "casillas_ocupadas": 1504107,
+  "lecturas_conservadas": 1516948,
+  "huecos": 337653,
+  "por_ciento_de_huecos": 18.3,
+  "filas_dudosas": 16762,
+  "mb_bronce": 22.06,
+  "mb_plata": 23.85,
+  "escribir": {
+    "mediana_s": 8.36,
+    "min_s": 7.51,
+    "max_s": 8.58,
+    "corridas": 3
+  },
+  "ventana_desde": "2020-06-12 00:55:00",
+  "ventana_hasta": "2020-06-12 00:55:30",
+  "ventana_presion_primera": 7.212,
+  "ventana_presion_ultima": 7.79,
+  "ventana_casillas_con_dato": 4
+}

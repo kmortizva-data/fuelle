@@ -35,6 +35,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 PROJECT = Path(__file__).resolve().parents[2]
 LESSONS = PROJECT / "lecciones"
 BRONZE = PROJECT / "lake" / "bronze" / "telemetry"
+SILVER = PROJECT / "lake" / "silver" / "telemetry"
 SAMPLES = PROJECT / "assets" / "muestras"
 RETOS = PROJECT / "results" / "retos.json"
 
@@ -119,6 +120,12 @@ def conectar():
             f"SELECT * FROM read_parquet('{BRONZE.as_posix()}/**/*.parquet')"
         )
         con.execute(f"CREATE VIEW t AS SELECT * FROM telemetria")
+    # La capa de plata, si existe. Desde el módulo 14 las lecciones consultan
+    # `plata` igual que consultaban `telemetria`, y sin registrarla aquí sus
+    # consultas publicadas no se podrían ejecutar.
+    if SILVER.exists():
+        con.execute(f"CREATE VIEW plata AS "
+                    f"SELECT * FROM read_parquet('{SILVER.as_posix()}/**/*.parquet')")
     # Las tablas pequeñas que acompañan a la telemetría, como los partes de
     # avería del módulo 12. Del lago no salen: son de `assets/muestras/`, que es
     # también de donde las coge el navegador.
@@ -238,6 +245,7 @@ def revisa(path: Path, con, respuestas: dict) -> list[str]:
 DEPENDE_DE = {
     PROJECT / "lake" / "_formatos" / "todo.parquet":
         "src/transform/benchmark_formats.py  (lo usan las consultas del módulo 7)",
+    SILVER: "src/transform/silver.py  (la consultan las lecciones desde el módulo 14)",
 }
 
 

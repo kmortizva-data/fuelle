@@ -88,5 +88,9 @@
   },
   "m13_ventanas_en": {
     "5.16": "los MB que cuesta la columna timestamp en el lago entero, medidos en el modulo 7 y citados aqui para justificar por que esta leccion usa un solo dia"
+  },
+  "m14_plata": {
+    "8.200000000000001": "una presion del ejemplo de juguete, escrita con la basura de coma flotante a proposito para que se vea de que va el redondeo",
+    "0.4987654321": "las diez cifras que escupe un espectrometro en el puente metalurgico, inventadas para ilustrar que publicarlas todas no es mas precision"
   }
 }
