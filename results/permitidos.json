@@ -92,5 +92,10 @@
   "m14_plata": {
     "8.200000000000001": "una presion del ejemplo de juguete, escrita con la basura de coma flotante a proposito para que se vea de que va el redondeo",
     "0.4987654321": "las diez cifras que escupe un espectrometro en el puente metalurgico, inventadas para ilustrar que publicarlas todas no es mas precision"
+  },
+  "m16_calidad": {
+    "1200": "la ley del lote L2 del ejemplo de juguete, en partes por millon. Numeros elegidos para que el cambio de unidad se vea de golpe",
+    "1000": "la del lote L3 del mismo ejemplo",
+    "1000.0": "el 1.000 % que sale en el informe del ejemplo al no cazar el cambio de unidad"
   }
 }

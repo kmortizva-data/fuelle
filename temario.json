@@ -589,10 +589,10 @@
       "title_en": "Data quality: tests and contracts",
       "subtitle_en": "What happens on Monday when a new column arrives or pressure comes in different units. A contract is a promise a machine checks by itself",
       "cifra": {
-        "value": "por medir",
-        "label": "pruebas de datos en verde",
-        "value_en": "to be measured",
-        "label_en": "data tests passing"
+        "value": "5 de 5",
+        "label": "roturas cazadas; con 7 promesas solo cazaba 4",
+        "value_en": "5 of 5",
+        "label_en": "breakages caught; with 7 promises it caught only 4"
       },
       "accent": {
         "dark": "#ADC183",

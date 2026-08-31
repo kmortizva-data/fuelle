@@ -1,0 +1,64 @@
+{
+  "promesas": 8,
+  "promesas_de_la_primera_version": 7,
+  "promesas_del_contrato": [
+    "las columnas son las acordadas",
+    "timestamp no se repite",
+    "la presion esta en bar y no en otra unidad",
+    "las digitales solo valen cero o uno",
+    "el recuento de lecturas nunca es negativo",
+    "el dia se corresponde con la marca de tiempo",
+    "una casilla sin medir no trae presion",
+    "no llegan columnas de mas"
+  ],
+  "roturas_cazadas_por_la_primera_version": 4,
+  "columnas_acordadas": 20,
+  "rotas_en_la_plata": 0,
+  "roturas_probadas": 5,
+  "roturas_cazadas": 5,
+  "detalle": [
+    {
+      "rotura": "una columna llega con otro nombre",
+      "la_caza_la_primera_version": true,
+      "la_caza": true,
+      "promesas_rotas": [
+        "las columnas son las acordadas",
+        "la presion esta en bar y no en otra unidad",
+        "una casilla sin medir no trae presion",
+        "no llegan columnas de mas"
+      ]
+    },
+    {
+      "rotura": "la presion llega en milibares",
+      "la_caza_la_primera_version": true,
+      "la_caza": true,
+      "promesas_rotas": [
+        "la presion esta en bar y no en otra unidad"
+      ]
+    },
+    {
+      "rotura": "aparece una columna que nadie anuncio",
+      "la_caza_la_primera_version": false,
+      "la_caza": true,
+      "promesas_rotas": [
+        "no llegan columnas de mas"
+      ]
+    },
+    {
+      "rotura": "la ingesta corrio dos veces",
+      "la_caza_la_primera_version": true,
+      "la_caza": true,
+      "promesas_rotas": [
+        "timestamp no se repite"
+      ]
+    },
+    {
+      "rotura": "un recuento de lecturas negativo",
+      "la_caza_la_primera_version": true,
+      "la_caza": true,
+      "promesas_rotas": [
+        "el recuento de lecturas nunca es negativo"
+      ]
+    }
+  ]
+}
