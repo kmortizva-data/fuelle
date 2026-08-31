@@ -213,10 +213,27 @@ def revisa(path: Path, con, respuestas: dict) -> list[str]:
     return problemas
 
 
+# Las lecciones consultan ficheros que no crea `bronze.py`, sino los scripts de
+# su propio módulo. Sin esta lista, una reconstrucción desde cero fallaba con un
+# «No files found» que no dice a quién hay que llamar.
+DEPENDE_DE = {
+    PROJECT / "lake" / "_formatos" / "todo.parquet":
+        "src/transform/benchmark_formats.py  (lo usan las consultas del módulo 7)",
+}
+
+
 def main() -> None:
     if not BRONZE.exists():
         print("  no hay lago todavía: nada que ejecutar")
         return
+
+    faltan = [f"{ruta.relative_to(PROJECT)}  ->  corre {quien}"
+              for ruta, quien in DEPENDE_DE.items() if not ruta.exists()]
+    if faltan:
+        print("  faltan ficheros que las lecciones consultan:")
+        for f in faltan:
+            print(f"    {f}")
+        raise SystemExit("El lago está incompleto. No se puede verificar el SQL publicado.")
 
     respuestas = json.loads(io.open(RETOS, encoding="utf-8").read()) if RETOS.exists() else {}
     con = conectar()

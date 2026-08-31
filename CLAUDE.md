@@ -96,6 +96,27 @@ perfectamente regular (hay saltos de 9 s). Material del módulo 7.
 | Git | Lo corre Claude. Un módulo por commit, mensajes en inglés, sin comillas dobles en `-m` (PowerShell 5.1) |
 | Regla de oro | Ningún número se publica sin recalcularlo corriendo su script |
 
+### Reconstruir el lago desde cero, en orden
+
+`data/` y `lake/` están fuera de git a propósito, así que en una máquina nueva hay que
+regenerarlos. El orden importa: cada script depende de lo que dejó el anterior.
+
+```
+1. data/MetroPT3(AirCompressor).csv     se descarga de UCI (209 MB)
+2. src/ingest/bronze.py                 el lago: 212 particiones, ~4 s
+3. src/transform/benchmark_formats.py   deja lake/_formatos/todo.parquet
+4. src/ingest/partition_profile.py      perfila lo que escribió el paso 2
+5. src/site/check_all.py                las ocho puertas
+```
+
+**El paso 3 no es opcional.** Las consultas publicadas del módulo 7 apuntan a ese fichero y
+`check_sql` las ejecuta de verdad. Si falta, la puerta lo dice por su nombre y a quién llamar,
+en vez de fallar con un «No files found» que no lleva a ningún sitio.
+
+Los demás scripts (`donde_viven.py`, `choose_partition.py`, `fingerprint.py`, `m10_duty_cycle.py`)
+se pueden correr en cualquier orden después del paso 2. Todos limpian su propio directorio de
+trabajo al terminar.
+
 ## Método (heredado de Sílice, no se reinventa)
 
 Diez secciones exactas por lección: `En 30 segundos`, `Qué resuelve este módulo`, `Antes de la
