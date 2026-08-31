@@ -1,0 +1,41 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=41.15&longitude=-8.61&start_date=2020-02-01&end_date=2020-09-01&hourly=temperature_2m,relative_humidity_2m,precipitation&timezone=UTC",
+  "latitud": 41.15,
+  "longitud": -8.61,
+  "desde": "2020-02-01",
+  "hasta": "2020-09-01",
+  "sha256": "f0fe591bc21693b445b882df769d15acebeba5a8a1fc7afbe7d6a698c1da4873",
+  "kb_descargados": 160.6,
+  "horas": 5136,
+  "horas_con_temperatura": 5136,
+  "temperatura_minima": 5.6,
+  "temperatura_maxima": 36.0,
+  "temperatura_media": 16.4,
+  "humedad_media": 80.7,
+  "frecuencias": [
+    {
+      "fuente": "telemetria",
+      "cada": "10 s",
+      "filas": 1516948
+    },
+    {
+      "fuente": "clima",
+      "cada": "1 h",
+      "filas": 5136
+    },
+    {
+      "fuente": "averias",
+      "cada": "por suceso",
+      "filas": 4
+    }
+  ],
+  "veces_mas_densa_la_telemetria": 295,
+  "lecturas_por_hora": 360,
+  "aceite_meseta_media": 75.7,
+  "aceite_meseta_minimo": 73.5,
+  "aceite_meseta_maximo": 77.7,
+  "horas_cruzadas": 4416,
+  "correlacion_calle_aceite": 0.529,
+  "correlacion_carga_aceite": 0.432,
+  "grados_del_aceite_por_encima_de_la_calle": 46.0
+}

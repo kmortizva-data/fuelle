@@ -1,0 +1,38 @@
+{
+  "partes": 4,
+  "numeros_repetidos": 1,
+  "formas_de_escribir_la_averia": 2,
+  "formas_normalizando": 1,
+  "mantenimiento_fechado_antes": 1,
+  "horas_totales": 87.5,
+  "partes_detalle": [
+    {
+      "nr": "#1",
+      "inicio": "2020-04-18 00:00:00",
+      "fin": "2020-04-18 23:59:00",
+      "horas": 24.0,
+      "averia": "Air leak"
+    },
+    {
+      "nr": "#1",
+      "inicio": "2020-05-29 23:30:00",
+      "fin": "2020-05-30 06:00:00",
+      "horas": 6.5,
+      "averia": "Air Leak"
+    },
+    {
+      "nr": "#3",
+      "inicio": "2020-06-05 10:00:00",
+      "fin": "2020-06-07 14:30:00",
+      "horas": 52.5,
+      "averia": "Air Leak"
+    },
+    {
+      "nr": "#4",
+      "inicio": "2020-07-15 14:30:00",
+      "fin": "2020-07-15 19:00:00",
+      "horas": 4.5,
+      "averia": "Air Leak"
+    }
+  ]
+}

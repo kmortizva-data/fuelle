@@ -200,5 +200,31 @@
     ],
     "sql": "SELECT count(*) AS paradas FROM ( SELECT DV_eletric, lag(DV_eletric) OVER (ORDER BY timestamp) AS antes FROM telemetria WHERE day = DATE '2020-06-05' ) WHERE antes = 1 AND DV_eletric = 0",
     "muestra": "un_dia"
+  },
+  "m15_aceite_por_tramo": {
+    "columns": [
+      "calle",
+      "horas",
+      "aceite_medio"
+    ],
+    "rows": [
+      [
+        "a. menos de 10",
+        247,
+        58.0
+      ],
+      [
+        "b. de 10 a 20",
+        3243,
+        61.5
+      ],
+      [
+        "c. mas de 20",
+        926,
+        66.9
+      ]
+    ],
+    "sql": "SELECT CASE WHEN c.temperatura < 10 THEN 'a. menos de 10' WHEN c.temperatura < 20 THEN 'b. de 10 a 20' ELSE 'c. mas de 20' END AS calle, count(*) AS horas, round(avg(h.aceite), 1) AS aceite_medio FROM horas h JOIN clima c ON c.hora = h.hora GROUP BY calle ORDER BY calle",
+    "muestra": "horas"
   }
 }

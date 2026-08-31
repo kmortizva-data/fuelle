@@ -72,6 +72,26 @@ SHIPPED = {
 # La tabla pequeña de los partes de avería, para el JOIN del módulo 12.
 EXTRA = {"averias": REPORTS}
 
+# El módulo 15 cruza fuentes de frecuencias distintas, así que se lleva las dos
+# por separado: si llegaran ya cruzadas, su reto no tendría nada que hacer. Las
+# dos van a la hora, que es el ritmo de la más lenta.
+POR_HORA = {
+    "clima": """
+        SELECT hora, temperatura, humedad, lluvia
+        FROM read_parquet('{weather}/**/*.parquet')
+        ORDER BY hora
+    """,
+    "horas": """
+        SELECT time_bucket(INTERVAL 1 HOUR, timestamp) AS hora,
+               round(avg(Oil_temperature), 2) AS aceite,
+               round(avg(CASE WHEN DV_eletric = 1 THEN 1.0 ELSE 0.0 END), 4) AS carga,
+               count(*) AS lecturas
+        FROM read_parquet('{silver}/**/*.parquet')
+        WHERE medido
+        GROUP BY hora ORDER BY hora
+    """,
+}
+
 
 def gzipped_size(path: Path) -> int:
     """What the reader really downloads: GitHub Pages serves this compressed."""
@@ -102,6 +122,11 @@ def write(con: duckdb.DuckDBPyConnection, name: str, columns: list[str],
         "columns": len(columns) if columns else 17,
         "kb_on_disk": round(raw / 1024, 1),
         "kb_downloaded": round(gzipped_size(target) / 1024, 1),
+        # Explícito y no deducido del recuento: una muestra puede tener menos
+        # filas que la telemetría por ser de otro grano, como las horarias del
+        # módulo 15, sin recortar nada. Lo que obliga a filtrar por día es
+        # recortar filas, no tener pocas.
+        "recorta_filas": bool(where),
     }
 
 
@@ -146,6 +171,28 @@ def agrees_with_lake(con: duckdb.DuckDBPyConnection, name: str, spec: dict) -> l
     return problems
 
 
+def write_por_hora(con: duckdb.DuckDBPyConnection) -> list[dict]:
+    """Las dos tablas horarias del módulo 15, si el lago las tiene."""
+    weather = PROJECT / "lake" / "bronze" / "weather"
+    silver = PROJECT / "lake" / "silver" / "telemetry"
+    if not (weather.exists() and silver.exists()):
+        return []
+    out = []
+    for nombre, sql in POR_HORA.items():
+        target = SAMPLES / f"{nombre}.parquet"
+        con.execute(f"COPY ({sql.format(weather=weather.as_posix(), silver=silver.as_posix())}) "
+                    f"TO '{target.as_posix()}' (FORMAT PARQUET, COMPRESSION ZSTD)")
+        rows = con.sql(f"SELECT count(*) FROM read_parquet('{target.as_posix()}')").fetchone()[0]
+        cols = len(con.sql(
+            f"SELECT * FROM read_parquet('{target.as_posix()}') LIMIT 0").columns)
+        out.append({"name": nombre, "rows": rows, "columns": cols,
+                    "kb_on_disk": round(target.stat().st_size / 1024, 1),
+                    "kb_downloaded": round(gzipped_size(target) / 1024, 1),
+                    "recorta_filas": False,
+                    "para": "módulo 15: cruzar fuentes de distinta frecuencia"})
+    return out
+
+
 def write_reports(con: duckdb.DuckDBPyConnection) -> dict:
     """Los cuatro partes de avería, tal cual están escritos, para el JOIN."""
     target = SAMPLES / "averias.parquet"
@@ -153,7 +200,7 @@ def write_reports(con: duckdb.DuckDBPyConnection) -> dict:
         f"COPY (SELECT * FROM read_csv_auto('{REPORTS.as_posix()}')) "
         f"TO '{target.as_posix()}' (FORMAT PARQUET, COMPRESSION ZSTD)")
     rows = con.sql(f"SELECT count(*) FROM read_parquet('{target.as_posix()}')").fetchone()[0]
-    return {"name": "averias", "rows": rows,
+    return {"name": "averias", "rows": rows, "recorta_filas": False,
             "columns": len(con.sql(
                 f"SELECT * FROM read_parquet('{target.as_posix()}') LIMIT 0").columns),
             "kb_on_disk": round(target.stat().st_size / 1024, 1),
@@ -174,6 +221,7 @@ def main() -> None:
         shipped.append(row)
         problems += agrees_with_lake(con, name, spec)
     shipped.append(write_reports(con))
+    shipped += write_por_hora(con)
 
     print("  muestra                     filas    cols   en disco   se descarga   para")
     for row in shipped:

@@ -38,6 +38,7 @@ MUESTRA_DE = {
     "m11_con_with": "sin_timestamp_ligera",
     "m12_lecturas_por_averia": "sql",
     "m13_paradas_del_dia": "un_dia",
+    "m15_aceite_por_tramo": "horas",
 }
 
 SECONDS_PER_READING = 10
@@ -130,6 +131,19 @@ CHALLENGES = {
         )
         WHERE antes = 1 AND DV_eletric = 0
     """,
+    # Modulo 15: el reto cruza las dos tablas horarias, asi que su muestra no es
+    # telemetria cruda. connect_to registra las dos por su nombre.
+    "m15_aceite_por_tramo": """
+        SELECT CASE WHEN c.temperatura < 10 THEN 'a. menos de 10'
+                    WHEN c.temperatura < 20 THEN 'b. de 10 a 20'
+                    ELSE 'c. mas de 20' END AS calle,
+               count(*) AS horas,
+               round(avg(h.aceite), 1) AS aceite_medio
+        FROM horas h
+        JOIN clima c ON c.hora = h.hora
+        GROUP BY calle
+        ORDER BY calle
+    """,
 }
 
 
@@ -142,15 +156,24 @@ def plain(value):
     return str(value)
 
 
+# Las muestras que no son telemetria cruda se registran con su propio nombre: el
+# modulo 15 trabaja con `horas` y `clima`, y llamar `telemetria` a una tabla
+# horaria haria ilegible cada consulta de su leccion.
+POR_SU_NOMBRE = {"horas", "clima"}
+
+
 def connect_to(muestra: str) -> duckdb.DuckDBPyConnection:
     path = SAMPLES / f"{muestra}.parquet"
     if not path.exists():
         raise SystemExit(f"Falta {path.name}. Corre src/site/make_sample.py primero.")
     con = duckdb.connect()
-    con.execute(f"CREATE VIEW telemetria AS SELECT * FROM read_parquet('{path.as_posix()}')")
-    averias = SAMPLES / "averias.parquet"
-    if averias.exists():
-        con.execute(f"CREATE VIEW averias AS SELECT * FROM read_parquet('{averias.as_posix()}')")
+    vista = muestra if muestra in POR_SU_NOMBRE else "telemetria"
+    con.execute(f"CREATE VIEW {vista} AS SELECT * FROM read_parquet('{path.as_posix()}')")
+    for extra in ("averias", "clima", "horas"):
+        otra = SAMPLES / f"{extra}.parquet"
+        if extra != vista and otra.exists():
+            con.execute(f"CREATE VIEW {extra} AS "
+                        f"SELECT * FROM read_parquet('{otra.as_posix()}')")
     return con
 
 

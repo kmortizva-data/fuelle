@@ -40,6 +40,7 @@ import duckdb
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from check_sql import bloques, normaliza  # noqa: E402
+from make_sample import POR_HORA  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -47,6 +48,8 @@ PROJECT = Path(__file__).resolve().parents[2]
 LESSONS = PROJECT / "lecciones"
 SAMPLES = PROJECT / "assets" / "muestras"
 BRONZE = PROJECT / "lake" / "bronze" / "telemetry"
+SILVER = PROJECT / "lake" / "silver" / "telemetry"
+WEATHER = PROJECT / "lake" / "bronze" / "weather"
 TEMARIO = PROJECT / "temario.json"
 SAMPLE_FACTS = PROJECT / "results" / "sample.json"
 
@@ -55,6 +58,8 @@ POR_DEFECTO = "sin_timestamp_ligera"
 
 def declared(module: dict) -> dict[str, str]:
     """Las vistas que la página de ese módulo va a registrar."""
+    if module.get("tablas"):
+        return dict(module["tablas"])
     tablas = {"telemetria": module.get("muestra", POR_DEFECTO)}
     for extra in module.get("tablas_extra", []):
         tablas[extra] = extra
@@ -71,14 +76,26 @@ def connect_sample(tablas: dict[str, str]) -> duckdb.DuckDBPyConnection:
 
 
 def connect_lake(tablas: dict[str, str]) -> duckdb.DuckDBPyConnection:
+    """El mismo juego de vistas, pero construidas desde el lago.
+
+    Las tablas derivadas, como las horarias del módulo 15, se rehacen aquí con
+    la misma consulta que las generó. Leerlas del propio fichero de muestra
+    haría que la comparación se hiciera consigo misma y no comprobara nada.
+    """
     con = duckdb.connect()
     con.execute(f"CREATE VIEW telemetria AS "
                 f"SELECT * FROM read_parquet('{BRONZE.as_posix()}/**/*.parquet')")
-    for view in tablas:
+    for view, fichero in tablas.items():
         if view == "telemetria":
             continue
-        path = SAMPLES / f"{view}.parquet"
-        con.execute(f"CREATE VIEW {view} AS SELECT * FROM read_parquet('{path.as_posix()}')")
+        if fichero in POR_HORA and WEATHER.exists() and SILVER.exists():
+            sql = POR_HORA[fichero].format(weather=WEATHER.as_posix(),
+                                           silver=SILVER.as_posix())
+            con.execute(f"CREATE VIEW {view} AS {sql}")
+        else:
+            path = SAMPLES / f"{fichero}.parquet"
+            con.execute(
+                f"CREATE VIEW {view} AS SELECT * FROM read_parquet('{path.as_posix()}')")
     return con
 
 
@@ -112,8 +129,10 @@ def main() -> None:
 
     temario = json.loads(io.open(TEMARIO, encoding="utf-8").read())
     hechos = json.loads(io.open(SAMPLE_FACTS, encoding="utf-8").read())
-    completas = {m["name"] for m in hechos["muestras"]
-                 if m["rows"] == hechos["muestras"][0]["rows"]}
+    # La bandera la escribe make_sample.py. Antes se deducía comparando el
+    # recuento de filas con el de la primera muestra, y eso trataba como
+    # recortada cualquier muestra de otro grano, como las horarias del módulo 15.
+    completas = {m["name"] for m in hechos["muestras"] if not m.get("recorta_filas")}
     un_dia = hechos["un_dia"]
 
     problemas, usadas, revisadas = [], set(), 0
@@ -144,17 +163,22 @@ def main() -> None:
                     en_muestra = muestra.sql(sql).fetchall()
                 except Exception as e:
                     problemas.append(
-                        f"{nombre}:{linea}  NO CORRE contra la muestra que baja el lector "
-                        f"({tablas['telemetria']}): {str(e).splitlines()[0][:90]}")
+                        f"{nombre}:{linea}  NO CORRE contra las muestras que baja el lector "
+                        f"({', '.join(sorted(tablas.values()))}): "
+                        f"{str(e).splitlines()[0][:90]}")
                     continue
 
-                # Si la muestra no lleva todas las filas, la consulta tiene que
-                # decir de qué día habla. Si no, el lector ve una cosa y el lago
-                # dice otra, y la lección estaría publicando la diferencia.
-                if tablas["telemetria"] not in completas:
+                # Si ALGUNA de las muestras del módulo recorta filas, la consulta
+                # tiene que decir de qué día habla. Si no, el lector ve una cosa y
+                # el lago dice otra, y la lección publicaría la diferencia.
+                #
+                # Se miran todas y no solo `telemetria`: desde el módulo 15 hay
+                # módulos que declaran sus vistas con otros nombres.
+                recortadas = [f for f in tablas.values() if f not in completas]
+                if recortadas:
                     if un_dia not in sql:
                         problemas.append(
-                            f"{nombre}:{linea}  la muestra de este módulo es de un solo día "
+                            f"{nombre}:{linea}  {', '.join(recortadas)} lleva un solo día "
                             f"y la consulta no filtra por {un_dia}")
                     continue
 

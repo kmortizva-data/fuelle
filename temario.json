@@ -556,10 +556,10 @@
       "title_en": "The other sources: weather, and reports with errata",
       "subtitle_en": "The air entering the compressor comes off the street, so weather matters. And the maintenance reports arrive with factory faults that are not fixed",
       "cifra": {
-        "value": "3",
-        "label": "fuentes, tres frecuencias, tres formatos",
-        "value_en": "3",
-        "label_en": "sources, three frequencies, three formats"
+        "value": "0,529 contra 0,432",
+        "label": "lo que la calle y lo que la carga explican de la temperatura del aceite",
+        "value_en": "0.529 against 0.432",
+        "label_en": "how much the street and the workload each explain of the oil temperature"
       },
       "accent": {
         "dark": "#A8C287",
@@ -574,7 +574,11 @@
       ],
       "figuras": [
         "fig_m15_tres_frecuencias"
-      ]
+      ],
+      "tablas": {
+        "horas": "horas",
+        "clima": "clima"
+      }
     },
     {
       "number": 16,

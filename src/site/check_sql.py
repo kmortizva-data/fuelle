@@ -130,7 +130,7 @@ def conectar():
     # avería del módulo 12. Del lago no salen: son de `assets/muestras/`, que es
     # también de donde las coge el navegador.
     for extra in sorted(SAMPLES.glob("*.parquet")):
-        if extra.stem in ("averias",):
+        if extra.stem in ("averias", "clima", "horas"):
             con.execute(f"CREATE VIEW {extra.stem} AS "
                         f"SELECT * FROM read_parquet('{extra.as_posix()}')")
     return con

@@ -6,6 +6,7 @@
       "columns": 3,
       "kb_on_disk": 64.3,
       "kb_downloaded": 56.3,
+      "recorta_filas": false,
       "para": "módulos 10 y 11: agrupar y WITH"
     },
     {
@@ -14,6 +15,7 @@
       "columns": 6,
       "kb_on_disk": 2202.1,
       "kb_downloaded": 2186.9,
+      "recorta_filas": false,
       "para": "módulos 8, 9 y 12: filtrar, tipos y JOIN"
     },
     {
@@ -22,14 +24,34 @@
       "columns": 5,
       "kb_on_disk": 42.9,
       "kb_downloaded": 42.3,
+      "recorta_filas": true,
       "para": "módulo 13: funciones de ventana"
     },
     {
       "name": "averias",
       "rows": 4,
+      "recorta_filas": false,
       "columns": 6,
       "kb_on_disk": 1.2,
       "kb_downloaded": 0.7
+    },
+    {
+      "name": "clima",
+      "rows": 5136,
+      "columns": 4,
+      "kb_on_disk": 32.8,
+      "kb_downloaded": 32.5,
+      "recorta_filas": false,
+      "para": "módulo 15: cruzar fuentes de distinta frecuencia"
+    },
+    {
+      "name": "horas",
+      "rows": 4416,
+      "columns": 4,
+      "kb_on_disk": 39.4,
+      "kb_downloaded": 39.1,
+      "recorta_filas": false,
+      "para": "módulo 15: cruzar fuentes de distinta frecuencia"
     }
   ],
   "un_dia": "2020-06-05",

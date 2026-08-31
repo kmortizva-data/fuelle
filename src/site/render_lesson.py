@@ -365,6 +365,13 @@ def tables_for(module: dict) -> str:
     Se emite siempre, tambien en los modulos sin consulta viva: no cuesta nada y
     evita que anadir un bloque `sql-vivo` a una leccion exija tocar la plantilla.
     """
+    # Un modulo puede declarar sus vistas enteras con `tablas`, cuando lo que
+    # baja no es telemetria cruda. El modulo 15 trabaja a la hora y sus tablas
+    # se llaman `horas` y `clima`: llamar `telemetria` a una tabla horaria
+    # confundiria al lector en cada consulta de la leccion.
+    if module.get("tablas"):
+        return ",".join(f"{vista}={fichero}.parquet"
+                        for vista, fichero in module["tablas"].items())
     pares = [f"telemetria={module.get('muestra', MUESTRA_POR_DEFECTO)}.parquet"]
     for extra in module.get("tablas_extra", []):
         pares.append(f"{extra}={extra}.parquet")
