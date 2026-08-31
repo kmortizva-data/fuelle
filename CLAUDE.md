@@ -183,8 +183,9 @@ obligatoria (`## Hazlo tú`) en los módulos que lo declaran: el lector escribe 
 página la ejecuta contra los datos reales y le dice si acertó**, comparando el resultado, nunca el
 texto de la consulta. Punto de partida siempre dado, pista y solución plegadas.
 
-**La consulta viva:** DuckDB por WebAssembly, cargado solo cuando el lector lo pide (unos 3 MB la
-primera vez). Quien solo lee no paga nada.
+**La consulta viva:** DuckDB por WebAssembly, cargado solo cuando el lector lo pide. **7,74 MB
+comprimido, medido el 2026-09-01**, no los «unos 3 MB» que decía esta línea antes de pesarlo.
+Quien solo lee no paga nada.
 
 **Las figuras nacen en dos temas** (claro y oscuro) desde el mismo script, con el patrón que
 Sílice ya usa para los dos idiomas (`figures_i18n.py`): un `figures_theme.py` hermano cambia solo
@@ -425,6 +426,80 @@ se acotó a lo que enseña y el experimento de verdad vive en `fingerprint.py`.
 **Deuda saldada:** los módulos 2 y 3 ya tienen su gemela inglesa. Las ocho parejas pasan la
 puerta de paridad.
 
+### Parte 3 cerrada (2026-09-01): el curso de SQL entero, en los dos idiomas
+
+**13 lecciones de 31, las 13 en español y en inglés.** Módulos 1 a 13 más nada pendiente de
+traducir. **Nueve** verificadores en verde. La parte 3 es publicable por sí sola.
+
+**La muestra dejó de ser una y pasó a ser cuatro**, porque cada módulo necesita columnas
+distintas y una sola sería peso muerto en casi todas las páginas:
+
+| Muestra | Peso | Módulos | Qué lleva |
+|---|---|---|---|
+| `sin_timestamp_ligera` | 64 KB | 10, 11 | day, DV_eletric, COMP |
+| `sql` | 2.202 KB | 8, 9, 12 | y LPS, Motor_current, TP2 |
+| `un_dia` | 43 KB | 13 | y timestamp, solo del 5 de junio |
+| `averias` | 1 KB | 12 | los cuatro partes |
+
+El módulo 13 se lleva un solo día porque **la hora exacta del lago entero cuesta 5,16 MB**, que
+es el hallazgo del módulo 7 cobrado. El motor pesa 7,74 MB comprimido (no los «unos 3 MB» que
+decía el riesgo 8, que ahora se corrige), así que la muestra más cara añade un 28 %.
+
+**La consulta viva llevaba rota quién sabe cuánto.** `live.js` pedía `muestras/muestra.parquet`,
+un nombre que **nunca ha existido en el repo**. Comprobado en el navegador: el viejo daba 404 y
+el nuevo da 200. Ahora las tablas se declaran en `temario.json`, la página las emite en
+`data-tablas` y los nombres no pueden volver a separarse.
+
+**`check_muestras.py`, el noveno verificador**, existe por eso. `check_sql` ejecuta contra el
+lago y **el navegador del lector no tiene lago**: tiene una muestra con menos columnas. Una
+consulta con `TP3` pasaba `check_sql` y reventaba en la página. Ahora cada bloque ejecutable y
+cada reto se corren contra **la muestra de su módulo** y se comparan con el lago fila a fila.
+
+**Regla nueva que impone:** una muestra que recorta filas obliga a que todas las consultas de su
+módulo nombren el día. Si no, la página diría una cosa y el lago otra.
+
+**Hallazgos de la parte 3, todos medidos:**
+
+1. **La alarma de baja presión no sirve de aviso.** Salta en 5.188 lecturas (0,342 %) pero
+   repartidas en **95 de los 212 días**, casi uno de cada dos. Demasiado frecuente para mirarla.
+2. **Faltan dos días enteros del calendario**, el 29 de febrero y el 26 de abril. Preguntar por
+   ellos devuelve `count(*)` = 0 y `avg()` = NULL en la misma fila. Ese contraste es el módulo 8.
+3. **`TP2 = 8.2` encuentra 107 filas y las que quieres son 5.237.** Encuentra el 2 %, y eso es
+   peor que encontrar cero, porque 107 cabe en un informe. **Y la causa dominante aquí no es la
+   binaria**: el sensor da tres decimales y la pantalla enseña dos.
+4. **En DuckDB `0.1 + 0.2 = 0.3` es CIERTO**, porque los literales son DECIMAL. El fallo famoso
+   solo aparece con `::DOUBLE`, que es el tipo de TP2. Publicar el ejemplo clásico sin comprobarlo
+   habría enseñado algo falso de este motor.
+5. **Los tres estados del motor: 54,6 / 30,1 / 15,2 %.** Los cortes en 1 y 5 A están en los valles
+   de la distribución, y el **98,1 %** de lo que la regla llama carga lleva la marca de
+   `DV_eletric`, una señal que no se usó para escribirla.
+6. **`WITH` no cuesta nada.** Anidada 0,023 s y con WITH 0,021 s, **rangos solapados**. El precio
+   entero son 3 líneas más.
+7. **El JOIN malo no hubo que inventarlo.** `nr` no es clave: dos partes son `#1`, así que cruzar
+   por él da **6 filas de 4**. La errata que el módulo 1 se negó a corregir es el ejemplo.
+8. **Un día de avería arranca MENOS.** El 5 de junio el compresor arrancó **31 veces** contra una
+   mediana de **58**, y a la vez estuvo **15,41 h en carga** contra 3,42. Con fuga no llega a
+   parar. Contar sucesos sin su duración da la conclusión contraria.
+9. **El hueco mayor dura 48 horas**, del 25 al 27 de abril, y explica el 26 de abril que faltaba.
+
+**Cuatro fallos propios que cazaron las puertas, y ninguno se veía releyendo:**
+
+- Tres salidas inventadas (módulos 8, 11 y 13). `check_sql` las tumbó las tres. **Dejar de
+  escribir salidas de memoria: se generan.**
+- Un `ORDER BY day LIMIT 5` que **no es reproducible**: 8 corridas sobre los mismos datos dieron
+  2 resultados distintos. Está en la lección como hallazgo.
+- La cifra del módulo 8 iban a ser segundos, y el manual prohíbe citar tiempos en prosa.
+- El módulo 3 escribía «8,716» con coma inglesa en prosa española.
+
+**Cinco agujeros en los propios verificadores**, todos encontrados porque acusaban a una lección
+correcta: `check_english` tenía **el cuerpo del bucle vacío** (seis lecciones sin comparar código
+de verdad); `check_numbers` adivinaba el separador decimal contando cifras, así que «8,198» se
+leía como ocho mil; y `check_sql` no conocía las tablas de compañía, no miraba dentro de los
+textos que devuelve una consulta, y tiraba la hora de una marca de tiempo.
+
+**`figures_theme.es()`** existe porque formatear un número y hacer `.replace(",", ".")` sobre la
+frase entera ya se había comido la coma de tres pies de figura.
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo
@@ -440,6 +515,10 @@ puerta de paridad.
 6. **CC BY 4.0 obliga a citar**, en el repo, en el curso y en la página del portafolio.
 7. Red corporativa con SSL interceptado: inyectar `truststore` temprano. Consola cp1252: forzar
    UTF-8 en las salidas de Python.
+8. **El motor SQL del navegador pesa 7,74 MB comprimido**, medido el 2026-09-01 sobre los ficheros
+   que se sirven de verdad. El plan decía «unos 3 MB» a ojo. Se descarga solo al pulsar y se
+   cachea, así que el que solo lee no paga nada, pero en móvil con datos son 7,74 MB reales. La
+   muestra más cara del curso, la de la parte 3, añade 2,14 MB encima.
 
 ## Decisiones ya cerradas por Kevin
 
