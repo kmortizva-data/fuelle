@@ -192,6 +192,9 @@ def main() -> None:
         "byte_cambiado": position,
         "sha_antes": before,
         "sha_despues": after,
+        # Los 256 bits no se escriben a mano: se cuentan sobre la huella que
+        # acaba de salir, que es de donde viene el nombre del algoritmo.
+        "bits_del_hash": len(before) * 4,
         "bits_distintos_de_256": differing,
         "por_ciento_de_bits_distintos": round(differing / 256 * 100, 1),
         "reingirio_tras_el_cambio": reacted,
