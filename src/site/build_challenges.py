@@ -37,6 +37,7 @@ MUESTRA_DE = {
     "m10_horas_por_mes": "sin_timestamp_ligera",
     "m11_con_with": "sin_timestamp_ligera",
     "m12_lecturas_por_averia": "sql",
+    "m13_paradas_del_dia": "un_dia",
 }
 
 SECONDS_PER_READING = 10
@@ -115,6 +116,19 @@ CHALLENGES = {
         LEFT JOIN telemetria t ON t.day BETWEEN a.desde AND a.hasta
         GROUP BY a.nr, a.desde
         ORDER BY a.desde
+    """,
+    # Modulo 13: el cambio de estado al reves. Filtrado al dia de la muestra,
+    # porque esa muestra es de un solo dia y sin el filtro la pagina diria una
+    # cosa y el lago otra.
+    "m13_paradas_del_dia": """
+        SELECT count(*) AS paradas
+        FROM (
+            SELECT DV_eletric,
+                   lag(DV_eletric) OVER (ORDER BY timestamp) AS antes
+            FROM telemetria
+            WHERE day = DATE '2020-06-05'
+        )
+        WHERE antes = 1 AND DV_eletric = 0
     """,
 }
 

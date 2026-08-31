@@ -188,5 +188,17 @@
     ],
     "sql": "SELECT a.nr, a.desde, count(t.day) AS lecturas FROM ( SELECT nr, CAST(strptime(start_time, '%-m/%-d/%Y %-H:%M') AS DATE) AS desde, CAST(strptime(end_time, '%-m/%-d/%Y %-H:%M') AS DATE) AS hasta FROM averias ) a LEFT JOIN telemetria t ON t.day BETWEEN a.desde AND a.hasta GROUP BY a.nr, a.desde ORDER BY a.desde",
     "muestra": "sql"
+  },
+  "m13_paradas_del_dia": {
+    "columns": [
+      "paradas"
+    ],
+    "rows": [
+      [
+        30
+      ]
+    ],
+    "sql": "SELECT count(*) AS paradas FROM ( SELECT DV_eletric, lag(DV_eletric) OVER (ORDER BY timestamp) AS antes FROM telemetria WHERE day = DATE '2020-06-05' ) WHERE antes = 1 AND DV_eletric = 0",
+    "muestra": "un_dia"
   }
 }

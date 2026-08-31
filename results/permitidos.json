@@ -61,5 +61,8 @@
   "m12_juntar_tablas": {
     "300": "la suma correcta del ejemplo de juguete, 100 mas 200 toneladas",
     "400": "la suma inflada del mismo ejemplo despues de cruzar, con las 100 t de T1 contadas dos veces. Numeros elegidos para que la diferencia salte a la vista"
+  },
+  "m13_ventanas": {
+    "5.16": "los MB que cuesta la columna timestamp en el lago entero, medidos en el modulo 7 y citados aqui para justificar por que esta leccion usa un solo dia"
   }
 }

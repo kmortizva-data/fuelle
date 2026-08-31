@@ -1,0 +1,55 @@
+{
+  "dia_de_la_muestra": "2020-06-05",
+  "segundos_nominales": 10,
+  "lecturas_del_dia": 8716,
+  "huecos_del_lago": [
+    {
+      "hueco": 10,
+      "veces": 1337521
+    },
+    {
+      "hueco": 9,
+      "veces": 128277
+    },
+    {
+      "hueco": 12,
+      "veces": 38321
+    },
+    {
+      "hueco": 13,
+      "veces": 7988
+    },
+    {
+      "hueco": 11,
+      "veces": 4471
+    },
+    {
+      "hueco": 21,
+      "veces": 10
+    }
+  ],
+  "huecos_totales": 1516947,
+  "huecos_regulares": 1337521,
+  "huecos_irregulares": 179426,
+  "por_ciento_irregulares": 11.8,
+  "hueco_mayor_segundos": 172918,
+  "hueco_mayor_horas": 48.0,
+  "hueco_mayor_desde": "2020-04-25 01:10:51",
+  "hueco_mayor_hasta": "2020-04-27 01:12:49",
+  "horas_de_carga_del_dia": 15.41,
+  "huecos_del_dia": [
+    {
+      "hueco": 10,
+      "veces": 7953
+    },
+    {
+      "hueco": 9,
+      "veces": 762
+    }
+  ],
+  "arranques_del_dia": 31,
+  "arranques_mediana_del_lago": 58,
+  "dias_con_arranques": 208,
+  "arranques_maximo": 1257,
+  "dia_con_mas_arranques": "2020-06-23"
+}

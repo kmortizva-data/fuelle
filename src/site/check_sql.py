@@ -176,6 +176,11 @@ def revisa(path: Path, con, respuestas: dict) -> list[str]:
                     # dentro de una cadena.
                     if isinstance(v, str):
                         reales |= numeros_de(v)
+                    # Y una marca de tiempo lleva su hora dentro. `normaliza` se
+                    # queda solo con la fecha, así que el 10 de «00:00:10» no
+                    # entraba y la puerta lo daba por inventado.
+                    elif hasattr(v, "isoformat"):
+                        reales |= numeros_de(v.isoformat()[11:])
                     if isinstance(v, (int, float)) and not isinstance(v, bool):
                         # La salida publicada suele venir redondeada, así que un
                         # 23,81 tiene que casar con un 23,808333 del resultado.
