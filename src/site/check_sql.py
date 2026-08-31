@@ -35,7 +35,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 PROJECT = Path(__file__).resolve().parents[2]
 LESSONS = PROJECT / "lecciones"
 BRONZE = PROJECT / "lake" / "bronze" / "telemetry"
-SAMPLE = PROJECT / "assets" / "muestras" / "sin_timestamp_ligera.parquet"
+SAMPLES = PROJECT / "assets" / "muestras"
 RETOS = PROJECT / "results" / "retos.json"
 
 NUMBER = re.compile(r"-?\d[\d.,]*\d|\d")
@@ -119,6 +119,13 @@ def conectar():
             f"SELECT * FROM read_parquet('{BRONZE.as_posix()}/**/*.parquet')"
         )
         con.execute(f"CREATE VIEW t AS SELECT * FROM telemetria")
+    # Las tablas pequeñas que acompañan a la telemetría, como los partes de
+    # avería del módulo 12. Del lago no salen: son de `assets/muestras/`, que es
+    # también de donde las coge el navegador.
+    for extra in sorted(SAMPLES.glob("*.parquet")):
+        if extra.stem in ("averias",):
+            con.execute(f"CREATE VIEW {extra.stem} AS "
+                        f"SELECT * FROM read_parquet('{extra.as_posix()}')")
     return con
 
 
@@ -162,6 +169,13 @@ def revisa(path: Path, con, respuestas: dict) -> list[str]:
             for fila in filas:
                 for v in fila:
                     reales.add(normaliza(v))
+                    # Un valor de texto puede llevar números dentro, y son suyos.
+                    # Las fechas de los partes de avería llegan como texto,
+                    # «4/18/2020 0:00», y la puerta acusaba a la lección de
+                    # publicar un 0 y un 18 que la consulta sí devuelve, solo que
+                    # dentro de una cadena.
+                    if isinstance(v, str):
+                        reales |= numeros_de(v)
                     if isinstance(v, (int, float)) and not isinstance(v, bool):
                         # La salida publicada suele venir redondeada, así que un
                         # 23,81 tiene que casar con un 23,808333 del resultado.

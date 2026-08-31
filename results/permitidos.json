@@ -57,5 +57,9 @@
   },
   "m11_consultas_por_pasos": {
     "90": "la recuperacion del ejemplo de juguete: 1,8 t de cobre sobre 2 t, numeros elegidos para que salga redondo a mano"
+  },
+  "m12_juntar_tablas": {
+    "300": "la suma correcta del ejemplo de juguete, 100 mas 200 toneladas",
+    "400": "la suma inflada del mismo ejemplo despues de cruzar, con las 100 t de T1 contadas dos veces. Numeros elegidos para que la diferencia salte a la vista"
   }
 }

@@ -157,5 +157,36 @@
     ],
     "sql": "WITH por_dia AS ( SELECT day, count(*) AS lecturas, sum(CASE WHEN DV_eletric = 1 THEN 1 ELSE 0 END) * 10 / 3600.0 AS horas FROM telemetria GROUP BY day ), dias_completos AS ( SELECT * FROM por_dia WHERE lecturas > 0.9 * 8640 ) SELECT strftime(day, '%Y-%m') AS mes, round(avg(horas), 2) AS horas_de_carga FROM dias_completos GROUP BY mes ORDER BY mes",
     "muestra": "sin_timestamp_ligera"
+  },
+  "m12_lecturas_por_averia": {
+    "columns": [
+      "nr",
+      "desde",
+      "lecturas"
+    ],
+    "rows": [
+      [
+        "#1",
+        "2020-04-18",
+        8663
+      ],
+      [
+        "#1",
+        "2020-05-29",
+        16083
+      ],
+      [
+        "#3",
+        "2020-06-05",
+        20947
+      ],
+      [
+        "#4",
+        "2020-07-15",
+        8661
+      ]
+    ],
+    "sql": "SELECT a.nr, a.desde, count(t.day) AS lecturas FROM ( SELECT nr, CAST(strptime(start_time, '%-m/%-d/%Y %-H:%M') AS DATE) AS desde, CAST(strptime(end_time, '%-m/%-d/%Y %-H:%M') AS DATE) AS hasta FROM averias ) a LEFT JOIN telemetria t ON t.day BETWEEN a.desde AND a.hasta GROUP BY a.nr, a.desde ORDER BY a.desde",
+    "muestra": "sql"
   }
 }

@@ -457,10 +457,10 @@
       "title_en": "Joining tables: JOINs, and the one that lies to you",
       "subtitle_en": "Crossing telemetry with the failure reports. What a key is, why a bad JOIN silently multiplies rows, and how to catch it",
       "cifra": {
-        "value": "por medir",
-        "label": "filas antes y después del cruce",
-        "value_en": "to be measured",
-        "label_en": "rows before and after the join"
+        "value": "de 4 filas a 6",
+        "label": "lo que multiplica cruzar por un número que parece clave y no lo es",
+        "value_en": "4 rows into 6",
+        "label_en": "what joining on a number that looks like a key multiplies them into"
       },
       "instrumento": "grafo",
       "interactivo": true,
@@ -470,7 +470,7 @@
         "claves"
       ],
       "scripts": [
-        "src/transform/queries_m12.sql"
+        "src/transform/queries_m12.py"
       ],
       "figuras": [
         "fig_m12_tipos_de_join",

@@ -36,6 +36,7 @@ MUESTRA_DE = {
     "m09_horas_por_estado": "sql",
     "m10_horas_por_mes": "sin_timestamp_ligera",
     "m11_con_with": "sin_timestamp_ligera",
+    "m12_lecturas_por_averia": "sql",
 }
 
 SECONDS_PER_READING = 10
@@ -99,6 +100,21 @@ CHALLENGES = {
         FROM dias_completos
         GROUP BY mes
         ORDER BY mes
+    """,
+    # Modulo 12: una fila por parte de averia, con las lecturas que caen dentro.
+    # Los partes van a la IZQUIERDA del LEFT JOIN, que es lo que garantiza las
+    # cuatro filas aunque alguno no tuviera ninguna lectura.
+    "m12_lecturas_por_averia": """
+        SELECT a.nr, a.desde, count(t.day) AS lecturas
+        FROM (
+            SELECT nr,
+                   CAST(strptime(start_time, '%-m/%-d/%Y %-H:%M') AS DATE) AS desde,
+                   CAST(strptime(end_time,   '%-m/%-d/%Y %-H:%M') AS DATE) AS hasta
+            FROM averias
+        ) a
+        LEFT JOIN telemetria t ON t.day BETWEEN a.desde AND a.hasta
+        GROUP BY a.nr, a.desde
+        ORDER BY a.desde
     """,
 }
 

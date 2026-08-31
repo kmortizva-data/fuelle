@@ -1,0 +1,84 @@
+{
+  "lecturas": 1516948,
+  "partes": 4,
+  "tipo_de_las_fechas": "VARCHAR",
+  "fechas_convertidas": [
+    [
+      "2020-04-18",
+      "2020-04-18",
+      "#1"
+    ],
+    [
+      "2020-05-29",
+      "2020-05-30",
+      "#1"
+    ],
+    [
+      "2020-06-05",
+      "2020-06-07",
+      "#3"
+    ],
+    [
+      "2020-07-15",
+      "2020-07-15",
+      "#4"
+    ]
+  ],
+  "filas_tras_el_cruce": 1516948,
+  "el_cruce_respeta_el_recuento": true,
+  "lecturas_dentro_de_una_averia": 54354,
+  "por_ciento_dentro_de_una_averia": 3.58,
+  "por_averia": [
+    {
+      "nr": "#1",
+      "desde": "2020-04-18",
+      "hasta": "2020-04-18",
+      "lecturas": 8663,
+      "horas_de_carga": 23.8
+    },
+    {
+      "nr": "#1",
+      "desde": "2020-05-29",
+      "hasta": "2020-05-30",
+      "lecturas": 16083,
+      "horas_de_carga": 11.3
+    },
+    {
+      "nr": "#3",
+      "desde": "2020-06-05",
+      "hasta": "2020-06-07",
+      "lecturas": 20947,
+      "horas_de_carga": 49.4
+    },
+    {
+      "nr": "#4",
+      "desde": "2020-07-15",
+      "hasta": "2020-07-15",
+      "lecturas": 8661,
+      "horas_de_carga": 11.6
+    }
+  ],
+  "tipos_de_join": [
+    {
+      "tipo": "INNER JOIN",
+      "filas": 54354
+    },
+    {
+      "tipo": "LEFT JOIN",
+      "filas": 1516948
+    },
+    {
+      "tipo": "CROSS JOIN",
+      "filas": 6067792
+    }
+  ],
+  "numeros_repetidos": [
+    {
+      "nr": "#1",
+      "veces": 2
+    }
+  ],
+  "filas_cruzando_por_nr": 6,
+  "filas_cruzando_por_la_clave_buena": 4,
+  "veces_que_multiplica": 1.5
+}
