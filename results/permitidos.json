@@ -24,5 +24,11 @@
   "m03_donde_viven_los_datos": {
     "203.7": "una corrida anterior del mismo script, citada para enseñar cuánto bailan los tiempos medidos una sola vez. Es la razón de que ahora se midan siete",
     "143.8": "la corrida siguiente a la anterior, con el mismo código y sin tocar nada. Las dos juntas justifican la mediana de siete"
+  },
+  "m04_bronce": {
+    "0.0120000000000004": "el mismo valor literal del CSV que cita el modulo 1, repetido aqui para decir que bronce no lo toca. Es una cita, no una medicion"
+  },
+  "m07_filas_contra_columnas": {
+    "20,20,20,20": "la fila de leyes del ejemplo de juguete, cuatro turnos con la misma ley. Numeros elegidos para que la repeticion se vea a simple vista"
   }
 }

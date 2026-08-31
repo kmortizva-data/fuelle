@@ -1,0 +1,1926 @@
+{
+  "particiones": 212,
+  "lecturas_de_un_dia_lleno": 8640,
+  "dias": [
+    {
+      "dia": "2020-02-01",
+      "lecturas": 7144,
+      "por_ciento_del_dia": 82.7
+    },
+    {
+      "dia": "2020-02-02",
+      "lecturas": 7031,
+      "por_ciento_del_dia": 81.4
+    },
+    {
+      "dia": "2020-02-03",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-02-04",
+      "lecturas": 8717,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-02-05",
+      "lecturas": 7437,
+      "por_ciento_del_dia": 86.1
+    },
+    {
+      "dia": "2020-02-06",
+      "lecturas": 4939,
+      "por_ciento_del_dia": 57.2
+    },
+    {
+      "dia": "2020-02-07",
+      "lecturas": 7052,
+      "por_ciento_del_dia": 81.6
+    },
+    {
+      "dia": "2020-02-08",
+      "lecturas": 8689,
+      "por_ciento_del_dia": 100.6
+    },
+    {
+      "dia": "2020-02-09",
+      "lecturas": 7279,
+      "por_ciento_del_dia": 84.2
+    },
+    {
+      "dia": "2020-02-10",
+      "lecturas": 7468,
+      "por_ciento_del_dia": 86.4
+    },
+    {
+      "dia": "2020-02-11",
+      "lecturas": 7431,
+      "por_ciento_del_dia": 86.0
+    },
+    {
+      "dia": "2020-02-12",
+      "lecturas": 7353,
+      "por_ciento_del_dia": 85.1
+    },
+    {
+      "dia": "2020-02-13",
+      "lecturas": 7528,
+      "por_ciento_del_dia": 87.1
+    },
+    {
+      "dia": "2020-02-14",
+      "lecturas": 6932,
+      "por_ciento_del_dia": 80.2
+    },
+    {
+      "dia": "2020-02-15",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-02-16",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-02-17",
+      "lecturas": 7095,
+      "por_ciento_del_dia": 82.1
+    },
+    {
+      "dia": "2020-02-18",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-02-19",
+      "lecturas": 7225,
+      "por_ciento_del_dia": 83.6
+    },
+    {
+      "dia": "2020-02-20",
+      "lecturas": 7113,
+      "por_ciento_del_dia": 82.3
+    },
+    {
+      "dia": "2020-02-21",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-02-22",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-02-23",
+      "lecturas": 7105,
+      "por_ciento_del_dia": 82.2
+    },
+    {
+      "dia": "2020-02-24",
+      "lecturas": 5893,
+      "por_ciento_del_dia": 68.2
+    },
+    {
+      "dia": "2020-02-25",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-02-26",
+      "lecturas": 7244,
+      "por_ciento_del_dia": 83.8
+    },
+    {
+      "dia": "2020-02-27",
+      "lecturas": 8464,
+      "por_ciento_del_dia": 98.0
+    },
+    {
+      "dia": "2020-02-28",
+      "lecturas": 8699,
+      "por_ciento_del_dia": 100.7
+    },
+    {
+      "dia": "2020-03-01",
+      "lecturas": 7263,
+      "por_ciento_del_dia": 84.1
+    },
+    {
+      "dia": "2020-03-02",
+      "lecturas": 7570,
+      "por_ciento_del_dia": 87.6
+    },
+    {
+      "dia": "2020-03-03",
+      "lecturas": 7252,
+      "por_ciento_del_dia": 83.9
+    },
+    {
+      "dia": "2020-03-04",
+      "lecturas": 8668,
+      "por_ciento_del_dia": 100.3
+    },
+    {
+      "dia": "2020-03-05",
+      "lecturas": 8691,
+      "por_ciento_del_dia": 100.6
+    },
+    {
+      "dia": "2020-03-06",
+      "lecturas": 7557,
+      "por_ciento_del_dia": 87.5
+    },
+    {
+      "dia": "2020-03-07",
+      "lecturas": 3043,
+      "por_ciento_del_dia": 35.2
+    },
+    {
+      "dia": "2020-03-08",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-03-09",
+      "lecturas": 7502,
+      "por_ciento_del_dia": 86.8
+    },
+    {
+      "dia": "2020-03-10",
+      "lecturas": 8076,
+      "por_ciento_del_dia": 93.5
+    },
+    {
+      "dia": "2020-03-11",
+      "lecturas": 5226,
+      "por_ciento_del_dia": 60.5
+    },
+    {
+      "dia": "2020-03-12",
+      "lecturas": 8202,
+      "por_ciento_del_dia": 94.9
+    },
+    {
+      "dia": "2020-03-13",
+      "lecturas": 8700,
+      "por_ciento_del_dia": 100.7
+    },
+    {
+      "dia": "2020-03-14",
+      "lecturas": 6990,
+      "por_ciento_del_dia": 80.9
+    },
+    {
+      "dia": "2020-03-15",
+      "lecturas": 3746,
+      "por_ciento_del_dia": 43.4
+    },
+    {
+      "dia": "2020-03-16",
+      "lecturas": 7072,
+      "por_ciento_del_dia": 81.9
+    },
+    {
+      "dia": "2020-03-17",
+      "lecturas": 8551,
+      "por_ciento_del_dia": 99.0
+    },
+    {
+      "dia": "2020-03-18",
+      "lecturas": 8717,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-03-19",
+      "lecturas": 7668,
+      "por_ciento_del_dia": 88.8
+    },
+    {
+      "dia": "2020-03-20",
+      "lecturas": 6359,
+      "por_ciento_del_dia": 73.6
+    },
+    {
+      "dia": "2020-03-21",
+      "lecturas": 8255,
+      "por_ciento_del_dia": 95.5
+    },
+    {
+      "dia": "2020-03-22",
+      "lecturas": 8717,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-03-23",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-03-24",
+      "lecturas": 7684,
+      "por_ciento_del_dia": 88.9
+    },
+    {
+      "dia": "2020-03-25",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-03-26",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-03-27",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-03-28",
+      "lecturas": 3536,
+      "por_ciento_del_dia": 40.9
+    },
+    {
+      "dia": "2020-03-29",
+      "lecturas": 7199,
+      "por_ciento_del_dia": 83.3
+    },
+    {
+      "dia": "2020-03-30",
+      "lecturas": 5907,
+      "por_ciento_del_dia": 68.4
+    },
+    {
+      "dia": "2020-03-31",
+      "lecturas": 8717,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-04-01",
+      "lecturas": 4816,
+      "por_ciento_del_dia": 55.7
+    },
+    {
+      "dia": "2020-04-02",
+      "lecturas": 3853,
+      "por_ciento_del_dia": 44.6
+    },
+    {
+      "dia": "2020-04-03",
+      "lecturas": 7275,
+      "por_ciento_del_dia": 84.2
+    },
+    {
+      "dia": "2020-04-04",
+      "lecturas": 7794,
+      "por_ciento_del_dia": 90.2
+    },
+    {
+      "dia": "2020-04-05",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-04-06",
+      "lecturas": 7045,
+      "por_ciento_del_dia": 81.5
+    },
+    {
+      "dia": "2020-04-07",
+      "lecturas": 7989,
+      "por_ciento_del_dia": 92.5
+    },
+    {
+      "dia": "2020-04-08",
+      "lecturas": 7155,
+      "por_ciento_del_dia": 82.8
+    },
+    {
+      "dia": "2020-04-09",
+      "lecturas": 6962,
+      "por_ciento_del_dia": 80.6
+    },
+    {
+      "dia": "2020-04-10",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-04-11",
+      "lecturas": 7229,
+      "por_ciento_del_dia": 83.7
+    },
+    {
+      "dia": "2020-04-12",
+      "lecturas": 7125,
+      "por_ciento_del_dia": 82.5
+    },
+    {
+      "dia": "2020-04-13",
+      "lecturas": 3501,
+      "por_ciento_del_dia": 40.5
+    },
+    {
+      "dia": "2020-04-14",
+      "lecturas": 6329,
+      "por_ciento_del_dia": 73.3
+    },
+    {
+      "dia": "2020-04-15",
+      "lecturas": 8433,
+      "por_ciento_del_dia": 97.6
+    },
+    {
+      "dia": "2020-04-16",
+      "lecturas": 8027,
+      "por_ciento_del_dia": 92.9
+    },
+    {
+      "dia": "2020-04-17",
+      "lecturas": 6301,
+      "por_ciento_del_dia": 72.9
+    },
+    {
+      "dia": "2020-04-18",
+      "lecturas": 8663,
+      "por_ciento_del_dia": 100.3
+    },
+    {
+      "dia": "2020-04-19",
+      "lecturas": 8555,
+      "por_ciento_del_dia": 99.0
+    },
+    {
+      "dia": "2020-04-20",
+      "lecturas": 7477,
+      "por_ciento_del_dia": 86.5
+    },
+    {
+      "dia": "2020-04-21",
+      "lecturas": 6802,
+      "por_ciento_del_dia": 78.7
+    },
+    {
+      "dia": "2020-04-22",
+      "lecturas": 8256,
+      "por_ciento_del_dia": 95.6
+    },
+    {
+      "dia": "2020-04-23",
+      "lecturas": 7369,
+      "por_ciento_del_dia": 85.3
+    },
+    {
+      "dia": "2020-04-24",
+      "lecturas": 8423,
+      "por_ciento_del_dia": 97.5
+    },
+    {
+      "dia": "2020-04-25",
+      "lecturas": 429,
+      "por_ciento_del_dia": 5.0
+    },
+    {
+      "dia": "2020-04-27",
+      "lecturas": 6778,
+      "por_ciento_del_dia": 78.4
+    },
+    {
+      "dia": "2020-04-28",
+      "lecturas": 6809,
+      "por_ciento_del_dia": 78.8
+    },
+    {
+      "dia": "2020-04-29",
+      "lecturas": 8017,
+      "por_ciento_del_dia": 92.8
+    },
+    {
+      "dia": "2020-04-30",
+      "lecturas": 3890,
+      "por_ciento_del_dia": 45.0
+    },
+    {
+      "dia": "2020-05-01",
+      "lecturas": 962,
+      "por_ciento_del_dia": 11.1
+    },
+    {
+      "dia": "2020-05-02",
+      "lecturas": 8441,
+      "por_ciento_del_dia": 97.7
+    },
+    {
+      "dia": "2020-05-03",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-05-04",
+      "lecturas": 7427,
+      "por_ciento_del_dia": 86.0
+    },
+    {
+      "dia": "2020-05-05",
+      "lecturas": 7382,
+      "por_ciento_del_dia": 85.4
+    },
+    {
+      "dia": "2020-05-06",
+      "lecturas": 7942,
+      "por_ciento_del_dia": 91.9
+    },
+    {
+      "dia": "2020-05-07",
+      "lecturas": 8024,
+      "por_ciento_del_dia": 92.9
+    },
+    {
+      "dia": "2020-05-08",
+      "lecturas": 8118,
+      "por_ciento_del_dia": 94.0
+    },
+    {
+      "dia": "2020-05-09",
+      "lecturas": 7657,
+      "por_ciento_del_dia": 88.6
+    },
+    {
+      "dia": "2020-05-10",
+      "lecturas": 329,
+      "por_ciento_del_dia": 3.8
+    },
+    {
+      "dia": "2020-05-11",
+      "lecturas": 7260,
+      "por_ciento_del_dia": 84.0
+    },
+    {
+      "dia": "2020-05-12",
+      "lecturas": 8518,
+      "por_ciento_del_dia": 98.6
+    },
+    {
+      "dia": "2020-05-13",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-05-14",
+      "lecturas": 6342,
+      "por_ciento_del_dia": 73.4
+    },
+    {
+      "dia": "2020-05-15",
+      "lecturas": 8363,
+      "por_ciento_del_dia": 96.8
+    },
+    {
+      "dia": "2020-05-16",
+      "lecturas": 8615,
+      "por_ciento_del_dia": 99.7
+    },
+    {
+      "dia": "2020-05-17",
+      "lecturas": 2847,
+      "por_ciento_del_dia": 33.0
+    },
+    {
+      "dia": "2020-05-18",
+      "lecturas": 8435,
+      "por_ciento_del_dia": 97.6
+    },
+    {
+      "dia": "2020-05-19",
+      "lecturas": 7410,
+      "por_ciento_del_dia": 85.8
+    },
+    {
+      "dia": "2020-05-20",
+      "lecturas": 7462,
+      "por_ciento_del_dia": 86.4
+    },
+    {
+      "dia": "2020-05-21",
+      "lecturas": 6516,
+      "por_ciento_del_dia": 75.4
+    },
+    {
+      "dia": "2020-05-22",
+      "lecturas": 7233,
+      "por_ciento_del_dia": 83.7
+    },
+    {
+      "dia": "2020-05-23",
+      "lecturas": 8458,
+      "por_ciento_del_dia": 97.9
+    },
+    {
+      "dia": "2020-05-24",
+      "lecturas": 210,
+      "por_ciento_del_dia": 2.4
+    },
+    {
+      "dia": "2020-05-25",
+      "lecturas": 6902,
+      "por_ciento_del_dia": 79.9
+    },
+    {
+      "dia": "2020-05-26",
+      "lecturas": 5606,
+      "por_ciento_del_dia": 64.9
+    },
+    {
+      "dia": "2020-05-27",
+      "lecturas": 7096,
+      "por_ciento_del_dia": 82.1
+    },
+    {
+      "dia": "2020-05-28",
+      "lecturas": 8436,
+      "por_ciento_del_dia": 97.6
+    },
+    {
+      "dia": "2020-05-29",
+      "lecturas": 7466,
+      "por_ciento_del_dia": 86.4
+    },
+    {
+      "dia": "2020-05-30",
+      "lecturas": 8617,
+      "por_ciento_del_dia": 99.7
+    },
+    {
+      "dia": "2020-05-31",
+      "lecturas": 7294,
+      "por_ciento_del_dia": 84.4
+    },
+    {
+      "dia": "2020-06-01",
+      "lecturas": 8523,
+      "por_ciento_del_dia": 98.6
+    },
+    {
+      "dia": "2020-06-02",
+      "lecturas": 5131,
+      "por_ciento_del_dia": 59.4
+    },
+    {
+      "dia": "2020-06-03",
+      "lecturas": 7976,
+      "por_ciento_del_dia": 92.3
+    },
+    {
+      "dia": "2020-06-04",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-06-05",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-06-06",
+      "lecturas": 7343,
+      "por_ciento_del_dia": 85.0
+    },
+    {
+      "dia": "2020-06-07",
+      "lecturas": 4888,
+      "por_ciento_del_dia": 56.6
+    },
+    {
+      "dia": "2020-06-08",
+      "lecturas": 4232,
+      "por_ciento_del_dia": 49.0
+    },
+    {
+      "dia": "2020-06-09",
+      "lecturas": 7286,
+      "por_ciento_del_dia": 84.3
+    },
+    {
+      "dia": "2020-06-10",
+      "lecturas": 7919,
+      "por_ciento_del_dia": 91.7
+    },
+    {
+      "dia": "2020-06-11",
+      "lecturas": 8398,
+      "por_ciento_del_dia": 97.2
+    },
+    {
+      "dia": "2020-06-12",
+      "lecturas": 7245,
+      "por_ciento_del_dia": 83.9
+    },
+    {
+      "dia": "2020-06-13",
+      "lecturas": 8717,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-06-14",
+      "lecturas": 8684,
+      "por_ciento_del_dia": 100.5
+    },
+    {
+      "dia": "2020-06-15",
+      "lecturas": 8359,
+      "por_ciento_del_dia": 96.7
+    },
+    {
+      "dia": "2020-06-16",
+      "lecturas": 8235,
+      "por_ciento_del_dia": 95.3
+    },
+    {
+      "dia": "2020-06-17",
+      "lecturas": 5240,
+      "por_ciento_del_dia": 60.6
+    },
+    {
+      "dia": "2020-06-18",
+      "lecturas": 6912,
+      "por_ciento_del_dia": 80.0
+    },
+    {
+      "dia": "2020-06-19",
+      "lecturas": 8656,
+      "por_ciento_del_dia": 100.2
+    },
+    {
+      "dia": "2020-06-20",
+      "lecturas": 8506,
+      "por_ciento_del_dia": 98.4
+    },
+    {
+      "dia": "2020-06-21",
+      "lecturas": 7422,
+      "por_ciento_del_dia": 85.9
+    },
+    {
+      "dia": "2020-06-22",
+      "lecturas": 7274,
+      "por_ciento_del_dia": 84.2
+    },
+    {
+      "dia": "2020-06-23",
+      "lecturas": 7159,
+      "por_ciento_del_dia": 82.9
+    },
+    {
+      "dia": "2020-06-24",
+      "lecturas": 7162,
+      "por_ciento_del_dia": 82.9
+    },
+    {
+      "dia": "2020-06-25",
+      "lecturas": 8272,
+      "por_ciento_del_dia": 95.7
+    },
+    {
+      "dia": "2020-06-26",
+      "lecturas": 8678,
+      "por_ciento_del_dia": 100.4
+    },
+    {
+      "dia": "2020-06-27",
+      "lecturas": 3183,
+      "por_ciento_del_dia": 36.8
+    },
+    {
+      "dia": "2020-06-28",
+      "lecturas": 317,
+      "por_ciento_del_dia": 3.7
+    },
+    {
+      "dia": "2020-06-29",
+      "lecturas": 8677,
+      "por_ciento_del_dia": 100.4
+    },
+    {
+      "dia": "2020-06-30",
+      "lecturas": 8688,
+      "por_ciento_del_dia": 100.6
+    },
+    {
+      "dia": "2020-07-01",
+      "lecturas": 8715,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-07-02",
+      "lecturas": 8717,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-07-03",
+      "lecturas": 8093,
+      "por_ciento_del_dia": 93.7
+    },
+    {
+      "dia": "2020-07-04",
+      "lecturas": 8693,
+      "por_ciento_del_dia": 100.6
+    },
+    {
+      "dia": "2020-07-05",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-07-06",
+      "lecturas": 5906,
+      "por_ciento_del_dia": 68.4
+    },
+    {
+      "dia": "2020-07-07",
+      "lecturas": 4001,
+      "por_ciento_del_dia": 46.3
+    },
+    {
+      "dia": "2020-07-08",
+      "lecturas": 3107,
+      "por_ciento_del_dia": 36.0
+    },
+    {
+      "dia": "2020-07-09",
+      "lecturas": 7518,
+      "por_ciento_del_dia": 87.0
+    },
+    {
+      "dia": "2020-07-10",
+      "lecturas": 7157,
+      "por_ciento_del_dia": 82.8
+    },
+    {
+      "dia": "2020-07-11",
+      "lecturas": 5253,
+      "por_ciento_del_dia": 60.8
+    },
+    {
+      "dia": "2020-07-12",
+      "lecturas": 5609,
+      "por_ciento_del_dia": 64.9
+    },
+    {
+      "dia": "2020-07-13",
+      "lecturas": 7434,
+      "por_ciento_del_dia": 86.0
+    },
+    {
+      "dia": "2020-07-14",
+      "lecturas": 3563,
+      "por_ciento_del_dia": 41.2
+    },
+    {
+      "dia": "2020-07-15",
+      "lecturas": 8661,
+      "por_ciento_del_dia": 100.2
+    },
+    {
+      "dia": "2020-07-16",
+      "lecturas": 8642,
+      "por_ciento_del_dia": 100.0
+    },
+    {
+      "dia": "2020-07-17",
+      "lecturas": 7279,
+      "por_ciento_del_dia": 84.2
+    },
+    {
+      "dia": "2020-07-18",
+      "lecturas": 8697,
+      "por_ciento_del_dia": 100.7
+    },
+    {
+      "dia": "2020-07-19",
+      "lecturas": 8677,
+      "por_ciento_del_dia": 100.4
+    },
+    {
+      "dia": "2020-07-20",
+      "lecturas": 8688,
+      "por_ciento_del_dia": 100.6
+    },
+    {
+      "dia": "2020-07-21",
+      "lecturas": 8163,
+      "por_ciento_del_dia": 94.5
+    },
+    {
+      "dia": "2020-07-22",
+      "lecturas": 8305,
+      "por_ciento_del_dia": 96.1
+    },
+    {
+      "dia": "2020-07-23",
+      "lecturas": 7245,
+      "por_ciento_del_dia": 83.9
+    },
+    {
+      "dia": "2020-07-24",
+      "lecturas": 6899,
+      "por_ciento_del_dia": 79.8
+    },
+    {
+      "dia": "2020-07-25",
+      "lecturas": 6119,
+      "por_ciento_del_dia": 70.8
+    },
+    {
+      "dia": "2020-07-26",
+      "lecturas": 6448,
+      "por_ciento_del_dia": 74.6
+    },
+    {
+      "dia": "2020-07-27",
+      "lecturas": 7349,
+      "por_ciento_del_dia": 85.1
+    },
+    {
+      "dia": "2020-07-28",
+      "lecturas": 6785,
+      "por_ciento_del_dia": 78.5
+    },
+    {
+      "dia": "2020-07-29",
+      "lecturas": 7802,
+      "por_ciento_del_dia": 90.3
+    },
+    {
+      "dia": "2020-07-30",
+      "lecturas": 7278,
+      "por_ciento_del_dia": 84.2
+    },
+    {
+      "dia": "2020-07-31",
+      "lecturas": 7119,
+      "por_ciento_del_dia": 82.4
+    },
+    {
+      "dia": "2020-08-01",
+      "lecturas": 8684,
+      "por_ciento_del_dia": 100.5
+    },
+    {
+      "dia": "2020-08-02",
+      "lecturas": 7473,
+      "por_ciento_del_dia": 86.5
+    },
+    {
+      "dia": "2020-08-03",
+      "lecturas": 3947,
+      "por_ciento_del_dia": 45.7
+    },
+    {
+      "dia": "2020-08-04",
+      "lecturas": 2800,
+      "por_ciento_del_dia": 32.4
+    },
+    {
+      "dia": "2020-08-05",
+      "lecturas": 5672,
+      "por_ciento_del_dia": 65.6
+    },
+    {
+      "dia": "2020-08-06",
+      "lecturas": 8653,
+      "por_ciento_del_dia": 100.2
+    },
+    {
+      "dia": "2020-08-07",
+      "lecturas": 8708,
+      "por_ciento_del_dia": 100.8
+    },
+    {
+      "dia": "2020-08-08",
+      "lecturas": 7909,
+      "por_ciento_del_dia": 91.5
+    },
+    {
+      "dia": "2020-08-09",
+      "lecturas": 7688,
+      "por_ciento_del_dia": 89.0
+    },
+    {
+      "dia": "2020-08-10",
+      "lecturas": 8716,
+      "por_ciento_del_dia": 100.9
+    },
+    {
+      "dia": "2020-08-11",
+      "lecturas": 7122,
+      "por_ciento_del_dia": 82.4
+    },
+    {
+      "dia": "2020-08-12",
+      "lecturas": 8512,
+      "por_ciento_del_dia": 98.5
+    },
+    {
+      "dia": "2020-08-13",
+      "lecturas": 8676,
+      "por_ciento_del_dia": 100.4
+    },
+    {
+      "dia": "2020-08-14",
+      "lecturas": 7200,
+      "por_ciento_del_dia": 83.3
+    },
+    {
+      "dia": "2020-08-15",
+      "lecturas": 6868,
+      "por_ciento_del_dia": 79.5
+    },
+    {
+      "dia": "2020-08-16",
+      "lecturas": 6209,
+      "por_ciento_del_dia": 71.9
+    },
+    {
+      "dia": "2020-08-17",
+      "lecturas": 8116,
+      "por_ciento_del_dia": 93.9
+    },
+    {
+      "dia": "2020-08-18",
+      "lecturas": 8207,
+      "por_ciento_del_dia": 95.0
+    },
+    {
+      "dia": "2020-08-19",
+      "lecturas": 7392,
+      "por_ciento_del_dia": 85.6
+    },
+    {
+      "dia": "2020-08-20",
+      "lecturas": 5742,
+      "por_ciento_del_dia": 66.5
+    },
+    {
+      "dia": "2020-08-21",
+      "lecturas": 7380,
+      "por_ciento_del_dia": 85.4
+    },
+    {
+      "dia": "2020-08-22",
+      "lecturas": 6780,
+      "por_ciento_del_dia": 78.5
+    },
+    {
+      "dia": "2020-08-23",
+      "lecturas": 1871,
+      "por_ciento_del_dia": 21.7
+    },
+    {
+      "dia": "2020-08-24",
+      "lecturas": 8659,
+      "por_ciento_del_dia": 100.2
+    },
+    {
+      "dia": "2020-08-25",
+      "lecturas": 6660,
+      "por_ciento_del_dia": 77.1
+    },
+    {
+      "dia": "2020-08-26",
+      "lecturas": 7936,
+      "por_ciento_del_dia": 91.9
+    },
+    {
+      "dia": "2020-08-27",
+      "lecturas": 7334,
+      "por_ciento_del_dia": 84.9
+    },
+    {
+      "dia": "2020-08-28",
+      "lecturas": 8190,
+      "por_ciento_del_dia": 94.8
+    },
+    {
+      "dia": "2020-08-29",
+      "lecturas": 7131,
+      "por_ciento_del_dia": 82.5
+    },
+    {
+      "dia": "2020-08-30",
+      "lecturas": 7354,
+      "por_ciento_del_dia": 85.1
+    },
+    {
+      "dia": "2020-08-31",
+      "lecturas": 6845,
+      "por_ciento_del_dia": 79.2
+    },
+    {
+      "dia": "2020-09-01",
+      "lecturas": 530,
+      "por_ciento_del_dia": 6.1
+    }
+  ],
+  "kb_por_particion": [
+    {
+      "dia": "2020-02-01",
+      "kb": 105.2
+    },
+    {
+      "dia": "2020-02-02",
+      "kb": 104.5
+    },
+    {
+      "dia": "2020-02-03",
+      "kb": 118.9
+    },
+    {
+      "dia": "2020-02-04",
+      "kb": 121.7
+    },
+    {
+      "dia": "2020-02-05",
+      "kb": 108.5
+    },
+    {
+      "dia": "2020-02-06",
+      "kb": 72.7
+    },
+    {
+      "dia": "2020-02-07",
+      "kb": 106.5
+    },
+    {
+      "dia": "2020-02-08",
+      "kb": 123.4
+    },
+    {
+      "dia": "2020-02-09",
+      "kb": 106.7
+    },
+    {
+      "dia": "2020-02-10",
+      "kb": 108.2
+    },
+    {
+      "dia": "2020-02-11",
+      "kb": 109.2
+    },
+    {
+      "dia": "2020-02-12",
+      "kb": 107.3
+    },
+    {
+      "dia": "2020-02-13",
+      "kb": 108.7
+    },
+    {
+      "dia": "2020-02-14",
+      "kb": 102.9
+    },
+    {
+      "dia": "2020-02-15",
+      "kb": 122.3
+    },
+    {
+      "dia": "2020-02-16",
+      "kb": 121.0
+    },
+    {
+      "dia": "2020-02-17",
+      "kb": 104.5
+    },
+    {
+      "dia": "2020-02-18",
+      "kb": 122.1
+    },
+    {
+      "dia": "2020-02-19",
+      "kb": 104.2
+    },
+    {
+      "dia": "2020-02-20",
+      "kb": 105.9
+    },
+    {
+      "dia": "2020-02-21",
+      "kb": 121.0
+    },
+    {
+      "dia": "2020-02-22",
+      "kb": 122.8
+    },
+    {
+      "dia": "2020-02-23",
+      "kb": 104.0
+    },
+    {
+      "dia": "2020-02-24",
+      "kb": 88.8
+    },
+    {
+      "dia": "2020-02-25",
+      "kb": 122.4
+    },
+    {
+      "dia": "2020-02-26",
+      "kb": 105.2
+    },
+    {
+      "dia": "2020-02-27",
+      "kb": 118.6
+    },
+    {
+      "dia": "2020-02-28",
+      "kb": 121.9
+    },
+    {
+      "dia": "2020-03-01",
+      "kb": 108.8
+    },
+    {
+      "dia": "2020-03-02",
+      "kb": 119.5
+    },
+    {
+      "dia": "2020-03-03",
+      "kb": 117.3
+    },
+    {
+      "dia": "2020-03-04",
+      "kb": 128.7
+    },
+    {
+      "dia": "2020-03-05",
+      "kb": 132.1
+    },
+    {
+      "dia": "2020-03-06",
+      "kb": 123.8
+    },
+    {
+      "dia": "2020-03-07",
+      "kb": 56.8
+    },
+    {
+      "dia": "2020-03-08",
+      "kb": 126.6
+    },
+    {
+      "dia": "2020-03-09",
+      "kb": 118.1
+    },
+    {
+      "dia": "2020-03-10",
+      "kb": 129.1
+    },
+    {
+      "dia": "2020-03-11",
+      "kb": 89.5
+    },
+    {
+      "dia": "2020-03-12",
+      "kb": 135.8
+    },
+    {
+      "dia": "2020-03-13",
+      "kb": 126.1
+    },
+    {
+      "dia": "2020-03-14",
+      "kb": 109.7
+    },
+    {
+      "dia": "2020-03-15",
+      "kb": 62.1
+    },
+    {
+      "dia": "2020-03-16",
+      "kb": 109.0
+    },
+    {
+      "dia": "2020-03-17",
+      "kb": 121.7
+    },
+    {
+      "dia": "2020-03-18",
+      "kb": 123.9
+    },
+    {
+      "dia": "2020-03-19",
+      "kb": 111.3
+    },
+    {
+      "dia": "2020-03-20",
+      "kb": 99.6
+    },
+    {
+      "dia": "2020-03-21",
+      "kb": 122.1
+    },
+    {
+      "dia": "2020-03-22",
+      "kb": 127.4
+    },
+    {
+      "dia": "2020-03-23",
+      "kb": 126.6
+    },
+    {
+      "dia": "2020-03-24",
+      "kb": 117.9
+    },
+    {
+      "dia": "2020-03-25",
+      "kb": 128.0
+    },
+    {
+      "dia": "2020-03-26",
+      "kb": 130.9
+    },
+    {
+      "dia": "2020-03-27",
+      "kb": 136.4
+    },
+    {
+      "dia": "2020-03-28",
+      "kb": 64.8
+    },
+    {
+      "dia": "2020-03-29",
+      "kb": 91.9
+    },
+    {
+      "dia": "2020-03-30",
+      "kb": 94.6
+    },
+    {
+      "dia": "2020-03-31",
+      "kb": 127.4
+    },
+    {
+      "dia": "2020-04-01",
+      "kb": 73.7
+    },
+    {
+      "dia": "2020-04-02",
+      "kb": 61.3
+    },
+    {
+      "dia": "2020-04-03",
+      "kb": 111.1
+    },
+    {
+      "dia": "2020-04-04",
+      "kb": 119.9
+    },
+    {
+      "dia": "2020-04-05",
+      "kb": 124.0
+    },
+    {
+      "dia": "2020-04-06",
+      "kb": 113.2
+    },
+    {
+      "dia": "2020-04-07",
+      "kb": 119.2
+    },
+    {
+      "dia": "2020-04-08",
+      "kb": 108.1
+    },
+    {
+      "dia": "2020-04-09",
+      "kb": 103.7
+    },
+    {
+      "dia": "2020-04-10",
+      "kb": 125.9
+    },
+    {
+      "dia": "2020-04-11",
+      "kb": 111.4
+    },
+    {
+      "dia": "2020-04-12",
+      "kb": 119.6
+    },
+    {
+      "dia": "2020-04-13",
+      "kb": 56.2
+    },
+    {
+      "dia": "2020-04-14",
+      "kb": 100.1
+    },
+    {
+      "dia": "2020-04-15",
+      "kb": 123.2
+    },
+    {
+      "dia": "2020-04-16",
+      "kb": 120.1
+    },
+    {
+      "dia": "2020-04-17",
+      "kb": 65.9
+    },
+    {
+      "dia": "2020-04-18",
+      "kb": 117.8
+    },
+    {
+      "dia": "2020-04-19",
+      "kb": 131.1
+    },
+    {
+      "dia": "2020-04-20",
+      "kb": 67.6
+    },
+    {
+      "dia": "2020-04-21",
+      "kb": 99.1
+    },
+    {
+      "dia": "2020-04-22",
+      "kb": 120.7
+    },
+    {
+      "dia": "2020-04-23",
+      "kb": 110.6
+    },
+    {
+      "dia": "2020-04-24",
+      "kb": 121.0
+    },
+    {
+      "dia": "2020-04-25",
+      "kb": 12.2
+    },
+    {
+      "dia": "2020-04-27",
+      "kb": 106.5
+    },
+    {
+      "dia": "2020-04-28",
+      "kb": 104.1
+    },
+    {
+      "dia": "2020-04-29",
+      "kb": 122.6
+    },
+    {
+      "dia": "2020-04-30",
+      "kb": 62.5
+    },
+    {
+      "dia": "2020-05-01",
+      "kb": 22.4
+    },
+    {
+      "dia": "2020-05-02",
+      "kb": 124.6
+    },
+    {
+      "dia": "2020-05-03",
+      "kb": 126.5
+    },
+    {
+      "dia": "2020-05-04",
+      "kb": 111.5
+    },
+    {
+      "dia": "2020-05-05",
+      "kb": 111.3
+    },
+    {
+      "dia": "2020-05-06",
+      "kb": 118.6
+    },
+    {
+      "dia": "2020-05-07",
+      "kb": 118.5
+    },
+    {
+      "dia": "2020-05-08",
+      "kb": 119.3
+    },
+    {
+      "dia": "2020-05-09",
+      "kb": 113.1
+    },
+    {
+      "dia": "2020-05-10",
+      "kb": 12.2
+    },
+    {
+      "dia": "2020-05-11",
+      "kb": 108.0
+    },
+    {
+      "dia": "2020-05-12",
+      "kb": 121.6
+    },
+    {
+      "dia": "2020-05-13",
+      "kb": 138.5
+    },
+    {
+      "dia": "2020-05-14",
+      "kb": 102.2
+    },
+    {
+      "dia": "2020-05-15",
+      "kb": 121.1
+    },
+    {
+      "dia": "2020-05-16",
+      "kb": 124.4
+    },
+    {
+      "dia": "2020-05-17",
+      "kb": 53.9
+    },
+    {
+      "dia": "2020-05-18",
+      "kb": 130.3
+    },
+    {
+      "dia": "2020-05-19",
+      "kb": 125.6
+    },
+    {
+      "dia": "2020-05-20",
+      "kb": 108.5
+    },
+    {
+      "dia": "2020-05-21",
+      "kb": 108.1
+    },
+    {
+      "dia": "2020-05-22",
+      "kb": 114.8
+    },
+    {
+      "dia": "2020-05-23",
+      "kb": 129.8
+    },
+    {
+      "dia": "2020-05-24",
+      "kb": 8.9
+    },
+    {
+      "dia": "2020-05-25",
+      "kb": 112.3
+    },
+    {
+      "dia": "2020-05-26",
+      "kb": 55.1
+    },
+    {
+      "dia": "2020-05-27",
+      "kb": 36.6
+    },
+    {
+      "dia": "2020-05-28",
+      "kb": 119.9
+    },
+    {
+      "dia": "2020-05-29",
+      "kb": 117.2
+    },
+    {
+      "dia": "2020-05-30",
+      "kb": 133.3
+    },
+    {
+      "dia": "2020-05-31",
+      "kb": 112.4
+    },
+    {
+      "dia": "2020-06-01",
+      "kb": 129.9
+    },
+    {
+      "dia": "2020-06-02",
+      "kb": 79.0
+    },
+    {
+      "dia": "2020-06-03",
+      "kb": 121.3
+    },
+    {
+      "dia": "2020-06-04",
+      "kb": 127.4
+    },
+    {
+      "dia": "2020-06-05",
+      "kb": 141.7
+    },
+    {
+      "dia": "2020-06-06",
+      "kb": 101.1
+    },
+    {
+      "dia": "2020-06-07",
+      "kb": 68.2
+    },
+    {
+      "dia": "2020-06-08",
+      "kb": 72.8
+    },
+    {
+      "dia": "2020-06-09",
+      "kb": 111.3
+    },
+    {
+      "dia": "2020-06-10",
+      "kb": 119.2
+    },
+    {
+      "dia": "2020-06-11",
+      "kb": 123.6
+    },
+    {
+      "dia": "2020-06-12",
+      "kb": 78.0
+    },
+    {
+      "dia": "2020-06-13",
+      "kb": 128.0
+    },
+    {
+      "dia": "2020-06-14",
+      "kb": 127.9
+    },
+    {
+      "dia": "2020-06-15",
+      "kb": 123.5
+    },
+    {
+      "dia": "2020-06-16",
+      "kb": 123.0
+    },
+    {
+      "dia": "2020-06-17",
+      "kb": 81.6
+    },
+    {
+      "dia": "2020-06-18",
+      "kb": 111.9
+    },
+    {
+      "dia": "2020-06-19",
+      "kb": 130.3
+    },
+    {
+      "dia": "2020-06-20",
+      "kb": 128.1
+    },
+    {
+      "dia": "2020-06-21",
+      "kb": 113.5
+    },
+    {
+      "dia": "2020-06-22",
+      "kb": 94.5
+    },
+    {
+      "dia": "2020-06-23",
+      "kb": 37.3
+    },
+    {
+      "dia": "2020-06-24",
+      "kb": 37.3
+    },
+    {
+      "dia": "2020-06-25",
+      "kb": 113.6
+    },
+    {
+      "dia": "2020-06-26",
+      "kb": 127.1
+    },
+    {
+      "dia": "2020-06-27",
+      "kb": 51.8
+    },
+    {
+      "dia": "2020-06-28",
+      "kb": 11.3
+    },
+    {
+      "dia": "2020-06-29",
+      "kb": 127.8
+    },
+    {
+      "dia": "2020-06-30",
+      "kb": 127.1
+    },
+    {
+      "dia": "2020-07-01",
+      "kb": 125.8
+    },
+    {
+      "dia": "2020-07-02",
+      "kb": 129.9
+    },
+    {
+      "dia": "2020-07-03",
+      "kb": 121.2
+    },
+    {
+      "dia": "2020-07-04",
+      "kb": 127.3
+    },
+    {
+      "dia": "2020-07-05",
+      "kb": 126.5
+    },
+    {
+      "dia": "2020-07-06",
+      "kb": 97.8
+    },
+    {
+      "dia": "2020-07-07",
+      "kb": 66.1
+    },
+    {
+      "dia": "2020-07-08",
+      "kb": 59.4
+    },
+    {
+      "dia": "2020-07-09",
+      "kb": 117.0
+    },
+    {
+      "dia": "2020-07-10",
+      "kb": 112.7
+    },
+    {
+      "dia": "2020-07-11",
+      "kb": 84.6
+    },
+    {
+      "dia": "2020-07-12",
+      "kb": 93.1
+    },
+    {
+      "dia": "2020-07-13",
+      "kb": 115.0
+    },
+    {
+      "dia": "2020-07-14",
+      "kb": 60.1
+    },
+    {
+      "dia": "2020-07-15",
+      "kb": 141.5
+    },
+    {
+      "dia": "2020-07-16",
+      "kb": 131.3
+    },
+    {
+      "dia": "2020-07-17",
+      "kb": 118.3
+    },
+    {
+      "dia": "2020-07-18",
+      "kb": 128.1
+    },
+    {
+      "dia": "2020-07-19",
+      "kb": 127.2
+    },
+    {
+      "dia": "2020-07-20",
+      "kb": 126.1
+    },
+    {
+      "dia": "2020-07-21",
+      "kb": 105.2
+    },
+    {
+      "dia": "2020-07-22",
+      "kb": 110.3
+    },
+    {
+      "dia": "2020-07-23",
+      "kb": 111.3
+    },
+    {
+      "dia": "2020-07-24",
+      "kb": 109.1
+    },
+    {
+      "dia": "2020-07-25",
+      "kb": 98.8
+    },
+    {
+      "dia": "2020-07-26",
+      "kb": 103.8
+    },
+    {
+      "dia": "2020-07-27",
+      "kb": 114.5
+    },
+    {
+      "dia": "2020-07-28",
+      "kb": 107.7
+    },
+    {
+      "dia": "2020-07-29",
+      "kb": 129.3
+    },
+    {
+      "dia": "2020-07-30",
+      "kb": 112.3
+    },
+    {
+      "dia": "2020-07-31",
+      "kb": 114.4
+    },
+    {
+      "dia": "2020-08-01",
+      "kb": 127.2
+    },
+    {
+      "dia": "2020-08-02",
+      "kb": 113.2
+    },
+    {
+      "dia": "2020-08-03",
+      "kb": 64.2
+    },
+    {
+      "dia": "2020-08-04",
+      "kb": 45.9
+    },
+    {
+      "dia": "2020-08-05",
+      "kb": 93.6
+    },
+    {
+      "dia": "2020-08-06",
+      "kb": 124.5
+    },
+    {
+      "dia": "2020-08-07",
+      "kb": 125.7
+    },
+    {
+      "dia": "2020-08-08",
+      "kb": 116.5
+    },
+    {
+      "dia": "2020-08-09",
+      "kb": 117.1
+    },
+    {
+      "dia": "2020-08-10",
+      "kb": 128.1
+    },
+    {
+      "dia": "2020-08-11",
+      "kb": 109.3
+    },
+    {
+      "dia": "2020-08-12",
+      "kb": 127.1
+    },
+    {
+      "dia": "2020-08-13",
+      "kb": 128.4
+    },
+    {
+      "dia": "2020-08-14",
+      "kb": 110.5
+    },
+    {
+      "dia": "2020-08-15",
+      "kb": 108.3
+    },
+    {
+      "dia": "2020-08-16",
+      "kb": 100.2
+    },
+    {
+      "dia": "2020-08-17",
+      "kb": 122.5
+    },
+    {
+      "dia": "2020-08-18",
+      "kb": 121.1
+    },
+    {
+      "dia": "2020-08-19",
+      "kb": 115.1
+    },
+    {
+      "dia": "2020-08-20",
+      "kb": 96.0
+    },
+    {
+      "dia": "2020-08-21",
+      "kb": 116.0
+    },
+    {
+      "dia": "2020-08-22",
+      "kb": 107.2
+    },
+    {
+      "dia": "2020-08-23",
+      "kb": 39.1
+    },
+    {
+      "dia": "2020-08-24",
+      "kb": 130.2
+    },
+    {
+      "dia": "2020-08-25",
+      "kb": 106.0
+    },
+    {
+      "dia": "2020-08-26",
+      "kb": 119.3
+    },
+    {
+      "dia": "2020-08-27",
+      "kb": 112.5
+    },
+    {
+      "dia": "2020-08-28",
+      "kb": 122.7
+    },
+    {
+      "dia": "2020-08-29",
+      "kb": 111.7
+    },
+    {
+      "dia": "2020-08-30",
+      "kb": 113.8
+    },
+    {
+      "dia": "2020-08-31",
+      "kb": 107.2
+    },
+    {
+      "dia": "2020-09-01",
+      "kb": 14.6
+    }
+  ],
+  "lecturas_minimo": 210,
+  "lecturas_maximo": 8717,
+  "lecturas_mediana": 7437,
+  "por_ciento_mediano_del_dia": 86.1,
+  "dias_completos": 91,
+  "dias_a_rebosar": 49,
+  "dias_casi_vacios": 5,
+  "kb_minimo": 8.9,
+  "kb_maximo": 141.7,
+  "veces_entre_la_mayor_y_la_menor": 16
+}

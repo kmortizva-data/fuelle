@@ -291,6 +291,14 @@ def render_blocks(lines: list[str]) -> str:
             # esperada. La pagina compara EL RESULTADO, nunca el texto.
             elif language == "reto":
                 out.append(challenge_block(code))
+            # Un bloque `diagrama` es un esquema conceptual, no una figura de
+            # datos: las capas del lago, el recorrido de un fichero. Matplotlib
+            # dibuja mal estas cosas y ademas obligaria a generar dos versiones,
+            # una por tema. Esto se genera con los tokens de la propia pagina,
+            # asi que responde al tema solo, se reordena en movil, y su texto es
+            # texto de verdad que se puede copiar y leer con un lector.
+            elif language == "diagrama":
+                out.append(diagram_block(code))
             else:
                 css_class = f' class="language-{language}"' if language else ""
                 out.append(f"<pre><code{css_class}>{body}</code></pre>")
@@ -340,6 +348,40 @@ def render_blocks(lines: list[str]) -> str:
         out.append(f"<p>{inline(' '.join(paragraph))}</p>")
 
     return "".join(out)
+
+
+# ------------------------------------------------------------------- diagramas
+
+def diagram_block(lines: list[str]) -> str:
+    """Un esquema de cajas encadenadas, generado con los tokens de la pagina.
+
+    La gramatica es una linea por caja:
+
+        NOMBRE | que es | nota al pie
+
+    Un asterisco delante del nombre enciende la caja, que es como una leccion
+    marca el tramo que esta construyendo. Los dos ultimos campos son opcionales.
+
+    Se genera HTML y no SVG a proposito. Un SVG tendria que traer sus colores
+    dentro, o dos versiones, y no se reordenaria en un movil. Con cajas de HTML
+    el tema y el ancho los resuelve el CSS, que es donde viven esas decisiones.
+    """
+    nodes = []
+    for entry in lines:
+        raw = entry.strip()
+        if not raw:
+            continue
+        lit = raw.startswith("*")
+        name, _, rest = raw.lstrip("*").strip().partition("|")
+        what, _, note = rest.partition("|")
+        inner = [f'<span class="node-name">{inline(name.strip())}</span>']
+        if what.strip():
+            inner.append(f'<span class="node-what">{inline(what.strip())}</span>')
+        if note.strip():
+            inner.append(f'<span class="node-note">{inline(note.strip())}</span>')
+        cls = "node lit" if lit else "node"
+        nodes.append(f'<li class="{cls}">' + "".join(inner) + "</li>")
+    return f'<figure class="diagram"><ol class="chain">{"".join(nodes)}</ol></figure>'
 
 
 # --------------------------------------------------------------- consulta viva
