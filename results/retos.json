@@ -1,4 +1,65 @@
 {
+  "m08_alarma_con_presion": {
+    "columns": [
+      "day",
+      "TP2",
+      "LPS"
+    ],
+    "rows": [
+      [
+        "2020-07-17",
+        8.132,
+        1.0
+      ],
+      [
+        "2020-07-25",
+        8.124,
+        1.0
+      ],
+      [
+        "2020-07-08",
+        8.108,
+        1.0
+      ],
+      [
+        "2020-07-12",
+        8.106,
+        1.0
+      ],
+      [
+        "2020-07-15",
+        8.104,
+        1.0
+      ],
+      [
+        "2020-07-28",
+        8.098,
+        1.0
+      ],
+      [
+        "2020-08-17",
+        8.096,
+        1.0
+      ],
+      [
+        "2020-08-03",
+        8.096,
+        1.0
+      ],
+      [
+        "2020-07-08",
+        8.088,
+        1.0
+      ],
+      [
+        "2020-07-26",
+        8.08,
+        1.0
+      ]
+    ],
+    "sql": "SELECT day, TP2, LPS FROM telemetria WHERE LPS = 1 AND TP2 > 6 ORDER BY TP2 DESC LIMIT 10",
+    "muestra": "sql"
+  },
   "m10_horas_por_mes": {
     "columns": [
       "mes",
@@ -34,6 +95,7 @@
         2.81
       ]
     ],
-    "sql": "SELECT strftime(day, '%Y-%m') AS mes, round(avg(horas), 2) AS horas_de_carga FROM ( SELECT day, count(*) AS lecturas, sum(CASE WHEN DV_eletric = 1 THEN 1 ELSE 0 END) * 10 / 3600.0 AS horas FROM telemetria GROUP BY day ) WHERE lecturas > 0.9 * 8640 GROUP BY mes ORDER BY mes"
+    "sql": "SELECT strftime(day, '%Y-%m') AS mes, round(avg(horas), 2) AS horas_de_carga FROM ( SELECT day, count(*) AS lecturas, sum(CASE WHEN DV_eletric = 1 THEN 1 ELSE 0 END) * 10 / 3600.0 AS horas FROM telemetria GROUP BY day ) WHERE lecturas > 0.9 * 8640 GROUP BY mes ORDER BY mes",
+    "muestra": "sin_timestamp_ligera"
   }
 }

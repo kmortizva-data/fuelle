@@ -1,0 +1,441 @@
+{
+  "filas": 1516948,
+  "corridas": 7,
+  "filtrar": {
+    "mediana_s": 0.008,
+    "min_s": 0.0073,
+    "max_s": 0.0138,
+    "corridas": 7
+  },
+  "contar_todo": {
+    "mediana_s": 0.0031,
+    "min_s": 0.0028,
+    "max_s": 0.0048,
+    "corridas": 7
+  },
+  "lecturas_con_alarma": 5188,
+  "por_ciento_con_alarma": 0.342,
+  "dias_con_alarma": 95,
+  "dias_totales": 212,
+  "por_ciento_de_dias_con_alarma": 45,
+  "peores_dias": [
+    {
+      "dia": "2020-07-15",
+      "lecturas": 534
+    },
+    {
+      "dia": "2020-07-17",
+      "lecturas": 414
+    },
+    {
+      "dia": "2020-06-08",
+      "lecturas": 312
+    },
+    {
+      "dia": "2020-05-19",
+      "lecturas": 272
+    },
+    {
+      "dia": "2020-07-31",
+      "lecturas": 247
+    }
+  ],
+  "alarmas_por_dia": [
+    {
+      "dia": "2020-02-06",
+      "lecturas": 1
+    },
+    {
+      "dia": "2020-03-11",
+      "lecturas": 86
+    },
+    {
+      "dia": "2020-03-12",
+      "lecturas": 170
+    },
+    {
+      "dia": "2020-03-14",
+      "lecturas": 28
+    },
+    {
+      "dia": "2020-03-15",
+      "lecturas": 40
+    },
+    {
+      "dia": "2020-03-16",
+      "lecturas": 21
+    },
+    {
+      "dia": "2020-03-20",
+      "lecturas": 11
+    },
+    {
+      "dia": "2020-03-21",
+      "lecturas": 5
+    },
+    {
+      "dia": "2020-03-24",
+      "lecturas": 12
+    },
+    {
+      "dia": "2020-03-28",
+      "lecturas": 138
+    },
+    {
+      "dia": "2020-03-30",
+      "lecturas": 29
+    },
+    {
+      "dia": "2020-03-31",
+      "lecturas": 7
+    },
+    {
+      "dia": "2020-04-04",
+      "lecturas": 8
+    },
+    {
+      "dia": "2020-04-06",
+      "lecturas": 25
+    },
+    {
+      "dia": "2020-04-11",
+      "lecturas": 25
+    },
+    {
+      "dia": "2020-04-12",
+      "lecturas": 24
+    },
+    {
+      "dia": "2020-04-13",
+      "lecturas": 23
+    },
+    {
+      "dia": "2020-04-14",
+      "lecturas": 3
+    },
+    {
+      "dia": "2020-04-16",
+      "lecturas": 1
+    },
+    {
+      "dia": "2020-04-17",
+      "lecturas": 16
+    },
+    {
+      "dia": "2020-04-19",
+      "lecturas": 72
+    },
+    {
+      "dia": "2020-04-22",
+      "lecturas": 1
+    },
+    {
+      "dia": "2020-04-23",
+      "lecturas": 16
+    },
+    {
+      "dia": "2020-04-25",
+      "lecturas": 71
+    },
+    {
+      "dia": "2020-04-27",
+      "lecturas": 44
+    },
+    {
+      "dia": "2020-04-28",
+      "lecturas": 2
+    },
+    {
+      "dia": "2020-04-29",
+      "lecturas": 4
+    },
+    {
+      "dia": "2020-04-30",
+      "lecturas": 29
+    },
+    {
+      "dia": "2020-05-01",
+      "lecturas": 82
+    },
+    {
+      "dia": "2020-05-02",
+      "lecturas": 9
+    },
+    {
+      "dia": "2020-05-05",
+      "lecturas": 12
+    },
+    {
+      "dia": "2020-05-06",
+      "lecturas": 3
+    },
+    {
+      "dia": "2020-05-07",
+      "lecturas": 1
+    },
+    {
+      "dia": "2020-05-08",
+      "lecturas": 1
+    },
+    {
+      "dia": "2020-05-09",
+      "lecturas": 10
+    },
+    {
+      "dia": "2020-05-10",
+      "lecturas": 53
+    },
+    {
+      "dia": "2020-05-11",
+      "lecturas": 13
+    },
+    {
+      "dia": "2020-05-14",
+      "lecturas": 21
+    },
+    {
+      "dia": "2020-05-16",
+      "lecturas": 19
+    },
+    {
+      "dia": "2020-05-17",
+      "lecturas": 62
+    },
+    {
+      "dia": "2020-05-18",
+      "lecturas": 6
+    },
+    {
+      "dia": "2020-05-19",
+      "lecturas": 272
+    },
+    {
+      "dia": "2020-05-20",
+      "lecturas": 25
+    },
+    {
+      "dia": "2020-05-21",
+      "lecturas": 32
+    },
+    {
+      "dia": "2020-05-23",
+      "lecturas": 29
+    },
+    {
+      "dia": "2020-05-25",
+      "lecturas": 60
+    },
+    {
+      "dia": "2020-05-26",
+      "lecturas": 37
+    },
+    {
+      "dia": "2020-05-31",
+      "lecturas": 23
+    },
+    {
+      "dia": "2020-06-02",
+      "lecturas": 203
+    },
+    {
+      "dia": "2020-06-06",
+      "lecturas": 127
+    },
+    {
+      "dia": "2020-06-07",
+      "lecturas": 71
+    },
+    {
+      "dia": "2020-06-08",
+      "lecturas": 312
+    },
+    {
+      "dia": "2020-06-10",
+      "lecturas": 21
+    },
+    {
+      "dia": "2020-06-12",
+      "lecturas": 8
+    },
+    {
+      "dia": "2020-06-15",
+      "lecturas": 3
+    },
+    {
+      "dia": "2020-06-16",
+      "lecturas": 9
+    },
+    {
+      "dia": "2020-06-17",
+      "lecturas": 40
+    },
+    {
+      "dia": "2020-06-18",
+      "lecturas": 45
+    },
+    {
+      "dia": "2020-06-20",
+      "lecturas": 4
+    },
+    {
+      "dia": "2020-06-21",
+      "lecturas": 23
+    },
+    {
+      "dia": "2020-06-22",
+      "lecturas": 17
+    },
+    {
+      "dia": "2020-06-28",
+      "lecturas": 46
+    },
+    {
+      "dia": "2020-07-06",
+      "lecturas": 40
+    },
+    {
+      "dia": "2020-07-07",
+      "lecturas": 46
+    },
+    {
+      "dia": "2020-07-08",
+      "lecturas": 238
+    },
+    {
+      "dia": "2020-07-09",
+      "lecturas": 27
+    },
+    {
+      "dia": "2020-07-10",
+      "lecturas": 31
+    },
+    {
+      "dia": "2020-07-11",
+      "lecturas": 29
+    },
+    {
+      "dia": "2020-07-12",
+      "lecturas": 47
+    },
+    {
+      "dia": "2020-07-13",
+      "lecturas": 22
+    },
+    {
+      "dia": "2020-07-14",
+      "lecturas": 224
+    },
+    {
+      "dia": "2020-07-15",
+      "lecturas": 534
+    },
+    {
+      "dia": "2020-07-17",
+      "lecturas": 414
+    },
+    {
+      "dia": "2020-07-24",
+      "lecturas": 34
+    },
+    {
+      "dia": "2020-07-25",
+      "lecturas": 18
+    },
+    {
+      "dia": "2020-07-26",
+      "lecturas": 33
+    },
+    {
+      "dia": "2020-07-27",
+      "lecturas": 40
+    },
+    {
+      "dia": "2020-07-28",
+      "lecturas": 30
+    },
+    {
+      "dia": "2020-07-29",
+      "lecturas": 23
+    },
+    {
+      "dia": "2020-07-30",
+      "lecturas": 30
+    },
+    {
+      "dia": "2020-07-31",
+      "lecturas": 247
+    },
+    {
+      "dia": "2020-08-03",
+      "lecturas": 169
+    },
+    {
+      "dia": "2020-08-05",
+      "lecturas": 61
+    },
+    {
+      "dia": "2020-08-09",
+      "lecturas": 9
+    },
+    {
+      "dia": "2020-08-11",
+      "lecturas": 3
+    },
+    {
+      "dia": "2020-08-12",
+      "lecturas": 32
+    },
+    {
+      "dia": "2020-08-15",
+      "lecturas": 41
+    },
+    {
+      "dia": "2020-08-16",
+      "lecturas": 34
+    },
+    {
+      "dia": "2020-08-17",
+      "lecturas": 46
+    },
+    {
+      "dia": "2020-08-19",
+      "lecturas": 7
+    },
+    {
+      "dia": "2020-08-20",
+      "lecturas": 14
+    },
+    {
+      "dia": "2020-08-21",
+      "lecturas": 13
+    },
+    {
+      "dia": "2020-08-23",
+      "lecturas": 32
+    },
+    {
+      "dia": "2020-08-26",
+      "lecturas": 5
+    },
+    {
+      "dia": "2020-09-01",
+      "lecturas": 4
+    }
+  ],
+  "dias_del_calendario": 214,
+  "dias_que_faltan": [
+    "2020-02-29",
+    "2020-04-26"
+  ],
+  "cuantos_faltan": 2,
+  "dia_ausente": "2020-02-29",
+  "vacio_cuantas": 0,
+  "vacio_presion_media": null,
+  "vacio_presion_minima": null,
+  "vacio_alarmas": null,
+  "filas_con_igual_null": 0,
+  "filas_con_is_null": 1,
+  "corridas_del_orden": 8,
+  "resultados_distintos_ordenando_por_dia": 2,
+  "resultados_distintos_ordenando_por_presion": 1
+}

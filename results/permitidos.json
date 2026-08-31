@@ -40,5 +40,8 @@
   },
   "m04_bronce_en": {
     "0.0120000000000004": "the same literal CSV value module 1 quotes, repeated here to say that bronze does not touch it. It is a quotation, not a measurement"
+  },
+  "m08_primera_consulta": {
+    "8640": "las lecturas de un dia lleno a 10 s, una constante del muestreo que el modulo 4 mide"
   }
 }

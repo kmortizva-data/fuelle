@@ -24,13 +24,31 @@ import duckdb
 sys.stdout.reconfigure(encoding="utf-8")
 
 PROJECT = Path(__file__).resolve().parents[2]
-SAMPLE = PROJECT / "assets" / "muestras" / "sin_timestamp_ligera.parquet"
+SAMPLES = PROJECT / "assets" / "muestras"
 RESULTS = PROJECT / "results" / "retos.json"
+
+# Cada reto se resuelve contra LA MUESTRA DE SU MODULO, que es la que se baja el
+# lector. Desde la parte 3 no todos usan la misma: el modulo 13 necesita la hora
+# exacta y los demas no. Resolver un reto contra otra muestra daria una respuesta
+# que el lector no puede reproducir.
+MUESTRA_DE = {
+    "m08_alarma_con_presion": "sql",
+    "m10_horas_por_mes": "sin_timestamp_ligera",
+}
 
 SECONDS_PER_READING = 10
 FULL_DAY_READINGS = 8640
 
 CHALLENGES = {
+    # Modulo 8: la primera consulta. Dos condiciones a la vez y un orden
+    # descendente, que es todo lo que la leccion ha ensenado hasta aqui.
+    "m08_alarma_con_presion": """
+        SELECT day, TP2, LPS
+        FROM telemetria
+        WHERE LPS = 1 AND TP2 > 6
+        ORDER BY TP2 DESC
+        LIMIT 10
+    """,
     # Módulo 10: agrupar. El reto pide el promedio mes a mes, que obliga a
     # agrupar dos veces: primero por día para tener las horas, y luego por mes.
     "m10_horas_por_mes": f"""
@@ -60,26 +78,35 @@ def plain(value):
     return str(value)
 
 
-def main() -> None:
-    if not SAMPLE.exists():
-        raise SystemExit("Falta la muestra. Corre src/site/make_sample.py primero.")
-
+def connect_to(muestra: str) -> duckdb.DuckDBPyConnection:
+    path = SAMPLES / f"{muestra}.parquet"
+    if not path.exists():
+        raise SystemExit(f"Falta {path.name}. Corre src/site/make_sample.py primero.")
     con = duckdb.connect()
-    con.execute(
-        f"CREATE VIEW telemetria AS SELECT * FROM read_parquet('{SAMPLE.as_posix()}')"
-    )
+    con.execute(f"CREATE VIEW telemetria AS SELECT * FROM read_parquet('{path.as_posix()}')")
+    averias = SAMPLES / "averias.parquet"
+    if averias.exists():
+        con.execute(f"CREATE VIEW averias AS SELECT * FROM read_parquet('{averias.as_posix()}')")
+    return con
 
+
+def main() -> None:
     answers = {}
     for key, sql in CHALLENGES.items():
+        muestra = MUESTRA_DE[key]
+        con = connect_to(muestra)
         result = con.sql(sql)
         columns = list(result.columns)
         rows = [[plain(v) for v in row] for row in result.fetchall()]
-        answers[key] = {"columns": columns, "rows": rows, "sql": " ".join(sql.split())}
-        print(f"  {key:<24} {len(rows)} filas, {len(columns)} columnas")
+        answers[key] = {"columns": columns, "rows": rows, "sql": " ".join(sql.split()),
+                        "muestra": muestra}
+        print(f"  {key:<26} {len(rows)} filas, {len(columns)} columnas  "
+              f"(contra {muestra})")
         for row in rows[:3]:
             print(f"      {row}")
         if len(rows) > 3:
             print(f"      ... y {len(rows) - 3} más")
+        con.close()
 
     RESULTS.parent.mkdir(exist_ok=True)
     with io.open(RESULTS, "w", encoding="utf-8") as fh:

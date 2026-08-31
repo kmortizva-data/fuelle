@@ -324,10 +324,10 @@
       "title_en": "Your first query, all of it",
       "subtitle_en": "Asking for columns, keeping the rows that matter, sorting them and cutting. And the empty that is not zero, the very first trap",
       "cifra": {
-        "value": "por medir",
-        "label": "segundos en filtrar 1,5 millones de filas",
-        "value_en": "to be measured",
-        "label_en": "seconds to filter 1.5 million rows"
+        "value": "5.188 lecturas",
+        "label": "las veces que saltó la alarma, en 95 de los 212 días",
+        "value_en": "5,188 readings",
+        "label_en": "the times the alarm fired, on 95 of the 212 days"
       },
       "instrumento": "caratula",
       "interactivo": true,
@@ -338,10 +338,9 @@
         "ORDER BY y LIMIT"
       ],
       "scripts": [
-        "src/transform/queries_m08.sql"
+        "src/transform/queries_m08.py"
       ],
       "figuras": [
-        "fig_m08_anatomia_de_una_consulta",
         "fig_m08_null_no_es_cero"
       ],
       "accent": {
