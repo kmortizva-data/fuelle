@@ -1,0 +1,27 @@
+{
+  "filas_origen": 1516948,
+  "corridas_del_experimento": 3,
+  "filas_naive_por_corrida": [
+    1516948,
+    3033896,
+    4550844
+  ],
+  "filas_naive_al_final": 4550844,
+  "veces_duplicado": 3.0,
+  "filas_guarded_por_corrida": [
+    1516948,
+    1516948,
+    1516948
+  ],
+  "filas_guarded_al_final": 1516948,
+  "corridas_que_ingirieron": 1,
+  "bytes_del_fichero": 218300507,
+  "byte_cambiado": 109150253,
+  "sha_antes": "db30ccb4ea402e3c8bf2c99db06e288d4f2a772f6928f9dbe26a920d69793e24",
+  "sha_despues": "2dd4fd02dd3ae1bcd82933a9ed224952493821edfd368076c0c90466f1681be6",
+  "bits_distintos_de_256": 126,
+  "por_ciento_de_bits_distintos": 49.2,
+  "reingirio_tras_el_cambio": true,
+  "huella_segundos": 0.45,
+  "huella_mb_s": 459
+}

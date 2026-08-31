@@ -5,27 +5,30 @@
       "sitio": "un fichero de texto",
       "formato": "CSV",
       "mb": 208.19,
-      "mediana_s": 0.587,
-      "min_s": 0.563,
-      "max_s": 0.617,
+      "mediana_s": 0.558,
+      "min_s": 0.551,
+      "max_s": 0.628,
+      "corridas": 7,
       "filas": 8716
     },
     {
       "sitio": "un lago de ficheros",
       "formato": "Parquet particionado",
       "mb": 22.08,
-      "mediana_s": 0.229,
-      "min_s": 0.191,
-      "max_s": 0.31,
+      "mediana_s": 0.216,
+      "min_s": 0.174,
+      "max_s": 0.225,
+      "corridas": 7,
       "filas": 8716
     },
     {
       "sitio": "una base de datos",
       "formato": "DuckDB",
-      "mb": 50.01,
+      "mb": 49.76,
       "mediana_s": 0.003,
       "min_s": 0.002,
-      "max_s": 0.004,
+      "max_s": 0.005,
+      "corridas": 7,
       "filas": 8716
     },
     {
@@ -34,17 +37,19 @@
       "mb": 67.76,
       "mediana_s": 0.004,
       "min_s": 0.003,
-      "max_s": 0.006,
+      "max_s": 0.005,
+      "corridas": 7,
       "filas": 8716
     }
   ],
   "todos_coinciden": true,
   "filas_ese_dia": 8716,
   "repeticiones": 7,
-  "veces_entre_extremos": 195.7,
-  "veces_redondeadas": 196,
+  "veces_entre_extremos": 186.0,
+  "veces_redondeadas": 186,
   "mas_lento": "un fichero de texto",
   "mas_rapido": "una base de datos",
-  "mb_de_mas_del_indice": 17.8,
-  "veces_indice_mas_lento": 1.33
+  "mb_de_mas_del_indice": 18.0,
+  "veces_indice_mas_lento": 1.67,
+  "el_indice_se_nota": false
 }

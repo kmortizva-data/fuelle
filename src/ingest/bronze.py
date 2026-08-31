@@ -1,16 +1,25 @@
 """Bronze layer: the raw CSV, partitioned by day, with nothing else touched.
 
-Minimal version, written during the mock-up phase so lesson 13 has real numbers
-to stand on. Modules 4 to 7 explain and refine what happens here; this is the
-skeleton those lessons will teach.
-
-Two rules the bronze layer must obey, and both are tested at the bottom:
+Two rules the bronze layer must obey:
   1. Nothing is cleaned, fixed or interpreted. Values land as they arrived.
   2. Running it twice must not duplicate a single row.
 
-The only thing added is a `day` column derived from the timestamp, because that
-is what the partitioning needs, and a fingerprint manifest so a later run can
-tell whether the source actually changed.
+The only things added are a `day` column derived from the timestamp, because
+that is what the partitioning needs, and a fingerprint manifest so a later run
+can tell whether the source actually changed.
+
+A warning about rule 2, and it is the reason module 5 exists as its own lesson:
+this script gets rule 2 the cheap way, by deleting the folder and writing it
+again. That really is idempotent, and at this size it is also the right choice,
+but it proves nothing about the interesting case. A pipeline that appends
+instead of replacing will happily duplicate everything on a rerun, and no
+amount of rereading this file would show it. `fingerprint.py` runs that
+experiment for real.
+
+Every timing here is the median of seven runs (src/medir.py). The first version
+reported a single run, and that run happened to be one where the antivirus was
+scanning a freshly created 209 MB folder: it published 3.5 hours for a write
+that takes seconds.
 
 Run:  .venv\\Scripts\\python.exe src\\ingest\\bronze.py
 """
@@ -22,10 +31,13 @@ import io
 import json
 import shutil
 import sys
-import time
 from pathlib import Path
 
 import duckdb
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from medir import RUNS, measure  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -45,12 +57,15 @@ def fingerprint(path: Path, chunk: int = 1 << 20) -> str:
     return digest.hexdigest()
 
 
-def ingest(con: duckdb.DuckDBPyConnection) -> None:
-    """Read the CSV and write it out as Parquet, one folder per day."""
+def clear() -> None:
+    """Empty the layer. Untimed: it is not part of writing."""
     if BRONZE.exists():
         shutil.rmtree(BRONZE)
     BRONZE.parent.mkdir(parents=True, exist_ok=True)
 
+
+def write(con: duckdb.DuckDBPyConnection) -> None:
+    """Read the CSV and write it out as Parquet, one folder per day."""
     # The first column of the file has no name: it is the original 1 Hz row
     # number, and it is the evidence that the published CSV is one reading in
     # ten. It is kept, renamed, never renumbered.
@@ -75,7 +90,7 @@ def ingest(con: duckdb.DuckDBPyConnection) -> None:
     )
 
 
-def measure(con: duckdb.DuckDBPyConnection) -> dict:
+def inventory(con: duckdb.DuckDBPyConnection) -> dict:
     glob = f"{BRONZE.as_posix()}/**/*.parquet"
     rows = con.sql(f"SELECT count(*) FROM read_parquet('{glob}')").fetchone()[0]
     partitions = len(list(BRONZE.glob("day=*")))
@@ -94,24 +109,23 @@ def main() -> None:
 
     con = duckdb.connect()
 
-    print("Fingerprinting the source...")
-    started = time.perf_counter()
-    source_hash = fingerprint(RAW_CSV)
-    hash_seconds = time.perf_counter() - started
-    print(f"  sha256 {source_hash[:16]}...  ({hash_seconds:.1f} s)")
+    print(f"Fingerprinting the source, {RUNS} times...")
+    hashed = measure(lambda: fingerprint(RAW_CSV))
+    source_hash = hashed.result
+    speed = RAW_CSV.stat().st_size / 1024 / 1024 / hashed.median
+    print(f"  sha256 {source_hash[:16]}...  {hashed}  ({speed:.0f} MB/s)")
 
-    print("Writing bronze...")
-    started = time.perf_counter()
-    ingest(con)
-    write_seconds = time.perf_counter() - started
+    print(f"Writing bronze, {RUNS} times...")
+    written = measure(lambda: write(con), setup=clear)
+    stats = inventory(con)
 
-    stats = measure(con)
-
-    # Rule 2, tested rather than asserted in prose: run it again and the row
-    # count must not move.
-    print("Running it a second time, to prove it does not duplicate...")
-    ingest(con)
-    second = measure(con)
+    # Rule 2, tested rather than asserted in prose. Note what this does and does
+    # not prove: `clear()` runs first, so this shows that replacing the layer
+    # lands on the same count, not that an appending pipeline would be safe.
+    print("Running it a second time, to check the count does not move...")
+    clear()
+    write(con)
+    second = inventory(con)
     idempotent = second["rows"] == stats["rows"]
 
     manifest = {
@@ -127,11 +141,16 @@ def main() -> None:
 
     results = {
         **stats,
-        "write_seconds": round(write_seconds, 2),
-        "fingerprint_seconds": round(hash_seconds, 1),
+        "write_seconds": round(written.median, 2),
+        "write_min_s": round(written.minimum, 2),
+        "write_max_s": round(written.maximum, 2),
+        "fingerprint_seconds": round(hashed.median, 2),
+        "fingerprint_mb_s": round(speed),
+        "corridas": RUNS,
         "rows_after_second_run": second["rows"],
         "idempotent": idempotent,
         "compression_ratio": round(stats["csv_mb"] / stats["size_mb"], 2),
+        "rows_per_partition": round(stats["rows"] / stats["partitions"]),
     }
     RESULTS.parent.mkdir(exist_ok=True)
     with io.open(RESULTS, "w", encoding="utf-8") as fh:
@@ -142,9 +161,9 @@ def main() -> None:
     print(f"  Partitions      {stats['partitions']} (one per day)")
     print(f"  CSV             {stats['csv_mb']} MB")
     print(f"  Parquet         {stats['size_mb']} MB   ({results['compression_ratio']}x smaller)")
-    print(f"  Write time      {write_seconds:.2f} s")
+    print(f"  Write time      {written}")
     print(f"  Second run      {second['rows']:,} rows  ->  "
-          f"{'idempotent' if idempotent else 'DUPLICATED, BUG'}")
+          f"{'same count' if idempotent else 'DUPLICATED, BUG'}")
     print()
     print(f"Written to {RESULTS.relative_to(PROJECT)} and {MANIFEST.relative_to(PROJECT)}")
 

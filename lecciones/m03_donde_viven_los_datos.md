@@ -5,10 +5,10 @@ module: 3
 ## En 30 segundos
 
 - «Fichero», «base de datos», «lago» y «almacén» no son sinónimos, aunque se usen así.
-- La misma pregunta, en los cuatro sitios: de **0,587 s a 0,003 s**. Casi doscientas veces.
+- La misma pregunta, en los cuatro sitios: de **0,558 s a 0,003 s**. Casi doscientas veces.
 - El fichero de texto es el más grande y el más lento. Los dos a la vez, y no es casualidad.
 - El lago ocupa **22,08 MB** frente a **208,19**: casi diez veces menos con el mismo dato dentro.
-- Y una sorpresa: **el índice del almacén no aceleró nada** y costó 17,8 MB.
+- Y una sorpresa: **el índice del almacén no aceleró nada** y costó 18,0 MB.
 
 ## Qué resuelve este módulo
 
@@ -83,30 +83,37 @@ que no existe.
 ### Paso 4. La misma pregunta, cambiando solo el sitio
 
 ```python
-tiempos = []
-for _ in range(7):
-    inicio = time.perf_counter()
-    filas = con.sql(sql).fetchone()[0]
-    tiempos.append(time.perf_counter() - inicio)
-tiempos.sort()
-mediana = tiempos[len(tiempos) // 2]
+def measure(action, runs=7):
+    times = []
+    for _ in range(runs):
+        started = time.perf_counter()
+        result = action()
+        times.append(time.perf_counter() - started)
+    times.sort()
+    return Measurement(median=times[len(times) // 2],
+                       minimum=times[0], maximum=times[-1],
+                       runs=runs, result=result)
 ```
 
 ```anota
-CAST(timestamp AS DATE) | se queda con la parte del día y tira la hora
+def measure(action, runs=7) | define una función llamada measure que recibe algo que hacer y cuántas veces hacerlo
+action | no es un dato, es una acción: se le pasa la consulta a medir y aquí dentro se la llama con action()
 time.perf_counter() | el cronómetro más preciso de Python, en segundos
-.fetchone()[0] | la primera fila, y de ella el primer valor: el número que cuenta
-for _ in range(7) | repite siete veces; el guion bajo significa que el número de vuelta no se usa
-tiempos[len(tiempos) // 2] | el del medio una vez ordenados, o sea la mediana
+times.sort() | ordena la lista de menor a mayor, que es lo que hace falta para sacar la mediana
+times[len(times) // 2] | el del medio una vez ordenados, o sea la mediana
+result | lo que devolvió la última corrida, que sirve para comprobar que los cuatro sitios contestan lo mismo
 ```
 
+Esa función vive en `src/medir.py` y la usan todos los scripts del curso que cronometran algo. Se
+escribe una vez y no tres copias que se van separando con el tiempo.
+
 ```salida
-mediana de 7 corridas por sitio
-sitio                 formato                 tamaño  mediana     min     max
-un fichero de texto   CSV                     208.19 MB   0.587   0.563   0.617
-un lago de ficheros   Parquet particionado     22.08 MB   0.229   0.191   0.310
-una base de datos     DuckDB                   50.01 MB   0.003   0.002   0.004
-un almacén            DuckDB con índice        67.76 MB   0.004   0.003   0.006
+median of 7 runs per place
+place                 format                   size  median     min     max
+un fichero de texto   CSV                     208.19 MB   0.558   0.551   0.628
+un lago de ficheros   Parquet particionado     22.08 MB   0.216   0.174   0.225
+una base de datos     DuckDB                   49.76 MB   0.003   0.002   0.005
+un almacén            DuckDB con índice        67.76 MB   0.004   0.003   0.005
 ```
 
 ### Paso 5. Comprobar que los cuatro dicen lo mismo
@@ -115,8 +122,9 @@ Antes de comparar tiempos hay que comprobar que las cuatro respuestas coinciden.
 está midiendo el sitio: se está midiendo un error.
 
 ```salida
-los cuatro devuelven 8,716 filas del 2020-06-05: True
-del más lento al más rápido: 195.7 veces
+all four return 8,716 rows for 2020-06-05: True
+slowest over fastest: 186.0x
+index vs no index distinguishable: False (plain 0.003 s (from 0.002 to 0.005), indexed 0.004 s (from 0.003 to 0.005))
 ```
 
 ## El resultado, medido
@@ -126,14 +134,19 @@ del más lento al más rápido: 195.7 veces
 **Qué esperábamos.** Que el fichero de texto fuera el más lento y la base de datos la más rápida.
 Y que el almacén, con su índice, fuera más rápido todavía.
 
-**Qué salió.** Lo primero sí, y por goleada: el fichero de texto tarda **0,587 s** y la base de
-datos **0,003 s**. Son **196 veces**.
+**Qué salió.** Lo primero sí, y por goleada: el fichero de texto tarda **0,558 s** y la base de
+datos **0,003 s**. Son **186 veces**.
 
 **El índice no aceleró nada.** El almacén y la base de datos dan medianas de
 0,004 y 0,003 segundos, y **sus rangos se solapan**. Cuando dos
 rangos se pisan no hay diferencia que enseñar, por mucho que las medianas no sean idénticas. Lo
-único que el índice consiguió con seguridad fue ocupar **17,8 MB
+único que el índice consiguió con seguridad fue ocupar **18,0 MB
 más**.
+
+Esa última frase no la decide quien escribe: la decide el script. `medir.py` trae una función
+`distinguishable` que compara los dos rangos y devuelve falso cuando se pisan, y es ella la que
+imprime esa línea de la salida de arriba. Así el veredicto sale de una corrida, igual que los
+números.
 
 **Qué significa.** Un índice sirve para no tener que mirar todo. Pero esta base de datos es
 columnar y ya guarda, por cada bloque de filas, cuál es el valor mínimo y el máximo. Preguntando
@@ -158,9 +171,11 @@ solo por cambiar de formato. Eso es el módulo 7 entero, y aquí ya asoma.
   se queda quieto. Si una diferencia no sobrevive a repetir la medición, no existe.
 - **Un índice no es gratis.** Ocupa disco, hay que mantenerlo en cada escritura, y solo paga si
   el motor no tenía ya otra forma de saltarse lo que no necesita.
-- **El lago es el que más baila**, entre 0,191 y 0,310 segundos según la corrida, Con 212 carpetas
-  entre la corrida más rápida y la más lenta. Con 212 carpetas que abrir y cerrar, esa
-  variabilidad es el sistema de ficheros, no los datos.
+- **Los tiempos bailan, y en proporción el que más baila es el más rápido.** La base de datos va
+  de 0,002 a 0,005 segundos según la corrida: está en el suelo de lo que el reloj distingue, así
+  que cualquier pico dobla la medida. El lago va de 0,174 a 0,225, y con 212 carpetas que abrir y
+  cerrar esa variación es el sistema de ficheros, no los datos. Por eso una diferencia solo cuenta
+  cuando los dos rangos no se tocan.
 - **Ninguno de los cuatro es «el mejor».** El fichero es el que llegó y no se toca. El lago es
   barato y no necesita servidor. La base de datos es rápida y necesita que alguien la cuide. El
   almacén es para preguntas que se repiten mucho.
@@ -197,7 +212,7 @@ más lectura de disco, y encima con trabajo de interpretación por medio.
 
 No, estaba puesto sobre la columna correcta. Pasa que la base de datos es columnar y guarda el
 mínimo y el máximo de cada bloque, así que ya se saltaba lo innecesario. El
-índice repetía un trabajo ya hecho y encima ocupaba 17,8 MB. En una base de datos por filas, como
+índice repetía un trabajo ya hecho y encima ocupaba 18,0 MB. En una base de datos por filas, como
 PostgreSQL, la respuesta habría sido otra, y eso se mide en el módulo 21.
 
 ### Tienes 208 MB. Merece la pena montar una base de datos

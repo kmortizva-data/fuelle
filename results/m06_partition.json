@@ -5,35 +5,65 @@
       "layout": "single_file",
       "files": 1,
       "size_mb": 16.84,
-      "write_seconds": 1.18,
-      "read_one_day_seconds": 0.021,
-      "rows_that_day": 8716
+      "write_seconds": 0.99,
+      "write_min_s": 0.96,
+      "write_max_s": 1.04,
+      "read_one_day_seconds": 0.014,
+      "read_min_s": 0.012,
+      "read_max_s": 0.017,
+      "corridas": 7,
+      "rows_that_day": 8716,
+      "read_distinguishable_from_fastest": false
     },
     {
       "layout": "by_month",
       "files": 8,
-      "size_mb": 17.69,
-      "write_seconds": 0.99,
-      "read_one_day_seconds": 0.02,
-      "rows_that_day": 8716
+      "size_mb": 17.64,
+      "write_seconds": 0.94,
+      "write_min_s": 0.88,
+      "write_max_s": 1.18,
+      "read_one_day_seconds": 0.019,
+      "read_min_s": 0.016,
+      "read_max_s": 0.085,
+      "corridas": 7,
+      "rows_that_day": 8716,
+      "read_distinguishable_from_fastest": false
     },
     {
       "layout": "by_week",
       "files": 32,
       "size_mb": 17.79,
-      "write_seconds": 3.1,
-      "read_one_day_seconds": 0.07,
-      "rows_that_day": 8716
+      "write_seconds": 2.51,
+      "write_min_s": 2.26,
+      "write_max_s": 12692.44,
+      "read_one_day_seconds": 0.039,
+      "read_min_s": 0.026,
+      "read_max_s": 0.053,
+      "corridas": 7,
+      "rows_that_day": 8716,
+      "read_distinguishable_from_fastest": true
     },
     {
       "layout": "by_day",
       "files": 212,
       "size_mb": 22.09,
-      "write_seconds": 4.28,
-      "read_one_day_seconds": 0.331,
-      "rows_that_day": 8716
+      "write_seconds": 3.18,
+      "write_min_s": 2.41,
+      "write_max_s": 86244.2,
+      "read_one_day_seconds": 0.171,
+      "read_min_s": 0.154,
+      "read_max_s": 0.201,
+      "corridas": 7,
+      "rows_that_day": 8716,
+      "read_distinguishable_from_fastest": true
     }
   ],
   "all_agree": true,
-  "rows_that_day": 8716
+  "rows_that_day": 8716,
+  "corridas": 7,
+  "fastest_read": "single_file",
+  "slowest_read": "by_day",
+  "by_day_veces_mas_lento": 12.2,
+  "by_day_por_ciento_mas_grande": 31,
+  "by_day_ficheros": 212
 }

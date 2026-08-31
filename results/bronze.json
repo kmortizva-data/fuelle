@@ -3,9 +3,14 @@
   "partitions": 212,
   "size_mb": 22.05,
   "csv_mb": 208.19,
-  "write_seconds": 12533.88,
-  "fingerprint_seconds": 925.2,
+  "write_seconds": 4.03,
+  "write_min_s": 3.81,
+  "write_max_s": 4.51,
+  "fingerprint_seconds": 0.42,
+  "fingerprint_mb_s": 494,
+  "corridas": 7,
   "rows_after_second_run": 1516948,
   "idempotent": true,
-  "compression_ratio": 9.44
+  "compression_ratio": 9.44,
+  "rows_per_partition": 7155
 }

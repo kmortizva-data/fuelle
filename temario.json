@@ -182,9 +182,9 @@
       "title_en": "Where data lives: file, database, lake and warehouse",
       "subtitle_en": "Four words used as synonyms that are not. Which is for what, and why this project needs more than one",
       "cifra": {
-        "value": "196 veces",
+        "value": "186 veces",
         "label": "entre el sitio más lento y el más rápido, con la misma pregunta",
-        "value_en": "196 times",
+        "value_en": "186 times",
         "label_en": "between the slowest and fastest place, same question"
       },
       "accent": {
@@ -211,10 +211,10 @@
       "title_en": "Bronze: raw is sacred",
       "subtitle_en": "The first layer does not clean, fix or interpret. It keeps what arrived exactly as it arrived, and that discipline saves you later",
       "cifra": {
-        "value": "por medir",
-        "label": "particiones diarias escritas",
-        "value_en": "to be measured",
-        "label_en": "daily partitions written"
+        "value": "212 particiones",
+        "label": "una por día, de 208,19 MB a 22,05 MB",
+        "value_en": "212 partitions",
+        "label_en": "one per day, from 208.19 MB down to 22.05 MB"
       },
       "accent": {
         "dark": "#87C5BF",
@@ -240,10 +240,10 @@
       "title_en": "Running twice without duplicating anything",
       "subtitle_en": "What a file fingerprint is, what idempotent means, and why a process that is not will eventually lie to you in the totals",
       "cifra": {
-        "value": "por medir",
-        "label": "filas tras correr la ingesta tres veces",
-        "value_en": "to be measured",
-        "label_en": "rows after running ingestion three times"
+        "value": "4.550.844 contra 1.516.948",
+        "label": "filas tras correr la ingesta tres veces, sin huella y con ella",
+        "value_en": "4,550,844 against 1,516,948",
+        "label_en": "rows after three ingestion runs, without a fingerprint and with one"
       },
       "accent": {
         "dark": "#86C6BB",
@@ -264,13 +264,13 @@
       "slug": "m06_particionar",
       "parte": 2,
       "title": "Partir por fecha: qué es particionar y con qué tamaño",
-      "subtitle": "Guardar el mismo dato en carpetas por día hace que una pregunta lea la centésima parte. El tamaño se elige mirando la curva, no copiando un valor por defecto",
+      "subtitle": "Guardar el mismo dato en carpetas por día es el consejo que se repite en todas partes. Con el cronómetro puesto resulta ser la peor de las cuatro formas a esta escala, y el tamaño se elige mirando la curva",
       "title_en": "Splitting by date: what partitioning is and at what size",
-      "subtitle_en": "Storing the same data in folders by day makes a question read a hundredth of it. The size is chosen by reading the curve, not by copying a default",
+      "subtitle_en": "Storing the same data in folders by day is the advice repeated everywhere. With a stopwatch on it, it turns out to be the worst of the four layouts at this scale, and the size is chosen by reading the curve",
       "cifra": {
-        "value": "0,021 s contra 0,331 s",
+        "value": "0,014 s contra 0,171 s",
         "label": "leer un día sin particionar y particionando por día",
-        "value_en": "0.021 s against 0.331 s",
+        "value_en": "0.014 s against 0.171 s",
         "label_en": "reading one day unpartitioned and partitioned by day"
       },
       "accent": {
@@ -296,10 +296,10 @@
       "title_en": "Rows against columns: CSV versus Parquet",
       "subtitle_en": "Why the format you store in changes the time of a question by a large factor, timed on your own machine",
       "cifra": {
-        "value": "por medir",
-        "label": "veces más rápido que el CSV",
-        "value_en": "to be measured",
-        "label_en": "times faster than the CSV"
+        "value": "53 veces",
+        "label": "más rápido que el CSV para preguntar por una sola columna",
+        "value_en": "53 times",
+        "label_en": "faster than the CSV for a question about a single column"
       },
       "accent": {
         "dark": "#86C7B2",
