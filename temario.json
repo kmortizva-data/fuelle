@@ -227,7 +227,6 @@
         "src/ingest/bronze.py"
       ],
       "figuras": [
-        "fig_m4_capas",
         "fig_m4_bronce_particiones"
       ]
     },
@@ -296,9 +295,9 @@
       "title_en": "Rows against columns: CSV versus Parquet",
       "subtitle_en": "Why the format you store in changes the time of a question by a large factor, timed on your own machine",
       "cifra": {
-        "value": "53 veces",
+        "value": "54 veces",
         "label": "más rápido que el CSV para preguntar por una sola columna",
-        "value_en": "53 times",
+        "value_en": "54 times",
         "label_en": "faster than the CSV for a question about a single column"
       },
       "accent": {

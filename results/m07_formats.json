@@ -7,35 +7,38 @@
   "preguntas": [
     {
       "pregunta": "contar_filas",
-      "csv_s": 0.557,
-      "csv_min_s": 0.542,
-      "csv_max_s": 0.572,
-      "parquet_s": 0.0036,
-      "parquet_min_s": 0.003,
-      "parquet_max_s": 0.0071,
-      "veces": 156.2,
+      "csv_s": 0.552,
+      "csv_min_s": 0.531,
+      "csv_max_s": 0.719,
+      "parquet_s": 0.0043,
+      "parquet_min_s": 0.0032,
+      "parquet_max_s": 0.0089,
+      "veces": 128.7,
+      "veces_redondeadas": 129,
       "diferencia_real": true
     },
     {
       "pregunta": "una_columna",
-      "csv_s": 0.553,
-      "csv_min_s": 0.535,
-      "csv_max_s": 0.645,
-      "parquet_s": 0.0104,
-      "parquet_min_s": 0.0102,
-      "parquet_max_s": 0.0124,
-      "veces": 53.0,
+      "csv_s": 0.594,
+      "csv_min_s": 0.56,
+      "csv_max_s": 0.615,
+      "parquet_s": 0.0111,
+      "parquet_min_s": 0.0104,
+      "parquet_max_s": 0.014,
+      "veces": 53.6,
+      "veces_redondeadas": 54,
       "diferencia_real": true
     },
     {
       "pregunta": "siete_columnas",
-      "csv_s": 0.621,
-      "csv_min_s": 0.609,
-      "csv_max_s": 0.636,
-      "parquet_s": 0.0317,
-      "parquet_min_s": 0.0279,
-      "parquet_max_s": 0.0347,
-      "veces": 19.6,
+      "csv_s": 0.68,
+      "csv_min_s": 0.639,
+      "csv_max_s": 0.716,
+      "parquet_s": 0.0274,
+      "parquet_min_s": 0.0248,
+      "parquet_max_s": 0.032,
+      "veces": 24.8,
+      "veces_redondeadas": 25,
       "diferencia_real": true
     }
   ],
@@ -44,6 +47,8 @@
     {
       "columna": "timestamp",
       "kb": 5160.9,
+      "bytes": 5284726,
+      "bytes_sin_comprimir": 12135987,
       "por_ciento_del_fichero": 30.4,
       "valores_distintos": 1516948,
       "veces_comprimida": 2.3
@@ -51,6 +56,8 @@
     {
       "columna": "Oil_temperature",
       "kb": 1924.9,
+      "bytes": 1971125,
+      "bytes_sin_comprimir": 2147372,
       "por_ciento_del_fichero": 11.3,
       "valores_distintos": 2462,
       "veces_comprimida": 1.1
@@ -58,6 +65,8 @@
     {
       "columna": "TP3",
       "kb": 1899.1,
+      "bytes": 1944693,
+      "bytes_sin_comprimir": 2223233,
       "por_ciento_del_fichero": 11.2,
       "valores_distintos": 3683,
       "veces_comprimida": 1.1
@@ -65,6 +74,8 @@
     {
       "columna": "Reservoirs",
       "kb": 1896.9,
+      "bytes": 1942403,
+      "bytes_sin_comprimir": 2222913,
       "por_ciento_del_fichero": 11.2,
       "valores_distintos": 3682,
       "veces_comprimida": 1.1
@@ -72,6 +83,8 @@
     {
       "columna": "H1",
       "kb": 1762.5,
+      "bytes": 1804798,
+      "bytes_sin_comprimir": 2162780,
       "por_ciento_del_fichero": 10.4,
       "valores_distintos": 2665,
       "veces_comprimida": 1.2
@@ -79,6 +92,8 @@
     {
       "columna": "source_index",
       "kb": 1613.2,
+      "bytes": 1651898,
+      "bytes_sin_comprimir": 12135987,
       "por_ciento_del_fichero": 9.5,
       "valores_distintos": 1516948,
       "veces_comprimida": 7.3
@@ -86,6 +101,8 @@
     {
       "columna": "Motor_current",
       "kb": 1154.1,
+      "bytes": 1181807,
+      "bytes_sin_comprimir": 2088442,
       "por_ciento_del_fichero": 6.8,
       "valores_distintos": 1809,
       "veces_comprimida": 1.8
@@ -93,6 +110,8 @@
     {
       "columna": "TP2",
       "kb": 887.5,
+      "bytes": 908791,
+      "bytes_sin_comprimir": 2476482,
       "por_ciento_del_fichero": 5.2,
       "valores_distintos": 5257,
       "veces_comprimida": 2.7
@@ -100,6 +119,8 @@
     {
       "columna": "DV_pressure",
       "kb": 533.6,
+      "bytes": 546379,
+      "bytes_sin_comprimir": 1818088,
       "por_ciento_del_fichero": 3.1,
       "valores_distintos": 2257,
       "veces_comprimida": 3.3
@@ -107,6 +128,8 @@
     {
       "columna": "Towers",
       "kb": 42.3,
+      "bytes": 43292,
+      "bytes_sin_comprimir": 248928,
       "por_ciento_del_fichero": 0.2,
       "valores_distintos": 2,
       "veces_comprimida": 5.7
@@ -114,6 +137,8 @@
     {
       "columna": "COMP",
       "kb": 28.7,
+      "bytes": 29377,
+      "bytes_sin_comprimir": 82156,
       "por_ciento_del_fichero": 0.2,
       "valores_distintos": 2,
       "veces_comprimida": 2.8
@@ -121,6 +146,8 @@
     {
       "columna": "DV_eletric",
       "kb": 28.2,
+      "bytes": 28872,
+      "bytes_sin_comprimir": 79976,
       "por_ciento_del_fichero": 0.2,
       "valores_distintos": 2,
       "veces_comprimida": 2.8
@@ -128,6 +155,8 @@
     {
       "columna": "MPG",
       "kb": 27.9,
+      "bytes": 28544,
+      "bytes_sin_comprimir": 79842,
       "por_ciento_del_fichero": 0.2,
       "valores_distintos": 2,
       "veces_comprimida": 2.8
@@ -135,6 +164,8 @@
     {
       "columna": "Pressure_switch",
       "kb": 14.3,
+      "bytes": 14685,
+      "bytes_sin_comprimir": 129438,
       "por_ciento_del_fichero": 0.1,
       "valores_distintos": 2,
       "veces_comprimida": 8.8
@@ -142,6 +173,8 @@
     {
       "columna": "Oil_level",
       "kb": 4.9,
+      "bytes": 4992,
+      "bytes_sin_comprimir": 12237,
       "por_ciento_del_fichero": 0.0,
       "valores_distintos": 2,
       "veces_comprimida": 2.5
@@ -149,6 +182,8 @@
     {
       "columna": "Caudal_impulses",
       "kb": 4.7,
+      "bytes": 4803,
+      "bytes_sin_comprimir": 11875,
       "por_ciento_del_fichero": 0.0,
       "valores_distintos": 2,
       "veces_comprimida": 2.5
@@ -156,6 +191,8 @@
     {
       "columna": "LPS",
       "kb": 1.7,
+      "bytes": 1710,
+      "bytes_sin_comprimir": 2485,
       "por_ciento_del_fichero": 0.0,
       "valores_distintos": 2,
       "veces_comprimida": 1.5
@@ -167,22 +204,34 @@
     {
       "columnas": "las 17",
       "cuantas": 17,
-      "mb": 16.83
+      "mb": 16.83,
+      "kb_medidos": 17235.4,
+      "kb_que_predice_la_contabilidad": 16985.4,
+      "por_ciento_de_desvio": 1.5
     },
     {
       "columnas": "5",
       "cuantas": 5,
-      "mb": 9.04
+      "mb": 9.04,
+      "kb_medidos": 9257.0,
+      "kb_que_predice_la_contabilidad": 9130.3,
+      "por_ciento_de_desvio": 1.4
     },
     {
       "columnas": "4",
       "cuantas": 4,
-      "mb": 4.0
+      "mb": 4.0,
+      "kb_medidos": 4095.0,
+      "kb_que_predice_la_contabilidad": 3969.4,
+      "por_ciento_de_desvio": 3.1
     },
     {
       "columnas": "2",
       "cuantas": 2,
-      "mb": 0.03
+      "mb": 0.03,
+      "kb_medidos": 34.4,
+      "kb_que_predice_la_contabilidad": 28.7,
+      "por_ciento_de_desvio": 16.6
     }
   ],
   "veces_entre_17_y_2_columnas": 561

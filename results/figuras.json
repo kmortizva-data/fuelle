@@ -6,5 +6,15 @@
   "fig_m2_analogica_vs_digital.claro.png": "4364bd92",
   "fig_m2_analogica_vs_digital.oscuro.png": "b36e1906",
   "fig_m3_cuatro_sitios.claro.png": "ce4f962a",
-  "fig_m3_cuatro_sitios.oscuro.png": "b2255fde"
+  "fig_m3_cuatro_sitios.oscuro.png": "b2255fde",
+  "fig_m4_bronce_particiones.claro.png": "bd7e2997",
+  "fig_m4_bronce_particiones.oscuro.png": "23afe529",
+  "fig_m5_idempotencia.claro.png": "c6e7a8c9",
+  "fig_m5_idempotencia.oscuro.png": "35072c3c",
+  "fig_m6_curva_de_particion.claro.png": "d50b78a2",
+  "fig_m6_curva_de_particion.oscuro.png": "4d863b6f",
+  "fig_m7_csv_vs_parquet.claro.png": "8ac3982f",
+  "fig_m7_csv_vs_parquet.oscuro.png": "7a2b2608",
+  "fig_m7_filas_vs_columnas.claro.png": "36153c28",
+  "fig_m7_filas_vs_columnas.oscuro.png": "9eb380d5"
 }

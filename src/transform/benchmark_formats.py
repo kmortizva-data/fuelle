@@ -90,6 +90,11 @@ def column_weights(con: duckdb.DuckDBPyConnection, parquet: Path) -> list[dict]:
         out.append({
             "columna": name,
             "kb": round(packed / 1024, 1),
+            "bytes": packed,
+            # El tamaño sin comprimir también se guarda: es la prueba de que dos
+            # columnas pueden ocupar lo mismo en crudo y comprimir distinto, que
+            # es de lo que va este módulo.
+            "bytes_sin_comprimir": raw,
             "por_ciento_del_fichero": round(packed / total * 100, 1),
             "valores_distintos": distinct,
             "veces_comprimida": round(raw / packed, 1) if packed else None,
@@ -134,6 +139,9 @@ def main() -> None:
             "parquet_min_s": round(on_parquet.minimum, 4),
             "parquet_max_s": round(on_parquet.maximum, 4),
             "veces": round(on_csv.median / on_parquet.median, 1) if real else None,
+            # El redondeo a entero se hace aqui y no al escribir la leccion: un
+            # numero redondeado a mano es un numero sin respaldo.
+            "veces_redondeadas": round(on_csv.median / on_parquet.median) if real else None,
             "diferencia_real": real,
         })
         factor = f"{timings[-1]['veces']}x" if real else "se solapan"
@@ -166,9 +174,21 @@ def main() -> None:
         target = SCRATCH / f"cols_{len(ladder_rows)}.parquet"
         con.execute(f"COPY (SELECT {projection} FROM {parquet_source}) "
                     f"TO '{target.as_posix()}' (FORMAT PARQUET, COMPRESSION ZSTD)")
-        n = len(con.sql(f"SELECT * FROM read_parquet('{target.as_posix()}') LIMIT 0").columns)
-        ladder_rows.append({"columnas": label, "cuantas": n, "mb": round(mb(target), 2)})
-        print(f"  {label:>6} columns -> {ladder_rows[-1]['mb']:>6.2f} MB")
+        cols = con.sql(f"SELECT * FROM read_parquet('{target.as_posix()}') LIMIT 0").columns
+        # La contabilidad del fichero grande tiene que predecir el tamaño del
+        # pequeño. Sumar esos pesos a mano al escribir la lección seria un
+        # numero derivado sin respaldo, asi que se suma aqui y se compara.
+        by_name = {w["columna"]: w["kb"] for w in weights}
+        predicted = round(sum(by_name.get(c, 0) for c in cols), 1)
+        measured_kb = round(target.stat().st_size / 1024, 1)
+        ladder_rows.append({
+            "columnas": label, "cuantas": len(cols), "mb": round(mb(target), 2),
+            "kb_medidos": measured_kb,
+            "kb_que_predice_la_contabilidad": predicted,
+            "por_ciento_de_desvio": round(abs(measured_kb - predicted) / measured_kb * 100, 1),
+        })
+        print(f"  {label:>6} columns -> {ladder_rows[-1]['mb']:>6.2f} MB   "
+              f"la contabilidad predecia {predicted:,.1f} KB, midio {measured_kb:,.1f} KB")
 
     rows = con.sql(f"SELECT count(*) FROM {parquet_source}").fetchone()[0]
     heaviest, lightest = ladder_rows[0], ladder_rows[-1]
@@ -198,7 +218,12 @@ def main() -> None:
           f"{lightest['mb']} MB: {payload['veces_entre_17_y_2_columnas']}x")
     print(f"Written to {RESULTS.relative_to(PROJECT)}")
 
-    shutil.rmtree(SCRATCH, ignore_errors=True)
+    # Los ficheros de la escalera se van; `todo.parquet` se queda. La leccion
+    # publica consultas contra el, y check_sql las ejecuta de verdad: borrarlo
+    # dejaria en la pagina un camino que no lleva a ninguna parte.
+    for leftover in SCRATCH.glob("cols_*.parquet"):
+        leftover.unlink()
+    print(f"  se queda {full.relative_to(PROJECT)} para que la leccion se pueda ejecutar")
 
     if not columns_matter:
         raise SystemExit("Reading one column costs the same as seven. "

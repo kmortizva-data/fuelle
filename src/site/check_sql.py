@@ -70,11 +70,37 @@ def normaliza(valor) -> str:
 FECHA = re.compile(r"\d{4}-\d{2}(-\d{2})?")
 
 
+def solo_datos(texto: str) -> str:
+    """Las filas de datos de una caja de DuckDB, sin su cabecera.
+
+    La cabecera lleva el nombre de cada columna y su tipo, y ahí hay números que
+    no son datos: `avg(TP2)` trae un 2 e `int128` trae un 128. Contándolos, la
+    puerta acusaba a la lección de publicar cifras que la consulta no devuelve,
+    cuando lo único que pasaba es que una columna se llama TP2.
+
+    Solo recorta si encuentra la línea que separa cabecera de datos. Una salida
+    que no sea una caja de DuckDB se mira entera, como antes.
+    """
+    lineas = texto.splitlines()
+    for i, linea in enumerate(lineas):
+        if linea.lstrip().startswith("├"):
+            return "\n".join(lineas[i + 1:])
+    return texto
+
+
 def numeros_de(texto: str) -> set:
     """Los números de una salida, sin separadores de millares ni fechas."""
     out = set()
-    texto = FECHA.sub(" ", texto)
+    texto = FECHA.sub(" ", solo_datos(texto))
     for m in NUMBER.finditer(texto):
+        # Un dígito pegado a letras no es un número publicado: es parte de un
+        # nombre. Las señales de este compresor se llaman TP2, TP3, H1 y LPS, y
+        # sin esto la puerta leía el 3 de «TP3» como una cifra que la consulta
+        # no devuelve, cuando lo que devuelve es el texto «TP3» entero.
+        antes = texto[m.start() - 1] if m.start() else " "
+        despues = texto[m.end()] if m.end() < len(texto) else " "
+        if antes.isalpha() or despues.isalpha() or antes == "_" or despues == "_":
+            continue
         crudo = m.group().rstrip(".,")
         limpio = crudo.replace(",", "") if re.fullmatch(r"-?\d{1,3}(,\d{3})+", crudo) else crudo
         try:
