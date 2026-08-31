@@ -358,10 +358,10 @@
       "title_en": "Types and decisions: when 8.2 is not 8.2",
       "subtitle_en": "Text, number and date are not the same even when they look alike. And CASE, which is how a number becomes a named state",
       "cifra": {
-        "value": "por medir",
-        "label": "reparto del tiempo entre los tres estados",
-        "value_en": "to be measured",
-        "label_en": "how time splits across the three states"
+        "value": "54,6 / 30,1 / 15,2 %",
+        "label": "del tiempo parado, en vacío y en carga",
+        "value_en": "54.6 / 30.1 / 15.2 %",
+        "label_en": "of the time stopped, offloaded and loaded"
       },
       "instrumento": "caratula",
       "interactivo": true,
@@ -371,7 +371,7 @@
         "CASE"
       ],
       "scripts": [
-        "src/transform/queries_m09.sql"
+        "src/transform/queries_m09.py"
       ],
       "figuras": [
         "fig_m09_coma_flotante",

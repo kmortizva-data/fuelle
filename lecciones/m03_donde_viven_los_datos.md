@@ -204,7 +204,7 @@ almacén se reconstruye desde el lago.
 
 ### Por qué el CSV es a la vez el más grande y el más lento
 
-Porque es texto. El número 8,716 ocupa cinco caracteres y hay que convertirlo a número cada vez
+Porque es texto. El número 8.716 ocupa cinco caracteres y hay que convertirlo a número cada vez
 que se lee. En formato columnar ocupa unos pocos bytes y se lee tal cual. Más tamaño significa
 más lectura de disco, y encima con trabajo de interpretación por medio.
 

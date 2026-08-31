@@ -33,6 +33,7 @@ RESULTS = PROJECT / "results" / "retos.json"
 # que el lector no puede reproducir.
 MUESTRA_DE = {
     "m08_alarma_con_presion": "sql",
+    "m09_horas_por_estado": "sql",
     "m10_horas_por_mes": "sin_timestamp_ligera",
 }
 
@@ -51,6 +52,17 @@ CHALLENGES = {
     """,
     # Módulo 10: agrupar. El reto pide el promedio mes a mes, que obliga a
     # agrupar dos veces: primero por día para tener las horas, y luego por mes.
+    # Modulo 9: la regla de los tres estados, pero contando horas en vez de
+    # lecturas. El CASE viene dado; lo que se practica es la conversion.
+    "m09_horas_por_estado": f"""
+        SELECT CASE WHEN Motor_current < 1 THEN 'parado'
+                    WHEN Motor_current < 5 THEN 'en vacio'
+                    ELSE 'en carga' END        AS estado,
+               round(count(*) * {SECONDS_PER_READING} / 3600.0, 1) AS horas
+        FROM telemetria
+        GROUP BY estado
+        ORDER BY horas DESC
+    """,
     "m10_horas_por_mes": f"""
         SELECT strftime(day, '%Y-%m')      AS mes,
                round(avg(horas), 2)        AS horas_de_carga

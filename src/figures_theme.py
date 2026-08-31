@@ -98,6 +98,18 @@ def _style(theme: str, c: dict) -> dict:
     }
 
 
+def es(n: float, decimales: int = 0) -> str:
+    """Un número en español: punto de millares y coma decimal.
+
+    Existe porque el atajo evidente, formatear y hacer `.replace(",", ".")`
+    sobre la cadena entera, ya ha estropeado tres etiquetas de este curso: se
+    come también la coma de la prosa y convierte «un día lleno, 8.640 lecturas»
+    en «un día lleno. 8.640 lecturas». El cambio de separador tiene que hacerse
+    sobre el número solo, y por eso vive aquí y no suelto en cada figura.
+    """
+    return f"{n:,.{decimales}f}".replace(",", "\x00").replace(".", ",").replace("\x00", ".")
+
+
 def fingerprint(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()[:8]
 

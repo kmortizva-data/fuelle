@@ -24,7 +24,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 
-from figures_theme import FIGURES, _style, colours, fingerprint, guardar_huellas  # noqa: E402
+from figures_theme import (FIGURES, _style, colours, es, fingerprint,  # noqa: E402
+                            guardar_huellas)
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -98,7 +99,7 @@ def filas_contra_columnas(datos: dict) -> str:
             izq.set_yticklabels(nombres)
             izq.grid(axis="x", zorder=0)
             for i, v in zip(y, kb):
-                izq.annotate(f"{v:,.0f}".replace(",", "."), xy=(v, i), xytext=(4, 0),
+                izq.annotate(es(v), xy=(v, i), xytext=(4, 0),
                              textcoords="offset points", va="center",
                              fontsize=8, color=c["ink_soft"])
             izq.set_xlim(0, max(kb) * 1.18)
@@ -108,7 +109,7 @@ def filas_contra_columnas(datos: dict) -> str:
             der.set_xlabel("valores distintos en la columna (escala logarítmica)")
             der.grid(axis="x", zorder=0)
             for i, v in zip(y, distintos):
-                der.annotate(f"{v:,}".replace(",", "."), xy=(v, i), xytext=(4, 0),
+                der.annotate(es(v), xy=(v, i), xytext=(4, 0),
                              textcoords="offset points", va="center",
                              fontsize=8, color=c["ink_soft"])
             der.set_xlim(1, max(distintos) * 9)

@@ -43,5 +43,16 @@
   },
   "m08_primera_consulta": {
     "8640": "las lecturas de un dia lleno a 10 s, una constante del muestreo que el modulo 4 mide"
+  },
+  "m09_tipos_y_decisiones": {
+    "8.202": "un valor del ejemplo de juguete, copiado del reparto real de TP2 alrededor de 8,2 que mide queries_m09.py",
+    "8.198": "idem, el vecino por debajo",
+    "0.4987": "la ley de cobre del puente metalurgico, dos cifras inventadas a proposito para ilustrar que nadie mide exactamente 0,5",
+    "0.5013": "idem, la de arriba",
+    "8.25": "el extremo superior de un BETWEEN escrito en la prosa como ejemplo de como se pregunta bien",
+    "8.15": "el extremo inferior de ese mismo BETWEEN",
+    "8.31": "una lectura del ejemplo de juguete, elegida para que no caiga en 8,20 y el recuento a mano salga en tres",
+    "8.200": "el mismo 8,2 del ejemplo de juguete escrito con tres decimales, para que las tres filas se vean alineadas",
+    "8.1999999999999993": "el valor binario que se cita en el repaso al explicar por que DOUBLE no es exacto. Es una cita del tipo, no una medida del fichero"
   }
 }

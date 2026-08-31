@@ -43,32 +43,38 @@ NUMBER = re.compile(r"\d[\d.,]*\d|\d")
 DATE = re.compile(r"\d{4}-\d{2}(-\d{2})?")
 
 
-def canonical(raw: str) -> str | None:
+def canonical(raw: str, lang: str = "es") -> str | None:
     """1.516.948 y 1,516,948 son el mismo número. Devuelve None si no es un dato.
 
     Se descartan los que no parecen medición: menos de cuatro cifras y sin
     decimales. Un «los tres pasos» o un «módulo 16» no hay que justificarlo.
+
+    **El idioma decide cuál es el separador decimal**, y no el número de cifras.
+    En español la coma es el decimal y el punto el de millares; en inglés al
+    revés. Adivinarlo contando cifras leía «8,198» como ocho mil ciento noventa
+    y ocho, así que un valor de tres decimales publicado en una lección española
+    no había forma de declararlo: la excepción y la prosa nunca coincidían.
     """
     body = raw.strip()
-    last = max(body.rfind("."), body.rfind(","))
-    if last == -1:
+    decimal, millares = (",", ".") if lang == "es" else (".", ",")
+
+    last = body.rfind(decimal)
+    if last != -1:
+        # Hay separador decimal: lo de después son decimales, sin discusión.
+        entero = body[:last].replace(millares, "") or "0"
+        return _trim(f"{entero}.{body[last + 1:]}")
+
+    if millares not in body:
         return body if len(body) >= 4 else None
 
-    tail = body[last + 1:]
-    groups = re.split(r"[.,]", body)
-    # Un separador de millares no puede llevar un cero solo delante: «0,003» es
-    # tres milésimas, no cero mil tres. Sin esta condición el verificador pedía
-    # justificar tiempos como 0,003 s que sí estaban medidos, que es la clase de
-    # falso positivo que hace que una puerta deje de creerse.
-    parece_millares = (len(tail) == 3
-                       and all(len(g) == 3 for g in groups[1:])
-                       and groups[0] != "0")
-    if parece_millares:
+    # Solo hay separadores de millares. Se comprueba que lo parezcan de verdad:
+    # un «0.003» inglés no es cero mil tres, es tres milésimas mal escritas, y
+    # eso es un error de la lección, no un número que haya que canonizar.
+    groups = body.split(millares)
+    if all(len(g) == 3 for g in groups[1:]) and groups[0] not in ("0", ""):
         entero = "".join(groups)
         return entero if len(entero) >= 4 else None
-
-    entero = re.sub(r"[.,]", "", body[:last]) or "0"
-    return _trim(f"{entero}.{tail}")
+    return _trim(f"{groups[0]}.{''.join(groups[1:])}")
 
 
 def _trim(value: str) -> str:
@@ -174,13 +180,19 @@ def clave(path: Path) -> str:
 def check(path: Path, known: set, excepciones: dict) -> list[str]:
     text = io.open(path, encoding="utf-8").read()
     permitidos = excepciones.get(clave(path), {})
+    # La edición inglesa escribe 1,516,948 y 3.42; la española al revés. Sin
+    # esto, cada número de tres decimales se leía como millares en la mitad de
+    # las lecciones.
+    lang = "en" if path.parent.name == "en" else "es"
+    # Las excepciones se declaran como se escriben, y se comparan canonizadas.
+    permitidos = {canonical(k, "en") or k: v for k, v in permitidos.items()}
     problems = []
     for line_no, line in prose(text):
         destacados = {n for trozo in NEGRITA.findall(line)
                       for n in NUMBER.findall(trozo)}
         for m in NUMBER.finditer(line):
             crudo = m.group()
-            value = canonical(crudo)
+            value = canonical(crudo, lang)
             if value is None and crudo in destacados:
                 # Va en negrita: se afirma, así que se comprueba igual.
                 value = _trim(crudo.replace(".", "").replace(",", "."))

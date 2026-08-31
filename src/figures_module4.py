@@ -21,7 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from figures_theme import figura, guardar_huellas  # noqa: E402
+from figures_theme import es, figura, guardar_huellas  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -39,12 +39,6 @@ def main() -> None:
     lecturas = [d["lecturas"] for d in datos["dias"]]
     lleno = datos["lecturas_de_un_dia_lleno"]
     mediana = datos["lecturas_mediana"]
-
-    # El separador se cambia sobre el número ya formateado y nunca sobre la
-    # frase entera: hacerlo sobre la frase convierte también la coma de la
-    # prosa en un punto.
-    def es(n: int) -> str:
-        return f"{n:,}".replace(",", ".")
 
     def dibujar(fig, ax, c):
         ax.bar(dias, lecturas, width=1.0, color=c["accent"], zorder=3, linewidth=0)

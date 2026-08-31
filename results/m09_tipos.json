@@ -1,0 +1,54 @@
+{
+  "filas": 1516948,
+  "umbral_de_la_ficha": 8.2,
+  "filas_con_igual_exacto": 107,
+  "filas_como_se_ven_en_pantalla": 498,
+  "filas_redondeando": 5237,
+  "por_ciento_que_encuentra_el_igual_en_pantalla": 21.5,
+  "veces_que_se_pierde": 48.9,
+  "por_ciento_que_encuentra_el_igual": 2.0,
+  "vecinos_del_umbral": [
+    8.198,
+    8.202,
+    8.196,
+    8.204
+  ],
+  "decimal_es_exacto": true,
+  "decimal_suma": "0.3",
+  "double_es_exacto": false,
+  "double_suma": "0.30000000000000004",
+  "tipo_de_un_literal": "DECIMAL(2,1)",
+  "tipo_de_TP2": "DOUBLE",
+  "corte_parado": 1.0,
+  "corte_carga": 5.0,
+  "estados": [
+    {
+      "estado": "parado",
+      "lecturas": 829000,
+      "por_ciento": 54.6,
+      "horas": 2302.8,
+      "corriente_media": 0.04,
+      "por_ciento_marcado_en_carga": 0.2
+    },
+    {
+      "estado": "en vacio",
+      "lecturas": 457356,
+      "por_ciento": 30.1,
+      "horas": 1270.4,
+      "corriente_media": 3.79,
+      "por_ciento_marcado_en_carga": 3.4
+    },
+    {
+      "estado": "en carga",
+      "lecturas": 230592,
+      "por_ciento": 15.2,
+      "horas": 640.5,
+      "corriente_media": 5.82,
+      "por_ciento_marcado_en_carga": 98.1
+    }
+  ],
+  "por_ciento_en_carga": 15.2,
+  "acuerdo_con_dv_eletric": 98.1,
+  "amperios_mas_frecuentes_en_carga": 6.0,
+  "amperios_que_dice_la_ficha_en_carga": 7
+}

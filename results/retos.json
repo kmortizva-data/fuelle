@@ -60,6 +60,28 @@
     "sql": "SELECT day, TP2, LPS FROM telemetria WHERE LPS = 1 AND TP2 > 6 ORDER BY TP2 DESC LIMIT 10",
     "muestra": "sql"
   },
+  "m09_horas_por_estado": {
+    "columns": [
+      "estado",
+      "horas"
+    ],
+    "rows": [
+      [
+        "parado",
+        2302.8
+      ],
+      [
+        "en vacio",
+        1270.4
+      ],
+      [
+        "en carga",
+        640.5
+      ]
+    ],
+    "sql": "SELECT CASE WHEN Motor_current < 1 THEN 'parado' WHEN Motor_current < 5 THEN 'en vacio' ELSE 'en carga' END AS estado, round(count(*) * 10 / 3600.0, 1) AS horas FROM telemetria GROUP BY estado ORDER BY horas DESC",
+    "muestra": "sql"
+  },
   "m10_horas_por_mes": {
     "columns": [
       "mes",
