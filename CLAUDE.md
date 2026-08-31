@@ -500,6 +500,44 @@ textos que devuelve una consulta, y tiraba la hora de una marca de tiempo.
 **`figures_theme.es()`** existe porque formatear un número y hacer `.replace(",", ".")` sobre la
 frase entera ya se había comido la coma de tres pies de figura.
 
+### Parte 4 a medias (2026-09-01): módulos 14, 15 y 16
+
+**16 lecciones de 31 en español, 13 en inglés.** Los nueve verificadores en verde. El inglés de la
+parte 4 está en deuda, que es la cadencia acordada: se traduce al cerrar la parte.
+
+**Parado a propósito en el módulo 17.** El 17 necesita `dbt-core` y `dbt-duckdb`, y el 18 necesita
+`deltalake` o `pyiceberg`. Instalar librerías gordas en su entorno es de las tres cosas que se le
+preguntan, así que ahí se para. Todo lo anterior no necesitaba instalar nada.
+
+**Hallazgos de estos tres módulos:**
+
+1. **El reloj del registro no se desplaza: camina.** Las lecturas se reparten por igual entre los
+   diez restos de segundo posibles, porque cada hueco de 9 s mueve la fase. La primera versión de
+   `silver.py` cruzaba con la rejilla por marca exacta y **conservó una de cada diez**. Lo cazó su
+   propia comprobación de que la plata tiene que salir con todas las lecturas del bronce.
+2. **La plata destapa 337.653 huecos** (18,3 %) que en bronce no existían como filas. Cuestan
+   1,79 MB de más, y ese es el precio de poder contar lo que falta.
+3. **El ruido de coma flotante es la norma, no la excepción**: toca el 85,5 % de TP2 y el 98,6 %
+   de DV_pressure.
+4. **La calle explica la temperatura del aceite mejor que la carga del compresor**, 0,529 contra
+   0,432, y el aceite va 46 grados por encima. Un gemelo que ignore el clima se equivocará **más
+   en verano**, y eso es una fábrica de falsas alarmas.
+5. **El 5 de junio el aceite deja de ciclar y se queda en 75,7 grados justo a las 10:00**, la hora
+   exacta en que empieza el parte. Es el hallazgo del módulo 13 por otro camino.
+6. **El contrato de datos cazó 4 de 5 roturas con 7 promesas.** La que se escapó fue una columna
+   nueva: la promesa comprobaba que estuvieran las acordadas, **no que no sobrara ninguna**. Con
+   la promesa que faltaba, 8 promesas y 5 de 5.
+
+**Las muestras ya son seis**, y dos son de otro grano (`horas` y `clima`, del módulo 15). Eso
+obligó a tres cambios en la maquinaria: un módulo puede declarar sus vistas por nombre en
+`temario.json`, `check_muestras` reconstruye las tablas derivadas **desde el lago** en vez de leer
+la propia muestra, y si una muestra recorta filas ahora lo declara `make_sample` en vez de
+deducirse del recuento.
+
+**Y la lección que se repite:** tres veces he citado en prosa un número leído de mi propia figura
+(7,2 y 10,5 bar en el 14, y 76 grados en el 15). `check_numbers` las cazó las tres. **Los números
+de la prosa salen de `results/`, no del dibujo.**
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo
