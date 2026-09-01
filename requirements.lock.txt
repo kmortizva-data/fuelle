@@ -1,0 +1,24 @@
+# El entorno tal y como estaba ANTES de instalar dbt, Delta e Iceberg (2026-09-01).
+#
+# Existe para que volver atras sea un comando y no una reconstruccion:
+#     .venv\Scripts\python.exe -m pip install -r requirements.lock.txt
+#
+# Las 16 lecciones escritas hasta el modulo 16 dependen de estas versiones exactas,
+# en particular de duckdb 1.5.5, que trae time_bucket y parquet_metadata.
+
+contourpy==1.3.3
+cycler==0.12.1
+duckdb==1.5.5
+fonttools==4.63.0
+kiwisolver==1.5.1
+matplotlib==3.11.1
+numpy==2.5.2
+packaging==26.3
+pandas==3.0.5
+pillow==12.3.0
+pyarrow==25.0.1
+pyparsing==3.3.2
+python-dateutil==2.9.0.post0
+six==1.17.0
+truststore==0.10.4
+tzdata==2026.3
