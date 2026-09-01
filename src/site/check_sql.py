@@ -22,6 +22,7 @@ Correr:  .venv\\Scripts\\python.exe src\\site\\check_sql.py
 
 from __future__ import annotations
 
+import decimal
 import io
 import json
 import re
@@ -58,8 +59,15 @@ def bloques(text: str) -> list[tuple[int, str, str]]:
 
 
 def normaliza(valor) -> str:
-    if isinstance(valor, float):
-        return f"{valor:.10g}"
+    # Una columna DECIMAL llega como `Decimal` y no como `float`, así que sin
+    # esta línea el 14,0 publicado y el `Decimal('14.0')` que devuelve la
+    # consulta se leían como dos valores distintos, y la puerta acusaba a la
+    # lección de inventarse un número que estaba en su propia caja. El clima del
+    # módulo 15 trae su temperatura en DECIMAL(3,1), así que pasa de verdad.
+    if isinstance(valor, bool):
+        return str(valor)
+    if isinstance(valor, (float, decimal.Decimal)):
+        return f"{float(valor):.10g}"
     if hasattr(valor, "isoformat"):
         return valor.isoformat()[:10]
     return str(valor)
@@ -188,7 +196,8 @@ def revisa(path: Path, con, respuestas: dict) -> list[str]:
                     # entraba y la puerta lo daba por inventado.
                     elif hasattr(v, "isoformat"):
                         reales |= numeros_de(v.isoformat()[11:])
-                    if isinstance(v, (int, float)) and not isinstance(v, bool):
+                    if (isinstance(v, (int, float, decimal.Decimal))
+                            and not isinstance(v, bool)):
                         # La salida publicada suele venir redondeada, así que un
                         # 23,81 tiene que casar con un 23,808333 del resultado.
                         for dec in range(0, 5):

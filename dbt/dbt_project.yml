@@ -1,0 +1,24 @@
+# El proyecto dbt de Fuelle. Modulo 17.
+#
+# Lo que dbt aporta aqui, y es lo que justifica meter una herramienta mas:
+#
+#   1. El LINAJE se dibuja solo. Basta con que un modelo diga ref('otro') para
+#      que dbt sepa el orden y el grafo. Nadie mantiene un diagrama a mano.
+#   2. Las PRUEBAS son el contrato del modulo 16 con sintaxis de la industria.
+#   3. El orden de ejecucion lo decide dbt, no un script con los pasos a mano.
+name: fuelle
+version: "1.0.0"
+profile: fuelle
+
+model-paths: ["models"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  fuelle:
+    preparacion:
+      +materialized: view
+    oro:
+      # Las tablas de oro se materializan de verdad: se consultan mucho y se
+      # calculan una vez, que es justo lo que distingue el oro de la plata.
+      +materialized: table

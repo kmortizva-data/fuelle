@@ -1,0 +1,103 @@
+{
+  "nodos_del_grafo": 9,
+  "tablas_de_oro": {
+    "oro_averias": {
+      "filas": 4,
+      "columnas": 9
+    },
+    "oro_ciclo_diario": {
+      "filas": 212,
+      "columnas": 8
+    },
+    "oro_horas": {
+      "filas": 4416,
+      "columnas": 7
+    }
+  },
+  "kb_de_la_base": 1036.0,
+  "fuentes": 3,
+  "modelos": 6,
+  "modelos_de_preparacion": 3,
+  "modelos_de_oro": 3,
+  "pruebas": 11,
+  "dependencias": 8,
+  "pasos_de_la_construccion": 17,
+  "todo_en_verde": true,
+  "la_prueba_rota_se_caza": true,
+  "filas_que_incumplen_la_prueba_rota": 1,
+  "grafo": {
+    "nodos": {
+      "source.fuelle.lago.plata": {
+        "nombre": "plata",
+        "capa": "fuente"
+      },
+      "source.fuelle.lago.clima": {
+        "nombre": "clima",
+        "capa": "fuente"
+      },
+      "source.fuelle.lago.averias": {
+        "nombre": "averias",
+        "capa": "fuente"
+      },
+      "model.fuelle.oro_averias": {
+        "nombre": "oro_averias",
+        "capa": "oro"
+      },
+      "model.fuelle.oro_ciclo_diario": {
+        "nombre": "oro_ciclo_diario",
+        "capa": "oro"
+      },
+      "model.fuelle.oro_horas": {
+        "nombre": "oro_horas",
+        "capa": "oro"
+      },
+      "model.fuelle.prep_telemetria": {
+        "nombre": "prep_telemetria",
+        "capa": "preparacion"
+      },
+      "model.fuelle.prep_clima": {
+        "nombre": "prep_clima",
+        "capa": "preparacion"
+      },
+      "model.fuelle.prep_averias": {
+        "nombre": "prep_averias",
+        "capa": "preparacion"
+      }
+    },
+    "aristas": [
+      [
+        "model.fuelle.prep_averias",
+        "model.fuelle.oro_averias"
+      ],
+      [
+        "model.fuelle.oro_ciclo_diario",
+        "model.fuelle.oro_averias"
+      ],
+      [
+        "model.fuelle.prep_telemetria",
+        "model.fuelle.oro_ciclo_diario"
+      ],
+      [
+        "model.fuelle.prep_telemetria",
+        "model.fuelle.oro_horas"
+      ],
+      [
+        "model.fuelle.prep_clima",
+        "model.fuelle.oro_horas"
+      ],
+      [
+        "source.fuelle.lago.plata",
+        "model.fuelle.prep_telemetria"
+      ],
+      [
+        "source.fuelle.lago.clima",
+        "model.fuelle.prep_clima"
+      ],
+      [
+        "source.fuelle.lago.averias",
+        "model.fuelle.prep_averias"
+      ]
+    ],
+    "pruebas": 11
+  }
+}

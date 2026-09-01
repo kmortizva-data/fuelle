@@ -1,0 +1,26 @@
+version: 2
+
+# The lake's three sources, declared so dbt knows where everything comes from.
+#
+# A source is NOT a model: dbt does not build it, it only names it. It is the
+# edge of the graph, which is why source nodes are drawn apart in the figure.
+#
+# `external_location` is what makes this work without loading anything: dbt
+# pastes that text behind the FROM, so the source is the lake's Parquet, read
+# in place. No copy and no import.
+sources:
+  - name: lago
+    description: The data lake that modules 4 to 15 built.
+    tables:
+      - name: plata
+        description: Compressor telemetry on a 10 s grid. Module 14.
+        meta:
+          external_location: "read_parquet('../lake/silver/telemetry/**/*.parquet')"
+      - name: clima
+        description: Porto weather hour by hour, from Open-Meteo. Module 15.
+        meta:
+          external_location: "read_parquet('../lake/bronze/weather/**/*.parquet')"
+      - name: averias
+        description: The four failure reports, errata included.
+        meta:
+          external_location: "read_parquet('../lake/bronze/failures/failures.parquet')"

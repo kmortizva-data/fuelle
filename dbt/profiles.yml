@@ -1,0 +1,11 @@
+# El perfil apunta a un fichero DuckDB dentro del lago. No hay servidor que
+# levantar ni credenciales que guardar, que es la razon de usar DuckDB aqui.
+fuelle:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../lake/gold/fuelle.duckdb
+      threads: 4
+      extensions:
+        - parquet

@@ -39,6 +39,7 @@ MUESTRA_DE = {
     "m12_lecturas_por_averia": "sql",
     "m13_paradas_del_dia": "un_dia",
     "m15_aceite_por_tramo": "horas",
+    "m17_oro_por_mes": "horas",
 }
 
 SECONDS_PER_READING = 10
@@ -143,6 +144,19 @@ CHALLENGES = {
         JOIN clima c ON c.hora = h.hora
         GROUP BY calle
         ORDER BY calle
+    """,
+    # Modulo 17: un modelo de oro es un SELECT y nada mas. Este da un mes por
+    # fila, que es otro grano distinto del de las dos tablas que cruza, y por eso
+    # merece ser una tabla de oro propia en vez de una consulta suelta.
+    "m17_oro_por_mes": """
+        SELECT strftime(h.hora, '%Y-%m')     AS mes,
+               count(*)                      AS horas,
+               round(avg(h.aceite), 1)       AS aceite,
+               round(avg(c.temperatura), 1)  AS calle
+        FROM horas h
+        JOIN clima c ON c.hora = h.hora
+        GROUP BY mes
+        ORDER BY mes
     """,
 }
 

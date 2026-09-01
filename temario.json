@@ -617,10 +617,10 @@
       "title_en": "Gold with dbt: model in SQL and let lineage draw itself",
       "subtitle_en": "The tables that answer questions, written in the SQL you now know, with docs and a dependency map the tool generates",
       "cifra": {
-        "value": "por medir",
-        "label": "modelos en el mapa de dependencias",
-        "value_en": "to be measured",
-        "label_en": "models in the dependency map"
+        "value": "9",
+        "label": "nodos del mapa, ninguno colocado a mano",
+        "value_en": "9",
+        "label_en": "nodes in the map, not one placed by hand"
       },
       "accent": {
         "dark": "#B3BF80",
@@ -628,13 +628,18 @@
       },
       "instrumento": "grafo",
       "interactivo": true,
-      "reto": "Añadir un modelo nuevo y ver aparecer su nodo en el mapa sin dibujar nada a mano.",
+      "reto": "Escribir el SELECT de un modelo de oro nuevo, el paso que hace aparecer su nodo en el mapa.",
       "scripts": [
-        "dbt/models/"
+        "dbt/models/",
+        "src/transform/dbt_gold.py"
       ],
       "figuras": [
         "fig_m17_linaje_dbt"
-      ]
+      ],
+      "tablas": {
+        "horas": "horas",
+        "clima": "clima"
+      }
     },
     {
       "number": 18,

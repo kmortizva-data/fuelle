@@ -1,0 +1,52 @@
+version: 2
+
+# Module 16's contract, written in the tool the industry uses.
+#
+# They are the same promises: every test is a query looking for offenders, and
+# it has to return zero rows. The difference is that here you do not write the
+# query, only name the promise, and dbt generates it and runs it on every build.
+models:
+  - name: oro_ciclo_diario
+    description: >
+      One day per row. This is the table the twin hangs from: the duty cycle is
+      where the leak shows, because pressure is held by the control loop.
+    columns:
+      - name: dia
+        description: The calendar day.
+        data_tests: [unique, not_null]
+      - name: horas_de_carga
+        description: Hours the compressor spent loaded that day.
+        data_tests: [not_null]
+      - name: arranques
+        description: Times the compressor went from stopped to loaded.
+        data_tests: [not_null]
+      - name: dia_completo
+        description: True when the day carries over 90 per cent of its readings.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [true, false]
+                quote: false
+
+  - name: oro_horas
+    description: Telemetry brought down to the weather's grain, and crossed with it.
+    columns:
+      - name: hora
+        description: The hour on the hour.
+        data_tests: [unique, not_null]
+      - name: calle
+        description: Air temperature in Porto, in degrees.
+        data_tests: [not_null]
+
+  - name: oro_averias
+    description: >
+      The four reports with what the compressor actually did meanwhile.
+      `nr` carries NO uniqueness test: two reports are called «#1» and that
+      erratum is kept. The real key is checked in tests/clave_de_averias.sql.
+    columns:
+      - name: nr
+        description: The report number, as it came. It repeats.
+        data_tests: [not_null]
+      - name: horas_del_parte
+        description: Duration declared in the report.
+        data_tests: [not_null]
