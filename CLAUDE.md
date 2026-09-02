@@ -106,8 +106,11 @@ regenerarlos. El orden importa: cada script depende de lo que dejó el anterior.
 2. src/ingest/bronze.py                 el lago: 212 particiones, ~4 s
 3. src/transform/benchmark_formats.py   deja lake/_formatos/todo.parquet
 4. src/ingest/partition_profile.py      perfila lo que escribió el paso 2
-5. src/site/check_all.py                las ocho puertas
+5. src/transform/silver.py              la plata, en rejilla de 10 s
+6. src/site/check_all.py                las nueve puertas
 ```
+
+La parte 4 añade cinco scripts más y una lista propia, al final de este fichero.
 
 **El paso 3 no es opcional.** Las consultas publicadas del módulo 7 apuntan a ese fichero y
 `check_sql` las ejecuta de verdad. Si falta, la puerta lo dice por su nombre y a quién llamar,
@@ -500,14 +503,14 @@ textos que devuelve una consulta, y tiraba la hora de una marca de tiempo.
 **`figures_theme.es()`** existe porque formatear un número y hacer `.replace(",", ".")` sobre la
 frase entera ya se había comido la coma de tres pies de figura.
 
-### Parte 4 a medias (2026-09-01): módulos 14, 15 y 16
+### Parte 4, primera mitad (2026-09-01): módulos 14, 15 y 16
 
 **16 lecciones de 31 en español, 13 en inglés.** Los nueve verificadores en verde. El inglés de la
 parte 4 está en deuda, que es la cadencia acordada: se traduce al cerrar la parte.
 
-**Parado a propósito en el módulo 17.** El 17 necesita `dbt-core` y `dbt-duckdb`, y el 18 necesita
+**Se paró aquí a propósito** porque el 17 necesita `dbt-core` y `dbt-duckdb`, y el 18 necesita
 `deltalake` o `pyiceberg`. Instalar librerías gordas en su entorno es de las tres cosas que se le
-preguntan, así que ahí se para. Todo lo anterior no necesitaba instalar nada.
+preguntan. Kevin dio luz verde el 2026-09-01 y el bloque siguió.
 
 **Hallazgos de estos tres módulos:**
 
@@ -537,6 +540,95 @@ deducirse del recuento.
 **Y la lección que se repite:** tres veces he citado en prosa un número leído de mi propia figura
 (7,2 y 10,5 bar en el 14, y 76 grados en el 15). `check_numbers` las cazó las tres. **Los números
 de la prosa salen de `results/`, no del dibujo.**
+
+### Parte 4 CERRADA (2026-09-02): módulos 17 y 18, y las 18 lecciones en los dos idiomas
+
+**18 lecciones de 31, las 18 en español y en inglés.** Nueve verificadores en verde. Con esto el
+hueco de ingeniería de datos del portafolio queda cerrado entero, aunque el gemelo llegue después.
+
+**La instalación no rompió nada.** `requirements.lock.txt` se commiteó antes de tocar el entorno y
+`check_all.py` pasó entero justo después de instalar. duckdb 1.5.5, pandas 3.0.5, pyarrow 25.0.1,
+numpy 2.5.2 y matplotlib 3.11.1 siguen intactos. Las extensiones `delta` e `iceberg` de DuckDB
+instalan y cargan sin pelea: el riesgo del SSL interceptado no se materializó.
+
+**Módulo 17, oro con dbt.** Proyecto dbt sobre DuckDB en `dbt/`: tres vistas de preparación sobre
+las tres fuentes, tres tablas de oro encima, once pruebas. `dbt build` en verde en 17 pasos, y el
+grafo tiene **9 nodos y 8 dependencias, ninguna escrita a mano**.
+
+- **La figura sale del `manifest.json` de dbt**, no de una lista. Es el argumento entero del
+  módulo, así que dibujarla a mano lo destruiría. Columna = capa; altura dentro de la columna =
+  profundidad en el grafo, que es el orden en que dbt construye.
+- **Las once pruebas en verde se probaron rompiéndolas**, igual que el contrato del 16: se mete a
+  propósito `unique` sobre el número de parte, que el módulo 12 ya midió que es mentira, y dbt lo
+  caza con una fila culpable. El fichero se restaura pase lo que pase.
+- **El reto cambió de forma, como estaba previsto.** El temario pedía «añadir un modelo y ver
+  aparecer su nodo», que la maquinaria de retos no puede comprobar porque compara resultados de
+  consultas. Ahora pide el SELECT de un modelo de oro nuevo, y la lección explica que guardarlo
+  como fichero es lo que hace aparecer el nodo. **Cero bytes de muestra nuevos**: reutiliza las
+  dos tablas horarias del módulo 15.
+
+**Módulo 18, viaje en el tiempo, con los dos formatos.** Kevin pidió montar Delta **e** Iceberg y
+compararlos, así que es un banco de pruebas como el 6. El historial no está inventado: es el fallo
+real de la plata, que conservaba 151.657 de 1.516.948 lecturas.
+
+| Qué | Delta | Iceberg |
+|---|---|---|
+| Montaje | nada, una carpeta vacía | un catálogo SQLite |
+| En disco | 12,9 KB en 4 ficheros | 53,7 KB en 12, **4,2 veces más** |
+| Escribir | unas 3 veces más rápido | |
+| Leer, pagando la consulta al catálogo | | unas 2 veces más rápido |
+
+**Nada empató**, que era el resultado más probable a esta escala. Y la cuarta medida existe para
+no hacer trampa: las dos primeras lecturas de Iceberg parten de un puntero que ya sabemos dónde
+está, así que se añadió una que paga la consulta al catálogo. Sigue ganando.
+
+**Dos hallazgos técnicos que valen el módulo por sí solos:**
+
+1. **`delta_scan` acepta carpeta y número de versión; `iceberg_scan` quiere el fichero de
+   metadatos exacto**, cuyo nombre lleva un uuid, porque el puntero a la versión buena vive en el
+   catálogo y no en la carpeta. Por eso el proyecto mantiene dos copias con nombre estable, y la
+   lección dice que es un apaño y por qué hace falta.
+2. **A pyiceberg hay que darle el almacén SIN esquema `file://`.** Con él escribe rutas
+   `file://C:/...` dentro del metadato y DuckDB no las sabe abrir en Windows: falla buscando el
+   manifiesto, no la tabla.
+
+**La cifra del 18: 0,32 h contra 3,17 h.** Eso decía el panel de horas de carga al día antes de
+encontrar el fallo. El 18 de abril, el peor día del semestre, aparecía con **2,36** horas en vez
+de **23,6**. Ni un error, ni una alarma, ni un valor imposible: un compresor sospechosamente
+tranquilo.
+
+**Tres agujeros más en los propios verificadores, todos encontrados usándolos:**
+
+- **`check_sql` no sabía de las columnas DECIMAL.** Un `DECIMAL(3,1)` llega como `decimal.Decimal`
+  y no como `float`, así que un 14,0 publicado y el `Decimal('14.0')` devuelto se leían como
+  valores distintos, y la puerta acusaba a una lección correcta. La temperatura del clima es
+  `DECIMAL(3,1)`, o sea que pasaba de verdad. Comprobado rompiéndolo después: sigue cazando un
+  número mal escrito.
+- **`check_english` trataba un `diagrama` como código literal**, así que la única forma de pasar
+  era publicar el diagrama en español dentro de la lección inglesa. Es lo que llevaban haciendo
+  los módulos 4, 8 y 11 desde la parte 2 sin que nadie lo viera, porque la puerta daba verde.
+  Ahora compara la forma (mismas filas, mismos campos, mismas cajas encendidas) y los números, y
+  deja que las palabras cambien. Los tres diagramas ya están traducidos.
+- **`check_muestras` pasó de segundos a minutos** al añadir las dos versiones del 18, porque
+  recalculaba los bordes del bronce una vez por lección. Con caché, 25 s.
+
+**Limitación conocida, y es decisión de Kevin, no un bug:** las figuras se generan **solo en
+español**, así que la edición inglesa enseña ejes en español, y las `salida` del módulo 16 llevan
+la transcripción española que imprime `contracts.py`. Hacer cualquiera de las dos cosas bilingüe
+es un trabajo aparte que el plan no ha presupuestado (Sílice lo resuelve para las figuras con
+`figures_i18n.py`).
+
+**Lo que hay que correr para reconstruir la parte 4**, después de `silver.py`:
+
+```
+src/transform/contracts.py        el contrato y sus cinco roturas
+src/transform/dbt_gold.py         dbt build + el manifest + la prueba que falla
+src/figures_module17.py           el linaje, leído del manifest
+src/transform/table_format.py     Delta e Iceberg, las dos versiones y las medidas
+src/figures_module18.py           las dos figuras del 18
+src/site/make_sample.py           regenera las muestras, incluidas antes y ahora
+src/site/build_challenges.py      las respuestas de los retos
+```
 
 ## Riesgos declarados
 
