@@ -23,7 +23,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import matplotlib.pyplot as plt  # noqa: E402
 
-from figures_theme import FIGURES, _style, colours, fingerprint, guardar_huellas  # noqa: E402
+from figures_theme import (FIGURES, _style, colours, es, fingerprint,  # noqa: E402
+                           guardar_huellas)
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -59,7 +60,7 @@ def main() -> None:
             izq.set_yticklabels(nombres)
             izq.grid(axis="x", zorder=0)
             for i, v in zip(y, tamaños):
-                izq.annotate(f"{v:,.0f}", xy=(v, i), xytext=(5, 0),
+                izq.annotate(es(v), xy=(v, i), xytext=(5, 0),
                              textcoords="offset points", va="center",
                              fontsize=8, color=c["ink_soft"])
             izq.set_xlim(0, max(tamaños) * 1.22)
@@ -71,7 +72,7 @@ def main() -> None:
             der.set_xlabel("segundos, mediana de 7 corridas y su rango (escala logarítmica)")
             der.grid(axis="x", zorder=0)
             for i, v in zip(y, tiempos):
-                der.annotate(f"{v:.3f}", xy=(v, i), xytext=(5, 0),
+                der.annotate(es(v, 3), xy=(v, i), xytext=(5, 0),
                              textcoords="offset points", va="center",
                              fontsize=8, color=c["ink_soft"])
             der.set_xlim(min(tiempos) * 0.45, max(tiempos) * 3.2)

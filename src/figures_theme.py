@@ -35,6 +35,16 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import figures_i18n  # noqa: E402
+
+# El idioma se resuelve aquí y en ningún otro sitio. Los 16 scripts de figuras
+# importan este módulo, y aquí pyplot ya está importado, que es justo lo que
+# necesita el parche de `savefig` para que pyplot no lo rechace. En español no
+# hace nada, así que la llamada va sin condiciones.
+figures_i18n.install()
+
 sys.stdout.reconfigure(encoding="utf-8")
 
 PROJECT = Path(__file__).resolve().parents[1]
@@ -99,19 +109,31 @@ def _style(theme: str, c: dict) -> dict:
 
 
 def es(n: float, decimales: int = 0) -> str:
-    """Un número en español: punto de millares y coma decimal.
+    """Un número en el idioma de la figura: 1.516.948 en español, 1,516,948 en inglés.
 
     Existe porque el atajo evidente, formatear y hacer `.replace(",", ".")`
     sobre la cadena entera, ya ha estropeado tres etiquetas de este curso: se
     come también la coma de la prosa y convierte «un día lleno, 8.640 lecturas»
     en «un día lleno. 8.640 lecturas». El cambio de separador tiene que hacerse
     sobre el número solo, y por eso vive aquí y no suelto en cada figura.
+
+    Y por eso mismo es el sitio donde se decide el idioma del número. El parche de
+    `figures_i18n` no puede hacerlo: descarta los números al buscar traducciones,
+    porque reportarlos todos como «sin traducir» ahogaría la lista que hay que
+    revisar. Así que un «1.516.948» se colaba entero en la figura inglesa y la
+    puerta daba verde.
     """
-    return f"{n:,.{decimales}f}".replace(",", "\x00").replace(".", ",").replace("\x00", ".")
+    ingles = f"{n:,.{decimales}f}"
+    if figures_i18n.language() != "es":
+        return ingles
+    return ingles.replace(",", "\x00").replace(".", ",").replace("\x00", ".")
 
 
 def fingerprint(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()[:8]
+    # `destino` resuelve el idioma en curso. Sin ella, durante una corrida
+    # inglesa se leería `fig_x.claro.png`, que existe porque es la española, y la
+    # huella publicada no correspondería con el fichero recién escrito.
+    return hashlib.sha256(figures_i18n.destino(path).read_bytes()).hexdigest()[:8]
 
 
 def figura(name: str, dibujar, ancho: float = 9.0, alto: float = 3.6,
@@ -133,7 +155,8 @@ def figura(name: str, dibujar, ancho: float = 9.0, alto: float = 3.6,
             target = FIGURES / f"{name}.{theme}.png"
             fig.savefig(target, bbox_inches="tight", pad_inches=0.12)
             plt.close(fig)
-            print(f"  {target.name:<44} {target.stat().st_size / 1024:>7.1f} KB  "
+            escrito = figures_i18n.destino(target)
+            print(f"  {escrito.name:<47} {escrito.stat().st_size / 1024:>7.1f} KB  "
                   f"{fingerprint(target)}")
 
 
@@ -145,9 +168,11 @@ def guardar_huellas(nombres: list[str]) -> None:
         datos = json.loads(io.open(salida, encoding="utf-8").read())
     for name in nombres:
         for theme in ("claro", "oscuro"):
-            f = FIGURES / f"{name}.{theme}.png"
+            # Solo el idioma en curso: una corrida inglesa no tiene por qué
+            # recalcular la huella española, y al revés tampoco.
+            f = figures_i18n.destino(FIGURES / f"{name}.{theme}.png")
             if f.exists():
-                datos[f.name] = fingerprint(f)
+                datos[f.name] = hashlib.sha256(f.read_bytes()).hexdigest()[:8]
     io.open(salida, "w", encoding="utf-8").write(
         json.dumps(dict(sorted(datos.items())), ensure_ascii=False, indent=2) + "\n"
     )

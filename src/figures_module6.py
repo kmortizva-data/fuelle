@@ -23,7 +23,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import matplotlib.pyplot as plt  # noqa: E402
 
-from figures_theme import FIGURES, _style, colours, fingerprint, guardar_huellas  # noqa: E402
+from figures_theme import (FIGURES, _style, colours, es, fingerprint,  # noqa: E402
+                           guardar_huellas)
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -78,7 +79,7 @@ def main() -> None:
             # A la izquierda de cada punto, porque la línea sube hacia la derecha
             # y una etiqueta centrada encima se le echa encima.
             for x, y in zip(ficheros, tamaños):
-                der.annotate(f"{y:.2f}".replace(".", ","), xy=(x, y), xytext=(-8, 8),
+                der.annotate(es(y, 2), xy=(x, y), xytext=(-8, 8),
                              textcoords="offset points", ha="right",
                              fontsize=8, color=c["ink_soft"])
             der.set_ylim(min(tamaños) * 0.94, max(tamaños) * 1.06)

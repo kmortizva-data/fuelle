@@ -408,9 +408,7 @@
       "scripts": [
         "src/transform/m10_duty_cycle.py"
       ],
-      "figuras": [
-        "fig_m10_ciclo_de_trabajo_diario"
-      ],
+      "figuras": [],
       "accent": {
         "dark": "#8EC7A2",
         "light": "#437958"

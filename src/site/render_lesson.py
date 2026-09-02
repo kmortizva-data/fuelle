@@ -514,13 +514,26 @@ def _fingerprints() -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def figure_file(name: str, theme: str, lang: str | None = None) -> str:
+    """El fichero de una figura para un tema y un idioma.
+
+    Cuatro por figura desde el 2026-09-02: `nombre.claro.png` en español y
+    `nombre.claro.en.png` en inglés. Antes eran dos y la edición inglesa enseñaba
+    los ejes en español, que es el mismo defecto que tenían los bloques
+    `diagrama` y por la misma razón: ninguna puerta lo miraba.
+    """
+    sufijo = "" if (lang or _lang) == "es" else f".{lang or _lang}"
+    return f"{name}.{theme}{sufijo}.png"
+
+
 def resolve_figure(relative: str, depth: int = 1) -> str:
     """Convierte {{FIG:nombre|pie}} en una figura de dos temas.
 
-    Cada figura existe dos veces, `nombre.claro.png` y `nombre.oscuro.png`, porque
-    una figura con fondo de papel dentro de una página en grafito canta como un
-    faro. Van las dos al HTML y el CSS enseña la que toca, que es lo único que
-    responde tanto a la preferencia del sistema como al interruptor manual.
+    Cada figura existe dos veces por idioma, `nombre.claro.png` y
+    `nombre.oscuro.png`, porque una figura con fondo de papel dentro de una
+    página en grafito canta como un faro. Van las dos al HTML y el CSS enseña la
+    que toca, que es lo único que responde tanto a la preferencia del sistema
+    como al interruptor manual.
 
     La huella del contenido va en la URL y no en el nombre del fichero, que es el
     patrón del portafolio: mata la caché del navegador, y una huella que se mueve
@@ -532,15 +545,15 @@ def resolve_figure(relative: str, depth: int = 1) -> str:
     up = "../" * depth
 
     faltan = [t for t in ("claro", "oscuro")
-              if not (FIGURES_DIR / f"{name}.{t}.png").exists()]
+              if not (FIGURES_DIR / figure_file(name, t)).exists()]
     if faltan:
-        print(f"  AVISO: falta la figura {name} en {', '.join(faltan)}")
+        print(f"  AVISO: falta la figura {name} ({_lang}) en {', '.join(faltan)}")
         return f'<p class="gone">falta la figura {html.escape(name)}</p>'
 
     alt = html.escape(caption.strip() or name.replace("_", " "))
     imagenes = []
     for theme in ("claro", "oscuro"):
-        fichero = f"{name}.{theme}.png"
+        fichero = figure_file(name, theme)
         version = huellas.get(fichero, "")
         query = f"?v={version}" if version else ""
         imagenes.append(

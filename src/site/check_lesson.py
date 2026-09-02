@@ -64,6 +64,41 @@ CLOSING = "El arco del proyecto"
 TOY_EXAMPLE = "Antes de la teoría: un ejemplo de juguete"
 
 
+def figure_files(body: str) -> list[str]:
+    """Cada figura del temario tiene que existir en 2 temas Y en 2 idiomas.
+
+    Cuatro ficheros por figura, y los cuatro se comprueban porque la edición
+    inglesa enseñó figuras con los ejes en español durante toda la parte 4 sin
+    que nadie lo viera. La lección era correcta, la figura existía, y la puerta
+    daba verde porque solo miraba los dos temas.
+
+    Es la misma lección que dejaron los bloques `diagrama`: lo que no se
+    comprueba, se rompe en silencio.
+    """
+    syllabus = json.loads((ROOT / "temario.json").read_text(encoding="utf-8"))
+    match = re.search(r"^module:\s*(\d+)", body, re.M)
+    if not match:
+        return []
+    module = next((m for m in syllabus["modules"]
+                   if m["number"] == int(match.group(1))), None)
+    if module is None:
+        return []
+
+    faltan = []
+    for name in module.get("figuras", []):
+        for theme in ("claro", "oscuro"):
+            for sufijo in ("", ".en"):
+                fichero = ROOT / "figuras" / f"{name}.{theme}{sufijo}.png"
+                if not fichero.exists():
+                    faltan.append(fichero.name)
+    if not faltan:
+        return []
+    quien = ("src/figures_build_en.py" if all(".en." in f for f in faltan)
+             else f"src/figures_module{match.group(1)}.py")
+    return [f"faltan {len(faltan)} ficheros de figura ({', '.join(faltan[:3])}"
+            f"{'...' if len(faltan) > 3 else ''}). Corre {quien}"]
+
+
 def promised_figure(path: str, body: str) -> list[str]:
     """The number temario.json promised for this module has to appear in the lesson.
 
@@ -155,6 +190,7 @@ def check(path: Path) -> list[str]:
             problems.append(f"línea {number}: raya o guion medio")
 
     problems += promised_figure(path.name, body)
+    problems += figure_files(body)
 
     # The brief is the way in, so it goes first and stays short.
     if present and present[0] != "En 30 segundos":

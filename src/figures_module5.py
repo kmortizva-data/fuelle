@@ -19,7 +19,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from figures_theme import figura, guardar_huellas  # noqa: E402
+from figures_theme import es, figura, guardar_huellas  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -50,10 +50,10 @@ def main() -> None:
                 color=c["ink_soft"], zorder=5, label="con huella: solo si el origen cambió")
 
         for x, y in zip(corridas, naive):
-            ax.annotate(f"{y:.2f} M", xy=(x, y), xytext=(0, 8),
+            ax.annotate(f"{es(y, 2)} M", xy=(x, y), xytext=(0, 8),
                         textcoords="offset points", ha="center",
                         fontsize=8, color=c["accent"])
-        ax.annotate(f"{guarded[-1]:.2f} M", xy=(corridas[-1], guarded[-1]),
+        ax.annotate(f"{es(guarded[-1], 2)} M", xy=(corridas[-1], guarded[-1]),
                     xytext=(0, -16), textcoords="offset points", ha="center",
                     fontsize=8, color=c["ink_soft"])
 
