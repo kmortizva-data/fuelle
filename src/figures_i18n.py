@@ -252,6 +252,13 @@ TRADUCCIONES: dict[str, str] = {
     "condición": "check",
     "la guarda que el motor impone, leída de su propio catálogo":
         "the guard the engine enforces, read from its own catalogue",
+
+    # --- módulo 21, el índice y su factura -----------------------------
+    "sin índice": "without an index",
+    "con índice": "with an index",
+    "leer un día": "reading one day",
+    "segundos": "seconds",
+    "segundos, escala logarítmica": "seconds, log scale",
 }
 
 # Etiquetas construidas con f-strings: llevan un número dentro, así que no se
@@ -290,6 +297,7 @@ PATTERNS: list[tuple[str, str]] = [
     (r"^([\d,]+) cada lectura con cada parte$",
      r"\1   every reading x  every report"),
     (r"^([\d.]+) veces mas disco$", r"\1 times more disk"),
+    (r"^escribir ([\d,]+) filas$", r"writing \1 rows"),
 ]
 
 TABLE: dict[str, str] = {}

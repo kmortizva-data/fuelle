@@ -738,10 +738,10 @@
       "title_en": "Indexes: measure before and after",
       "subtitle_en": "What an index is, why it speeds some questions and slows writes, and how to read the plan the database shows you if you ask",
       "cifra": {
-        "value": "por medir",
-        "label": "veces más rápida la consulta con índice",
-        "value_en": "to be measured",
-        "label_en": "times faster with the index"
+        "value": "entre 58,1 y 114,3 veces",
+        "label": "más rápida la consulta, según la repetición. Esa horquilla es el hallazgo",
+        "value_en": "between 58.1 and 114.3 times",
+        "label_en": "faster, depending on the repetition. That spread is the finding"
       },
       "accent": {
         "dark": "#C7B77B",
@@ -751,7 +751,7 @@
       "interactivo": false,
       "reto": null,
       "scripts": [
-        "src/transform/postgres_bench.py"
+        "src/db/indexes.py"
       ],
       "figuras": [
         "fig_m21_indice_antes_despues"

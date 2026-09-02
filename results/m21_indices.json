@@ -1,0 +1,47 @@
+{
+  "dia": "2020-06-05",
+  "lecturas_del_dia": 8640,
+  "filas_de_la_tabla": 1841760,
+  "leer": {
+    "sin_indice": {
+      "mediana": 0.2925,
+      "minimo": 0.2799,
+      "maximo": 0.3071,
+      "plan": "Parallel Seq Scan"
+    },
+    "con_indice": {
+      "mediana": 0.0027,
+      "minimo": 0.0018,
+      "maximo": 0.0044,
+      "plan": "Index Scan using lecturas_por_dia"
+    },
+    "se_distinguen": true,
+    "veces_mas_rapido": 107.5,
+    "factores_observados": [
+      107.5,
+      114.3,
+      58.1,
+      82.9
+    ],
+    "factor_minimo": 58.1,
+    "factor_maximo": 114.3
+  },
+  "escribir": {
+    "filas": 200000,
+    "sin_indice": {
+      "mediana": 0.494,
+      "minimo": 0.468,
+      "maximo": 0.557
+    },
+    "con_indice": {
+      "mediana": 1.208,
+      "minimo": 1.142,
+      "maximo": 1.376
+    },
+    "se_distinguen": true,
+    "veces_mas_lento": 2.45
+  },
+  "mb_del_indice": 12.3,
+  "plan_sin_indice": "Finalize Aggregate  (cost=44865.76..44865.77 rows=1 width=40)\n  ->  Gather  (cost=44865.54..44865.75 rows=2 width=40)\n        Workers Planned: 2\n        ->  Partial Aggregate  (cost=43865.54..43865.55 rows=1 width=40)\n              ->  Parallel Seq Scan on lecturas  (cost=0.00..43847.62 rows=3582 width=8)\n                    Filter: (day = '2020-06-05'::date)",
+  "plan_con_indice": "Aggregate  (cost=402.17..402.19 rows=1 width=40)\n  ->  Index Scan using lecturas_por_dia on lecturas  (cost=0.43..359.65 rows=8504 width=8)\n        Index Cond: (day = '2020-06-05'::date)"
+}
