@@ -234,6 +234,13 @@ TRADUCCIONES: dict[str, str] = {
     "leer preguntando primero": "reading after asking first",
     "segundos, mediana de siete corridas y su rango":
         "seconds, median of seven runs and its range",
+
+    # --- módulo 19, fichero contra servicio ----------------------------
+    "un fichero": "a file",
+    "un servicio": "a service",
+    "los rangos se pisan: no se distinguen": "the ranges overlap: they do not differ",
+    "segundos en responder la misma pregunta": "seconds to answer the same question",
+    "MB que ocupan las mismas lecturas": "MB the same readings take",
 }
 
 # Etiquetas construidas con f-strings: llevan un número dentro, así que no se
@@ -271,6 +278,7 @@ PATTERNS: list[tuple[str, str]] = [
      r"\1   only readings  during a failure"),
     (r"^([\d,]+) cada lectura con cada parte$",
      r"\1   every reading x  every report"),
+    (r"^([\d.]+) veces mas disco$", r"\1 times more disk"),
 ]
 
 TABLE: dict[str, str] = {}

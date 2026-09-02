@@ -1,0 +1,26 @@
+{
+  "filas": 1841760,
+  "dias": 212,
+  "mb_del_csv_intermedio": 190.0,
+  "segundos_en_cargar": 21.21,
+  "carga_minimo": 20.02,
+  "carga_maximo": 21.82,
+  "mb_en_parquet": 23.8,
+  "mb_en_el_servidor": 267.8,
+  "mb_de_la_base_entera": 1306.8,
+  "veces_mas_disco_el_servidor": 11.2,
+  "pregunta": {
+    "fichero": {
+      "mediana": 0.4398,
+      "minimo": 0.3986,
+      "maximo": 0.491
+    },
+    "servicio": {
+      "mediana": 0.396,
+      "minimo": 0.3223,
+      "maximo": 0.4118
+    },
+    "se_distinguen": false,
+    "veces": null
+  }
+}

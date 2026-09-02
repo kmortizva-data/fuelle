@@ -90,11 +90,19 @@ def solo_datos(texto: str) -> str:
     Solo recorta si encuentra la línea que separa cabecera de datos. Una salida
     que no sea una caja de DuckDB se mira entera, como antes.
     """
-    lineas = texto.splitlines()
+    # psql cierra con «(5 rows)». Ese 5 es mobiliario del cliente, no un dato, y
+    # sin quitarlo la puerta acusaba a la lección de publicar un número que la
+    # consulta no devuelve. Es el mismo caso que la cabecera de DuckDB.
+    lineas = [l for l in texto.splitlines()
+              if not re.fullmatch(r"\(\d+ rows?\)", l.strip())]
     for i, linea in enumerate(lineas):
         if linea.lstrip().startswith("├"):
             return "\n".join(lineas[i + 1:])
-    return texto
+        # Y la raya de psql, que separa la cabecera de los datos: guiones, con un
+        # «+» por cada columna si hay más de una.
+        if linea.strip() and re.fullmatch(r"[-+]+", linea.strip().replace(" ", "")):
+            return "\n".join(lineas[i + 1:])
+    return "\n".join(lineas)
 
 
 def numeros_de(texto: str) -> set:
@@ -154,6 +162,46 @@ def conectar():
     return con
 
 
+_PG = None
+_PG_LO_ARRANQUE = False
+
+
+def postgres():
+    """La conexión al servidor del curso, abierta la primera vez que hace falta.
+
+    Se abre tarde a propósito: arrancar PostgreSQL para comprobar una lección que
+    no lo usa sería cobrarle a todo el mundo el precio de la parte 5. Y si no
+    arranca, **esto falla**, no se salta. Un bloque `postgres` que nadie ejecuta
+    es SQL publicado sin verificar.
+    """
+    global _PG, _PG_LO_ARRANQUE
+    if _PG is not None:
+        return _PG
+    sys.path.insert(0, str(PROJECT / "src"))
+    from db.servidor import arranca, conecta
+
+    _PG_LO_ARRANQUE = arranca()
+    _PG = conecta()
+    existe = _PG.execute("SELECT to_regclass('lecturas') IS NOT NULL").fetchone()[0]
+    if not existe:
+        raise SystemExit("La tabla «lecturas» no está en PostgreSQL, y las consultas "
+                         "del módulo 19 la piden.\n  Corre src/db/load_silver.py")
+    return _PG
+
+
+def cierra_postgres() -> None:
+    """Deja el servidor como estaba: parado si esta puerta fue quien lo levantó."""
+    global _PG
+    if _PG is None:
+        return
+    _PG.close()
+    _PG = None
+    if _PG_LO_ARRANQUE:
+        from db.servidor import para
+
+        para()
+
+
 def revisa(path: Path, con, respuestas: dict) -> list[str]:
     # El nombre lleva el idioma: las dos ediciones comparten fichero y un
     # mensaje sin idioma manda a buscar el fallo al sitio equivocado.
@@ -163,12 +211,16 @@ def revisa(path: Path, con, respuestas: dict) -> list[str]:
     problemas = []
 
     for i, (linea, lang, cuerpo) in enumerate(trozos):
-        if lang in ("sql", "sql-vivo"):
+        if lang in ("sql", "sql-vivo", "postgres"):
             sql = cuerpo.strip().rstrip(";")
             if not sql.lower().lstrip().startswith(("select", "with")):
                 continue
             try:
-                filas = con.sql(sql).fetchall()
+                # Un bloque `postgres` va al servidor y no a DuckDB. Se ejecuta
+                # igual que los demas: publicar SQL sin correrlo es justo lo que
+                # este curso no se permite, y que el motor sea otro no lo cambia.
+                filas = (postgres().execute(sql).fetchall() if lang == "postgres"
+                         else con.sql(sql).fetchall())
             except Exception as e:
                 problemas.append(f"{nombre}:{linea}  la consulta NO CORRE: "
                                  f"{str(e).splitlines()[0][:90]}")
@@ -295,11 +347,12 @@ def main() -> None:
     for path in lecciones:
         encontrados = revisa(path, con, respuestas)
         consultas += sum(1 for _, lang, _ in bloques(io.open(path, encoding="utf-8").read())
-                         if lang in ("sql", "sql-vivo"))
+                         if lang in ("sql", "sql-vivo", "postgres"))
         etiqueta = path.stem + (" (en)" if path.parent.name == "en" else "")
         print(f"  {etiqueta:<26} {'verde' if not encontrados else f'{len(encontrados)} problemas'}")
         problemas += encontrados
 
+    cierra_postgres()
     print()
     print(f"  {consultas} bloques de SQL ejecutados contra el lago")
     if problemas:

@@ -681,10 +681,10 @@
       "title_en": "PostgreSQL: install, connect, and how it differs",
       "subtitle_en": "Until now the database was a file. Now it is a service serving several people at once, and that changes every rule",
       "cifra": {
-        "value": "por medir",
-        "label": "segundos en cargar el mismo dato en el servidor",
-        "value_en": "to be measured",
-        "label_en": "seconds to load the same data into the server"
+        "value": "unos 20 s",
+        "label": "en pasarle al servidor las lecturas que el fichero ya tenía",
+        "value_en": "about 20 s",
+        "label_en": "to hand the server the readings the file already had"
       },
       "accent": {
         "dark": "#BEBB7C",
@@ -694,7 +694,8 @@
       "interactivo": false,
       "reto": null,
       "scripts": [
-        "src/transform/postgres_setup.sql"
+        "src/db/servidor.py",
+        "src/db/load_silver.py"
       ],
       "figuras": [
         "fig_m19_fichero_vs_servicio"

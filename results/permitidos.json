@@ -112,5 +112,13 @@
     "1200": "toy example: the laboratory's grade arriving in ppm instead of per cent",
     "1000": "toy example: the same, and the 1,000 % the report would print",
     "1000.0": "toy example: the absurd mean the contract would have stopped"
+  },
+  "m19_postgres": {
+    "5432": "el puerto estándar de PostgreSQL. Es una constante del producto, no una medida, y este curso lo cita justo para explicar que NO lo usa",
+    "5433": "el puerto que usa este curso, elegido para no chocar con una instalación de verdad. Es una decisión escrita en postgresql.conf, no un resultado"
+  },
+  "m19_postgres_en": {
+    "5432": "PostgreSQL's standard port. A constant of the product rather than a measurement, quoted here precisely to explain that the course does not use it",
+    "5433": "the port this course uses, chosen so it never clashes with a real install. A decision written in postgresql.conf, not a result"
   }
 }
