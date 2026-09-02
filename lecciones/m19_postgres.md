@@ -210,9 +210,12 @@ aquí**, que es medio módulo resuelto: cambiar de motor no cambia el idioma.
 **Qué esperábamos.** Que un motor columnar como DuckDB ganara de calle a uno de filas en una
 pregunta analítica. Es lo que dice la teoría del módulo 7 y es lo que yo daba por hecho.
 
-**Qué salió.** Que **no se distinguen**. El fichero responde en 0,440 s y el servicio en 0,396, y
-sus rangos de siete corridas se pisan, así que por la regla del módulo 6 no hay diferencia que
-contar. A 1,8 millones de filas los dos barren la tabla y ninguno suda.
+**Qué salió.** Que **no se distinguen**. Sus rangos de siete corridas se pisan, así que por la
+regla del módulo 6 no hay diferencia que contar. A 1,8 millones de filas los dos barren la tabla y
+ninguno suda.
+
+Las medianas exactas están en la figura y no aquí a propósito: **se mueven de una corrida a otra**,
+como todo lo que se mide en décimas de segundo. Lo que no se mueve es que los rangos se pisen.
 
 Lo que sí se separa, y por mucho, es todo lo demás:
 
@@ -225,7 +228,7 @@ Lo que sí se separa, y por mucho, es todo lo demás:
 | Permisos por usuario | no | sí |
 
 **Once veces más disco.** Concretamente **11,2**, para exactamente las mismas lecturas. Y la
-carpeta entera del clúster pesa **1.306,8 MB**, porque además de la tabla guarda el registro de
+carpeta entera del clúster pasa del gigabyte, porque además de la tabla guarda el registro de
 transacciones que le permite no perder nada si se va la luz.
 
 **Qué significa.** Que la pregunta «cuál es más rápido» estaba mal planteada. **Con un servidor

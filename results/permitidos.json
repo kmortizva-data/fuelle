@@ -120,5 +120,11 @@
   "m19_postgres_en": {
     "5432": "PostgreSQL's standard port. A constant of the product rather than a measurement, quoted here precisely to explain that the course does not use it",
     "5433": "the port this course uses, chosen so it never clashes with a real install. A decision written in postgresql.conf, not a result"
+  },
+  "m20_esquema": {
+    "2019": "el año al que se manda la escritura imposible de la clave foránea, elegido por estar fuera del registro. Es una decisión del experimento, no una medida"
+  },
+  "m20_esquema_en": {
+    "2019": "the year the impossible foreign key write is aimed at, chosen for being outside the record. A choice of the experiment, not a measurement"
   }
 }

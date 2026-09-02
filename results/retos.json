@@ -328,5 +328,35 @@
     ],
     "sql": "SELECT a.dia, a.horas_de_carga AS antes, b.horas_de_carga AS ahora, round(b.horas_de_carga - a.horas_de_carga, 2) AS diferencia FROM antes a JOIN ahora b ON b.dia = a.dia ORDER BY diferencia DESC LIMIT 5",
     "muestra": "antes"
+  },
+  "m20_quien_la_rompe": {
+    "columns": [
+      "day",
+      "lecturas"
+    ],
+    "rows": [
+      [
+        "2020-04-20",
+        5717
+      ],
+      [
+        "2020-07-22",
+        1892
+      ],
+      [
+        "2020-06-23",
+        1447
+      ],
+      [
+        "2020-06-24",
+        1435
+      ],
+      [
+        "2020-05-27",
+        1433
+      ]
+    ],
+    "sql": "SELECT day, count(*) AS lecturas FROM telemetria WHERE DV_eletric = COMP GROUP BY day ORDER BY lecturas DESC LIMIT 5",
+    "muestra": "sql"
   }
 }

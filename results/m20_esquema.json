@@ -1,0 +1,221 @@
+{
+  "filas": 1841760,
+  "dias": 214,
+  "guardas": 12,
+  "columnas_obligatorias": 8,
+  "escrituras_imposibles": 6,
+  "rechazadas": 6,
+  "detalle": [
+    {
+      "que": "la misma marca de tiempo dos veces",
+      "la_rechaza": true,
+      "guarda": "lecturas_pk",
+      "error": "duplicate key value violates unique constraint \"lecturas_pk\""
+    },
+    {
+      "que": "una presion de -900 bar",
+      "la_rechaza": true,
+      "guarda": "tp2_en_rango",
+      "error": "new row for relation \"lecturas\" violates check constraint \"tp2_en_rango\""
+    },
+    {
+      "que": "una casilla sin decir si se midio",
+      "la_rechaza": true,
+      "guarda": "medido",
+      "error": "null value in column \"medido\" of relation \"lecturas\" violates not-null constraint"
+    },
+    {
+      "que": "una digital que vale 2",
+      "la_rechaza": true,
+      "guarda": "comp_es_binaria",
+      "error": "new row for relation \"lecturas\" violates check constraint \"comp_es_binaria\""
+    },
+    {
+      "que": "una lectura de un dia que no existe",
+      "la_rechaza": true,
+      "guarda": "el_dia_esta_en_el_calendario",
+      "error": "insert or update on table \"lecturas\" violates foreign key constraint \"el_dia_esta_en_el_calendario\""
+    },
+    {
+      "que": "un dia con 30 horas de carga",
+      "la_rechaza": true,
+      "guarda": "horas_de_un_dia",
+      "error": "new row for relation \"dias\" violates check constraint \"horas_de_un_dia\""
+    }
+  ],
+  "catalogo": [
+    {
+      "tabla": "dias",
+      "tipo": "condición",
+      "nombre": "dias_lecturas_no_negativas",
+      "definicion": "CHECK ((lecturas >= 0))"
+    },
+    {
+      "tabla": "dias",
+      "tipo": "condición",
+      "nombre": "horas_de_un_dia",
+      "definicion": "CHECK (((horas_de_carga >= (0)::numeric) AND (horas_de_carga <= (24)::numeric)))"
+    },
+    {
+      "tabla": "dias",
+      "tipo": "clave primaria",
+      "nombre": "dias_pk",
+      "definicion": "PRIMARY KEY (dia)"
+    },
+    {
+      "tabla": "lecturas",
+      "tipo": "condición",
+      "nombre": "comp_es_binaria",
+      "definicion": "CHECK ((comp = ANY (ARRAY[(0)::double precision, (1)::double precision])))"
+    },
+    {
+      "tabla": "lecturas",
+      "tipo": "condición",
+      "nombre": "dv_eletric_es_binaria",
+      "definicion": "CHECK ((dv_eletric = ANY (ARRAY[(0)::double precision, (1)::double precision])))"
+    },
+    {
+      "tabla": "lecturas",
+      "tipo": "condición",
+      "nombre": "el_dia_es_el_de_la_marca",
+      "definicion": "CHECK ((day = (\"timestamp\")::date))"
+    },
+    {
+      "tabla": "lecturas",
+      "tipo": "condición",
+      "nombre": "lecturas_no_negativas",
+      "definicion": "CHECK ((lecturas >= 0))"
+    },
+    {
+      "tabla": "lecturas",
+      "tipo": "condición",
+      "nombre": "lps_es_binaria",
+      "definicion": "CHECK ((lps = ANY (ARRAY[(0)::double precision, (1)::double precision])))"
+    },
+    {
+      "tabla": "lecturas",
+      "tipo": "condición",
+      "nombre": "tp2_en_rango",
+      "definicion": "CHECK (((tp2 >= ('-2'::integer)::double precision) AND (tp2 <= (15)::double precision)))"
+    },
+    {
+      "tabla": "lecturas",
+      "tipo": "condición",
+      "nombre": "tp3_en_rango",
+      "definicion": "CHECK (((tp3 >= ('-2'::integer)::double precision) AND (tp3 <= (15)::double precision)))"
+    },
+    {
+      "tabla": "lecturas",
+      "tipo": "clave foránea",
+      "nombre": "el_dia_esta_en_el_calendario",
+      "definicion": "FOREIGN KEY (day) REFERENCES dias(dia)"
+    },
+    {
+      "tabla": "lecturas",
+      "tipo": "clave primaria",
+      "nombre": "lecturas_pk",
+      "definicion": "PRIMARY KEY (\"timestamp\")"
+    }
+  ],
+  "por_columna": [
+    {
+      "tabla": "dias",
+      "columna": "dia",
+      "guardas": [
+        "clave primaria",
+        "no vacío"
+      ]
+    },
+    {
+      "tabla": "dias",
+      "columna": "horas_de_carga",
+      "guardas": [
+        "no vacío",
+        "condición"
+      ]
+    },
+    {
+      "tabla": "dias",
+      "columna": "lecturas",
+      "guardas": [
+        "no vacío",
+        "condición"
+      ]
+    },
+    {
+      "tabla": "lecturas",
+      "columna": "comp",
+      "guardas": [
+        "condición"
+      ]
+    },
+    {
+      "tabla": "lecturas",
+      "columna": "day",
+      "guardas": [
+        "clave foránea",
+        "no vacío",
+        "condición"
+      ]
+    },
+    {
+      "tabla": "lecturas",
+      "columna": "dudoso",
+      "guardas": [
+        "no vacío"
+      ]
+    },
+    {
+      "tabla": "lecturas",
+      "columna": "dv_eletric",
+      "guardas": [
+        "condición"
+      ]
+    },
+    {
+      "tabla": "lecturas",
+      "columna": "lecturas",
+      "guardas": [
+        "no vacío",
+        "condición"
+      ]
+    },
+    {
+      "tabla": "lecturas",
+      "columna": "lps",
+      "guardas": [
+        "condición"
+      ]
+    },
+    {
+      "tabla": "lecturas",
+      "columna": "medido",
+      "guardas": [
+        "no vacío"
+      ]
+    },
+    {
+      "tabla": "lecturas",
+      "columna": "timestamp",
+      "guardas": [
+        "clave primaria",
+        "no vacío",
+        "condición"
+      ]
+    },
+    {
+      "tabla": "lecturas",
+      "columna": "tp2",
+      "guardas": [
+        "condición"
+      ]
+    },
+    {
+      "tabla": "lecturas",
+      "columna": "tp3",
+      "guardas": [
+        "condición"
+      ]
+    }
+  ]
+}

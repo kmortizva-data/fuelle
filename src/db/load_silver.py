@@ -47,7 +47,11 @@ RESULTS = PROJECT / "results" / "m19_postgres.json"
 # Las columnas de la plata, con el tipo que les toca en PostgreSQL. Aquí no hay
 # ni clave ni restricciones a propósito: eso es el módulo 20.
 COLUMNAS = [
-    ("timestamp", "timestamptz"), ("lecturas", "integer"),
+    # `timestamp` SIN zona horaria: el registro del compresor no trae ninguna, y
+    # con `timestamptz` el servidor le pega la suya. Eso movería la fecha de las
+    # lecturas de medianoche y rompería la restricción del módulo 20, que exige
+    # que `day` sea exactamente el día de la marca de tiempo.
+    ("timestamp", "timestamp"), ("lecturas", "integer"),
     ("medido", "boolean"), ("dudoso", "boolean"),
     ("tp2", "double precision"), ("tp3", "double precision"),
     ("h1", "double precision"), ("dv_pressure", "double precision"),

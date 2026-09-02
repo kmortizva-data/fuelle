@@ -41,6 +41,7 @@ MUESTRA_DE = {
     "m15_aceite_por_tramo": "horas",
     "m17_oro_por_mes": "horas",
     "m18_donde_mentia": "antes",
+    "m20_quien_la_rompe": "sql",
 }
 
 SECONDS_PER_READING = 10
@@ -170,6 +171,17 @@ CHALLENGES = {
         FROM antes a
         JOIN ahora b ON b.dia = a.dia
         ORDER BY diferencia DESC
+        LIMIT 5
+    """,
+    # Modulo 20: lo que hay que hacer ANTES de anadir una restriccion, que es
+    # contar quien la rompe. Si sale mas de cero, la base se niega a ponerla y
+    # el problema no es la restriccion: son los datos.
+    "m20_quien_la_rompe": """
+        SELECT day, count(*) AS lecturas
+        FROM telemetria
+        WHERE DV_eletric = COMP
+        GROUP BY day
+        ORDER BY lecturas DESC
         LIMIT 5
     """,
 }

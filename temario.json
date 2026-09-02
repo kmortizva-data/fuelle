@@ -710,10 +710,10 @@
       "title_en": "Designing the schema: keys, relations and constraints",
       "subtitle_en": "Telling the database what is impossible, so it will not let you write it. A negative pressure or a failure with no machine should not be able to exist",
       "cifra": {
-        "value": "por medir",
-        "label": "escrituras imposibles que la base rechaza",
-        "value_en": "to be measured",
-        "label_en": "impossible writes the database rejects"
+        "value": "6 de 6",
+        "label": "escrituras imposibles que la base rechaza, cada una por una guarda distinta",
+        "value_en": "6 of 6",
+        "label_en": "impossible writes the database rejects, each by a different guard"
       },
       "accent": {
         "dark": "#C3B97B",
@@ -721,9 +721,9 @@
       },
       "instrumento": "grafo",
       "interactivo": true,
-      "reto": "Intentar meter un dato imposible y leer el error que devuelve la base.",
+      "reto": "Contar quién rompería una restricción antes de intentar ponerla.",
       "scripts": [
-        "src/transform/postgres_schema.sql"
+        "src/db/schema.py"
       ],
       "figuras": [
         "fig_m20_esquema"

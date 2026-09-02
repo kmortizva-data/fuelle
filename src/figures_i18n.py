@@ -76,6 +76,9 @@ NEUTRAL_PATTERNS = (
     # tan peligroso como no traducir: apaga el aviso.
     r"^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)$",
     r"^fig_m\d+",                          # nombres de fichero de figura
+    # `lecturas.tp2`, `dias.dia`: tabla y columna de PostgreSQL, o sea
+    # identificadores del esquema. Traducirlos rompería el enlace con la base.
+    r"^(lecturas|dias|origen)\.\w+$",
 )
 
 # La tabla, escrita en español legible: las claves se normalizan al final del
@@ -241,6 +244,14 @@ TRADUCCIONES: dict[str, str] = {
     "los rangos se pisan: no se distinguen": "the ranges overlap: they do not differ",
     "segundos en responder la misma pregunta": "seconds to answer the same question",
     "MB que ocupan las mismas lecturas": "MB the same readings take",
+
+    # --- módulo 20, el esquema como contrato ---------------------------
+    "clave primaria": "primary key",
+    "clave foránea": "foreign key",
+    "no vacío": "not null",
+    "condición": "check",
+    "la guarda que el motor impone, leída de su propio catálogo":
+        "the guard the engine enforces, read from its own catalogue",
 }
 
 # Etiquetas construidas con f-strings: llevan un número dentro, así que no se
