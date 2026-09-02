@@ -259,6 +259,14 @@ TRADUCCIONES: dict[str, str] = {
     "leer un día": "reading one day",
     "segundos": "seconds",
     "segundos, escala logarítmica": "seconds, log scale",
+
+    # --- módulo 22, copias y restauración ------------------------------
+    "en el servidor": "in the server",
+    "en Parquet": "in Parquet",
+    "la copia": "the backup",
+    "copiar": "backing up",
+    "restaurar": "restoring",
+    "MB del mismo dato": "MB of the same data",
 }
 
 # Etiquetas construidas con f-strings: llevan un número dentro, así que no se

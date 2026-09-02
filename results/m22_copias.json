@@ -1,0 +1,42 @@
+{
+  "rol_de_solo_lectura": {
+    "lee": 1841760,
+    "puede_escribir": false,
+    "error": "permission denied for table lecturas"
+  },
+  "mb_de_la_copia": 22.2,
+  "segundos_en_copiar": 13.0,
+  "segundos_en_restaurar": 24.9,
+  "minutos_en_restaurar": 0.42,
+  "guardas": 12,
+  "guardas_restauradas": 12,
+  "huellas": {
+    "lecturas": [
+      "1841760",
+      "1504107",
+      "94224402.00",
+      "2057820.33",
+      "214"
+    ],
+    "dias": [
+      "214",
+      "671.60",
+      "1841760"
+    ]
+  },
+  "huellas_restauradas": {
+    "lecturas": [
+      "1841760",
+      "1504107",
+      "94224402.00",
+      "2057820.33",
+      "214"
+    ],
+    "dias": [
+      "214",
+      "671.60",
+      "1841760"
+    ]
+  },
+  "la_copia_restaura_igual": true
+}

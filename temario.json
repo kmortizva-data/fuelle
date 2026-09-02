@@ -766,10 +766,10 @@
       "title_en": "Users, backups and maintenance",
       "subtitle_en": "Who gets in and to what. And the test almost nobody runs: actually restoring the backup, because a backup never restored is not a backup",
       "cifra": {
-        "value": "por medir",
-        "label": "minutos en restaurar la base entera",
-        "value_en": "to be measured",
-        "label_en": "minutes to restore the whole database"
+        "value": "22,2 MB",
+        "label": "la copia de una base que en el servidor ocupa 267,8, y restaura idéntica",
+        "value_en": "22.2 MB",
+        "label_en": "the backup of a database taking 267.8 in the server, and it restores identical"
       },
       "accent": {
         "dark": "#CBB57C",
@@ -779,7 +779,7 @@
       "interactivo": false,
       "reto": null,
       "scripts": [
-        "src/transform/postgres_admin.sql"
+        "src/db/backup.py"
       ],
       "figuras": [
         "fig_m22_copia_y_restauracion"
