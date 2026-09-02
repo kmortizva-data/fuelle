@@ -630,6 +630,110 @@ src/site/make_sample.py           regenera las muestras, incluidas antes y ahora
 src/site/build_challenges.py      las respuestas de los retos
 ```
 
+### Figuras bilingües (2026-09-02): la deuda que destapó el cierre de la parte 4
+
+**Las 22 figuras existen en cuatro variantes**: dos temas por dos idiomas, 88 ficheros. Antes eran
+dos, y la edición inglesa enseñaba los ejes en español. Mismo defecto que los bloques `diagrama` y
+misma causa: ninguna puerta lo miraba.
+
+**El enfoque es el de Sílice, no uno nuevo.** `src/figures_i18n.py` parchea `Text.set_text`,
+`Artist.set_label` y `Figure.savefig`, así que **no se toca ninguno de los 16 scripts de figuras** y
+la geometría ya validada no se mueve. Tiene que ser el parche y no un argumento de idioma en
+`figura()`: **solo 6 de los 16 scripts pasan por `figura()`**, los otros 10 hacen su propio bucle de
+temas y su propio `savefig`.
+
+`src/figures_build_en.py` corre cada script en su propio proceso con `FIG_LANG=en` y **reporta toda
+cadena visible sin traducir**, saliendo con ese número. Ese informe ES como se escribió la tabla:
+la primera corrida con la tabla vacía nombró las 114 cadenas.
+
+**Cuatro cosas que el informe cazó y leyendo no se habrían visto:**
+
+1. **`es()` formateaba en español siempre**, así que «1.516.948» y «16,84» se colaban en las figuras
+   inglesas. Ahora resuelve el idioma, y de paso arregló tres figuras ESPAÑOLAS que imprimían
+   `0.558` y `1,516,948` con el separador equivocado porque se saltaban `es()`.
+2. **El corte de longitud en 4 caracteres escondía «abr», «ago» y «oro».** Bajado a 3, salieron los
+   tres.
+3. **Neutralizar los meses españoles fue error mío** y dejó el eje del módulo 8 en español sin que
+   la puerta dijera nada. Ahora solo son neutrales los meses ingleses.
+4. **Poner entradas de identidad para los meses que no cambian** («feb» a «feb») parecía inofensivo
+   y pasó a minúscula el eje del módulo 18, donde matplotlib escribe «Feb». **Una traducción que no
+   cambia nada no es gratis.**
+
+**`check_lesson` exige ahora 2 temas x 2 idiomas por figura prometida**, probado escondiendo una. Y
+destapó que el temario prometía `fig_m10_ciclo_de_trabajo_diario`, que nunca se dibujó y que la
+lección no usa. Se quitó la promesa, no se inventó la figura.
+
+**Lo que NO se hizo, y es un cambio de criterio:** el plan decía que `contracts.py` pasaría a
+imprimir en inglés. Su narración y los nombres de sus promesas son un solo texto, y traducir solo la
+narración deja la transcripción del módulo 16 medio en inglés y medio en español, que se lee peor
+que lo que sustituye. El problema de verdad eran las figuras y están arregladas.
+
+### Parte 5 CERRADA (2026-09-02): PostgreSQL portable, módulos 19 a 22
+
+**22 lecciones de 31, las 22 en los dos idiomas.** Nueve verificadores en verde.
+
+**PostgreSQL va portable y sin administrador.** Binarios oficiales en zip descomprimidos en
+`~/tools/pgsql`, como Tectonic y ffmpeg. **330 MB, medidos a 9,1 MB/s: 36 segundos.** El clúster
+vive en `lake/pg`, que ya estaba fuera de git, en el **puerto 5433** para no chocar con una
+instalación de verdad, escuchando **solo en localhost**, que es lo único que hace defendible la
+autenticación `trust`. Y `lc_messages = 'C'` para que los errores que publica el módulo 20 digan lo
+mismo en las dos ediciones.
+
+`src/db/servidor.py` es el único sitio que lo arranca y lo para, **y para solo lo que arrancó él**.
+Dos cosas de Windows costaron tiempo y quedan escritas ahí:
+
+- **`pg_ctl start` se cuelga para siempre si se le captura la salida**, porque `postgres.exe` hereda
+  la tubería y no la cierra nunca. Va a DEVNULL.
+- **`pg_ctl status` dice que sí mientras la base todavía se está recuperando.** La sonda buena es
+  `pg_isready`.
+
+**Los cuatro hallazgos, todos medidos:**
+
+1. **Un servidor no vende velocidad.** La misma pregunta analítica **no se distingue** entre DuckDB
+   y PostgreSQL: rangos solapados en siete corridas. Lo que sí cambia es cargar (**unos 20 s** para
+   1.841.760 filas) y el disco: **23,8 MB en Parquet contra 267,8 en el servidor, 11,2 veces**.
+2. **El esquema rechaza 6 de 6 escrituras imposibles**, cada una por una guarda distinta. Y el
+   tropiezo enseña más: la prueba del 29 de febrero la rechazó **la clave primaria y no la
+   foránea**, porque ese día SÍ existe en la plata como filas vacías desde que el módulo 14 puso el
+   dato en rejilla. Por eso `dias` tiene **214** días donde el 19 contaba 212.
+3. **El factor de un índice no se puede publicar.** Cuatro repeticiones en la misma corrida dieron
+   **107,5, 114,3, 58,1 y 82,9** veces. Se publica la horquilla y se apoya en **el plan**, que pasa
+   de `Parallel Seq Scan` a `Index Scan` y no se mueve. La factura: **12,3 MB** y la escritura al
+   doble.
+4. **La copia pesa 22,2 MB**, menos que el Parquet del que salió, porque no guarda ni el registro de
+   transacciones ni los índices. Y **restaura idéntica**, comprobado por recuento, suma, días
+   distintos y **el número de guardas**, que es la fila que casi nadie mira.
+
+**Máquina nueva de la parte 5:**
+
+- **Bloque ` ```postgres `** que `check_sql` ejecuta **contra el servidor vivo**, arrancándolo si
+  hace falta y fallando con nombre si no puede. Probado cambiando un 8588 por 8500.
+- **`solo_datos()` recorta el «(5 rows)» de psql**, que se leía como dato publicado. Mismo defecto
+  que tenía la cabecera de las cajas de DuckDB.
+- **Restricciones con nombre puesto a mano.** Sin nombre PostgreSQL inventa uno y le pega sufijos al
+  recrear la tabla, así que el nombre publicado caducaría solo. Y el nombre es lo único que lee
+  quien mira el error a las tres de la mañana.
+- **`schema.py` se puede correr dos veces.** Costó dos intentos: renombrar la tabla se lleva sus
+  guardas y deja sus nombres ocupados. Copia con `CREATE TABLE AS SELECT`, que no arrastra ninguna.
+
+**Y la lección que se repite por cuarta vez:** publiqué 70,31 de aceite medio y son **70,57**.
+`check_sql` lo cazó. Los números salen de una corrida, nunca de la memoria. `check_numbers` cazó
+además dos cifras inestables en el módulo 19 (una mediana de consulta y el tamaño del clúster) que
+se mueven entre corridas: fuera de la prosa, dentro de la figura.
+
+**Para reconstruir la parte 5**, después de `silver.py`:
+
+```
+1. ~/tools/pgsql             binarios portables, si no estan
+2. src/db/servidor.py        arranca
+3. src/db/load_silver.py     la plata al servidor, y la comparacion del modulo 19
+4. src/db/schema.py          el esquema con sus guardas y las seis imposibles
+5. src/db/indexes.py         el indice, lo que da y lo que cobra
+6. src/db/backup.py          la copia, la restauracion y su comprobacion
+7. src/figures_module19.py a src/figures_module22.py
+8. src/figures_build_en.py   las figuras inglesas
+```
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo
