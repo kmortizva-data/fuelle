@@ -40,6 +40,7 @@ MUESTRA_DE = {
     "m13_paradas_del_dia": "un_dia",
     "m15_aceite_por_tramo": "horas",
     "m17_oro_por_mes": "horas",
+    "m18_donde_mentia": "antes",
 }
 
 SECONDS_PER_READING = 10
@@ -158,6 +159,19 @@ CHALLENGES = {
         GROUP BY mes
         ORDER BY mes
     """,
+    # Modulo 18: las dos versiones de la misma tabla, una al lado de la otra.
+    # El navegador no tiene ni la extension Delta ni la Iceberg, asi que el
+    # viaje en el tiempo ya esta hecho y lo que se practica es compararlas.
+    "m18_donde_mentia": """
+        SELECT a.dia,
+               a.horas_de_carga                               AS antes,
+               b.horas_de_carga                               AS ahora,
+               round(b.horas_de_carga - a.horas_de_carga, 2)  AS diferencia
+        FROM antes a
+        JOIN ahora b ON b.dia = a.dia
+        ORDER BY diferencia DESC
+        LIMIT 5
+    """,
 }
 
 
@@ -173,7 +187,7 @@ def plain(value):
 # Las muestras que no son telemetria cruda se registran con su propio nombre: el
 # modulo 15 trabaja con `horas` y `clima`, y llamar `telemetria` a una tabla
 # horaria haria ilegible cada consulta de su leccion.
-POR_SU_NOMBRE = {"horas", "clima"}
+POR_SU_NOMBRE = {"horas", "clima", "antes", "ahora"}
 
 
 def connect_to(muestra: str) -> duckdb.DuckDBPyConnection:
@@ -183,7 +197,7 @@ def connect_to(muestra: str) -> duckdb.DuckDBPyConnection:
     con = duckdb.connect()
     vista = muestra if muestra in POR_SU_NOMBRE else "telemetria"
     con.execute(f"CREATE VIEW {vista} AS SELECT * FROM read_parquet('{path.as_posix()}')")
-    for extra in ("averias", "clima", "horas"):
+    for extra in ("averias", "clima", "horas", "antes", "ahora"):
         otra = SAMPLES / f"{extra}.parquet"
         if extra != vista and otra.exists():
             con.execute(f"CREATE VIEW {extra} AS "

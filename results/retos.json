@@ -37,12 +37,12 @@
         1.0
       ],
       [
-        "2020-08-03",
+        "2020-08-17",
         8.096,
         1.0
       ],
       [
-        "2020-08-17",
+        "2020-08-03",
         8.096,
         1.0
       ],
@@ -286,5 +286,47 @@
     ],
     "sql": "SELECT strftime(h.hora, '%Y-%m') AS mes, count(*) AS horas, round(avg(h.aceite), 1) AS aceite, round(avg(c.temperatura), 1) AS calle FROM horas h JOIN clima c ON c.hora = h.hora GROUP BY mes ORDER BY mes",
     "muestra": "horas"
+  },
+  "m18_donde_mentia": {
+    "columns": [
+      "dia",
+      "antes",
+      "ahora",
+      "diferencia"
+    ],
+    "rows": [
+      [
+        "2020-04-18",
+        2.36,
+        23.6,
+        21.24
+      ],
+      [
+        "2020-06-06",
+        2.04,
+        20.22,
+        18.18
+      ],
+      [
+        "2020-05-20",
+        2.01,
+        20.02,
+        18.01
+      ],
+      [
+        "2020-03-29",
+        1.98,
+        19.82,
+        17.84
+      ],
+      [
+        "2020-06-24",
+        1.6,
+        15.91,
+        14.31
+      ]
+    ],
+    "sql": "SELECT a.dia, a.horas_de_carga AS antes, b.horas_de_carga AS ahora, round(b.horas_de_carga - a.horas_de_carga, 2) AS diferencia FROM antes a JOIN ahora b ON b.dia = a.dia ORDER BY diferencia DESC LIMIT 5",
+    "muestra": "antes"
   }
 }

@@ -650,10 +650,10 @@
       "title_en": "Time travel: seeing the data as it was",
       "subtitle_en": "An open table format keeps every version. Go back to June 5th and query the lake as it stood, without having kept a single copy",
       "cifra": {
-        "value": "por medir",
-        "label": "versiones guardadas de la tabla",
-        "value_en": "to be measured",
-        "label_en": "stored versions of the table"
+        "value": "0,32 h contra 3,17 h",
+        "label": "lo que decía el panel antes de encontrar el fallo, y lo que era",
+        "value_en": "0.32 h vs 3.17 h",
+        "label_en": "what the panel said before the bug was found, and what it was"
       },
       "accent": {
         "dark": "#B9BD7D",
@@ -661,13 +661,18 @@
       },
       "instrumento": "grafo",
       "interactivo": true,
-      "reto": "Consultar la misma tabla en dos versiones distintas y ver en qué se diferencian.",
+      "reto": "Cruzar las dos versiones de la tabla y encontrar en qué días se contradicen más.",
       "scripts": [
         "src/transform/table_format.py"
       ],
       "figuras": [
-        "fig_m18_historial_de_versiones"
-      ]
+        "fig_m18_historial_de_versiones",
+        "fig_m18_delta_contra_iceberg"
+      ],
+      "tablas": {
+        "antes": "antes",
+        "ahora": "ahora"
+      }
     },
     {
       "number": 19,

@@ -137,8 +137,18 @@ def conectar():
     # Las tablas pequeñas que acompañan a la telemetría, como los partes de
     # avería del módulo 12. Del lago no salen: son de `assets/muestras/`, que es
     # también de donde las coge el navegador.
+    # Las dos extensiones del módulo 18. Sin ellas, `delta_scan` e
+    # `iceberg_scan` de las consultas publicadas no existirían y la puerta
+    # diría que la lección publica SQL que no corre.
+    for ext in ("delta", "iceberg"):
+        try:
+            con.execute(f"INSTALL {ext}")
+            con.execute(f"LOAD {ext}")
+        except Exception as e:
+            print(f"  aviso: la extensión {ext} no carga ({str(e).splitlines()[0][:60]}). "
+                  f"Las consultas del módulo 18 fallarán y esta puerta lo dirá.")
     for extra in sorted(SAMPLES.glob("*.parquet")):
-        if extra.stem in ("averias", "clima", "horas"):
+        if extra.stem in ("averias", "clima", "horas", "antes", "ahora"):
             con.execute(f"CREATE VIEW {extra.stem} AS "
                         f"SELECT * FROM read_parquet('{extra.as_posix()}')")
     return con
@@ -255,6 +265,10 @@ DEPENDE_DE = {
     PROJECT / "lake" / "_formatos" / "todo.parquet":
         "src/transform/benchmark_formats.py  (lo usan las consultas del módulo 7)",
     SILVER: "src/transform/silver.py  (la consultan las lecciones desde el módulo 14)",
+    PROJECT / "lake" / "_formatos_de_tabla" / "delta":
+        "src/transform/table_format.py  (lo consultan las consultas del módulo 18)",
+    PROJECT / "lake" / "_formatos_de_tabla" / "iceberg_ultima.metadata.json":
+        "src/transform/table_format.py  (lo consultan las consultas del módulo 18)",
 }
 
 

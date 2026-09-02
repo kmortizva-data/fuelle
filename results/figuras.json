@@ -38,5 +38,9 @@
   "fig_m16_contrato_roto.claro.png": "7a46b281",
   "fig_m16_contrato_roto.oscuro.png": "dcf46e87",
   "fig_m17_linaje_dbt.claro.png": "1f9a4ba3",
-  "fig_m17_linaje_dbt.oscuro.png": "8c6fc932"
+  "fig_m17_linaje_dbt.oscuro.png": "8c6fc932",
+  "fig_m18_delta_contra_iceberg.claro.png": "3f79f393",
+  "fig_m18_delta_contra_iceberg.oscuro.png": "7b51a8b3",
+  "fig_m18_historial_de_versiones.claro.png": "8e1a77a9",
+  "fig_m18_historial_de_versiones.oscuro.png": "99471109"
 }

@@ -1,0 +1,85 @@
+{
+  "lecturas_con_el_fallo": 151657,
+  "lecturas_de_verdad": 1516948,
+  "dias_en_la_version_0": 212,
+  "dias_en_la_version_1": 212,
+  "horas_de_carga_que_decia_la_version_0": 0.32,
+  "horas_de_carga_de_verdad": 3.17,
+  "versiones_que_guarda_delta": 2,
+  "veces_mas_disco_iceberg": 4.2,
+  "metadatos_que_deja_iceberg": 3,
+  "delta": {
+    "kb_en_disco": 12.9,
+    "ficheros": 4,
+    "montaje": "nada: se escribe en una carpeta vacia",
+    "segundos_de_montaje": 0.079
+  },
+  "iceberg": {
+    "kb_en_disco": 53.7,
+    "ficheros": 12,
+    "montaje": "un catalogo SQLite que guarda donde esta cada tabla",
+    "segundos_de_montaje": 1.762
+  },
+  "medidas": {
+    "escribir las dos versiones": {
+      "delta": {
+        "mediana": 0.0441,
+        "minimo": 0.035,
+        "maximo": 0.0476
+      },
+      "iceberg": {
+        "mediana": 0.1203,
+        "minimo": 0.1138,
+        "maximo": 0.1354
+      },
+      "se_distinguen": true,
+      "mas_rapido": "delta",
+      "veces": 2.7
+    },
+    "leer la última versión": {
+      "delta": {
+        "mediana": 0.0274,
+        "minimo": 0.0267,
+        "maximo": 0.0348
+      },
+      "iceberg": {
+        "mediana": 0.0091,
+        "minimo": 0.008,
+        "maximo": 0.0113
+      },
+      "se_distinguen": true,
+      "mas_rapido": "iceberg",
+      "veces": 3.0
+    },
+    "leer la versión vieja": {
+      "delta": {
+        "mediana": 0.0259,
+        "minimo": 0.0248,
+        "maximo": 0.027
+      },
+      "iceberg": {
+        "mediana": 0.0118,
+        "minimo": 0.0097,
+        "maximo": 0.0149
+      },
+      "se_distinguen": true,
+      "mas_rapido": "iceberg",
+      "veces": 2.2
+    },
+    "leer preguntando primero": {
+      "delta": {
+        "mediana": 0.0298,
+        "minimo": 0.0263,
+        "maximo": 0.0365
+      },
+      "iceberg": {
+        "mediana": 0.0125,
+        "minimo": 0.0119,
+        "maximo": 0.0149
+      },
+      "se_distinguen": true,
+      "mas_rapido": "iceberg",
+      "veces": 2.4
+    }
+  }
+}

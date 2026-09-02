@@ -40,7 +40,7 @@ import duckdb
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from check_sql import bloques, normaliza  # noqa: E402
-from make_sample import POR_HORA  # noqa: E402
+from make_sample import POR_HORA, versiones_sql  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -85,10 +85,19 @@ def connect_lake(tablas: dict[str, str]) -> duckdb.DuckDBPyConnection:
     con = duckdb.connect()
     con.execute(f"CREATE VIEW telemetria AS "
                 f"SELECT * FROM read_parquet('{BRONZE.as_posix()}/**/*.parquet')")
+    con.execute("CREATE VIEW bronce AS SELECT * FROM telemetria")
+    if SILVER.exists():
+        con.execute(f"CREATE VIEW plata AS "
+                    f"SELECT * FROM read_parquet('{SILVER.as_posix()}/**/*.parquet')")
+    # Las dos versiones del módulo 18 se recalculan desde el lago con la misma
+    # consulta que las generó, igual que las horarias del 15.
+    versiones = versiones_sql(BRONZE, SILVER) if SILVER.exists() else {}
     for view, fichero in tablas.items():
         if view == "telemetria":
             continue
-        if fichero in POR_HORA and WEATHER.exists() and SILVER.exists():
+        if fichero in versiones:
+            con.execute(f"CREATE VIEW {view} AS {versiones[fichero]}")
+        elif fichero in POR_HORA and WEATHER.exists() and SILVER.exists():
             sql = POR_HORA[fichero].format(weather=WEATHER.as_posix(),
                                            silver=SILVER.as_posix())
             con.execute(f"CREATE VIEW {view} AS {sql}")

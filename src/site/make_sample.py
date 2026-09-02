@@ -33,6 +33,10 @@ from pathlib import Path
 
 import duckdb
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "transform"))
+
+from table_format import CICLO, PASO, PLATA_CON_EL_FALLO  # noqa: E402
+
 sys.stdout.reconfigure(encoding="utf-8")
 
 PROJECT = Path(__file__).resolve().parents[2]
@@ -90,6 +94,19 @@ POR_HORA = {
         WHERE medido
         GROUP BY hora ORDER BY hora
     """,
+}
+
+
+# Las dos versiones de la tabla de oro del módulo 18. El navegador del lector no
+# tiene ni la extensión Delta ni la Iceberg, así que no puede viajar en el
+# tiempo ahí. Lo que sí puede es tener las dos versiones delante y cruzarlas,
+# que es la habilidad que importa. La lección lo declara.
+#
+# Las consultas se importan de table_format.py para que la muestra y el lago no
+# se puedan separar: si allí cambia el agregado, aquí cambia solo.
+VERSIONES = {
+    "antes": CICLO.format(plata="{fallo}", paso=PASO),
+    "ahora": CICLO.format(plata="plata WHERE medido", paso=PASO),
 }
 
 
@@ -193,6 +210,54 @@ def write_por_hora(con: duckdb.DuckDBPyConnection) -> list[dict]:
     return out
 
 
+_VERSIONES_SQL: dict[str, str] = {}
+
+
+def versiones_sql(bronze: Path, silver: Path) -> dict[str, str]:
+    """Las dos consultas de las versiones, con las rutas del lago ya puestas.
+
+    El resultado se guarda porque averiguar los bordes del registro cuesta una
+    pasada por el bronce entero, y `check_muestras` llama a esto una vez por
+    lección. Sin la caché, la puerta pasaba de segundos a minutos.
+    """
+    if _VERSIONES_SQL:
+        return dict(_VERSIONES_SQL)
+    con = duckdb.connect()
+    con.execute(f"CREATE VIEW bronce AS "
+                f"SELECT * FROM read_parquet('{bronze.as_posix()}/**/*.parquet')")
+    borde = con.sql("SELECT min(timestamp), max(timestamp) FROM bronce").fetchone()
+    con.close()
+    fallo = PLATA_CON_EL_FALLO.format(desde=borde[0], hasta=borde[1], paso=PASO)
+    _VERSIONES_SQL.update({nombre: sql.format(fallo=fallo) if "{fallo}" in sql else sql
+                           for nombre, sql in VERSIONES.items()})
+    return dict(_VERSIONES_SQL)
+
+
+def write_versiones(con: duckdb.DuckDBPyConnection) -> list[dict]:
+    """Las dos versiones de la tabla de oro, para el reto del módulo 18."""
+    silver = PROJECT / "lake" / "silver" / "telemetry"
+    if not silver.exists():
+        return []
+    con.execute(f"CREATE OR REPLACE VIEW bronce AS "
+                f"SELECT * FROM read_parquet('{BRONZE.as_posix()}/**/*.parquet')")
+    con.execute(f"CREATE OR REPLACE VIEW plata AS "
+                f"SELECT * FROM read_parquet('{silver.as_posix()}/**/*.parquet')")
+    out = []
+    for nombre, sql in versiones_sql(BRONZE, silver).items():
+        target = SAMPLES / f"{nombre}.parquet"
+        con.execute(f"COPY ({sql}) TO '{target.as_posix()}' "
+                    f"(FORMAT PARQUET, COMPRESSION ZSTD)")
+        rows = con.sql(f"SELECT count(*) FROM read_parquet('{target.as_posix()}')").fetchone()[0]
+        cols = len(con.sql(
+            f"SELECT * FROM read_parquet('{target.as_posix()}') LIMIT 0").columns)
+        out.append({"name": nombre, "rows": rows, "columns": cols,
+                    "kb_on_disk": round(target.stat().st_size / 1024, 1),
+                    "kb_downloaded": round(gzipped_size(target) / 1024, 1),
+                    "recorta_filas": False,
+                    "para": "módulo 18: las dos versiones, para cruzarlas"})
+    return out
+
+
 def write_reports(con: duckdb.DuckDBPyConnection) -> dict:
     """Los cuatro partes de avería, tal cual están escritos, para el JOIN."""
     target = SAMPLES / "averias.parquet"
@@ -222,6 +287,7 @@ def main() -> None:
         problems += agrees_with_lake(con, name, spec)
     shipped.append(write_reports(con))
     shipped += write_por_hora(con)
+    shipped += write_versiones(con)
 
     print("  muestra                     filas    cols   en disco   se descarga   para")
     for row in shipped:

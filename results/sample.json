@@ -52,6 +52,24 @@
       "kb_downloaded": 39.1,
       "recorta_filas": false,
       "para": "módulo 15: cruzar fuentes de distinta frecuencia"
+    },
+    {
+      "name": "antes",
+      "rows": 212,
+      "columns": 4,
+      "kb_on_disk": 2.8,
+      "kb_downloaded": 2.6,
+      "recorta_filas": false,
+      "para": "módulo 18: las dos versiones, para cruzarlas"
+    },
+    {
+      "name": "ahora",
+      "rows": 212,
+      "columns": 4,
+      "kb_on_disk": 3.0,
+      "kb_downloaded": 2.8,
+      "recorta_filas": false,
+      "para": "módulo 18: las dos versiones, para cruzarlas"
     }
   ],
   "un_dia": "2020-06-05",

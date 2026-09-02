@@ -97,5 +97,11 @@
     "1200": "la ley del lote L2 del ejemplo de juguete, en partes por millon. Numeros elegidos para que el cambio de unidad se vea de golpe",
     "1000": "la del lote L3 del mismo ejemplo",
     "1000.0": "el 1.000 % que sale en el informe del ejemplo al no cazar el cambio de unidad"
+  },
+  "m18_viaje_en_el_tiempo": {
+    "00002": "parte del nombre real de un fichero de metadatos de Iceberg, citado para enseñar que lleva un identificador que cambia en cada corrida. Es una cita, no una medida"
+  },
+  "m18_viaje_en_el_tiempo_en": {
+    "00002": "part of the real name of an Iceberg metadata file, quoted to show that it carries an identifier that changes on every run. A quotation, not a measurement"
   }
 }
