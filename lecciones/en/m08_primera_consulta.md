@@ -92,11 +92,11 @@ NULL is.
 ### Step 5. The anatomy of a query
 
 ```diagrama
-SELECT | qué columnas | y con qué nombre
-FROM | de qué tabla | aquí, telemetria
-WHERE | qué filas pasan | el filtro
-ORDER BY | en qué orden | salen
-LIMIT | cuántas | quiero ver
+SELECT | which columns | and under what name
+FROM | from which table | here, telemetria
+WHERE | which rows pass | the filter
+ORDER BY | in what order | they come out
+LIMIT | how many | I want to see
 ```
 
 It is always written in that order. And a warning that saves grief: **it is not the order it gets

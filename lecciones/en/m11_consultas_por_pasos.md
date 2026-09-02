@@ -163,9 +163,9 @@ It is the order the question was thought in.
 ### Step 7. The two steps, drawn
 
 ```diagrama
-*POR_DIA | Las horas de carga de cada día | 212 filas, una por día
-*DIAS_COMPLETOS | Solo los que pasan del 90 % | 91 filas
-CONSULTA FINAL | El promedio de cada mes | 7 filas
+*POR_DIA | Loaded hours for each day | 212 rows, one per day
+*DIAS_COMPLETOS | Only the ones above 90 % | 91 rows
+FINAL QUERY | The mean of each month | 7 rows
 ```
 
 Each box can be queried on its own while writing, by swapping the final `SELECT` for

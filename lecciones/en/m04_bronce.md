@@ -97,10 +97,10 @@ measured, which is different from telling it already solved.
 ### Step 4. The three layers, to get your bearings
 
 ```diagrama
-*CRUDO | El CSV de UCI | 208,19 MB, intocable
-*BRONCE | Parquet por día | 22,05 MB, nada se limpia
-PLATA | Tipado y unido | aquí sí se arregla, módulo 14
-ORO | Tablas de respuesta | listas para preguntar, módulo 17
+*RAW | The CSV from UCI | 208.19 MB, untouchable
+*BRONZE | Parquet by day | 22.05 MB, nothing gets cleaned
+SILVER | Typed and joined | this is where it gets fixed, module 14
+GOLD | Answer tables | ready to be asked, module 17
 ```
 
 The two lit ones are those that exist by the end of this lesson. The other two arrive in part 4,

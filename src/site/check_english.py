@@ -89,6 +89,25 @@ def fragments(body: str) -> list[str]:
     return [line.split("|")[0].strip() for line in body.splitlines() if "|" in line]
 
 
+def diagrama_forma(body: str) -> list[tuple[bool, int]]:
+    """La forma de un `diagrama`: sus filas, y cuántos campos lleva cada una.
+
+    El texto de un diagrama **sí se traduce**, al contrario que el SQL o una
+    salida: es contenido que el lector lee, no código que se ejecuta. Compararlo
+    byte a byte dejó las lecciones inglesas del módulo 4 y del 11 enseñando su
+    esquema en español, y nadie lo vio porque la puerta daba verde.
+
+    Lo que se compara es la estructura: las mismas filas, cada una con los mismos
+    campos, y el asterisco de «esta caja está encendida» en las mismas.
+    """
+    filas = []
+    for line in body.splitlines():
+        if not line.strip():
+            continue
+        filas.append((line.lstrip().startswith("*"), line.count("|")))
+    return filas
+
+
 def canonical(number: str) -> str:
     """1.516.948 y 1,516,948 son el mismo número. 3,42 y 3.42 también.
 
@@ -112,6 +131,11 @@ def canonical(number: str) -> str:
 
 def numbers(text: str) -> Counter:
     return Counter(canonical(m.group()) for m in NUMBER.finditer(strip_code(text)))
+
+
+def numbers_here(text: str) -> Counter:
+    """Los números de un trozo cualquiera, sin quitarle los bloques de código."""
+    return Counter(canonical(m.group()) for m in NUMBER.finditer(text))
 
 
 def sections(text: str) -> list[str]:
@@ -152,6 +176,15 @@ def check(spanish: Path, english: Path) -> list[str]:
                     problems.append(
                         f"{spanish.name}: la anotación {i} no anota los mismos "
                         f"fragmentos en las dos ediciones")
+            elif lang_es == "diagrama":
+                if diagrama_forma(a) != diagrama_forma(b):
+                    problems.append(
+                        f"{spanish.name}: el diagrama {i} no tiene la misma forma "
+                        f"en las dos ediciones")
+                elif numbers_here(a) != numbers_here(b):
+                    problems.append(
+                        f"{spanish.name}: el diagrama {i} no dice los mismos números "
+                        f"en las dos ediciones")
             elif lang_es == "reto":
                 if reto_code(a) != reto_code(b):
                     problems.append(

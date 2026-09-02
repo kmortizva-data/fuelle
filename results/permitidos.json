@@ -103,5 +103,14 @@
   },
   "m18_viaje_en_el_tiempo_en": {
     "00002": "part of the real name of an Iceberg metadata file, quoted to show that it carries an identifier that changes on every run. A quotation, not a measurement"
+  },
+  "m14_plata_en": {
+    "8.200000000000001": "a value quoted from the file in the toy example, to show the floating point litter. Not a measurement, a quotation",
+    "0.4987654321": "the invented spectrometer reading of the metallurgical bridge, chosen to show significant figures"
+  },
+  "m16_calidad_en": {
+    "1200": "toy example: the laboratory's grade arriving in ppm instead of per cent",
+    "1000": "toy example: the same, and the 1,000 % the report would print",
+    "1000.0": "toy example: the absurd mean the contract would have stopped"
   }
 }
