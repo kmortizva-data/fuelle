@@ -901,6 +901,55 @@ en la URL y los datos de la perilla no. El techo del eje va en el HTML y las ser
 posiciones del módulo 24 se salían del marco**. Arreglado, y `check_motion` tiene una quinta regla
 que lo caza (probada rompiéndola).
 
+### Parte 6 cerrada en español (2026-09-03): módulos 27 y 28
+
+**Módulo 27, el residual.** Sale de una identidad y no de un ajuste, y tiene una propiedad que le da
+sentido a la perilla: **con una fuga de f bar/min el residual vale exactamente f**. Se nota a partir
+de **0,12 bar/min**, que es cuando pasa el suelo de ruido.
+
+| Qué | Medido |
+|---|---|
+| Suelo de ruido (579 horas de febrero) | mediana 0,0053, p95 0,0505, **máximo 0,1165** |
+| Techo, que es `llena` | **1,1796**, o sea 10,1 veces el suelo |
+| Horas topadas en el registro | 156 de 3.924 |
+| La #1b por días contra por horas | **1,09× el suelo** contra **7,47×** |
+| La segunda ruta el 18 de abril y el 6 de junio | **no contesta**: ni un tramo de vacío |
+| La segunda ruta el 15 de julio | **0,349 bar/min**, donde el residual está topado |
+
+**La deriva obligó a los dos indicadores** (decisión de Kevin del 2026-09-03): el consumo sube de
+0,0711 a más del doble entre febrero y agosto, así que el congelado marca 24 de 31 días en agosto.
+El móvil (contra los 14 días previos) devuelve los partes al primer plano: +1,0631 el 18 de abril,
++0,8182 el 5 de junio, +1,0169 el 15 de julio, +0,5368 el 29 de mayo, contra 0,0052 de un día
+corriente. **El gemelo sigue congelado; lo que se mueve es la referencia.**
+
+**Módulo 28, el veredicto.** Con umbral 1,15 bar/min:
+
+| | El gemelo | La alarma LPS instalada |
+|---|---|---|
+| Averías detectadas | **4 de 4** | 2 de 4 |
+| Días con alarma | 18 | 94 |
+| Falsas alarmas al mes | **1,5** | **11,4** |
+
+Con marzo como quinta avería: **5 de 5 con 1,2 falsas al mes**. Las dos cuentas van publicadas.
+
+**Como predictor no sirve**: solo el 15 de julio avisa antes, un día, en una racha de dos. Los otros
+tres levantan la alarma el mismo día del parte. La antelación se mide **desde que se encendió la
+racha**, no desde cualquier alarma previa, y eso es lo que baja el resultado de «7 a 13 días» (que
+es lo que sale con la definición floja) a «uno de cuatro».
+
+**Y el rival hay que juzgarlo en sus términos.** La primera versión contaba la LPS sobre las mismas
+horas completas que usa el gemelo y daba 28 días y 3,1 falsas al mes. Pero la LPS no promedia nada y
+salta sobre todo en horas incompletas: **101 de sus 136 horas**. Con el filtro del gemelo se le
+quitaban tres cuartas partes de sus disparos. Sobre lecturas crudas son 94 días y 11,4 al mes.
+
+**El rival trivial se comprueba, no se afirma:** con parámetros congelados el residual es función
+creciente de la carga, así que un umbral sobre cualquiera de los dos **ordena los 207 días igual**.
+El script lo verifica y falla si deja de ser cierto. El gemelo no gana en detección; gana en
+unidades físicas, en no necesitar historial y en poder preguntar por una fuga que no ha pasado.
+
+**Verificado a mano** contra el lago, sin código del proyecto: 4 de 4 y 12 días falsos en 8 meses,
+idéntico a lo que dice el script.
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo

@@ -106,9 +106,9 @@ mismo_orden = por_residual == por_carga
 ```
 
 ```anota
-dos ordenaciones | los mismos días, ordenados por el residual y por el ciclo de trabajo
+sorted(...) | los mismos días, ordenados por el residual y por el ciclo de trabajo
 == | si las dos listas son idénticas, cualquier umbral de una tiene su gemelo exacto en la otra
-por qué comprobarlo | porque es la afirmación más incómoda de la lección, y una afirmación incómoda sin comprobar es una excusa
+mismo_orden | es la afirmación más incómoda de la lección, y una afirmación incómoda sin comprobar es una excusa
 ```
 
 ### Paso 7. Toca la perilla

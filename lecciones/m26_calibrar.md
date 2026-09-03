@@ -115,7 +115,7 @@ error = (e_carga if pesa_carga else 0) + (e_arr if pesa_arranques else 0)
 
 ```anota
 resumen(dep) | simula doce horas con esos parámetros y devuelve las dos cosas que se pueden comparar
-error relativo | dividir por lo observado. Una es una fracción y la otra son sucesos por hora: sin dividir, la de números más grandes mandaría
+/ obs[...] | dividir por lo observado. Una es una fracción y la otra son sucesos por hora: sin dividir, la de números más grandes mandaría
 pesa_carga, pesa_arranques | los dos interruptores que hacen los tres ajustes del módulo con un solo bucle
 ```
 
@@ -128,9 +128,9 @@ if ganador["entrega"] in (ENTREGAS[0], ENTREGAS[-1]) or \
 ```
 
 ```anota
-solo al ganador | el ajuste completo es el único que debe tener un mínimo de verdad
-por qué no a los otros | un valle no tiene fondo, así que acaba en un borde le des la rejilla que le des
-saltó de verdad | la primera rejilla llegaba a 1,200 y el óptimo salió justo ahí. El número lo ponía la rejilla, no la máquina
+ganador | el ajuste completo es el único que debe tener un mínimo de verdad, así que solo a él se le exige
+ENTREGAS[0], ENTREGAS[-1] | los dos bordes. Un valle no tiene fondo, así que acaba en uno de ellos le des la rejilla que le des
+raise SystemExit | saltó de verdad: la primera rejilla llegaba a 1,200 y el óptimo salió justo ahí. El número lo ponía la rejilla, no la máquina
 ```
 
 ### Paso 7. Toca la perilla

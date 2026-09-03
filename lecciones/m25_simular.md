@@ -6,9 +6,9 @@ module: 25
 
 - Simular es avanzar el modelo a trocitos de tiempo. El tamaño del trocito **decide el resultado**.
 - Se barre el paso y se compara todo contra el más fino. El que aún vale es **5 s**.
-- Que son, ni más ni menos, **el ritmo al que el propio registro toma sus lecturas**.
+- La mitad de lo que el registro tarda entre lectura y lectura, y tiene su razón.
 - Y el criterio no puede ser el ciclo de trabajo: con paso de 30 s parece perfecto.
-- Ya ha perdido **2 ciclos de 16**. Contar ciclos no se puede equivocar así.
+- Ya ha perdido **2 ciclos de 15**. Contar ciclos no se puede equivocar así.
 
 ## Qué resuelve este módulo
 
@@ -158,7 +158,7 @@ debajo de cierto umbral.
 
 **Qué salió.** Que el error del ciclo de trabajo **no crece**. Con paso de 30 s es el más pequeño
 de toda la tabla salvo el del patrón, y a esas alturas la simulación ya se ha comido **2 ciclos de
-16**.
+15**.
 
 No es casualidad ni mala suerte. Un paso grueso se salta arranques, y cada arranque que se salta
 alarga el vacío siguiente y acorta la carga siguiente, **y los dos errores se compensan en la

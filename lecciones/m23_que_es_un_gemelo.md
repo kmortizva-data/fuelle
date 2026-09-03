@@ -96,8 +96,8 @@ else:
 ```
 
 ```anota
-cuatro números | arranca, para, entrega y consumo. Salen del lago en el módulo 24, ninguno inventado
-ni una línea más | no hay temperatura, ni geometría, ni datos ajustados. Es física de primeros principios
+entrega - consumo | lo que sube el depósito por minuto cargando. Los cuatro números salen del lago en el módulo 24, ninguno inventado
+p >= para | el presostato suelta arriba y vuelve a pedir carga al bajar a `arranca`. No hay temperatura, ni geometría, ni datos ajustados
 ```
 
 No hay más. Ese es el gemelo entero, y los módulos 24 y 25 son de dónde salen sus cuatro números y
@@ -110,8 +110,8 @@ residual = minutos_que_carga_la_maquina - minutos_que_carga_el_gemelo
 ```
 
 ```anota
-la resta | eso es todo. Un gemelo no entrega una predicción, entrega una diferencia
-en minutos | la unidad importa: son minutos de compresor, algo que un jefe de mantenimiento entiende
+residual | eso es todo. Un gemelo no entrega una predicción, entrega una diferencia
+minutos_que_carga_la_maquina | la unidad importa: son minutos de compresor, algo que un jefe de mantenimiento entiende
 ```
 
 ```salida

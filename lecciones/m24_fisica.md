@@ -83,7 +83,7 @@ minutos y los vacíos 22, aquel filtro tiraba casi todas las cargas y ningún va
 
 ### Paso 3. Cuadrar el aire
 
-Sobre seis semanas la presión acaba donde empezó, así que **los bar metidos tienen que igualar a
+Sobre un mes entero la presión acaba donde empezó, así que **los bar metidos tienen que igualar a
 los gastados**. Es la comprobación que decide si la medida vale algo.
 
 Si no cuadran, lo que está mal es la medida, no la máquina. Y si cuadran, los dos parámetros salen
@@ -104,7 +104,7 @@ SELECT CASE WHEN antes = 0 THEN 'arranca' ELSE 'para' END AS momento,
        round(median(TP3), 2) AS presion
 FROM (SELECT TP3, DV_eletric,
              lag(DV_eletric) OVER (ORDER BY timestamp) AS antes
-      FROM plata WHERE medido AND day BETWEEN DATE '2020-02-01' AND DATE '2020-03-15')
+      FROM plata WHERE medido AND day BETWEEN DATE '2020-02-01' AND DATE '2020-02-29')
 WHERE antes IS NOT NULL AND antes <> DV_eletric
 GROUP BY momento
 ORDER BY momento;
@@ -121,8 +121,8 @@ median(TP3) | la presión típica en ese momento. La mediana y no la media, porq
 │ momento │ presion │
 │ varchar │ double  │
 ├─────────┼─────────┤
-│ arranca │    8.06 │
-│ para    │   10.12 │
+│ arranca │    8.05 │
+│ para    │    10.1 │
 └─────────┴─────────┘
 ```
 
@@ -140,24 +140,24 @@ consumo  = gastados / minutos_en_vacio
 ```
 
 ```anota
-metidos y gastados | los bar que suben mientras carga y los que bajan mientras no. Sobre seis semanas tienen que ser iguales
+metidos y gastados | los bar que suben mientras carga y los que bajan mientras no. Sobre un mes entero tienen que ser iguales
 partido por minutos | de ahí salen los dos parámetros, por minuto y no por lectura: lo que mueve el aire es el total, no la pendiente de un instante
 entrega = subida + consumo | mientras carga también se está gastando, así que lo que el compresor mete es lo que se ve subir más lo que se va
 ```
 
 ```salida
   el balance de aire, que es lo que decide si la medida vale:
-    metidos             4159.7 bar
-    gastados            4127.6 bar
-    descuadre             0.8%
+    metidos             2311.7 bar
+    gastados            2295.0 bar
+    descuadre             0.7%
 
-  sube por minuto cargando   0.6735 bar/min
-  mediana instantánea         1.032 bar/min   un 53% de más
-  consumo                    0.0806 bar/min
+  sube por minuto cargando   1.1796 bar/min
+  mediana instantánea         1.248 bar/min   un 6% de más
+  consumo                    0.0711 bar/min
 ```
 
-Cuadra al **0,8 %** en seis semanas. Eso no lo he impuesto yo: los dos números se miden por
-separado y coinciden, y esa coincidencia es la que dice que la medida está bien hecha.
+Cuadra al **0,7 %** en un mes. Eso no lo he impuesto yo: los dos números se miden por separado y
+coinciden, y esa coincidencia es la que dice que la medida está bien hecha.
 
 ### Paso 7. Y el modelo entero, en cuatro líneas
 
@@ -226,9 +226,11 @@ cuadrar. Se midieron por separado, se comprobó el balance de aire, y la predicc
   que duran 1,8 minutos. El balance salía descuadrado por un factor de 2,3 por culpa del filtro.
 - **La ficha del fabricante es una pista, no un dato.** Dice 8,2 y son 8,05. Un presostato tiene
   tolerancia, y se modela la pieza montada.
-- **El consumo instantáneo no se puede medir a diez segundos.** TP3 trae dos decimales, así que el
-  cambio más pequeño visible son 0,01 bar, o sea 0,06 bar/min. La mediana instantánea de consumo
-  cae exactamente ahí: no es una medida, es la resolución del sensor.
+- **El consumo instantáneo se queda corto a diez segundos, y no por culpa del sensor.** La mediana
+  instantánea da 0,0480 bar/min contra los 0,0711 de la media, un 32 % menos. El escalón de TP3,
+  medido y no supuesto, es de 0,001 bar: ocho veces más fino que esa mediana, así que no explica
+  nada. La razón es otra: **el consumo va a ráfagas**, y la mitad de los pasos salen más tranquilos
+  que la media.
 - **Cuadrar el aire antes de creerse nada.** Si los bar que entran no son los que salen, no hay
   modelo posible y el fallo está en la medición.
 - **La presión no es la variable interesante.** El control la sostiene, así que apenas se mueve.
@@ -245,7 +247,7 @@ dice que las básculas, los muestreos y las leyes son coherentes entre sí. Uno 
 dice que hay un instrumento mintiendo, y hasta encontrarlo cualquier conclusión sobre el proceso es
 aire.
 
-El balance de aire de este módulo cierra al 0,8 %. Por eso se puede seguir.
+El balance de aire de este módulo cierra al 0,7 %. Por eso se puede seguir.
 
 ## Hazlo tú
 

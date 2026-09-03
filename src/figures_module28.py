@@ -91,8 +91,9 @@ def lupa(d: dict, umbral: float, col: dict):
         ax.set_title(titulo, fontsize=9, color=col["ink_soft"], pad=7)
         ax.set_xlabel("días")
         ax.set_xlim(-DIAS_ALREDEDOR, DIAS_ALREDEDOR)
-        # Sin esto, el −10 de un panel y el 10 del vecino se tocan.
-        ax.set_xticks([-DIAS_ALREDEDOR, 0, DIAS_ALREDEDOR])
+        # Las marcas van HACIA DENTRO, no en los extremos: con etiquetas en ±10
+        # el −10 de un panel y el 10 del vecino se tocaban.
+        ax.set_xticks([-DIAS_ALREDEDOR // 2, 0, DIAS_ALREDEDOR // 2])
         ax.grid(axis="y", zorder=0)
     ejes[0].set_ylabel("residual del día, bar/min")
     fig.tight_layout(pad=0.6)

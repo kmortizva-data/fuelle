@@ -111,7 +111,7 @@ sum(p_ini - p_fin) / sum(minutos) AS consumo
 ```anota
 p_ini − p_fin | lo que baja la presión en un tramo de vacío, en bar
 sum / sum | el total entre el total, no la media de las medias: un tramo de veinte minutos pesa veinte veces más que uno de uno
-qué no lleva | ni entrega, ni carga, ni el modelo. Por eso vale como segunda opinión
+AS consumo | y ya está: ni entrega, ni carga, ni el modelo. Por eso vale como segunda opinión
 ```
 
 ### Paso 7. Toca la perilla
