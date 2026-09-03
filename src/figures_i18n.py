@@ -50,6 +50,9 @@ NEUTRAL = {
     "tp2", "tp3", "h1", "dv_pressure", "reservoirs", "oil_temperature",
     "motor_current", "comp", "dv_eletric", "towers", "mpg", "lps",
     "pressure_switch", "oil_level", "caudal_impulses", "timestamp", "day",
+    # Las etiquetas de los partes de avería, que son identificadores del fichero
+    # de UCI. El «b» de #1b lo pone este curso porque el fichero repite el #1.
+    "#1", "#1b", "#3", "#4",
     # Los nombres que el propio proyecto da a sus tablas y a sus modelos, que
     # salen en español en las dos ediciones porque son identificadores: el grafo
     # del módulo 17 los lee del manifest de dbt, y traducirlos rompería el enlace
@@ -318,6 +321,14 @@ TRADUCCIONES: dict[str, str] = {
     "el techo: el compresor no para": "the ceiling: the compressor never stops",
     "los cuatro partes de avería": "the four failure reports",
     "marzo, doce días sin parte": "March, twelve days with no report",
+    # Módulo 28: la lupa sobre cada suceso y la curva del intercambio.
+    "residual del día, bar/min": "the day's residual, bar/min",
+    "días": "days",
+    "marzo, sin parte": "March, no report",
+    "averías detectadas, de cuatro": "failures detected, out of four",
+    "falsas alarmas por mes": "false alarms per month",
+    "el gemelo, umbral a umbral": "the twin, threshold by threshold",
+    "la alarma que la máquina ya lleva": "the alarm the machine already carries",
 }
 
 # Etiquetas construidas con f-strings: llevan un número dentro, así que no se
@@ -331,6 +342,8 @@ PATTERNS: list[tuple[str, str]] = [
     # Los tamaños del módulo 5, que se recalculan en cada corrida.
     (r"^([\d.]+) m$", r"\1 M"),
     (r"^(\d+) veces$", r"\1 times"),
+    # El umbral que elige el barrido del módulo 28, que cambia con los datos.
+    (r"^umbral ([\d.,]+)$", r"threshold \1"),
 
     # Las etiquetas que llevan una cifra medida dentro. Van por patrón y no una a
     # una a propósito: `es()` ya devuelve el número en inglés, así que fijarlo en

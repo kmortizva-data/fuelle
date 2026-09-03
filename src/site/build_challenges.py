@@ -46,6 +46,7 @@ MUESTRA_DE = {
     "m25_cuanto_dura": "un_dia",
     "m26_los_dos_observables": "un_dia",
     "m27_horas_sobre_el_suelo": "horas",
+    "m28_aciertos_y_falsas": "horas",
 }
 
 SECONDS_PER_READING = 10
@@ -228,6 +229,24 @@ CHALLENGES = {
           AND hora::DATE IN (DATE '2020-04-18', DATE '2020-05-29',
                              DATE '2020-06-05', DATE '2020-07-15')
         GROUP BY 1 ORDER BY 1
+    """,
+    # Modulo 28: el veredicto entero en una consulta. Cada dia se clasifica en
+    # tres cubos, y el recuento de los tres es la tabla que decide si el gemelo
+    # sirve. Cuatro dias de parte, y todo lo demas o es acierto o es ruido.
+    "m28_aciertos_y_falsas": """
+        WITH d AS (
+          SELECT hora::DATE AS dia,
+                 max(carga * 1.2507 - 0.0711) AS residual
+          FROM horas WHERE lecturas >= 300 GROUP BY 1
+        )
+        SELECT CASE WHEN dia IN (DATE '2020-04-18', DATE '2020-05-29',
+                                 DATE '2020-05-30', DATE '2020-06-05',
+                                 DATE '2020-06-06', DATE '2020-06-07',
+                                 DATE '2020-07-15') THEN 'con parte'
+                    ELSE 'sin parte' END AS clase,
+               count(*)                                   AS dias,
+               count(*) FILTER (WHERE residual > 1.15)     AS saltan
+        FROM d GROUP BY 1 ORDER BY 1
     """,
     # Modulo 25: cuanto dura cada carga y cada vacio. Es lo que la simulacion
     # tiene que reproducir, y contarlo a mano da la vara de medir.

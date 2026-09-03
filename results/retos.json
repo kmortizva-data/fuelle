@@ -425,6 +425,27 @@
     "sql": "SELECT hora::DATE AS dia, count(*) FILTER (WHERE carga * 1.2507 - 0.0711 > 0.1165) AS horas, round(max(carga * 1.2507 - 0.0711), 4) AS residual_maximo FROM horas WHERE lecturas >= 300 AND hora::DATE IN (DATE '2020-04-18', DATE '2020-05-29', DATE '2020-06-05', DATE '2020-07-15') GROUP BY 1 ORDER BY 1",
     "muestra": "horas"
   },
+  "m28_aciertos_y_falsas": {
+    "columns": [
+      "clase",
+      "dias",
+      "saltan"
+    ],
+    "rows": [
+      [
+        "con parte",
+        7,
+        6
+      ],
+      [
+        "sin parte",
+        200,
+        12
+      ]
+    ],
+    "sql": "WITH d AS ( SELECT hora::DATE AS dia, max(carga * 1.2507 - 0.0711) AS residual FROM horas WHERE lecturas >= 300 GROUP BY 1 ) SELECT CASE WHEN dia IN (DATE '2020-04-18', DATE '2020-05-29', DATE '2020-05-30', DATE '2020-06-05', DATE '2020-06-06', DATE '2020-06-07', DATE '2020-07-15') THEN 'con parte' ELSE 'sin parte' END AS clase, count(*) AS dias, count(*) FILTER (WHERE residual > 1.15) AS saltan FROM d GROUP BY 1 ORDER BY 1",
+    "muestra": "horas"
+  },
   "m25_cuanto_dura": {
     "columns": [
       "estado",

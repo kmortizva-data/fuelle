@@ -1,0 +1,5038 @@
+{
+  "ventana_sana": [
+    "2020-02-01",
+    "2020-02-29"
+  ],
+  "evento_de_marzo": [
+    "2020-03-01",
+    "2020-03-12"
+  ],
+  "suelo_del_27": 0.1165,
+  "umbrales": [
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95,
+    1.0,
+    1.05,
+    1.1,
+    1.15,
+    1.2
+  ],
+  "meses": 8,
+  "partes": [
+    {
+      "nr": "#1",
+      "empieza": "2020-04-18T00:00:00",
+      "dias": [
+        "2020-04-18"
+      ]
+    },
+    {
+      "nr": "#1",
+      "empieza": "2020-05-29T23:30:00",
+      "dias": [
+        "2020-05-29",
+        "2020-05-30"
+      ]
+    },
+    {
+      "nr": "#3",
+      "empieza": "2020-06-05T10:00:00",
+      "dias": [
+        "2020-06-05",
+        "2020-06-06",
+        "2020-06-07"
+      ]
+    },
+    {
+      "nr": "#4",
+      "empieza": "2020-07-15T14:30:00",
+      "dias": [
+        "2020-07-15"
+      ]
+    }
+  ],
+  "dias_de_parte": 7,
+  "barridos": {
+    "congelado, marzo cuenta": [
+      {
+        "umbral": 0.1,
+        "dias_con_alarma": 143,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 2,
+        "antelacion_mediana": 10,
+        "falsas_alarmas": 125,
+        "falsas_por_mes": 15.6,
+        "rachas": 25
+      },
+      {
+        "umbral": 0.15,
+        "dias_con_alarma": 87,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 2,
+        "antelacion_mediana": 3,
+        "falsas_alarmas": 70,
+        "falsas_por_mes": 8.8,
+        "rachas": 35
+      },
+      {
+        "umbral": 0.2,
+        "dias_con_alarma": 62,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 2,
+        "falsas_alarmas": 45,
+        "falsas_por_mes": 5.6,
+        "rachas": 30
+      },
+      {
+        "umbral": 0.25,
+        "dias_con_alarma": 53,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 2,
+        "falsas_alarmas": 39,
+        "falsas_por_mes": 4.9,
+        "rachas": 27
+      },
+      {
+        "umbral": 0.3,
+        "dias_con_alarma": 42,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 29,
+        "falsas_por_mes": 3.6,
+        "rachas": 22
+      },
+      {
+        "umbral": 0.35,
+        "dias_con_alarma": 39,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 26,
+        "falsas_por_mes": 3.2,
+        "rachas": 20
+      },
+      {
+        "umbral": 0.4,
+        "dias_con_alarma": 35,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 24,
+        "falsas_por_mes": 3.0,
+        "rachas": 20
+      },
+      {
+        "umbral": 0.45,
+        "dias_con_alarma": 34,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 23,
+        "falsas_por_mes": 2.9,
+        "rachas": 19
+      },
+      {
+        "umbral": 0.5,
+        "dias_con_alarma": 34,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 23,
+        "falsas_por_mes": 2.9,
+        "rachas": 19
+      },
+      {
+        "umbral": 0.55,
+        "dias_con_alarma": 30,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 20,
+        "falsas_por_mes": 2.5,
+        "rachas": 16
+      },
+      {
+        "umbral": 0.6,
+        "dias_con_alarma": 30,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 20,
+        "falsas_por_mes": 2.5,
+        "rachas": 16
+      },
+      {
+        "umbral": 0.65,
+        "dias_con_alarma": 30,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 20,
+        "falsas_por_mes": 2.5,
+        "rachas": 16
+      },
+      {
+        "umbral": 0.7,
+        "dias_con_alarma": 28,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 18,
+        "falsas_por_mes": 2.2,
+        "rachas": 14
+      },
+      {
+        "umbral": 0.75,
+        "dias_con_alarma": 27,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 17,
+        "falsas_por_mes": 2.1,
+        "rachas": 14
+      },
+      {
+        "umbral": 0.8,
+        "dias_con_alarma": 26,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 16,
+        "falsas_por_mes": 2.0,
+        "rachas": 13
+      },
+      {
+        "umbral": 0.85,
+        "dias_con_alarma": 25,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 15,
+        "falsas_por_mes": 1.9,
+        "rachas": 12
+      },
+      {
+        "umbral": 0.9,
+        "dias_con_alarma": 23,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 15,
+        "falsas_por_mes": 1.9,
+        "rachas": 12
+      },
+      {
+        "umbral": 0.95,
+        "dias_con_alarma": 23,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 15,
+        "falsas_por_mes": 1.9,
+        "rachas": 12
+      },
+      {
+        "umbral": 1.0,
+        "dias_con_alarma": 22,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 14,
+        "falsas_por_mes": 1.8,
+        "rachas": 11
+      },
+      {
+        "umbral": 1.05,
+        "dias_con_alarma": 21,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 13,
+        "falsas_por_mes": 1.6,
+        "rachas": 11
+      },
+      {
+        "umbral": 1.1,
+        "dias_con_alarma": 18,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 10,
+        "falsas_por_mes": 1.2,
+        "rachas": 10
+      },
+      {
+        "umbral": 1.15,
+        "dias_con_alarma": 18,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 10,
+        "falsas_por_mes": 1.2,
+        "rachas": 10
+      },
+      {
+        "umbral": 1.2,
+        "dias_con_alarma": 0,
+        "sucesos": 5,
+        "detectados": 0,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 0,
+        "falsas_por_mes": 0.0,
+        "rachas": 0
+      }
+    ],
+    "congelado, marzo no cuenta": [
+      {
+        "umbral": 0.1,
+        "dias_con_alarma": 143,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 2,
+        "antelacion_mediana": 10,
+        "falsas_alarmas": 136,
+        "falsas_por_mes": 17.0,
+        "rachas": 25
+      },
+      {
+        "umbral": 0.15,
+        "dias_con_alarma": 87,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 2,
+        "antelacion_mediana": 3,
+        "falsas_alarmas": 80,
+        "falsas_por_mes": 10.0,
+        "rachas": 35
+      },
+      {
+        "umbral": 0.2,
+        "dias_con_alarma": 62,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 2,
+        "falsas_alarmas": 55,
+        "falsas_por_mes": 6.9,
+        "rachas": 30
+      },
+      {
+        "umbral": 0.25,
+        "dias_con_alarma": 53,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 2,
+        "falsas_alarmas": 46,
+        "falsas_por_mes": 5.8,
+        "rachas": 27
+      },
+      {
+        "umbral": 0.3,
+        "dias_con_alarma": 42,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 35,
+        "falsas_por_mes": 4.4,
+        "rachas": 22
+      },
+      {
+        "umbral": 0.35,
+        "dias_con_alarma": 39,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 32,
+        "falsas_por_mes": 4.0,
+        "rachas": 20
+      },
+      {
+        "umbral": 0.4,
+        "dias_con_alarma": 35,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 28,
+        "falsas_por_mes": 3.5,
+        "rachas": 20
+      },
+      {
+        "umbral": 0.45,
+        "dias_con_alarma": 34,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 27,
+        "falsas_por_mes": 3.4,
+        "rachas": 19
+      },
+      {
+        "umbral": 0.5,
+        "dias_con_alarma": 34,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 27,
+        "falsas_por_mes": 3.4,
+        "rachas": 19
+      },
+      {
+        "umbral": 0.55,
+        "dias_con_alarma": 30,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 23,
+        "falsas_por_mes": 2.9,
+        "rachas": 16
+      },
+      {
+        "umbral": 0.6,
+        "dias_con_alarma": 30,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 23,
+        "falsas_por_mes": 2.9,
+        "rachas": 16
+      },
+      {
+        "umbral": 0.65,
+        "dias_con_alarma": 30,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 23,
+        "falsas_por_mes": 2.9,
+        "rachas": 16
+      },
+      {
+        "umbral": 0.7,
+        "dias_con_alarma": 28,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 21,
+        "falsas_por_mes": 2.6,
+        "rachas": 14
+      },
+      {
+        "umbral": 0.75,
+        "dias_con_alarma": 27,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 20,
+        "falsas_por_mes": 2.5,
+        "rachas": 14
+      },
+      {
+        "umbral": 0.8,
+        "dias_con_alarma": 26,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 19,
+        "falsas_por_mes": 2.4,
+        "rachas": 13
+      },
+      {
+        "umbral": 0.85,
+        "dias_con_alarma": 25,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 18,
+        "falsas_por_mes": 2.2,
+        "rachas": 12
+      },
+      {
+        "umbral": 0.9,
+        "dias_con_alarma": 23,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 17,
+        "falsas_por_mes": 2.1,
+        "rachas": 12
+      },
+      {
+        "umbral": 0.95,
+        "dias_con_alarma": 23,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 17,
+        "falsas_por_mes": 2.1,
+        "rachas": 12
+      },
+      {
+        "umbral": 1.0,
+        "dias_con_alarma": 22,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 16,
+        "falsas_por_mes": 2.0,
+        "rachas": 11
+      },
+      {
+        "umbral": 1.05,
+        "dias_con_alarma": 21,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 15,
+        "falsas_por_mes": 1.9,
+        "rachas": 11
+      },
+      {
+        "umbral": 1.1,
+        "dias_con_alarma": 18,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 12,
+        "falsas_por_mes": 1.5,
+        "rachas": 10
+      },
+      {
+        "umbral": 1.15,
+        "dias_con_alarma": 18,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 12,
+        "falsas_por_mes": 1.5,
+        "rachas": 10
+      },
+      {
+        "umbral": 1.2,
+        "dias_con_alarma": 0,
+        "sucesos": 4,
+        "detectados": 0,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 0,
+        "falsas_por_mes": 0.0,
+        "rachas": 0
+      }
+    ],
+    "móvil, marzo cuenta": [
+      {
+        "umbral": 0.1,
+        "dias_con_alarma": 56,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 2,
+        "falsas_alarmas": 39,
+        "falsas_por_mes": 4.9,
+        "rachas": 28
+      },
+      {
+        "umbral": 0.15,
+        "dias_con_alarma": 47,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 30,
+        "falsas_por_mes": 3.8,
+        "rachas": 23
+      },
+      {
+        "umbral": 0.2,
+        "dias_con_alarma": 38,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 25,
+        "falsas_por_mes": 3.1,
+        "rachas": 20
+      },
+      {
+        "umbral": 0.25,
+        "dias_con_alarma": 36,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 24,
+        "falsas_por_mes": 3.0,
+        "rachas": 19
+      },
+      {
+        "umbral": 0.3,
+        "dias_con_alarma": 35,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 23,
+        "falsas_por_mes": 2.9,
+        "rachas": 19
+      },
+      {
+        "umbral": 0.35,
+        "dias_con_alarma": 34,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 23,
+        "falsas_por_mes": 2.9,
+        "rachas": 19
+      },
+      {
+        "umbral": 0.4,
+        "dias_con_alarma": 32,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 21,
+        "falsas_por_mes": 2.6,
+        "rachas": 18
+      },
+      {
+        "umbral": 0.45,
+        "dias_con_alarma": 28,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 18,
+        "falsas_por_mes": 2.2,
+        "rachas": 16
+      },
+      {
+        "umbral": 0.5,
+        "dias_con_alarma": 27,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 17,
+        "falsas_por_mes": 2.1,
+        "rachas": 15
+      },
+      {
+        "umbral": 0.55,
+        "dias_con_alarma": 25,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 16,
+        "falsas_por_mes": 2.0,
+        "rachas": 14
+      },
+      {
+        "umbral": 0.6,
+        "dias_con_alarma": 23,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 15,
+        "falsas_por_mes": 1.9,
+        "rachas": 14
+      },
+      {
+        "umbral": 0.65,
+        "dias_con_alarma": 21,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 14,
+        "falsas_por_mes": 1.8,
+        "rachas": 13
+      },
+      {
+        "umbral": 0.7,
+        "dias_con_alarma": 19,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 12,
+        "falsas_por_mes": 1.5,
+        "rachas": 11
+      },
+      {
+        "umbral": 0.75,
+        "dias_con_alarma": 19,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 12,
+        "falsas_por_mes": 1.5,
+        "rachas": 11
+      },
+      {
+        "umbral": 0.8,
+        "dias_con_alarma": 19,
+        "sucesos": 5,
+        "detectados": 5,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 12,
+        "falsas_por_mes": 1.5,
+        "rachas": 11
+      },
+      {
+        "umbral": 0.85,
+        "dias_con_alarma": 15,
+        "sucesos": 5,
+        "detectados": 3,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 11,
+        "falsas_por_mes": 1.4,
+        "rachas": 8
+      },
+      {
+        "umbral": 0.9,
+        "dias_con_alarma": 15,
+        "sucesos": 5,
+        "detectados": 3,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 11,
+        "falsas_por_mes": 1.4,
+        "rachas": 8
+      },
+      {
+        "umbral": 0.95,
+        "dias_con_alarma": 12,
+        "sucesos": 5,
+        "detectados": 3,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 9,
+        "falsas_por_mes": 1.1,
+        "rachas": 7
+      },
+      {
+        "umbral": 1.0,
+        "dias_con_alarma": 12,
+        "sucesos": 5,
+        "detectados": 3,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 9,
+        "falsas_por_mes": 1.1,
+        "rachas": 7
+      },
+      {
+        "umbral": 1.05,
+        "dias_con_alarma": 10,
+        "sucesos": 5,
+        "detectados": 2,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 8,
+        "falsas_por_mes": 1.0,
+        "rachas": 5
+      },
+      {
+        "umbral": 1.1,
+        "dias_con_alarma": 1,
+        "sucesos": 5,
+        "detectados": 1,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 0,
+        "falsas_por_mes": 0.0,
+        "rachas": 1
+      },
+      {
+        "umbral": 1.15,
+        "dias_con_alarma": 0,
+        "sucesos": 5,
+        "detectados": 0,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 0,
+        "falsas_por_mes": 0.0,
+        "rachas": 0
+      },
+      {
+        "umbral": 1.2,
+        "dias_con_alarma": 0,
+        "sucesos": 5,
+        "detectados": 0,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 0,
+        "falsas_por_mes": 0.0,
+        "rachas": 0
+      }
+    ],
+    "móvil, marzo no cuenta": [
+      {
+        "umbral": 0.1,
+        "dias_con_alarma": 56,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 2,
+        "falsas_alarmas": 49,
+        "falsas_por_mes": 6.1,
+        "rachas": 28
+      },
+      {
+        "umbral": 0.15,
+        "dias_con_alarma": 47,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 40,
+        "falsas_por_mes": 5.0,
+        "rachas": 23
+      },
+      {
+        "umbral": 0.2,
+        "dias_con_alarma": 38,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 31,
+        "falsas_por_mes": 3.9,
+        "rachas": 20
+      },
+      {
+        "umbral": 0.25,
+        "dias_con_alarma": 36,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 29,
+        "falsas_por_mes": 3.6,
+        "rachas": 19
+      },
+      {
+        "umbral": 0.3,
+        "dias_con_alarma": 35,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 28,
+        "falsas_por_mes": 3.5,
+        "rachas": 19
+      },
+      {
+        "umbral": 0.35,
+        "dias_con_alarma": 34,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 27,
+        "falsas_por_mes": 3.4,
+        "rachas": 19
+      },
+      {
+        "umbral": 0.4,
+        "dias_con_alarma": 32,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 25,
+        "falsas_por_mes": 3.1,
+        "rachas": 18
+      },
+      {
+        "umbral": 0.45,
+        "dias_con_alarma": 28,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 21,
+        "falsas_por_mes": 2.6,
+        "rachas": 16
+      },
+      {
+        "umbral": 0.5,
+        "dias_con_alarma": 27,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 20,
+        "falsas_por_mes": 2.5,
+        "rachas": 15
+      },
+      {
+        "umbral": 0.55,
+        "dias_con_alarma": 25,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 19,
+        "falsas_por_mes": 2.4,
+        "rachas": 14
+      },
+      {
+        "umbral": 0.6,
+        "dias_con_alarma": 23,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 18,
+        "falsas_por_mes": 2.2,
+        "rachas": 14
+      },
+      {
+        "umbral": 0.65,
+        "dias_con_alarma": 21,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 16,
+        "falsas_por_mes": 2.0,
+        "rachas": 13
+      },
+      {
+        "umbral": 0.7,
+        "dias_con_alarma": 19,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 14,
+        "falsas_por_mes": 1.8,
+        "rachas": 11
+      },
+      {
+        "umbral": 0.75,
+        "dias_con_alarma": 19,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 14,
+        "falsas_por_mes": 1.8,
+        "rachas": 11
+      },
+      {
+        "umbral": 0.8,
+        "dias_con_alarma": 19,
+        "sucesos": 4,
+        "detectados": 4,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 14,
+        "falsas_por_mes": 1.8,
+        "rachas": 11
+      },
+      {
+        "umbral": 0.85,
+        "dias_con_alarma": 15,
+        "sucesos": 4,
+        "detectados": 2,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 13,
+        "falsas_por_mes": 1.6,
+        "rachas": 8
+      },
+      {
+        "umbral": 0.9,
+        "dias_con_alarma": 15,
+        "sucesos": 4,
+        "detectados": 2,
+        "con_aviso_previo": 1,
+        "antelacion_mediana": 1,
+        "falsas_alarmas": 13,
+        "falsas_por_mes": 1.6,
+        "rachas": 8
+      },
+      {
+        "umbral": 0.95,
+        "dias_con_alarma": 12,
+        "sucesos": 4,
+        "detectados": 2,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 10,
+        "falsas_por_mes": 1.2,
+        "rachas": 7
+      },
+      {
+        "umbral": 1.0,
+        "dias_con_alarma": 12,
+        "sucesos": 4,
+        "detectados": 2,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 10,
+        "falsas_por_mes": 1.2,
+        "rachas": 7
+      },
+      {
+        "umbral": 1.05,
+        "dias_con_alarma": 10,
+        "sucesos": 4,
+        "detectados": 1,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 9,
+        "falsas_por_mes": 1.1,
+        "rachas": 5
+      },
+      {
+        "umbral": 1.1,
+        "dias_con_alarma": 1,
+        "sucesos": 4,
+        "detectados": 0,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 1,
+        "falsas_por_mes": 0.1,
+        "rachas": 1
+      },
+      {
+        "umbral": 1.15,
+        "dias_con_alarma": 0,
+        "sucesos": 4,
+        "detectados": 0,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 0,
+        "falsas_por_mes": 0.0,
+        "rachas": 0
+      },
+      {
+        "umbral": 1.2,
+        "dias_con_alarma": 0,
+        "sucesos": 4,
+        "detectados": 0,
+        "con_aviso_previo": 0,
+        "antelacion_mediana": null,
+        "falsas_alarmas": 0,
+        "falsas_por_mes": 0.0,
+        "rachas": 0
+      }
+    ]
+  },
+  "detalle": {
+    "congelado, marzo cuenta": [
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 7
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 10,
+          "dias_que_llevaba_la_alarma": 30
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 3
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 3,
+          "dias_que_llevaba_la_alarma": 7
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 2,
+          "dias_que_llevaba_la_alarma": 5
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 2,
+          "dias_que_llevaba_la_alarma": 5
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "marzo",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ]
+    ],
+    "congelado, marzo no cuenta": [
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 7
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 10,
+          "dias_que_llevaba_la_alarma": 30
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 3
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 3,
+          "dias_que_llevaba_la_alarma": 7
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 2,
+          "dias_que_llevaba_la_alarma": 5
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 2,
+          "dias_que_llevaba_la_alarma": 5
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ]
+    ],
+    "móvil, marzo cuenta": [
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 2,
+          "dias_que_llevaba_la_alarma": 3
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "marzo",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "marzo",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "marzo",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ]
+    ],
+    "móvil, marzo no cuenta": [
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 2,
+          "dias_que_llevaba_la_alarma": 3
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": 1,
+          "dias_que_llevaba_la_alarma": 2
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": true,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ],
+      [
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#1",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#3",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        },
+        {
+          "suceso": "#4",
+          "detectado": false,
+          "dias_de_antelacion": null,
+          "dias_que_llevaba_la_alarma": null
+        }
+      ]
+    ]
+  },
+  "serie_diaria": [
+    {
+      "dia": "2020-02-01",
+      "congelado": 0.0505,
+      "movil": null,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-02",
+      "congelado": 0.0505,
+      "movil": 0.0,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-03",
+      "congelado": 0.0053,
+      "movil": -0.0452,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-04",
+      "congelado": 0.0574,
+      "movil": 0.0069,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-05",
+      "congelado": 0.054,
+      "movil": 0.0035,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-06",
+      "congelado": 0.0435,
+      "movil": -0.0069,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-07",
+      "congelado": 0.0991,
+      "movil": 0.0486,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-08",
+      "congelado": 0.1061,
+      "movil": 0.0556,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-09",
+      "congelado": 0.1165,
+      "movil": 0.0643,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-10",
+      "congelado": 0.0887,
+      "movil": 0.0347,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-11",
+      "congelado": 0.054,
+      "movil": -0.0017,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-12",
+      "congelado": 0.0505,
+      "movil": -0.0035,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-13",
+      "congelado": 0.054,
+      "movil": 0.0,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-14",
+      "congelado": 0.0644,
+      "movil": 0.0104,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-15",
+      "congelado": 0.0262,
+      "movil": -0.0278,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-16",
+      "congelado": 0.0088,
+      "movil": -0.0452,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-17",
+      "congelado": 0.0297,
+      "movil": -0.0243,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-18",
+      "congelado": 0.0505,
+      "movil": -0.0035,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-19",
+      "congelado": 0.0088,
+      "movil": -0.0452,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-20",
+      "congelado": 0.0435,
+      "movil": -0.0087,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-21",
+      "congelado": 0.0574,
+      "movil": 0.0052,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-22",
+      "congelado": 0.054,
+      "movil": 0.0017,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-23",
+      "congelado": 0.0505,
+      "movil": -0.0017,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-24",
+      "congelado": 0.0366,
+      "movil": -0.0139,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-25",
+      "congelado": 0.0644,
+      "movil": 0.0139,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-26",
+      "congelado": 0.0505,
+      "movil": 0.0,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-27",
+      "congelado": 0.0713,
+      "movil": 0.0208,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-28",
+      "congelado": 0.0609,
+      "movil": 0.0104,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-01",
+      "congelado": 0.0922,
+      "movil": 0.0417,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-02",
+      "congelado": 0.2381,
+      "movil": 0.1876,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-03",
+      "congelado": 0.2381,
+      "movil": 0.1859,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-04",
+      "congelado": 0.2937,
+      "movil": 0.238,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-05",
+      "congelado": 0.3771,
+      "movil": 0.3179,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-06",
+      "congelado": 1.1796,
+      "movil": 1.1169,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-07",
+      "congelado": 0.2405,
+      "movil": 0.1727,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-08",
+      "congelado": 0.1235,
+      "movil": 0.0417,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-09",
+      "congelado": 0.5369,
+      "movil": 0.4291,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-10",
+      "congelado": 0.3597,
+      "movil": 0.1789,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-11",
+      "congelado": 0.86,
+      "movil": 0.6219,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-12",
+      "congelado": 1.1796,
+      "movil": 0.9403,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-03-13",
+      "congelado": 0.0887,
+      "movil": -0.1784,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-14",
+      "congelado": 0.0887,
+      "movil": -0.1784,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-15",
+      "congelado": 0.1026,
+      "movil": -0.1645,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-16",
+      "congelado": 0.054,
+      "movil": -0.2131,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-17",
+      "congelado": 0.0818,
+      "movil": -0.1854,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-18",
+      "congelado": 0.054,
+      "movil": -0.2131,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-19",
+      "congelado": 0.0366,
+      "movil": -0.1454,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-20",
+      "congelado": 0.0644,
+      "movil": -0.0486,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-21",
+      "congelado": 0.1026,
+      "movil": 0.0069,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-22",
+      "congelado": 0.2138,
+      "movil": 0.1181,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-23",
+      "congelado": 0.1026,
+      "movil": 0.0069,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-24",
+      "congelado": 0.1026,
+      "movil": 0.0069,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-03-25",
+      "congelado": 0.1999,
+      "movil": 0.1042,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-26",
+      "congelado": 1.0233,
+      "movil": 0.9276,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-27",
+      "congelado": 1.1796,
+      "movil": 1.0839,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-28",
+      "congelado": 1.1796,
+      "movil": 1.077,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-03-29",
+      "congelado": 1.1796,
+      "movil": 1.077,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-30",
+      "congelado": 0.1547,
+      "movil": 0.0521,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-31",
+      "congelado": 0.2937,
+      "movil": 0.165,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-04-01",
+      "congelado": 0.1339,
+      "movil": -0.0434,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-02",
+      "congelado": 0.0922,
+      "movil": -0.0851,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-03",
+      "congelado": 0.1061,
+      "movil": -0.0712,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-04",
+      "congelado": 0.0922,
+      "movil": -0.0851,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-05",
+      "congelado": 0.1096,
+      "movil": -0.0677,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-06",
+      "congelado": 0.5016,
+      "movil": 0.3573,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-04-07",
+      "congelado": 0.186,
+      "movil": 0.0087,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-08",
+      "congelado": 0.12,
+      "movil": -0.073,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-09",
+      "congelado": 0.0679,
+      "movil": -0.1025,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-10",
+      "congelado": 0.1304,
+      "movil": -0.0139,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-11",
+      "congelado": 0.1373,
+      "movil": 0.0052,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-12",
+      "congelado": 1.1796,
+      "movil": 1.0475,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-13",
+      "congelado": 0.0713,
+      "movil": -0.0608,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-14",
+      "congelado": 0.0609,
+      "movil": -0.0643,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-15",
+      "congelado": 0.113,
+      "movil": -0.0017,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-16",
+      "congelado": 0.1269,
+      "movil": 0.0156,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-17",
+      "congelado": 0.0227,
+      "movil": -0.0938,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-18",
+      "congelado": 1.1796,
+      "movil": 1.0631,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-19",
+      "congelado": 1.1796,
+      "movil": 1.0561,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-20",
+      "congelado": 0.1634,
+      "movil": 0.0347,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-21",
+      "congelado": 0.0574,
+      "movil": -0.0712,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-22",
+      "congelado": 0.0574,
+      "movil": -0.066,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-23",
+      "congelado": 0.0644,
+      "movil": -0.0556,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-24",
+      "congelado": 0.0887,
+      "movil": -0.0313,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-25",
+      "congelado": 0.5265,
+      "movil": 0.4256,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-04-27",
+      "congelado": 0.2798,
+      "movil": 0.1789,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-28",
+      "congelado": 0.1014,
+      "movil": 0.0005,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-04-29",
+      "congelado": 0.6515,
+      "movil": 0.5443,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-04-30",
+      "congelado": 0.0435,
+      "movil": -0.0764,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-01",
+      "congelado": 0.0505,
+      "movil": -0.0637,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-02",
+      "congelado": 0.1408,
+      "movil": 0.0458,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-03",
+      "congelado": 0.0887,
+      "movil": -0.0324,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-04",
+      "congelado": 0.1165,
+      "movil": 0.0214,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-05",
+      "congelado": 0.0609,
+      "movil": -0.0341,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-06",
+      "congelado": 0.0644,
+      "movil": -0.0243,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-07",
+      "congelado": 0.0922,
+      "movil": 0.0035,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-08",
+      "congelado": 0.1235,
+      "movil": 0.033,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-09",
+      "congelado": 0.0922,
+      "movil": -0.0046,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-11",
+      "congelado": 0.1061,
+      "movil": 0.0093,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-12",
+      "congelado": 0.0366,
+      "movil": -0.0602,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-13",
+      "congelado": 1.1796,
+      "movil": 1.0874,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-14",
+      "congelado": 1.1796,
+      "movil": 1.0874,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-15",
+      "congelado": 0.0617,
+      "movil": -0.0305,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-16",
+      "congelado": 0.0818,
+      "movil": -0.0104,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-17",
+      "congelado": 0.3632,
+      "movil": 0.271,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-18",
+      "congelado": 0.5056,
+      "movil": 0.4134,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-19",
+      "congelado": 1.1796,
+      "movil": 1.0805,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-05-20",
+      "congelado": 1.1796,
+      "movil": 1.0805,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-21",
+      "congelado": 0.3041,
+      "movil": 0.1893,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-05-22",
+      "congelado": 0.1929,
+      "movil": -0.0208,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-23",
+      "congelado": 0.4188,
+      "movil": 0.1702,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-25",
+      "congelado": 0.2346,
+      "movil": -0.099,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-26",
+      "congelado": 0.2751,
+      "movil": -0.0585,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-05-28",
+      "congelado": 0.186,
+      "movil": -0.1477,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-29",
+      "congelado": 0.8704,
+      "movil": 0.5368,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-30",
+      "congelado": 1.1796,
+      "movil": 0.846,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-05-31",
+      "congelado": 0.1408,
+      "movil": -0.1928,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-01",
+      "congelado": 0.7453,
+      "movil": 0.4117,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-02",
+      "congelado": 1.0652,
+      "movil": 0.6742,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-06-03",
+      "congelado": 1.0545,
+      "movil": 0.5923,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-04",
+      "congelado": 0.0957,
+      "movil": -0.4864,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-05",
+      "congelado": 1.1796,
+      "movil": 0.8182,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-06",
+      "congelado": 1.1796,
+      "movil": 0.8182,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-06-07",
+      "congelado": 1.1796,
+      "movil": 0.5976,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-06-08",
+      "congelado": 1.1796,
+      "movil": 0.3717,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-06-09",
+      "congelado": 0.1373,
+      "movil": -0.8251,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-10",
+      "congelado": 0.1668,
+      "movil": -0.7957,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-06-11",
+      "congelado": 0.1269,
+      "movil": -0.8355,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-12",
+      "congelado": 0.1339,
+      "movil": -0.8286,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-13",
+      "congelado": 0.1512,
+      "movil": -0.7487,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-14",
+      "congelado": 0.186,
+      "movil": -0.2701,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-15",
+      "congelado": 0.1339,
+      "movil": -0.3318,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-16",
+      "congelado": 0.2013,
+      "movil": 0.0249,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-06-17",
+      "congelado": 0.1339,
+      "movil": -0.0425,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-18",
+      "congelado": 0.318,
+      "movil": 0.159,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-06-19",
+      "congelado": 0.2346,
+      "movil": 0.0582,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-20",
+      "congelado": 0.1999,
+      "movil": 0.0235,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-21",
+      "congelado": 0.1235,
+      "movil": -0.0529,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-22",
+      "congelado": 0.8466,
+      "movil": 0.6876,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-25",
+      "congelado": 0.1644,
+      "movil": 0.0054,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-26",
+      "congelado": 0.1096,
+      "movil": -0.056,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-27",
+      "congelado": 0.0852,
+      "movil": -0.0726,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-28",
+      "congelado": 0.2874,
+      "movil": 0.1296,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-06-29",
+      "congelado": 0.1443,
+      "movil": -0.0309,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-06-30",
+      "congelado": 0.1235,
+      "movil": -0.0517,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-01",
+      "congelado": 0.0852,
+      "movil": -0.0691,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-02",
+      "congelado": 0.1651,
+      "movil": 0.0108,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-03",
+      "congelado": 0.1602,
+      "movil": 0.0059,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-04",
+      "congelado": 0.0991,
+      "movil": -0.0632,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-05",
+      "congelado": 0.1061,
+      "movil": -0.0462,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-06",
+      "congelado": 0.2068,
+      "movil": 0.073,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-07",
+      "congelado": 0.1443,
+      "movil": 0.0104,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-08",
+      "congelado": 0.9781,
+      "movil": 0.8338,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-07-09",
+      "congelado": 0.1582,
+      "movil": 0.0139,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-10",
+      "congelado": 0.1999,
+      "movil": 0.0556,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-11",
+      "congelado": 0.1443,
+      "movil": -0.0069,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-12",
+      "congelado": 0.1895,
+      "movil": 0.0382,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-13",
+      "congelado": 0.2624,
+      "movil": 0.1112,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-14",
+      "congelado": 1.0719,
+      "movil": 0.9127,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-07-15",
+      "congelado": 1.1796,
+      "movil": 1.0169,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-07-16",
+      "congelado": 0.2763,
+      "movil": 0.099,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-17",
+      "congelado": 0.6742,
+      "movil": 0.4795,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-07-18",
+      "congelado": 0.1964,
+      "movil": -0.0069,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-19",
+      "congelado": 0.1408,
+      "movil": -0.0625,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-20",
+      "congelado": 0.1101,
+      "movil": -0.0933,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-21",
+      "congelado": 0.12,
+      "movil": -0.0782,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-22",
+      "congelado": 0.3012,
+      "movil": 0.1031,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-23",
+      "congelado": 0.12,
+      "movil": -0.0782,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-24",
+      "congelado": 0.1811,
+      "movil": -0.017,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-07-25",
+      "congelado": 0.113,
+      "movil": -0.0799,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-26",
+      "congelado": 0.1373,
+      "movil": -0.0556,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-27",
+      "congelado": 0.1339,
+      "movil": -0.0549,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-28",
+      "congelado": 0.1339,
+      "movil": -0.0271,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-07-29",
+      "congelado": 0.1929,
+      "movil": 0.0538,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-07-30",
+      "congelado": 0.1304,
+      "movil": -0.0087,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-07-31",
+      "congelado": 0.7801,
+      "movil": 0.6445,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-08-01",
+      "congelado": 0.2598,
+      "movil": 0.1241,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-02",
+      "congelado": 0.1304,
+      "movil": -0.0052,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-03",
+      "congelado": 0.3753,
+      "movil": 0.2414,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-08-04",
+      "congelado": 0.0748,
+      "movil": -0.0608,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-05",
+      "congelado": 0.0748,
+      "movil": -0.0608,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-06",
+      "congelado": 0.0818,
+      "movil": -0.0521,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-07",
+      "congelado": 0.0718,
+      "movil": -0.062,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-08",
+      "congelado": 0.0922,
+      "movil": -0.04,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-09",
+      "congelado": 0.1443,
+      "movil": 0.0122,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-10",
+      "congelado": 0.1756,
+      "movil": 0.0434,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-11",
+      "congelado": 0.1339,
+      "movil": 0.0017,
+      "lps": 1.0
+    },
+    {
+      "dia": "2020-08-12",
+      "congelado": 0.1478,
+      "movil": 0.0156,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-13",
+      "congelado": 0.1339,
+      "movil": 0.0017,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-14",
+      "congelado": 0.1443,
+      "movil": 0.0104,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-15",
+      "congelado": 0.1235,
+      "movil": -0.0104,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-16",
+      "congelado": 0.113,
+      "movil": -0.0191,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-17",
+      "congelado": 0.1339,
+      "movil": 0.0052,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-18",
+      "congelado": 0.1026,
+      "movil": -0.0261,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-19",
+      "congelado": 0.2728,
+      "movil": 0.1442,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-20",
+      "congelado": 0.1895,
+      "movil": 0.0556,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-21",
+      "congelado": 0.1825,
+      "movil": 0.0486,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-22",
+      "congelado": 0.2728,
+      "movil": 0.1338,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-23",
+      "congelado": 0.2833,
+      "movil": 0.139,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-24",
+      "congelado": 0.2103,
+      "movil": 0.0643,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-25",
+      "congelado": 0.1339,
+      "movil": -0.0122,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-26",
+      "congelado": 0.1269,
+      "movil": -0.0191,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-27",
+      "congelado": 0.1269,
+      "movil": -0.0122,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-28",
+      "congelado": 0.1999,
+      "movil": 0.0608,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-29",
+      "congelado": 0.1825,
+      "movil": 0.0243,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-30",
+      "congelado": 0.1651,
+      "movil": -0.0174,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-08-31",
+      "congelado": 0.1373,
+      "movil": -0.0452,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-09-01",
+      "congelado": 0.0123,
+      "movil": -0.1702,
+      "lps": 0.0
+    }
+  ],
+  "rival_del_ciclo": {
+    "dias": 207,
+    "mismo_orden": true,
+    "primeros_por_residual": [
+      "2020-03-06",
+      "2020-03-12",
+      "2020-03-27"
+    ],
+    "primeros_por_carga": [
+      "2020-03-06",
+      "2020-03-12",
+      "2020-03-27"
+    ]
+  },
+  "rival_instalado": {
+    "dias_con_alarma": 94,
+    "de_cuatro_partes": 2,
+    "horas_con_alarma": 136,
+    "de_esas_en_horas_incompletas": 101,
+    "falsas_alarmas": 91,
+    "falsas_por_mes": 11.4,
+    "meses_con_alarma": 8
+  }
+}

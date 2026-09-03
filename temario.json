@@ -949,10 +949,10 @@
       "title_en": "The verdict: four failures and how many false alarms",
       "subtitle_en": "Against the four real dates, and against the rival to beat: an ordinary threshold alarm. If the twin does not win, that is what gets published",
       "cifra": {
-        "value": "por medir",
-        "label": "días de antelación, y falsas alarmas por mes",
-        "value_en": "to be measured",
-        "label_en": "days of warning, and false alarms per month"
+        "value": "4 de 4 contra 2 de 4",
+        "label": "las averías que pilla el gemelo y las que pilla la alarma ya instalada, con la mitad de falsas",
+        "value_en": "4 of 4 against 2 of 4",
+        "label_en": "the failures the twin catches against the alarm already installed, at half the false alarms"
       },
       "accent": {
         "dark": "#D8AD90",
@@ -960,14 +960,19 @@
       },
       "instrumento": "doble-trazo",
       "interactivo": true,
-      "reto": "Mover el umbral de aviso y ver el intercambio entre antelación y falsas alarmas.",
+      "reto": "Reproducir el veredicto en una consulta: aciertos y falsas alarmas, clasificando cada día por si tuvo parte de avería.",
       "scripts": [
-        "src/twin/evaluate.py"
+        "src/twin/evaluate.py",
+        "src/figures_module28.py"
       ],
       "figuras": [
         "fig_m28_cuatro_averias",
         "fig_m28_antelacion_vs_falsas"
-      ]
+      ],
+      "tablas": {
+        "horas": "horas"
+      },
+      "reto_en": "Reproduce the verdict in one query: hits and false alarms, classifying each day by whether it had a failure report."
     },
     {
       "number": 29,

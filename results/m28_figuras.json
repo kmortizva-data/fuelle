@@ -1,0 +1,13 @@
+{
+  "barrido_dibujado": "congelado, marzo no cuenta",
+  "umbral_elegido": 1.15,
+  "detecta": 4,
+  "de": 4,
+  "falsas_por_mes": 1.5,
+  "falsas_alarmas": 12,
+  "dias_con_alarma": 18,
+  "rival_detecta": 2,
+  "rival_falsas_por_mes": 11.4,
+  "el_doble_de_averias": 2.0,
+  "la_mitad_de_falsas": 7.6
+}
