@@ -7,8 +7,8 @@ module: 23
 - Un gemelo digital no es un dibujo en tres dimensiones ni un panel bonito.
 - Es **un modelo que corre en paralelo a la máquina**, y su desacuerdo significa algo.
 - Ese desacuerdo se llama **residual**, y es lo único que un gemelo entrega.
-- Un día sano el gemelo se lleva **12 minutos** de carga con la máquina. El 18 de abril, **1.264,2**.
-- El hueco es **105,4 veces** mayor. Eso es lo que hace falta para que sirva de algo.
+- Entre los días sanos el gemelo no se separa más de **14,2 minutos** de la máquina.
+- El 18 de abril se separa **1.335,5**, que es **94 veces** ese peor caso sano.
 
 ## Qué resuelve este módulo
 
@@ -115,9 +115,10 @@ en minutos | la unidad importa: son minutos de compresor, algo que un jefe de ma
 ```
 
 ```salida
-  día sano   : la máquina 140.0 min, el gemelo 152.0, hueco -12.0
-  18 de abril: la máquina 1416.2 min, el gemelo 152.0, hueco 1264.2
-  el hueco es 105,4 veces mayor
+  día sano   : la máquina 80.8 min, el gemelo 80.7, hueco 0.2
+  los 7 días sanos completos van de 66.5 a 90.0 min, y el hueco mayor entre ellos es 14.2
+  18 de abril: la máquina 1416.2 min, el gemelo 80.7, hueco 1335.5
+  el hueco de la avería es 94,0 veces el mayor de los días sanos
 ```
 
 ## El resultado, medido
@@ -129,29 +130,39 @@ de avería.
 
 **Qué salió.** Exactamente eso, y con una distancia entre los dos casos que no deja lugar a dudas.
 
-En un día sano y completo, el 8 de marzo, la máquina cargó **140,0** minutos y el gemelo predijo
-**152,0**. Se lleva **12 minutos**, un 8,6 %, y se los lleva **de más**: el gemelo cree que la
-máquina trabajará algo más de lo que trabajó.
+En un día sano y completo, el 18 de febrero, la máquina cargó **80,8** minutos y el gemelo predijo
+**80,7**. Se llevan doce segundos.
+
+Ese acuerdo es demasiado bonito para creérselo, y hay que decir por qué. El gemelo predice lo
+mismo todos los días, y el 18 de febrero es **el día más cercano a la mediana** de los días sanos.
+O sea que se está comparando la costumbre contra el día que más se parece a la costumbre. Con
+cualquier otro día saldría peor, y eso es exactamente lo que hay que medir.
+
+**Así que el listón no sale de un día, sale de todos.** En la ventana sana hay **siete** días con
+sus 8.640 lecturas completas, y la máquina cargó entre **66,5** y **90,0** minutos en ellos. Contra
+la predicción única del gemelo, el peor de esos días se va **14,2 minutos**.
 
 El 18 de abril, la primera avería documentada, la máquina cargó **1.416,2** minutos, o sea casi el
-día entero. El gemelo, que sigue sin saber nada, predijo los mismos **152,0** de siempre.
+día entero. El gemelo, que sigue sin saber nada, predijo los mismos **80,7** de siempre.
 
-| | Un día sano | El 18 de abril |
+| | Los siete días sanos | El 18 de abril |
 |---|---|---|
-| La máquina | 140,0 min | **1.416,2 min** |
-| El gemelo | 152,0 min | 152,0 min |
-| El hueco | −12,0 min | **1.264,2 min** |
+| La máquina | de 66,5 a 90,0 min | **1.416,2 min** |
+| El gemelo | 80,7 min | 80,7 min |
+| El hueco | hasta 14,2 min | **1.335,5 min** |
 
-**105,4 veces más hueco.** Ese cociente es el que hace funcionar la idea: en condiciones normales
-el error del gemelo queda dos órdenes de magnitud por debajo de la señal a detectar.
+**94 veces el peor día sano.** Ese cociente es el que hace funcionar la idea. Y está medido contra
+el peor caso, no contra el mejor. Para poner un aviso es lo único que vale: una alarma no
+tiene que superar el día tranquilo, sino el día sano más raro.
 
-**Qué significa.** Que hay margen. Un gemelo con un 8,6 % de error no sirve para decir cuántos
-minutos exactos cargará mañana el compresor, y **no hace falta que sirva para eso**. Sirve para
-notar algo que es cien veces mayor que su propio error.
+**Qué significa.** Que hay margen. Un gemelo que puede fallar 14 minutos no sirve para decir
+cuántos minutos exactos cargará mañana el compresor, y **no hace falta que sirva para eso**. Sirve
+para notar algo noventa veces mayor que su peor error.
 
-Lo que queda por delante es de ingeniería, no de concepto. **Bajar ese 8,6 %** en el módulo 26.
-Decidir a partir de qué hueco se avisa, en el 27. Y comprobar contra las cuatro averías si el aviso
-llega a tiempo y sin despertar a nadie por nada, en el 28.
+Lo que queda por delante es de ingeniería, no de concepto. Comprobar si buscando los parámetros en
+vez de medirlos se afina algo, en el módulo 26. Decidir a partir de qué hueco se avisa, en el 27. Y
+comprobar contra las cuatro averías si el aviso llega a tiempo y sin despertar a nadie por nada, en
+el 28.
 
 ## Ojo
 
@@ -165,8 +176,13 @@ llega a tiempo y sin despertar a nadie por nada, en el 28.
   sucio es otro trabajo, y este proyecto no lo promete.
 - **Con cuatro averías no hay estadística.** Lo que va a haber en el módulo 28 es un estudio de
   cuatro casos, y así se dirá.
-- **Un gemelo se puede equivocar en la dirección cómoda.** Aquí predice de más en día sano, o sea
-  que tiende a no avisar. Conviene saberlo antes de poner un umbral.
+- **Un día sano no es un suelo de ruido.** Si mides el error del gemelo contra un solo día, y
+  encima contra el que más se parece a la media, te sale un error de doce segundos y un cociente
+  de miles. Eso no es precisión, es haber dividido por casi cero. El suelo sale del reparto.
+- **Y la ventana sana hay que mirarla, no solo elegirla por fecha.** La de este curso iba hasta el
+  15 de marzo, escogida antes de la primera avería documentada precisamente para no elegir a
+  conveniencia. Llevaba doce días de avería dentro que nadie había documentado. El módulo 26
+  cuenta cómo apareció.
 
 ## Puente metalúrgico
 
@@ -201,11 +217,14 @@ Porque entonces aprendería la avería y dejaría de extrañarse. El gemelo tien
 representando la máquina sana; su desacuerdo con la máquina de hoy es precisamente lo que se está
 midiendo.
 
-### El gemelo se equivoca un 8,6 % en un día sano. No es demasiado
+### El gemelo puede equivocarse 14 minutos en un día sano. No es demasiado
 
-Depende de contra qué. Para predecir la carga de mañana sí lo es. Para detectar algo 105 veces
-mayor que ese error, no. La pregunta útil no es cuánto se equivoca un modelo, es cuánto se equivoca
+Depende de contra qué. Para predecir la carga de mañana sí lo es. Para detectar algo 94 veces mayor
+que ese error, no. La pregunta útil no es cuánto se equivoca un modelo, es cuánto se equivoca
 comparado con lo que tiene que distinguir.
+
+Y fíjate en de dónde sale ese 14: es el **peor** de los siete días sanos, no el mejor ni el
+promedio. Un listón puesto con el mejor caso se cae el primer día raro.
 
 ### Qué NO va a poder decir este gemelo
 

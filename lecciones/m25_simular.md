@@ -143,8 +143,8 @@ escalones se van haciendo más largos y más pocos: son los ciclos que la simula
 
 {{FIG:fig_m25_ciclo_carga_vacio}}
 
-Eso es lo que hace el gemelo por dentro: la presión sube mientras carga, cruza los **10,12 bar** y
-el compresor suelta; baja despacio hasta los **8,06** y vuelve a arrancar. Un diente de sierra, y
+Eso es lo que hace el gemelo por dentro: la presión sube mientras carga, cruza los **10,10 bar** y
+el compresor suelta; baja despacio hasta los **8,05** y vuelve a arrancar. Un diente de sierra, y
 la histéresis es lo que le da los dientes.
 
 Es la única figura de este curso que dibuja la presión, y se puede porque aquí **explica el

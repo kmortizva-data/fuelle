@@ -11,10 +11,16 @@ it deserves to be.
   - how fast it empties, which is what the plant is consuming
 
 The fourth is the interesting one. Measured as an instantaneous slope over one
-ten second step it comes out **quantised by the sensor**: TP3 carries two
-decimals, so the smallest change visible in ten seconds is 0.01 bar, which is
-0.06 bar/min, and most steps land exactly there. Estimating it over a whole
-unloaded stretch instead, pressure drop divided by duration, averages that away.
+ten second step it comes out **a third below the truth**, and the reason is not
+the instrument: the smallest move TP3 ever makes is 0.001 bar, measured here
+rather than assumed, which is fine enough to see it. The reason is that the plant does not
+breathe evenly. Air goes in bursts, so most ten second steps are quieter than
+average and the median lands below the mean. Estimating it over a whole unloaded
+stretch instead, pressure drop divided by duration, averages that away.
+
+An earlier version of this file claimed the median sat exactly on the sensor's
+resolution, which it did, at 0.060 bar/min against an assumed 0.01 bar step. The
+step is five times finer than that, so the coincidence meant nothing.
 
 Run:  .venv\\Scripts\\python.exe src\\twin\\model.py
 """
@@ -35,10 +41,22 @@ PROJECT = Path(__file__).resolve().parents[2]
 SILVER = PROJECT / "lake" / "silver" / "telemetry"
 RESULTS = PROJECT / "results" / "m24_fisica.json"
 
-# La ventana sana con la que se calibra: antes de la primera avería documentada,
-# que es del 18 de abril. Se elige por fecha y no por lo tranquila que parezca,
-# para no estar escogiendo los datos que confirman el modelo.
-SANO = ("2020-02-01", "2020-03-15")
+# La ventana sana con la que se calibra. **Febrero entero, y solo febrero.**
+#
+# Iba hasta el 15 de marzo, elegida por fecha (antes de la primera avería
+# documentada, la del 18 de abril) para no estar escogiendo los datos que
+# confirman el modelo. Al calibrar en el módulo 26 se vio que no cuadraba, y la
+# razón es que **del 1 al 12 de marzo la máquina está averiada y nadie lo
+# documentó**: la carga pasa de 0,06 a 0,58, el aceite sube diez grados, la
+# corriente dobla y el 11 salta la alarma de baja presión por primera vez en
+# todo el registro. El 13 vuelve todo a lo de antes.
+#
+# Así que la ventana de calibración llevaba doce días de avería dentro. Elegir
+# por fecha protege de escoger a conveniencia, pero no de esto: hay que mirar.
+SANO = ("2020-02-01", "2020-02-29")
+
+# Y el evento que se encontró, que el curso publica como hallazgo.
+MARZO = ("2020-03-01", "2020-03-12")
 
 # Lo que promete la ficha del dataset, para poder contrastarlo.
 FICHA_ARRANQUE = 8.2
@@ -47,6 +65,11 @@ FICHA_ALARMA = 7.0
 # Un tramo de menos de dos minutos no sirve para estimar una pendiente: la
 # resolución del sensor se come la señal.
 TRAMO_MINIMO_S = 120
+
+# El registro va a una lectura cada diez segundos. Por encima de quince ya no es
+# jitter, es un hueco: hay 35 de más de una hora solo en la ventana sana, casi
+# todos de madrugada, cuando el metro no circula. Lo que pasó dentro no se sabe.
+SALTO_MAXIMO = 15
 
 
 @dataclass(frozen=True)
@@ -98,12 +121,24 @@ def _crea_tramos(con, desde: str, hasta: str) -> None:
     mediana y los vacíos 22, el filtro tiraba casi todas las cargas y ninguno de
     los vacíos. El balance de aire salía descuadrado por un factor de 2,3 y la
     culpa era del filtro, no de la máquina.
+
+    Y hay un segundo tropiezo, encontrado al calibrar en el módulo 26. La
+    duración se sacaba con `date_diff` de la primera lectura a la última, y el
+    registro **tiene huecos**: 35 de más de una hora en esta ventana, casi todos
+    de madrugada. Un tramo que salta un hueco se lleva las horas del hueco como
+    si el compresor las hubiera trabajado, y eso hunde la velocidad medida.
+
+    Así que cada tramo lleva ahora dos cosas más: los minutos contados por
+    intervalos de verdad, y una marca de si dentro hay un hueco. Lo que pasó
+    dentro del hueco no se sabe, así que esos tramos no miden nada.
     """
     con.execute(f"""
         CREATE OR REPLACE VIEW tramos AS
         WITH t AS (
           SELECT timestamp, TP3, DV_eletric,
-                 lag(DV_eletric) OVER (ORDER BY timestamp) AS antes
+                 lag(DV_eletric) OVER (ORDER BY timestamp) AS antes,
+                 date_diff('second', lag(timestamp) OVER (ORDER BY timestamp),
+                           timestamp) AS salto
           FROM p WHERE day BETWEEN DATE '{desde}' AND DATE '{hasta}'
         ), marcados AS (
           SELECT *, sum(CASE WHEN antes IS DISTINCT FROM DV_eletric THEN 1 ELSE 0 END)
@@ -111,7 +146,10 @@ def _crea_tramos(con, desde: str, hasta: str) -> None:
           FROM t
         )
         SELECT any_value(DV_eletric) AS cargando,
-               date_diff('second', min(timestamp), max(timestamp)) / 60.0 AS minutos,
+               count(*) AS lecturas,
+               (count(*) - 1) / 6.0 AS minutos,
+               date_diff('second', min(timestamp), max(timestamp)) / 60.0 AS span,
+               max(CASE WHEN salto > {SALTO_MAXIMO} THEN 1 ELSE 0 END) AS roto,
                first(TP3 ORDER BY timestamp) AS p_ini,
                last(TP3 ORDER BY timestamp) AS p_fin
         FROM marcados GROUP BY tramo
@@ -134,10 +172,19 @@ def balance(con) -> dict:
                sum(CASE WHEN cargando = 0 THEN p_ini - p_fin ELSE 0 END) AS bar_gastados,
                sum(CASE WHEN cargando = 1 THEN minutos ELSE 0 END)       AS min_cargando,
                sum(CASE WHEN cargando = 0 THEN minutos ELSE 0 END)       AS min_vacio
-        FROM tramos
+        FROM tramos WHERE roto = 0 AND lecturas > 1
     """).fetchone()
     metidos, gastados, t_carga, t_vacio = (float(v) for v in fila)
+    # Cuánto tiempo se colaba por los huecos cuando la duración salía de restar
+    # las marcas de tiempo. Va publicado porque es el tropiezo del módulo 26.
+    roto = con.sql("""
+        SELECT count(*), sum(span - minutos), sum(CASE WHEN roto = 1 THEN 1 ELSE 0 END)
+        FROM tramos
+    """).fetchone()
     return {
+        "tramos": int(roto[0]),
+        "tramos_con_hueco": int(roto[2]),
+        "minutos_que_colaban_los_huecos": round(float(roto[1]), 0),
         "bar_metidos": round(metidos, 1),
         "bar_gastados": round(gastados, 1),
         "descuadre": round(abs(metidos - gastados) / gastados, 4),
@@ -172,8 +219,26 @@ def pendientes_tipicas(con, desde: str, hasta: str) -> dict:
                median(CASE WHEN DV_eletric = 0 AND dv2 = 0 THEN -sube END)
         FROM t WHERE hueco = 10
     """).fetchone()
+    # El escalón real del sensor, medido y no supuesto: el movimiento más pequeño
+    # que TP3 llega a hacer. La primera versión daba por hecho que llevaba dos
+    # decimales, o sea 0,01 bar en diez segundos y 0,06 bar/min, y publicaba que
+    # la mediana instantánea de consumo caía justo ahí. Caía, pero de casualidad:
+    # el escalón de verdad es diez veces más fino y no explica nada.
+    escalon = float(con.sql(f"""
+        SELECT min(s) FROM (
+          SELECT abs(lead(TP3) OVER (ORDER BY timestamp) - TP3) AS s
+          FROM p WHERE day BETWEEN DATE '{desde}' AND DATE '{hasta}'
+        ) WHERE s > 1e-9
+    """).fetchone()[0])
+
     return {"llenado_mediana": round(float(fila[0]), 3),
-            "consumo_mediana": round(float(fila[1]), 4)}
+            "consumo_mediana": round(float(fila[1]), 4),
+            "escalon_del_sensor": round(escalon, 4),
+            "escalon_en_bar_min": round(escalon * 6, 4),
+            # Lo que la mediana instantánea se deja: el consumo no es parejo, va
+            # a ráfagas, así que la mitad de los pasos quedan por debajo de la
+            # media. Esto sí es la razón, y el escalón del sensor no lo era.
+            "cuantos_escalones_es_la_mediana": round(float(fila[1]) / (escalon * 6), 1)}
 
 
 def rampa(con, desde: str, hasta: str) -> list[dict]:
@@ -219,14 +284,35 @@ def mide(desde: str = SANO[0], hasta: str = SANO[1]) -> tuple[Deposito, dict]:
         SELECT avg(CASE WHEN DV_eletric = 1 THEN 1.0 ELSE 0.0 END)
         FROM p WHERE day BETWEEN DATE '{desde}' AND DATE '{hasta}'
     """).fetchone()[0])
+
+    # Cuántas veces arranca por hora. Es el segundo observable, y hace falta
+    # porque el ciclo de trabajo **no puede ver** un error de tiempo: si las dos
+    # duraciones se inflan por igual, su cociente no se mueve. Los arranques sí,
+    # porque se cuentan contra el reloj. Ese es el hueco por el que se coló el
+    # fallo de los huecos, y por eso este número está aquí ahora.
+    arranques_real = float(con.sql(f"""
+        WITH t AS (
+          SELECT DV_eletric, lag(DV_eletric) OVER (ORDER BY timestamp) AS antes
+          FROM p WHERE day BETWEEN DATE '{desde}' AND DATE '{hasta}'
+        )
+        SELECT sum(CASE WHEN antes = 0 AND DV_eletric = 1 THEN 1 ELSE 0 END)
+                   / (count(*) * 10 / 3600.0)
+        FROM t
+    """).fetchone()[0])
     con.close()
 
     deposito = Deposito(arranca=round(arranca, 2), para=round(para, 2),
                         llena=b["sube_por_minuto_cargando"], consumo=b["consumo"])
+    # Lo que el depósito tarda en subir y en bajar la banda entera, que es lo
+    # que se puede contrastar contra el reloj sin creerse nada del modelo.
+    periodo = deposito.banda / deposito.llena + deposito.banda / deposito.consumo
     contexto = {
         "ventana_sana": [desde, hasta],
         "carga_observada": round(carga_real, 4),
-        "resolucion_del_sensor": round(0.01 * 6, 2),   # 0,01 bar en 10 s
+        "arranques_por_hora_observados": round(arranques_real, 3),
+        "arranques_por_hora_que_predice": round(60 / periodo, 3),
+        "minutos_por_ciclo": round(periodo, 2),
+        "resolucion_del_sensor": tipicas["escalon_en_bar_min"],
         "ficha_arranque": FICHA_ARRANQUE,
         "ficha_alarma": FICHA_ALARMA,
         "balance": b,
@@ -277,7 +363,10 @@ def main() -> None:
           f"un {contexto['cuanto_engana_la_mediana']:.0%} de más")
     print(f"  consumo                   {deposito.consumo:>7.4f} bar/min")
     print(f"  consumo, mediana instantánea {tipicas['consumo_mediana']:>5.4f} bar/min   "
-          f"pegado a la resolución, que es {contexto['resolucion_del_sensor']:.2f}")
+          f"un {1 - tipicas['consumo_mediana'] / deposito.consumo:.0%} por debajo de la media")
+    print(f"  escalón del sensor           {tipicas['escalon_del_sensor']:>7.4f} bar   "
+          f"o sea {tipicas['escalon_en_bar_min']:.4f} bar/min, "
+          f"{tipicas['cuantos_escalones_es_la_mediana']:.0f} veces menos que la mediana")
     print()
     print(f"  carga que predice el balance {deposito.consumo / deposito.entrega:>7.4f}")
     print(f"  carga observada              {b['carga_por_tramos']:>7.4f}")
@@ -311,13 +400,33 @@ def main() -> None:
     if abs(predicha - observada) / observada > 0.05:
         raise SystemExit(f"El modelo predice una carga de {predicha:.4f} y la máquina "
                          f"hizo {observada:.4f}. No se puede publicar como gemelo.")
-    #   3. La mediana instantánea de consumo cae en la resolución del sensor. Es
-    #      un hallazgo publicado, así que si deja de ser cierto hay que mirarlo.
-    if abs(tipicas["consumo_mediana"] - contexto["resolucion_del_sensor"]) > 0.005:
+    #   2b. Y los arranques por hora, que es la comprobación que faltaba. La de
+    #      arriba comparte el error con lo que compara: si las dos duraciones se
+    #      inflan por igual, su cociente no se mueve y el guardián no ve nada.
+    #      Los arranques se cuentan contra el reloj, así que sí lo ven. Fue lo
+    #      que destapó, en el módulo 26, que los huecos del registro se estaban
+    #      contando como tiempo de compresor.
+    pred_a = contexto["arranques_por_hora_que_predice"]
+    obs_a = contexto["arranques_por_hora_observados"]
+    if abs(pred_a - obs_a) / obs_a > 0.05:
+        raise SystemExit(f"El modelo arranca {pred_a} veces por hora y la máquina "
+                         f"{obs_a}. El ciclo de trabajo no puede ver esto: mira "
+                         "las duraciones antes que el modelo.")
+    #   3. La mediana instantánea se queda corta, y **no por culpa del sensor**.
+    #      Las dos mitades van juntas a propósito: la primera es el hallazgo que
+    #      publica el módulo 24, y la segunda es la explicación que se descartó.
+    #      Si el escalón se acercara a la mediana, la culpa sí sería del sensor.
+    corta = 1 - tipicas["consumo_mediana"] / deposito.consumo
+    if corta < 0.2:
         raise SystemExit(
-            f"El consumo instantáneo ya no cae en la resolución del sensor "
-            f"({tipicas['consumo_mediana']} contra {contexto['resolucion_del_sensor']}). "
-            "El módulo 24 publica que sí: hay que remirarlo.")
+            f"La mediana instantánea de consumo ({tipicas['consumo_mediana']}) ya no "
+            f"se queda corta frente a la media ({deposito.consumo}): solo un "
+            f"{corta:.0%}. El módulo 24 publica que sí: hay que remirarlo.")
+    if tipicas["cuantos_escalones_es_la_mediana"] < 3:
+        raise SystemExit(
+            f"La mediana instantánea vale {tipicas['cuantos_escalones_es_la_mediana']} "
+            f"escalones de sensor. Tan cerca de la resolución, quien se queda corto "
+            "es el instrumento y no la máquina: el módulo 24 dice lo contrario.")
 
 
 if __name__ == "__main__":

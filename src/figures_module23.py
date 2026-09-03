@@ -37,12 +37,17 @@ PROJECT = Path(__file__).resolve().parents[1]
 SILVER = PROJECT / "lake" / "silver" / "telemetry"
 RESULTS = PROJECT / "results" / "m23_gemelo.json"
 
-# Un día sano y **completo**, con sus 8.640 lecturas. La primera versión usaba
-# el 2 de marzo, al que le faltan tres horas de registro, y comparar un día
-# incompleto contra una simulación de 24 h le regalaba minutos al gemelo.
-SANO = "2020-03-08"
+# Un día sano y **completo**, con sus 8.640 lecturas. Ha cambiado dos veces y las
+# dos por el mismo motivo, que es no mirar lo que se elige. Primero fue el 2 de
+# marzo, al que le faltan tres horas, y comparar un día incompleto contra una
+# simulación de 24 h le regalaba minutos al gemelo. Después el 8 de marzo, que sí
+# está completo pero **cae dentro de la avería no documentada de marzo** y era el
+# día más cargado de todos los candidatos: 140 min contra los 81 de la mediana.
+# Este es de febrero y es el más cercano a la mediana de los días completos.
+SANO = "2020-02-18"
 AVERIA = "2020-04-18"
 PASO = 10 / 60          # el que salió del módulo 25
+VENTANA = ("2020-02-01", "2020-02-29")   # la misma que calibra model.py
 
 
 def real(dia: str) -> list[float]:
@@ -57,6 +62,29 @@ def real(dia: str) -> list[float]:
     """).fetchall()
     con.close()
     return [float(f[0]) for f in filas]
+
+
+def dias_sanos_completos() -> list[tuple[str, float]]:
+    """Todos los días enteros de la ventana sana, con lo que cargó cada uno.
+
+    Hace falta para el suelo de ruido, y **un día suelto no sirve para eso**. La
+    primera versión medía el error del gemelo contra un único día sano y lo
+    dividía en el hueco de la avería. Con el día pegado a la mediana el hueco
+    sale de 0,2 minutos y el cociente se dispara a más de seis mil, que no es un
+    resultado: es dividir por casi cero. Lo que hay que enseñar es cuánto se
+    mueven los días sanos entre ellos, porque eso es lo que un aviso tiene que
+    superar para no sonar cada semana.
+    """
+    con = duckdb.connect()
+    filas = con.sql(f"""
+        SELECT day, sum(CASE WHEN DV_eletric = 1 THEN 1 ELSE 0 END) / 6.0 AS minutos
+        FROM read_parquet('{SILVER.as_posix()}/**/*.parquet')
+        WHERE medido AND day BETWEEN DATE '{VENTANA[0]}' AND DATE '{VENTANA[1]}'
+        GROUP BY day HAVING count(*) = 8640
+        ORDER BY day
+    """).fetchall()
+    con.close()
+    return [(str(f[0]), float(f[1])) for f in filas]
 
 
 def main() -> None:
@@ -120,16 +148,35 @@ def main() -> None:
             "hueco_minutos": round(hueco, 1),
         }
     sano, averia = payload[SANO], payload[AVERIA]
+
+    # El suelo de ruido, que sale del reparto de los días sanos y no de uno solo.
+    # El gemelo predice lo mismo todos los días, así que el hueco de cada día es
+    # lo que ese día se salió de la costumbre.
+    prediccion = sano["minutos_del_gemelo"]
+    completos = [{"dia": d, "minutos": round(m, 1),
+                  "hueco_minutos": round(m - prediccion, 1)}
+                 for d, m in dias_sanos_completos()]
+    peor = max(abs(d["hueco_minutos"]) for d in completos)
+    payload["dias_sanos_completos"] = completos
+    payload["cuantos_dias_sanos"] = len(completos)
+    payload["hueco_sano_mayor"] = round(peor, 1)
+    payload["minutos_sanos_min"] = round(min(d["minutos"] for d in completos), 1)
+    payload["minutos_sanos_max"] = round(max(d["minutos"] for d in completos), 1)
+    # El listón de verdad: la avería contra el PEOR día sano, no contra el mejor.
     payload["veces_mas_hueco_en_la_averia"] = round(
-        abs(averia["hueco_minutos"]) / max(abs(sano["hueco_minutos"]), 0.1), 1)
+        abs(averia["hueco_minutos"]) / peor, 1)
     with io.open(RESULTS, "w", encoding="utf-8") as fh:
         json.dump(payload, fh, ensure_ascii=False, indent=2)
 
     print(f"  día sano   : la máquina {sano['minutos_reales']} min, "
           f"el gemelo {sano['minutos_del_gemelo']}, hueco {sano['hueco_minutos']}")
+    print(f"  los {len(completos)} días sanos completos van de "
+          f"{payload['minutos_sanos_min']} a {payload['minutos_sanos_max']} min, "
+          f"y el hueco mayor entre ellos es {payload['hueco_sano_mayor']}")
     print(f"  18 de abril: la máquina {averia['minutos_reales']} min, "
           f"el gemelo {averia['minutos_del_gemelo']}, hueco {averia['hueco_minutos']}")
-    print(f"  el hueco es {es(payload['veces_mas_hueco_en_la_averia'], 1)} veces mayor")
+    print(f"  el hueco de la avería es {es(payload['veces_mas_hueco_en_la_averia'], 1)} "
+          f"veces el mayor de los días sanos")
 
 
 if __name__ == "__main__":

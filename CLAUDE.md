@@ -815,6 +815,71 @@ anunciado. Eso no lo miraba nadie.
 **`un_dia` se lleva ahora TP3**, en vez de publicar otra muestra: un día de presión son unos 9 KB y
 un fichero nuevo repetiría el `timestamp`, que es la columna cara. Pasa de 43 a 61 KB.
 
+### Hallazgo grande de la parte 6b (2026-09-03): la ventana sana no estaba sana
+
+Calibrar el gemelo en el módulo 26 destapó tres cosas encadenadas, y las tres cambian números ya
+publicados en los módulos 23, 24 y 25. El orden en que salieron importa, porque cada una tapaba
+a la siguiente.
+
+**1. Los huecos del registro se contaban como tiempo de compresor.** `_crea_tramos` medía la
+duración de cada tramo con `date_diff` de la primera lectura a la última, y el registro tiene
+huecos: 35 de más de una hora solo en la ventana vieja, casi todos de madrugada. Un tramo que
+salta un hueco se llevaba las horas del hueco. **92 tramos se tragaban 4.906 minutos**, o sea 82
+horas de compresor que nunca existieron. En la ventana nueva, febrero solo, son **28 tramos y
+3.129 minutos**, que es la cifra que publica el módulo 24. Eso hundía las dos velocidades por igual.
+
+**Y el guardián que había no podía verlo.** Comparaba el ciclo de trabajo predicho contra el
+observado, y el ciclo de trabajo es un cociente: si las dos duraciones se inflan por el mismo
+factor, no se mueve. Por eso ahora hay un guardián más, **los arranques por hora**, que se cuentan
+contra el reloj y sí lo ven. Con los parámetros viejos fallaba un 15,4 % y nadie miraba.
+
+**2. Del 1 al 12 de marzo de 2020 la máquina está averiada, y no está documentado.** Al arreglar
+lo anterior los parámetros seguían sin cuadrar, y mirando día a día salió esto:
+
+| | 20 al 28 de febrero | 1 al 12 de marzo | 16 al 20 de marzo |
+|---|---|---|---|
+| carga | 0,049 a 0,067 | 0,116 a **0,581** | 0,068 a 0,077 |
+| arranques por hora | 1,66 a 2,21 | 2,71 a **5,00** | 1,96 a 2,40 |
+| aceite | 54 a 57 °C | 61 a **69 °C** | 53 a 57 °C |
+| corriente del motor | 1,05 a 1,37 A | 1,78 a **3,91 A** | 1,23 a 1,38 A |
+| alarma LPS | 0 | salta el 11 y el 12 | ~0 |
+
+Cuatro señales independientes, y el 13 vuelve todo a lo de antes. **La ventana de calibración del
+proyecto (1 de febrero al 15 de marzo) llevaba doce días de avería dentro.** Elegir la ventana por
+fecha, que es lo que se hizo para no escoger a conveniencia, protege de una cosa pero no de esta.
+
+**La ventana sana pasa a ser febrero entero, y solo febrero.** `SANO = ("2020-02-01",
+"2020-02-29")`, y el evento de marzo se publica como hallazgo del curso.
+
+**3. La resolución de TP3 no es 0,01 bar, es 0,001**, medida y no supuesta. El módulo 24 publicaba
+que la mediana instantánea de consumo caía «en la resolución del sensor» (0,060 contra 0,06).
+Caía, pero de casualidad: el escalón de verdad es diez veces más fino. La mediana sí se queda
+corta, un **32 %** por debajo de la media, y la razón es otra: **el consumo va a ráfagas**, así que
+la mitad de los pasos de diez segundos son más tranquilos que la media.
+
+**Los parámetros, antes y después:**
+
+| | Publicado en 6a | Medido ahora | Por qué cambia |
+|---|---|---|---|
+| arranca / para | 8,06 / 10,12 bar | 8,05 / 10,10 bar | solo la ventana |
+| sube por minuto cargando | 0,6735 | **1,1796** | los huecos y marzo |
+| consumo | 0,0806 | **0,0711** | los huecos y marzo |
+| entrega | 0,7541 | **1,2507** | |
+| descuadre del balance | 0,8 % | 0,7 % | sigue cuadrando |
+| carga predicha contra observada | 0,1069 / 0,1076 | 0,0568 / 0,0572 | |
+| arranques por hora, predichos / observados | 2,00 / 2,363 (15,4 %) | 1,833 / 2,031 (9,7 %) | el guardián nuevo |
+| lo que engaña la mediana de llenado | 53 % | **6 %** | era casi todo el fallo de los huecos |
+| paso más grande que aún vale (módulo 25) | 10 s | **5 s** | la máquina llena más rápido |
+
+**Y el día sano del módulo 23 ha cambiado dos veces**, las dos por no mirar lo que se elegía:
+primero el 2 de marzo (le faltan tres horas), después el 8 de marzo (completo, pero dentro de la
+avería de marzo y el más cargado de los candidatos, 140 min contra 81 de mediana). Ahora es el
+**18 de febrero**, el día completo más cercano a la mediana de febrero.
+
+**Ojo con el cociente del módulo 23.** Con el día de la mediana el hueco sale de 0,2 min y el
+cociente contra el 18 de abril se dispara a 6.677, que es un artefacto de dividir por casi cero.
+El suelo de ruido tiene que salir del **reparto de los días sanos**, no de un día elegido.
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo

@@ -5,10 +5,11 @@ module: 24
 ## En 30 segundos
 
 - Un depósito que se llena y se vacía, y un interruptor con memoria. No hay más.
-- La ficha promete que arranca a **8,2 bar** y arranca a 8,06: **8,2 contra 8,06**.
-- Los dos parámetros del modelo salen de un **balance de aire** que cuadra al **0,8 %**.
-- Y con ellos el modelo predice una carga de **0,1069** cuando la máquina hizo **0,1076**.
-- Ojo con la mediana: da un llenado **un 53 % mayor** que el que el compresor consigue.
+- La ficha promete que arranca a **8,2 bar** y arranca a 8,05: **8,2 contra 8,05**.
+- Los dos parámetros del modelo salen de un **balance de aire** que cuadra al **0,7 %**.
+- Y con ellos el modelo predice una carga de **0,0568** cuando la máquina hizo **0,0572**.
+- Ojo con los huecos del registro: **28 tramos** se tragaban **3.129 minutos** de compresor
+  que nunca existieron.
 
 ## Qué resuelve este módulo
 
@@ -125,9 +126,9 @@ median(TP3) | la presión típica en ese momento. La mediana y no la media, porq
 └─────────┴─────────┘
 ```
 
-**La ficha dice 8,2 y la máquina arranca a 8,06.** Es el módulo 1 otra vez, y la ficha no está
+**La ficha dice 8,2 y la máquina arranca a 8,05.** Es el módulo 1 otra vez, y la ficha no está
 equivocada: un presostato real tiene tolerancia, e importa el que está montado en este tren. La
-presión de parada la ficha no la da, y son **10,12**.
+presión de parada la ficha no la da, y son **10,10**.
 
 ### Paso 6. El balance, que es lo que valida la medida
 
@@ -195,20 +196,23 @@ variable que el control sostiene, y por eso no cuenta nada.
 cualquiera de las que sube.
 
 **Qué salió.** Que no hay un ritmo, hay una rampa. Los primeros diez segundos la presión sube
-**0,516 bar/min**, porque el motor está arrancando y es la corriente de 9 A que la ficha menciona.
-Después pica en **1,5** y a partir de ahí **cae** según se llena el depósito y empuja hacia atrás.
+**0,804 bar/min**, porque el motor está arrancando y es la corriente de 9 A que la ficha menciona.
+Después pica en **1,608** y a partir de ahí **cae** según se llena el depósito y empuja hacia
+atrás.
 
-Y de ahí sale el aviso del módulo. La **mediana instantánea** de esas pendientes es **1,032
-bar/min**, y lo que el compresor consigue de verdad por minuto cargando es **0,6735**. Un **53 %**
-de diferencia, y la mediana es la que sale si uno mide sin pensar.
+La **mediana instantánea** de esas pendientes es **1,248 bar/min**, y lo que el compresor consigue
+de verdad por minuto cargando es **1,1796**. Un **5,8 %** de diferencia, y la mediana es la que
+sale si uno mide sin pensar.
 
-**No es un detalle.** Un modelo montado sobre la mediana predice una carga de **0,0724**, o sea
-un **32,7 %** por debajo de lo que la máquina hizo. Con la media por minuto:
+**Cuesta menos de lo que parece, y conviene decirlo así.** Un modelo montado sobre la mediana
+predice una carga de **0,0539**, un **5,8 %** por debajo de lo que la máquina hizo. La rampa es
+real y la mediana es la medida equivocada, pero el precio de equivocarse aquí es pequeño. Con la
+media por minuto:
 
 | Qué | Valor |
 |---|---|
-| Carga que predice el modelo | **0,1069** |
-| Carga que hizo la máquina | **0,1076** |
+| Carga que predice el modelo | **0,0568** |
+| Carga que hizo la máquina | **0,0572** |
 | Se llevan | 0,7 % |
 
 **Qué significa.** Que el gemelo ya existe, y que sus dos parámetros no se tocaron para hacerlo
@@ -216,11 +220,11 @@ cuadrar. Se midieron por separado, se comprobó el balance de aire, y la predicc
 
 ## Ojo
 
-- **Una mediana de pendientes no es una tasa media.** Aquí se llevan un 53 %, y la buena para un
+- **Una mediana de pendientes no es una tasa media.** Aquí se llevan un 5,8 %, y la buena para un
   ciclo de trabajo es la media por minuto, porque lo que cuenta es el aire total.
 - **Filtra con cuidado.** Descartar tramos cortos parecía prudente y tiraba casi todas las cargas,
   que duran 1,8 minutos. El balance salía descuadrado por un factor de 2,3 por culpa del filtro.
-- **La ficha del fabricante es una pista, no un dato.** Dice 8,2 y son 8,06. Un presostato tiene
+- **La ficha del fabricante es una pista, no un dato.** Dice 8,2 y son 8,05. Un presostato tiene
   tolerancia, y se modela la pieza montada.
 - **El consumo instantáneo no se puede medir a diez segundos.** TP3 trae dos decimales, así que el
   cambio más pequeño visible son 0,01 bar, o sea 0,06 bar/min. La mediana instantánea de consumo
@@ -264,7 +268,7 @@ GROUP BY momento
 ORDER BY momento;
 ```
 
-Un solo día da **8,04** y **10,13**, contra los 8,06 y 10,12 de seis semanas. Con treinta y una
+Un solo día da **8,04** y **10,13**, contra los 8,05 y 10,10 de un mes entero. Con treinta y una
 transiciones ya se ve la banda entera: el presostato es de las cosas más estables que tiene esta
 máquina.
 
@@ -284,16 +288,26 @@ hace falta simular nada para saberlo.
 
 ### Por qué la mediana de las pendientes de llenado no sirve
 
-Porque el compresor no llena a ritmo constante. Arranca despacio, unos 0,5 bar/min los primeros
-diez segundos, pica en 1,5 y va cayendo según sube la presión. La mediana coge el tramo bueno del
-medio y sale un 53 % por encima de su media por minuto, que es la cifra que mueve el aire.
+Porque el compresor no llena a ritmo constante. Arranca despacio, unos 0,8 bar/min los primeros
+diez segundos, pica en 1,6 y va cayendo según sube la presión. La mediana coge el tramo bueno del
+medio y sale un 5,8 % por encima de su media por minuto, que es la cifra que mueve el aire.
+
+Y hay que decir la otra mitad: un 5,8 % es poco. La mediana es la medida equivocada por una razón
+que se entiende, pero en esta máquina te habría costado barato. La versión anterior de esta
+lección publicaba aquí un 53 %, y ese número era casi todo un fallo de medida propio, no de la
+mediana. Está contado en el módulo 26.
 
 ### Qué comprobación decide si estos parámetros valen
 
-Que el aire cuadre. Sobre seis semanas entraron 4.159,7 bar y salieron 4.127,6, un 0,8 % de
+Que el aire cuadre. Sobre febrero entero entraron 2.311,7 bar y salieron 2.295,0, un 0,7 % de
 diferencia. Sin ese cierre, dos números medidos por separado no son un modelo, son dos números.
 
-### La ficha dice 8,2 bar y tú publicas 8,06. Quién se equivoca
+Y hay una segunda comprobación que este módulo no tenía y ahora sí: **cuántas veces arranca por
+hora**. Hace falta porque el balance no puede verlo todo. Si las dos duraciones se midieran mal
+por el mismo factor, el ciclo de trabajo es un cociente y no se enteraría; los arranques se
+cuentan contra el reloj y sí. Pasó, y lo cuenta el módulo 26.
+
+### La ficha dice 8,2 bar y tú publicas 8,05. Quién se equivoca
 
 Ninguno de los dos. La ficha describe el modelo de presostato y los datos describen la pieza
 montada en este tren, con su tolerancia y su desgaste. Para un gemelo de esta máquina manda la

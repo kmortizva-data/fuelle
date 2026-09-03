@@ -1,14 +1,55 @@
 {
   "paso_s": 10.0,
-  "2020-03-08": {
-    "minutos_reales": 140.0,
-    "minutos_del_gemelo": 152.0,
-    "hueco_minutos": -12.0
+  "2020-02-18": {
+    "minutos_reales": 80.8,
+    "minutos_del_gemelo": 80.7,
+    "hueco_minutos": 0.2
   },
   "2020-04-18": {
     "minutos_reales": 1416.2,
-    "minutos_del_gemelo": 152.0,
-    "hueco_minutos": 1264.2
+    "minutos_del_gemelo": 80.7,
+    "hueco_minutos": 1335.5
   },
-  "veces_mas_hueco_en_la_averia": 105.4
+  "dias_sanos_completos": [
+    {
+      "dia": "2020-02-03",
+      "minutos": 75.5,
+      "hueco_minutos": -5.2
+    },
+    {
+      "dia": "2020-02-04",
+      "minutos": 88.8,
+      "hueco_minutos": 8.1
+    },
+    {
+      "dia": "2020-02-15",
+      "minutos": 81.2,
+      "hueco_minutos": 0.5
+    },
+    {
+      "dia": "2020-02-16",
+      "minutos": 66.5,
+      "hueco_minutos": -14.2
+    },
+    {
+      "dia": "2020-02-18",
+      "minutos": 80.8,
+      "hueco_minutos": 0.1
+    },
+    {
+      "dia": "2020-02-21",
+      "minutos": 80.5,
+      "hueco_minutos": -0.2
+    },
+    {
+      "dia": "2020-02-22",
+      "minutos": 90.0,
+      "hueco_minutos": 9.3
+    }
+  ],
+  "cuantos_dias_sanos": 7,
+  "hueco_sano_mayor": 14.2,
+  "minutos_sanos_min": 66.5,
+  "minutos_sanos_max": 90.0,
+  "veces_mas_hueco_en_la_averia": 94.0
 }
