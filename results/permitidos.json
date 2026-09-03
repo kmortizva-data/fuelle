@@ -126,5 +126,13 @@
   },
   "m20_esquema_en": {
     "2019": "the year the impossible foreign key write is aimed at, chosen for being outside the record. A choice of the experiment, not a measurement"
+  },
+  "m27_residual": {
+    "1800": "el ejemplo de juguete del depósito de agua: 180 min de bomba a 10 l/min. Números elegidos para que la resta salga a mano",
+    "1200": "la resta del mismo ejemplo de juguete, 1.800 menos 600"
+  },
+  "m27_residual_en": {
+    "1800": "the toy water tank example: 180 min of pump at 10 l/min, chosen so the subtraction works by hand",
+    "1200": "the subtraction in the same toy example, 1,800 minus 600"
   }
 }

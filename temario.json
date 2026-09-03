@@ -916,10 +916,10 @@
       "title_en": "The residual gives the leak away",
       "subtitle_en": "Pressure does not change, because the control loop holds it. What changes is how hard the compressor works to hold it, and that difference does show",
       "cifra": {
-        "value": "por medir",
-        "label": "cuánto se separan gemelo y realidad en la fuga",
-        "value_en": "to be measured",
-        "label_en": "how far twin and reality part during the leak"
+        "value": "0,1165 contra 1,1796",
+        "label": "lo más alto que llega una hora sana, y donde el residual se topa en avería",
+        "value_en": "0.1165 against 1.1796",
+        "label_en": "the highest a healthy hour ever gets, and where the residual pins in failure"
       },
       "accent": {
         "dark": "#D7AE8B",
@@ -927,13 +927,18 @@
       },
       "instrumento": "doble-trazo",
       "interactivo": true,
-      "reto": "Mover el caudal de fuga y ver a partir de qué tamaño el gemelo la nota.",
+      "reto": "Calcular el residual hora a hora y contar cuántas horas de cada día con parte pasan del suelo de ruido.",
       "scripts": [
-        "src/twin/residual.py"
+        "src/twin/residual.py",
+        "src/figures_module27.py"
       ],
       "figuras": [
         "fig_m27_residual"
-      ]
+      ],
+      "reto_en": "Compute the residual hour by hour and count how many hours of each reported day cross the noise floor.",
+      "tablas": {
+        "horas": "horas"
+      }
     },
     {
       "number": 28,

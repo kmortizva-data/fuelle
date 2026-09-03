@@ -1,0 +1,26 @@
+{
+  "horas_dibujadas": 3924,
+  "dias_con_referencia": 206,
+  "suelo": 0.1165,
+  "techo": 1.1796,
+  "sobre_la_tendencia_en_los_partes": [
+    {
+      "dia": "2020-04-18",
+      "sobre": 1.0631
+    },
+    {
+      "dia": "2020-05-29",
+      "sobre": 0.5368
+    },
+    {
+      "dia": "2020-06-05",
+      "sobre": 0.8182
+    },
+    {
+      "dia": "2020-07-15",
+      "sobre": 1.0169
+    }
+  ],
+  "sobre_la_tendencia_mediana": 0.0052,
+  "sobre_la_tendencia_p95": 1.0475
+}

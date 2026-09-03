@@ -37,12 +37,12 @@
         1.0
       ],
       [
-        "2020-08-03",
+        "2020-08-17",
         8.096,
         1.0
       ],
       [
-        "2020-08-17",
+        "2020-08-03",
         8.096,
         1.0
       ],
@@ -393,6 +393,37 @@
     ],
     "sql": "SELECT round(avg(CASE WHEN DV_eletric = 1 THEN 1.0 ELSE 0.0 END), 4) AS carga, round(sum(CASE WHEN antes = 0 AND DV_eletric = 1 THEN 1 ELSE 0 END) / (count(*) * 10 / 3600.0), 2) AS arranques_por_hora FROM (SELECT DV_eletric, lag(DV_eletric) OVER (ORDER BY timestamp) AS antes FROM telemetria WHERE day = DATE '2020-06-05')",
     "muestra": "un_dia"
+  },
+  "m27_horas_sobre_el_suelo": {
+    "columns": [
+      "dia",
+      "horas",
+      "residual_maximo"
+    ],
+    "rows": [
+      [
+        "2020-04-18",
+        24,
+        1.1796
+      ],
+      [
+        "2020-05-29",
+        4,
+        0.8704
+      ],
+      [
+        "2020-06-05",
+        15,
+        1.1796
+      ],
+      [
+        "2020-07-15",
+        24,
+        1.1796
+      ]
+    ],
+    "sql": "SELECT hora::DATE AS dia, count(*) FILTER (WHERE carga * 1.2507 - 0.0711 > 0.1165) AS horas, round(max(carga * 1.2507 - 0.0711), 4) AS residual_maximo FROM horas WHERE lecturas >= 300 AND hora::DATE IN (DATE '2020-04-18', DATE '2020-05-29', DATE '2020-06-05', DATE '2020-07-15') GROUP BY 1 ORDER BY 1",
+    "muestra": "horas"
   },
   "m25_cuanto_dura": {
     "columns": [

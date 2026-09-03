@@ -45,6 +45,7 @@ MUESTRA_DE = {
     "m24_la_banda": "un_dia",
     "m25_cuanto_dura": "un_dia",
     "m26_los_dos_observables": "un_dia",
+    "m27_horas_sobre_el_suelo": "horas",
 }
 
 SECONDS_PER_READING = 10
@@ -213,6 +214,20 @@ CHALLENGES = {
         FROM (SELECT DV_eletric,
                      lag(DV_eletric) OVER (ORDER BY timestamp) AS antes
               FROM telemetria WHERE day = DATE '2020-06-05')
+    """,
+    # Modulo 27: el residual, calculado a mano sobre la muestra horaria. El
+    # lector escribe la formula entera y cuenta cuantas horas de cada dia de
+    # parte pasan del suelo de ruido de febrero. Tres de los cuatro dias tocan
+    # el techo, y eso tambien se ve aqui.
+    "m27_horas_sobre_el_suelo": """
+        SELECT hora::DATE AS dia,
+               count(*) FILTER (WHERE carga * 1.2507 - 0.0711 > 0.1165) AS horas,
+               round(max(carga * 1.2507 - 0.0711), 4) AS residual_maximo
+        FROM horas
+        WHERE lecturas >= 300
+          AND hora::DATE IN (DATE '2020-04-18', DATE '2020-05-29',
+                             DATE '2020-06-05', DATE '2020-07-15')
+        GROUP BY 1 ORDER BY 1
     """,
     # Modulo 25: cuanto dura cada carga y cada vacio. Es lo que la simulacion
     # tiene que reproducir, y contarlo a mano da la vara de medir.

@@ -310,6 +310,14 @@ TRADUCCIONES: dict[str, str] = {
     "febrero y marzo de 2020": "February and March 2020",
     "acaba la\nventana de ahora": "the window used now\nends here",
     "acababa la\nde antes": "the old one\nended here",
+    # Módulo 27: el residual sobre los siete meses, leído de dos formas.
+    "residual congelado, bar/min": "frozen residual, bar/min",
+    "sobre los 14 días previos": "above the previous 14 days",
+    "de febrero a agosto de 2020": "February to August 2020",
+    "el suelo de febrero": "February's floor",
+    "el techo: el compresor no para": "the ceiling: the compressor never stops",
+    "los cuatro partes de avería": "the four failure reports",
+    "marzo, doce días sin parte": "March, twelve days with no report",
 }
 
 # Etiquetas construidas con f-strings: llevan un número dentro, así que no se

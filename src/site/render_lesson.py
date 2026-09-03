@@ -468,6 +468,24 @@ def _traza(serie: list[float], techo: float) -> str:
     return " ".join(trozos)
 
 
+def _pie(plantilla: str, pos: dict, coma: str) -> str:
+    """El pie de la perilla ya escrito, para que se lea sin JavaScript.
+
+    Rellena las mismas claves que `perilla.js`, y por eso las dos listas tienen
+    que decir lo mismo: si divergen, la página servida y la que resulta de mover
+    el mando dirían cosas distintas en la misma posición.
+    """
+    texto = plantilla.replace(
+        "{carga}", _numero(round(pos["carga"] * 100, 1), coma)).replace(
+        "{arranques}", str(pos["arranques"]))
+    for clave, valor in pos.items():
+        if clave == "trazo":
+            continue
+        pieza = _numero(valor, coma) if isinstance(valor, (int, float)) else str(valor)
+        texto = texto.replace("{" + clave + "}", pieza)
+    return texto
+
+
 def _numero(v: float | int, coma: str) -> str:
     """El número tal como se escribe en el idioma de la página."""
     return str(v).replace(".", coma) if coma != "." else str(v)
@@ -515,7 +533,11 @@ def perilla_block(lines: list[str]) -> str:
         ruta += "?v=" + hashlib.sha256(fichero.read_bytes()).hexdigest()[:8]
     etiqueta = html.escape(datos["etiqueta"])
     unidad = html.escape(datos["unidad"])
-    plantilla = ui("perilla_nota")
+    # El pie de la perilla. Casi todas dicen lo mismo, cuánto carga y cuántas
+    # veces arranca, pero una perilla puede traer el suyo si lo que enseña es
+    # otra cosa: la del módulo 27 mueve una fuga y lo que importa es el residual.
+    # Viene bilingüe en el JSON, porque el fichero lo comparten las dos ediciones.
+    plantilla = datos.get("nota", {}).get(_lang) or ui("perilla_nota")
     # El separador decimal viaja con la página. Sin él, la edición española
     # escribía «0.12 bar/min» y «15.3 %» en cuanto se movía el mando, porque los
     # números los arma el JavaScript y no `es()`.
@@ -538,7 +560,7 @@ def perilla_block(lines: list[str]) -> str:
         f'<output class="perilla-valor">{_numero(inicial["valor"], coma)} {unidad}</output>'
         f"</label></div>"
         f'<p class="perilla-nota" data-plantilla="{html.escape(plantilla)}">'
-        f'{html.escape(plantilla.format(carga=_numero(round(inicial["carga"] * 100, 1), coma), arranques=inicial["arranques"]))}</p>'
+        f"{html.escape(_pie(plantilla, inicial, coma))}</p>"
         f'<p class="perilla-referencia-nota">{inline(ui("perilla_referencia").format(valor=_numero(referencia["valor"], coma), unidad=unidad))}</p>'
         f"</figure>"
     )

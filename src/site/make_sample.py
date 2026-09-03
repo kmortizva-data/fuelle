@@ -209,7 +209,7 @@ def write_por_hora(con: duckdb.DuckDBPyConnection) -> list[dict]:
                     "kb_on_disk": round(target.stat().st_size / 1024, 1),
                     "kb_downloaded": round(gzipped_size(target) / 1024, 1),
                     "recorta_filas": False,
-                    "para": "módulo 15: cruzar fuentes de distinta frecuencia"})
+                    "para": "módulos 15, 17, 27 y 28: cruzar fuentes de distinta frecuencia, y el residual"})
     return out
 
 

@@ -135,7 +135,7 @@ def _crea_tramos(con, desde: str, hasta: str) -> None:
     con.execute(f"""
         CREATE OR REPLACE VIEW tramos AS
         WITH t AS (
-          SELECT timestamp, TP3, DV_eletric,
+          SELECT timestamp, day, TP3, DV_eletric,
                  lag(DV_eletric) OVER (ORDER BY timestamp) AS antes,
                  date_diff('second', lag(timestamp) OVER (ORDER BY timestamp),
                            timestamp) AS salto
@@ -146,6 +146,7 @@ def _crea_tramos(con, desde: str, hasta: str) -> None:
           FROM t
         )
         SELECT any_value(DV_eletric) AS cargando,
+               any_value(day) AS day,
                count(*) AS lecturas,
                (count(*) - 1) / 6.0 AS minutos,
                date_diff('second', min(timestamp), max(timestamp)) / 60.0 AS span,

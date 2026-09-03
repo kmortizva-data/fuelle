@@ -59,9 +59,19 @@
       trazo.setAttribute("d", traza(pos.trazo, ancho, alto, margen, techo));
       salida.textContent = numero(pos.valor) + " " + datos.unidad;
       if (nota) {
-        nota.textContent = nota.getAttribute("data-plantilla")
+        // La plantilla puede pedir cualquier campo numerico de la posicion, y
+        // no solo la carga y los arranques. El modulo 27 necesita el residual,
+        // que no es ni una cosa ni la otra, y anadir un caso por perilla
+        // acabaria en una lista que hay que tocar en cada modulo nuevo.
+        var texto = nota.getAttribute("data-plantilla")
           .replace("{carga}", numero((pos.carga * 100).toFixed(1)))
           .replace("{arranques}", pos.arranques);
+        for (var clave in pos) {
+          if (!pos.hasOwnProperty(clave) || clave === "trazo") continue;
+          texto = texto.split("{" + clave + "}").join(
+            typeof pos[clave] === "number" ? numero(pos[clave]) : pos[clave]);
+        }
+        nota.textContent = texto;
       }
     }
 
