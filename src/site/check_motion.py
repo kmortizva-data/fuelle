@@ -7,7 +7,7 @@ propio movimiento. Y una de ellas ni siquiera tenía quien la leyera: el campo
 `instrumento` está declarado en los 31 módulos de `temario.json` y no lo usaba
 ningún script.
 
-Las tres, y cada una se prueba rompiéndola:
+Empezó con tres reglas y ya son cinco. Cada una se prueba rompiéndola:
 
   1. **Estado final sin JavaScript.** Toda pieza interactiva tiene que dejar algo
      legible cuando el JavaScript no llega. La consulta viva imprime su SQL en un
@@ -15,6 +15,10 @@ Las tres, y cada una se prueba rompiéndola:
   2. **`prefers-reduced-motion`.** Lo que se mueve se para si el sistema lo pide.
   3. **Un instrumento por lección**, el que declara `temario.json`. La regla existe
      para que el curso no acabe siendo tres cursos pegados.
+  4. **Lo que el temario promete de interacción está.** Una lección declarada
+     interactiva tiene que traer con qué interactuar.
+  5. **Los datos de cada perilla llevan su huella en la URL**, o una caché vieja
+     dibuja el trazo contra un techo que no es el suyo. Pasó en el módulo 24.
 
 Correr:  .venv\\Scripts\\python.exe src\\site\\check_motion.py
 """
@@ -32,6 +36,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 PROJECT = Path(__file__).resolve().parents[2]
 LESSONS = PROJECT / "lecciones"
 TEMPLATES = Path(__file__).resolve().parent / "templates"
+OUT = PROJECT / "out"
 TEMARIO = PROJECT / "temario.json"
 
 # Los tres instrumentos del curso son el grafo del lago, la carátula de la cifra
@@ -154,10 +159,33 @@ def revisa_movimiento_reducido() -> list[str]:
     return problemas
 
 
+def revisa_huella_de_las_perillas() -> list[str]:
+    """Que los datos de cada perilla lleven su huella en la URL.
+
+    Es la cuarta regla y la más aburrida, y viene de un fallo de verdad. El techo
+    del eje va escrito en el HTML y las series las trae el navegador de un JSON
+    aparte. Si el JSON se queda en la caché y la página no, el trazo se dibuja
+    contra un techo que no es el suyo: en el módulo 24, seis de las veintiuna
+    posiciones se salían por arriba del marco y se recortaban.
+
+    Nadie lo habría visto desde aquí. Solo se ve moviendo el mando con una caché
+    vieja delante, que es exactamente lo que le pasa a quien vuelve a la página.
+    """
+    problemas = []
+    for pagina in sorted(OUT.glob("m[0-9][0-9]_*.html")):
+        texto = io.open(pagina, encoding="utf-8").read()
+        for fuente in re.findall(r'data-perilla="([^"]+)"', texto):
+            if "?v=" not in fuente:
+                problemas.append(
+                    f"{pagina.name}: la perilla apunta a «{fuente}» sin huella. "
+                    "Un lector con la caché vieja vería el trazo contra otro techo.")
+    return problemas
+
+
 def main() -> None:
     temario = json.loads(io.open(TEMARIO, encoding="utf-8").read())
     problemas = (revisa_estado_final() + revisa_movimiento_reducido()
-                 + revisa_lecciones(temario))
+                 + revisa_lecciones(temario) + revisa_huella_de_las_perillas())
 
     con_perilla = sum(1 for ruta in sorted(LESSONS.glob("m[0-9][0-9]_*.md"))
                       if instrumentos_de(io.open(ruta, encoding="utf-8").read()))

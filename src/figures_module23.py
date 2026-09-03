@@ -46,8 +46,23 @@ RESULTS = PROJECT / "results" / "m23_gemelo.json"
 # Este es de febrero y es el más cercano a la mediana de los días completos.
 SANO = "2020-02-18"
 AVERIA = "2020-04-18"
-PASO = 10 / 60          # el que salió del módulo 25
+PASO = 5 / 60           # el que salió del módulo 25
 VENTANA = ("2020-02-01", "2020-02-29")   # la misma que calibra model.py
+
+
+# El registro va a una lectura cada diez segundos y el gemelo corre a `PASO`, que
+# desde el módulo 25 es más fino. Si se le dan tantos pasos como lecturas, el
+# gemelo vive **la mitad del reloj** y se queda corto sin que sea culpa suya.
+SEGUNDOS_POR_LECTURA = 10
+
+
+def traza_del_gemelo(dep, lecturas: int, paso: float) -> list[float]:
+    """Los minutos cargando del gemelo, en el mismo reloj que las lecturas."""
+    minutos = lecturas * SEGUNDOS_POR_LECTURA / 60
+    trabajo = avanza(dep, dep.consumo, minutos, paso)["trabajo"]
+    cada = SEGUNDOS_POR_LECTURA / 60 / paso
+    return [trabajo[min(int(round(i * cada)), len(trabajo) - 1)]
+            for i in range(lecturas)]
 
 
 def real(dia: str) -> list[float]:
@@ -98,10 +113,9 @@ def main() -> None:
         # El gemelo corre con el consumo de la ventana sana, SIEMPRE. No sabe que
         # hay una fuga, y por eso el día de avería se queda corto: esa distancia
         # es la que el módulo 27 va a convertir en un aviso.
-        simulado = avanza(dep, dep.consumo, len(medido) * PASO, PASO)["trabajo"]
-        n = min(len(medido), len(simulado))
+        simulado = traza_del_gemelo(dep, len(medido), PASO)
         dias.append({"dia": dia, "titulo": titulo,
-                     "medido": medido[:n], "simulado": simulado[:n]})
+                     "medido": medido, "simulado": simulado})
 
     def dibujar(fig, ax, c) -> None:
         pass  # esta figura lleva dos paneles, así que se dibuja a mano
@@ -114,7 +128,8 @@ def main() -> None:
             fig, ejes = plt.subplots(1, 2, figsize=(9.2, 3.2), sharey=True,
                                      gridspec_kw={"wspace": 0.08})
             for ax, d in zip(ejes, dias):
-                horas = [i * PASO / 60 for i in range(len(d["medido"]))]
+                horas = [i * SEGUNDOS_POR_LECTURA / 3600
+                         for i in range(len(d["medido"]))]
                 ax.fill_between(horas, d["simulado"], d["medido"],
                                 color=col["accent"], alpha=0.16, zorder=2)
                 ax.plot(horas, d["medido"], color=col["measured"], linewidth=1.8,

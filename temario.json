@@ -794,9 +794,9 @@
       "title_en": "What a digital twin is, and what it is not",
       "subtitle_en": "Not a three dimensional drawing nor a pretty dashboard. It is a model running alongside the machine, whose disagreement means something",
       "cifra": {
-        "value": "94 veces",
+        "value": "95 veces",
         "label": "más grande el hueco del día de avería que el del peor día sano",
-        "value_en": "94 times",
+        "value_en": "95 times",
         "label_en": "bigger the gap on the failure day than on the worst healthy day"
       },
       "accent": {
@@ -882,10 +882,10 @@
       "title_en": "Calibrating: parameters come from the data",
       "subtitle_en": "Receiver volume and compressor flow are not invented. They are searched for until the twin breathes like the original, and then you declare where it fails",
       "cifra": {
-        "value": "por medir",
-        "label": "error del gemelo en periodo sano",
-        "value_en": "to be measured",
-        "label_en": "twin error over a healthy period"
+        "value": "1,18 contra 1,27",
+        "label": "lo que sube el depósito por minuto: medido, y buscado por ajuste sin mirar la medida",
+        "value_en": "1.18 against 1.27",
+        "label_en": "how fast the receiver rises per minute: measured, and searched for without looking at the measurement"
       },
       "accent": {
         "dark": "#D6AF87",
@@ -893,14 +893,19 @@
       },
       "instrumento": "doble-trazo",
       "interactivo": true,
-      "reto": "Mover los parámetros a mano y tratar de bajar el error por debajo del que encontró el ajuste automático.",
+      "reto": "Sacar de una sola consulta las dos cosas contra las que se calibra el gemelo: el ciclo de trabajo y los arranques por hora.",
       "scripts": [
-        "src/twin/calibrate.py"
+        "src/twin/calibrate.py",
+        "src/twin/ventana_sana.py",
+        "src/figures_module26.py"
       ],
       "figuras": [
         "fig_m26_ajuste",
-        "fig_m26_gemelo_vs_real_sano"
-      ]
+        "fig_m26_gemelo_vs_real_sano",
+        "fig_m26_ventana_sucia"
+      ],
+      "reto_en": "Get both of the things the twin is calibrated against out of one query: the duty cycle and the starts per hour.",
+      "muestra": "un_dia"
     },
     {
       "number": 27,

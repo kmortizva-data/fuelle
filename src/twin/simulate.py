@@ -160,6 +160,57 @@ def perilla_consumo(dep: Deposito) -> dict:
     }
 
 
+# El valle del módulo 26: se mueve la entrega y **se mantiene el cociente**, o
+# sea que la carga no cambia. Veintiuna posiciones, como las demás perillas.
+ENTREGAS_DEL_VALLE = [round(0.80 + 0.045 * i, 4) for i in range(21)]
+
+
+def perilla_valle(dep: Deposito) -> dict:
+    """Módulo 26: recorrer el valle y ver que el trabajo no se entera.
+
+    Es la lección del módulo hecha perilla. Todos estos pares de parámetros dan
+    **la misma carga**, porque la carga solo depende del cociente, así que el
+    trazo de trabajo acumulado apenas se mueve. Lo que sí se mueve, y mucho, es
+    cuántas veces arranca: de un puñado a decenas. Por eso hace falta un segundo
+    observable para separarlos, y por eso el ajuste sobre la carga sola no tiene
+    una respuesta sino un valle entero de respuestas.
+    """
+    # Ocho horas y no cuatro: en el extremo lento del valle el ciclo dura casi
+    # una hora, y con pocos ciclos dentro la carga sale ruidosa por el ciclo a
+    # medias del final. La perilla tiene que enseñar que la carga NO se mueve,
+    # así que hay que darle sitio para que no se mueva por otra razón.
+    minutos = 8 * 60
+    paso = 1 / 60           # fino, porque las entregas altas ciclan muy rápido
+    cociente = dep.consumo / dep.entrega
+    base = avanza(dep, dep.consumo, minutos, paso)
+    series = []
+    for entrega in ENTREGAS_DEL_VALLE:
+        consumo = round(entrega * cociente, 5)
+        otro = Deposito(arranca=dep.arranca, para=dep.para,
+                        llena=entrega - consumo, consumo=consumo)
+        r = avanza(otro, consumo, minutos, paso)
+        series.append({
+            "valor": entrega,
+            "trazo": recorta(r["trabajo"], PUNTOS_DEL_TRAZO),
+            "carga": round(r["carga"], 4),
+            "arranques": r["arranques"],
+        })
+    return {
+        "titulo": "el valle: los mismos minutos de trabajo, con máquinas distintas",
+        "etiqueta": "entrega",
+        "unidad": "bar/min",
+        "eje": "minutos cargando, acumulados",
+        "horas": minutos / 60,
+        "referencia": {
+            "valor": round(dep.entrega, 4),
+            "trazo": recorta(base["trabajo"], PUNTOS_DEL_TRAZO),
+            "carga": round(base["carga"], 4),
+            "arranques": base["arranques"],
+        },
+        "posiciones": series,
+    }
+
+
 def perilla_paso(dep: Deposito) -> dict:
     """Módulo 25: mover el paso de tiempo y ver cuándo la simulación se rompe."""
     minutos = 4 * 60
@@ -225,7 +276,8 @@ def main() -> None:
     # --- Las dos perillas ------------------------------------------------
     PERILLAS.mkdir(parents=True, exist_ok=True)
     for nombre, datos in (("m24_consumo", perilla_consumo(dep)),
-                          ("m25_paso", perilla_paso(dep))):
+                          ("m25_paso", perilla_paso(dep)),
+                          ("m26_valle", perilla_valle(dep))):
         destino = PERILLAS / f"{nombre}.json"
         with io.open(destino, "w", encoding="utf-8") as fh:
             json.dump(datos, fh, ensure_ascii=False, separators=(",", ":"))
@@ -242,6 +294,13 @@ def main() -> None:
         "arranques_del_patron": tabla[0]["arranques"],
         "paso_mas_grande_que_vale": mayor,
         "ritmo_del_registro_s": 10,
+        # La fase corta del ciclo, que es contra lo que hay que medir el paso: de
+        # nada sirve compararlo con el reloj del registro, que hace otro trabajo.
+        "minutos_de_carga": round(dep.banda / dep.llena, 2),
+        "minutos_de_vacio": round(dep.banda / dep.consumo, 2),
+        # Y lo que un paso de diez segundos se pasa de largo antes de mirar si ya
+        # cruzó, que es por lo que pierde ciclos.
+        "cuanto_se_pasa_con_10s": round(10 / 60 * dep.llena, 2),
         "paso_patron_s": round(PASO_FINO * 60, 1),
         "pasos": tabla,
     }

@@ -37,12 +37,12 @@
         1.0
       ],
       [
-        "2020-08-17",
+        "2020-08-03",
         8.096,
         1.0
       ],
       [
-        "2020-08-03",
+        "2020-08-17",
         8.096,
         1.0
       ],
@@ -378,6 +378,20 @@
       ]
     ],
     "sql": "SELECT CASE WHEN antes = 0 THEN 'arranca' ELSE 'para' END AS momento, count(*) AS veces, round(median(TP3), 2) AS presion FROM (SELECT TP3, DV_eletric, lag(DV_eletric) OVER (ORDER BY timestamp) AS antes FROM telemetria WHERE day = DATE '2020-06-05') WHERE antes IS NOT NULL AND antes <> DV_eletric GROUP BY momento ORDER BY momento",
+    "muestra": "un_dia"
+  },
+  "m26_los_dos_observables": {
+    "columns": [
+      "carga",
+      "arranques_por_hora"
+    ],
+    "rows": [
+      [
+        0.6363,
+        1.28
+      ]
+    ],
+    "sql": "SELECT round(avg(CASE WHEN DV_eletric = 1 THEN 1.0 ELSE 0.0 END), 4) AS carga, round(sum(CASE WHEN antes = 0 AND DV_eletric = 1 THEN 1 ELSE 0 END) / (count(*) * 10 / 3600.0), 2) AS arranques_por_hora FROM (SELECT DV_eletric, lag(DV_eletric) OVER (ORDER BY timestamp) AS antes FROM telemetria WHERE day = DATE '2020-06-05')",
     "muestra": "un_dia"
   },
   "m25_cuanto_dura": {

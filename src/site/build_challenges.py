@@ -44,6 +44,7 @@ MUESTRA_DE = {
     "m20_quien_la_rompe": "sql",
     "m24_la_banda": "un_dia",
     "m25_cuanto_dura": "un_dia",
+    "m26_los_dos_observables": "un_dia",
 }
 
 SECONDS_PER_READING = 10
@@ -199,6 +200,19 @@ CHALLENGES = {
         WHERE antes IS NOT NULL AND antes <> DV_eletric
         GROUP BY momento
         ORDER BY momento
+    """,
+    # Modulo 26: las DOS cosas contra las que se calibra el gemelo, en una sola
+    # consulta. El ciclo de trabajo solo fija el cociente de los parametros; los
+    # arranques por hora son lo que fija su escala. Sacarlos a mano es entender
+    # por que hacen falta los dos, y de paso ver que el 5 de junio no se parece
+    # nada a febrero: es uno de los cuatro dias con parte de averia.
+    "m26_los_dos_observables": """
+        SELECT round(avg(CASE WHEN DV_eletric = 1 THEN 1.0 ELSE 0.0 END), 4) AS carga,
+               round(sum(CASE WHEN antes = 0 AND DV_eletric = 1 THEN 1 ELSE 0 END)
+                         / (count(*) * 10 / 3600.0), 2) AS arranques_por_hora
+        FROM (SELECT DV_eletric,
+                     lag(DV_eletric) OVER (ORDER BY timestamp) AS antes
+              FROM telemetria WHERE day = DATE '2020-06-05')
     """,
     # Modulo 25: cuanto dura cada carga y cada vacio. Es lo que la simulacion
     # tiene que reproducir, y contarlo a mano da la vara de medir.

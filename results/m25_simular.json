@@ -8,6 +8,9 @@
   "arranques_del_patron": 15,
   "paso_mas_grande_que_vale": 5,
   "ritmo_del_registro_s": 10,
+  "minutos_de_carga": 1.74,
+  "minutos_de_vacio": 28.83,
+  "cuanto_se_pasa_con_10s": 0.2,
   "paso_patron_s": 0.1,
   "pasos": [
     {

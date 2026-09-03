@@ -67,7 +67,7 @@ SHIPPED = {
     "un_dia": {
         "columns": ["timestamp", "day", "DV_eletric", "COMP", "Motor_current", "TP3"],
         "where": f"day = DATE '{ONE_DAY}'",
-        "para": "módulos 13, 24 y 25: ventanas, y la física del depósito",
+        "para": "módulos 13, 24, 25 y 26: ventanas, y la física del depósito",
         "por_que": ("comparar con la fila de al lado exige la hora exacta, y la hora "
                     "cuesta 5,16 MB si se lleva el lago entero. Un día son 43 KB. "
                     "TP3 se le añadió para la parte 6 en vez de publicar otra muestra: "

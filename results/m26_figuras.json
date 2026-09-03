@@ -1,0 +1,14 @@
+{
+  "semana": [
+    "2020-02-16",
+    "2020-02-22"
+  ],
+  "paso_s": 5.0,
+  "minutos_de_la_maquina": 497.2,
+  "minutos_del_gemelo_medido": 528.5,
+  "minutos_del_gemelo_ajustado": 536.7,
+  "hueco_del_medido": -31.3,
+  "hueco_del_ajustado": -39.5,
+  "se_separan_entre_ellos": 8.2,
+  "se_separan_pct": 1.6
+}

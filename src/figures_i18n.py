@@ -295,6 +295,21 @@ TRADUCCIONES: dict[str, str] = {
     "minutos cargando, acumulados": "minutes loaded, cumulative",
     "mirando solo la línea,\n30 s parece el mejor de todos":
         "going by the line alone,\n30 s looks like the best of them",
+    # Módulo 26: las tres superficies, el doble trazo de la semana y la ventana.
+    "ajustando la carga": "fitting the duty cycle",
+    "ajustando los arranques": "fitting the starts",
+    "ajustando las dos cosas": "fitting both",
+    "empatan con el mejor": "tie with the best",
+    "el mejor": "the best",
+    "lo que se midió": "what was measured",
+    "consumo, bar/min": "consumption, bar/min",
+    "entrega, bar/min": "delivery, bar/min",
+    "días de registro de la semana": "days of record in the week",
+    "ciclo de trabajo": "duty cycle",
+    "arranques por hora": "starts per hour",
+    "febrero y marzo de 2020": "February and March 2020",
+    "acaba la\nventana de ahora": "the window used now\nends here",
+    "acababa la\nde antes": "the old one\nended here",
 }
 
 # Etiquetas construidas con f-strings: llevan un número dentro, así que no se

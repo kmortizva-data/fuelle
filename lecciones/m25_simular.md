@@ -5,7 +5,7 @@ module: 25
 ## En 30 segundos
 
 - Simular es avanzar el modelo a trocitos de tiempo. El tamaño del trocito **decide el resultado**.
-- Se barre el paso y se compara todo contra el más fino. El que aún vale es **10 s**.
+- Se barre el paso y se compara todo contra el más fino. El que aún vale es **5 s**.
 - Que son, ni más ni menos, **el ritmo al que el propio registro toma sus lecturas**.
 - Y el criterio no puede ser el ciclo de trabajo: con paso de 30 s parece perfecto.
 - Ya ha perdido **2 ciclos de 16**. Contar ciclos no se puede equivocar así.
@@ -114,17 +114,17 @@ se_parece | el criterio: los mismos arranques que el patrón. Ni parecidos, los 
 ```
 
 ```salida
-    paso patrón s   carga 0.1020   arranques  16   error de carga 0.00000
-    paso    0.1 s   carga 0.1020   arranques  16   error de carga 0.00000
-    paso    0.5 s   carga 0.1022   arranques  16   error de carga 0.00022
-    paso      1 s   carga 0.1022   arranques  16   error de carga 0.00022
-    paso      2 s   carga 0.1022   arranques  16   error de carga 0.00022
-    paso      5 s   carga 0.1028   arranques  16   error de carga 0.00078
-    paso     10 s   carga 0.1056   arranques  16   error de carga 0.00356
-    paso     20 s   carga 0.1042   arranques  15   error de carga 0.00217   pierde 1 ciclos
-    paso     30 s   carga 0.1021   arranques  14   error de carga 0.00008   pierde 2 ciclos
-    paso     60 s   carga 0.1083   arranques  13   error de carga 0.00633   pierde 3 ciclos
-    paso    120 s   carga 0.1083   arranques  13   error de carga 0.00633   pierde 3 ciclos
+    paso patrón s   carga 0.0543   arranques  15   error de carga 0.00000
+    paso    0.1 s   carga 0.0543   arranques  15   error de carga 0.00000
+    paso    0.5 s   carga 0.0544   arranques  15   error de carga 0.00010
+    paso      1 s   carga 0.0547   arranques  15   error de carga 0.00036
+    paso      2 s   carga 0.0552   arranques  15   error de carga 0.00089
+    paso      5 s   carga 0.0547   arranques  15   error de carga 0.00036
+    paso     10 s   carga 0.0535   arranques  14   error de carga 0.00085   pierde 1 ciclos
+    paso     20 s   carga 0.0542   arranques  13   error de carga 0.00016   pierde 2 ciclos
+    paso     30 s   carga 0.0542   arranques  13   error de carga 0.00016   pierde 2 ciclos
+    paso     60 s   carga 0.0542   arranques  13   error de carga 0.00016   pierde 2 ciclos
+    paso    120 s   carga 0.0542   arranques  13   error de carga 0.00016   pierde 2 ciclos
 ```
 
 Lee la columna del error de carga de arriba abajo y luego la de arranques. **Una sube y baja; la
@@ -167,16 +167,21 @@ ahora en una simulación.
 
 Contando ciclos no pasa eso:
 
-| Paso | Ciclos de 16 | ¿Vale? |
+| Paso | Ciclos de 15 | ¿Vale? |
 |---|---|---|
-| 0,1 a 10 s | 16 | sí |
-| 20 s | 15 | no |
-| 30 s | 14 | no |
-| 60 y 120 s | 13 | no |
+| 0,1 a 5 s | 15 | sí |
+| 10 s | 14 | no |
+| 20 a 120 s | 13 | no |
 
-**El paso más grande que aún vale es 10 s.** Y ese número no es arbitrario: es exactamente **el
-ritmo al que el registro de este compresor toma sus lecturas**. La simulación necesita mirar tan a
-menudo como mira el sensor, ni más ni menos, y eso no se sabía antes de medirlo.
+**El paso más grande que aún vale es 5 s**, la mitad de lo que tarda el registro entre lectura y
+lectura. Y tiene sentido que sea más fino, porque son dos trabajos distintos. El registro solo
+tiene que **ver** los ciclos. La simulación tiene que **cerrarlos**.
+
+Cada paso avanza la presión y luego mira si ha cruzado. Con diez segundos se pasa de largo hasta
+0,2 bar, o sea la décima parte de la banda.
+
+Contra qué compararlo para que no sea un número suelto: la fase corta del ciclo, que es la carga,
+dura **1,74 minutos**. El paso bueno es una veinteava parte de eso.
 
 **Qué significa.** Que el paso no se elige, se mide. Y **la magnitud con la que se mide importa
 más que el umbral**: con el ciclo de trabajo, dos minutos habría parecido suficiente.
@@ -192,7 +197,10 @@ más que el umbral**: con el ciclo de trabajo, dos minutos habría parecido sufi
 - **Un paso fino no es gratis.** El patrón de este módulo da una vuelta por cada décima de
   segundo de las ocho horas. Para un turno da igual; para los escenarios del gemelo, no.
 - **Euler se salta los umbrales.** Mueve el estado y luego mira. Hay métodos que detectan el cruce
-  y retroceden, y aquí no hacen falta porque con 10 s ya se resuelve todo.
+  y retroceden, y aquí no hacen falta porque con 5 s ya se resuelve todo.
+- **Si la máquina se hace más rápida, el paso tiene que bajar.** Este barrido se rehízo cuando los
+  parámetros del módulo 24 se corrigieron, y el paso bueno pasó de 10 s a 5. No se corrigió a
+  mano: se volvió a correr.
 - **Esto vale para el consumo de este compresor.** Con un consumo cinco veces mayor los ciclos son
   cinco veces más cortos y el paso bueno bajaría. La prueba se repite si cambia el régimen.
 
@@ -257,17 +265,23 @@ medio no ocurre. La simulación no sale aproximada: sale de otra máquina.
 ### Por qué el ciclo de trabajo es mal juez de la convergencia
 
 Porque sus errores se compensan. Cada arranque que se pierde alarga un vacío y acorta una carga, y
-la media apenas se mueve. Aquí, con paso de 30 s el error del ciclo era el más pequeño de la tabla
-y ya se habían perdido dos ciclos de dieciséis.
+la media apenas se mueve. Aquí, con paso de 30 s el error del ciclo era de los más pequeños de la
+tabla y ya se habían perdido dos ciclos de quince.
 
 ### Cuál es entonces el criterio
 
 Contar sucesos, que aquí son los arranques. Un arranque ocurre o no ocurre, así que no hay forma de
 que un error tape a otro. Con ese criterio la degradación es monótona y la frontera queda clara.
 
-### El paso bueno resultó ser 10 s, el mismo del registro. Casualidad
+### El paso bueno es más fino que el registro. Por qué
 
-No del todo. El registro se muestrea a 10 s porque a ese ritmo se ve lo que hace esta máquina, y la
-simulación necesita exactamente lo mismo para resolver sus ciclos. Dicho eso, es una coincidencia
-numérica que hay que comprobar y no dar por hecha: con otro consumo, los ciclos serían más cortos y
-el paso bueno bajaría.
+Porque son dos trabajos distintos. El registro solo tiene que **ver** los ciclos, y una carga de
+1,74 minutos se ve de sobra con una lectura cada diez segundos.
+
+La simulación tiene que **cerrarlos**. Avanza la presión un paso entero y solo después mira si ha
+cruzado la presión de parada. Con diez segundos se pasa de largo hasta 0,2 bar, y un ciclo de
+quince se le escapa.
+
+Una versión anterior de esta lección publicaba aquí que el paso bueno coincidía con el del
+registro, y le buscaba un sentido. Coincidía, y el sentido era inventado: al corregir los
+parámetros del módulo 24 la coincidencia se deshizo sola.

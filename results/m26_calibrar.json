@@ -54,6 +54,7 @@
   "sube_medido": 1.1796,
   "sube_ajustado": 1.272,
   "el_ajuste_infla_el_llenado": 0.078,
+  "el_ajuste_infla_el_llenado_pct": 7.8,
   "puntos_de_la_rejilla": 1023,
   "entregas": [
     0.6,

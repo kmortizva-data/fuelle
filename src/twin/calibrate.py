@@ -226,6 +226,10 @@ def main() -> None:
         "sube_medido": medido.llena,
         "sube_ajustado": sube_ajustado,
         "el_ajuste_infla_el_llenado": round(sube_ajustado / medido.llena - 1, 3),
+        # En tanto por ciento, porque es como se cita en la prosa y la puerta
+        # de números compara la cifra escrita y no la fracción.
+        "el_ajuste_infla_el_llenado_pct": round(
+            (sube_ajustado / medido.llena - 1) * 100, 1),
         "puntos_de_la_rejilla": len(ENTREGAS) * len(CONSUMOS),
         "entregas": ENTREGAS,
         "consumos": CONSUMOS,

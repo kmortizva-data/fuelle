@@ -503,7 +503,16 @@ def perilla_block(lines: list[str]) -> str:
                    key=lambda i: abs(posiciones[i]["valor"] - referencia["valor"]))
     inicial = posiciones[arranque]
 
+    # La huella del contenido en la URL, igual que en las figuras, y por la misma
+    # razón elevada al cuadrado. El techo del eje va escrito en el HTML y las
+    # series las trae el JavaScript de este fichero: si el navegador se queda con
+    # una copia vieja del JSON y una página nueva, el trazo se dibuja contra un
+    # techo que no es el suyo y **se sale del marco**. Pasó de verdad al corregir
+    # los parámetros del módulo 24: seis de las veintiuna posiciones se salían.
     ruta = f"assets/perillas/{nombre}.json"
+    fichero = ROOT / ruta
+    if fichero.exists():
+        ruta += "?v=" + hashlib.sha256(fichero.read_bytes()).hexdigest()[:8]
     etiqueta = html.escape(datos["etiqueta"])
     unidad = html.escape(datos["unidad"])
     plantilla = ui("perilla_nota")

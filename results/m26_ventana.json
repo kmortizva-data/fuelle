@@ -1,0 +1,554 @@
+{
+  "desde": "2020-02-01",
+  "hasta": "2020-03-22",
+  "ventana_vieja": [
+    "2020-02-01",
+    "2020-03-15"
+  ],
+  "ventana_nueva": [
+    "2020-02-01",
+    "2020-02-29"
+  ],
+  "evento": [
+    "2020-03-01",
+    "2020-03-12"
+  ],
+  "mediana_de_febrero": 0.0617,
+  "liston": 0.1234,
+  "dias_raros": [
+    "2020-03-02",
+    "2020-03-03",
+    "2020-03-04",
+    "2020-03-05",
+    "2020-03-06",
+    "2020-03-07",
+    "2020-03-09",
+    "2020-03-10",
+    "2020-03-11",
+    "2020-03-12"
+  ],
+  "cuantos_dias_raros": 10,
+  "tramos": {
+    "febrero, la ventana nueva": {
+      "dias": 28,
+      "carga": [
+        0.0461,
+        0.0781
+      ],
+      "arranques": [
+        1.58,
+        2.42
+      ],
+      "aceite": [
+        53.9,
+        59.2
+      ],
+      "corriente": [
+        1.0,
+        1.5
+      ],
+      "lps_maximo": 0.0002
+    },
+    "del 1 al 12 de marzo": {
+      "dias": 12,
+      "carga": [
+        0.0972,
+        0.5808
+      ],
+      "arranques": [
+        1.46,
+        5.0
+      ],
+      "aceite": [
+        60.7,
+        69.2
+      ],
+      "corriente": [
+        1.78,
+        3.91
+      ],
+      "lps_maximo": 0.0208
+    },
+    "del 13 al 22 de marzo": {
+      "dias": 10,
+      "carga": [
+        0.0676,
+        0.1136
+      ],
+      "arranques": [
+        1.96,
+        2.77
+      ],
+      "aceite": [
+        53.5,
+        62.0
+      ],
+      "corriente": [
+        1.23,
+        1.8
+      ],
+      "lps_maximo": 0.0108
+    }
+  },
+  "huecos_de_la_ventana_vieja": {
+    "de_mas_de_una_hora": 35,
+    "minutos_sin_registro": 10162.0
+  },
+  "huecos_de_la_ventana_nueva": {
+    "de_mas_de_una_hora": 20,
+    "minutos_sin_registro": 4829.0
+  },
+  "dias": [
+    {
+      "dia": "2020-02-01",
+      "lecturas": 7082,
+      "carga": 0.0611,
+      "arranques": 2.03,
+      "aceite": 55.7,
+      "corriente": 1.3,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-02",
+      "lecturas": 6970,
+      "carga": 0.066,
+      "arranques": 2.17,
+      "aceite": 55.8,
+      "corriente": 1.38,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-03",
+      "lecturas": 8640,
+      "carga": 0.0524,
+      "arranques": 1.79,
+      "aceite": 56.1,
+      "corriente": 1.14,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-04",
+      "lecturas": 8640,
+      "carga": 0.0617,
+      "arranques": 1.96,
+      "aceite": 55.0,
+      "corriente": 1.24,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-05",
+      "lecturas": 7371,
+      "carga": 0.0688,
+      "arranques": 2.25,
+      "aceite": 57.0,
+      "corriente": 1.42,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-06",
+      "lecturas": 4897,
+      "carga": 0.0596,
+      "arranques": 1.98,
+      "aceite": 56.7,
+      "corriente": 1.25,
+      "lps": 0.0002
+    },
+    {
+      "dia": "2020-02-07",
+      "lecturas": 6990,
+      "carga": 0.069,
+      "arranques": 2.21,
+      "aceite": 59.0,
+      "corriente": 1.39,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-08",
+      "lecturas": 8612,
+      "carga": 0.0781,
+      "arranques": 2.42,
+      "aceite": 58.6,
+      "corriente": 1.5,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-09",
+      "lecturas": 7215,
+      "carga": 0.0656,
+      "arranques": 2.0,
+      "aceite": 58.0,
+      "corriente": 1.3,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-10",
+      "lecturas": 7403,
+      "carga": 0.0586,
+      "arranques": 1.85,
+      "aceite": 55.8,
+      "corriente": 1.2,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-11",
+      "lecturas": 7366,
+      "carga": 0.0649,
+      "arranques": 2.05,
+      "aceite": 56.1,
+      "corriente": 1.3,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-12",
+      "lecturas": 7288,
+      "carga": 0.0648,
+      "arranques": 2.07,
+      "aceite": 59.2,
+      "corriente": 1.3,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-13",
+      "lecturas": 7462,
+      "carga": 0.0662,
+      "arranques": 2.12,
+      "aceite": 59.0,
+      "corriente": 1.32,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-14",
+      "lecturas": 6870,
+      "carga": 0.0672,
+      "arranques": 2.1,
+      "aceite": 58.7,
+      "corriente": 1.32,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-15",
+      "lecturas": 8640,
+      "carga": 0.0564,
+      "arranques": 1.79,
+      "aceite": 56.7,
+      "corriente": 1.12,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-16",
+      "lecturas": 8640,
+      "carga": 0.0462,
+      "arranques": 1.58,
+      "aceite": 55.6,
+      "corriente": 1.0,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-17",
+      "lecturas": 7031,
+      "carga": 0.0498,
+      "arranques": 1.69,
+      "aceite": 55.6,
+      "corriente": 1.08,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-18",
+      "lecturas": 8640,
+      "carga": 0.0561,
+      "arranques": 1.83,
+      "aceite": 55.8,
+      "corriente": 1.15,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-19",
+      "lecturas": 7163,
+      "carga": 0.0461,
+      "arranques": 1.61,
+      "aceite": 55.7,
+      "corriente": 1.0,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-20",
+      "lecturas": 7051,
+      "carga": 0.0562,
+      "arranques": 1.89,
+      "aceite": 55.7,
+      "corriente": 1.2,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-21",
+      "lecturas": 8640,
+      "carga": 0.0559,
+      "arranques": 1.79,
+      "aceite": 55.0,
+      "corriente": 1.14,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-22",
+      "lecturas": 8640,
+      "carga": 0.0625,
+      "arranques": 2.0,
+      "aceite": 55.9,
+      "corriente": 1.27,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-23",
+      "lecturas": 7042,
+      "carga": 0.0656,
+      "arranques": 2.04,
+      "aceite": 56.6,
+      "corriente": 1.34,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-24",
+      "lecturas": 5841,
+      "carga": 0.0491,
+      "arranques": 1.66,
+      "aceite": 53.9,
+      "corriente": 1.05,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-25",
+      "lecturas": 8639,
+      "carga": 0.0594,
+      "arranques": 1.96,
+      "aceite": 54.4,
+      "corriente": 1.22,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-26",
+      "lecturas": 7179,
+      "carga": 0.0591,
+      "arranques": 1.91,
+      "aceite": 55.4,
+      "corriente": 1.25,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-27",
+      "lecturas": 8391,
+      "carga": 0.0669,
+      "arranques": 2.15,
+      "aceite": 55.3,
+      "corriente": 1.37,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-02-28",
+      "lecturas": 8623,
+      "carga": 0.0671,
+      "arranques": 2.21,
+      "aceite": 55.0,
+      "corriente": 1.37,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-01",
+      "lecturas": 7200,
+      "carga": 0.1161,
+      "arranques": 3.05,
+      "aceite": 64.0,
+      "corriente": 2.04,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-02",
+      "lecturas": 7504,
+      "carga": 0.1638,
+      "arranques": 3.98,
+      "aceite": 66.2,
+      "corriente": 2.62,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-03",
+      "lecturas": 7189,
+      "carga": 0.171,
+      "arranques": 3.91,
+      "aceite": 65.4,
+      "corriente": 2.67,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-04",
+      "lecturas": 8591,
+      "carga": 0.1273,
+      "arranques": 3.23,
+      "aceite": 64.4,
+      "corriente": 2.18,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-05",
+      "lecturas": 8615,
+      "carga": 0.1646,
+      "arranques": 3.51,
+      "aceite": 65.4,
+      "corriente": 2.49,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-06",
+      "lecturas": 7492,
+      "carga": 0.2284,
+      "arranques": 3.7,
+      "aceite": 67.1,
+      "corriente": 2.95,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-07",
+      "lecturas": 3016,
+      "carga": 0.1545,
+      "arranques": 2.75,
+      "aceite": 60.7,
+      "corriente": 2.11,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-08",
+      "lecturas": 8640,
+      "carga": 0.0972,
+      "arranques": 2.71,
+      "aceite": 62.0,
+      "corriente": 1.78,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-09",
+      "lecturas": 7437,
+      "carga": 0.1464,
+      "arranques": 2.86,
+      "aceite": 63.0,
+      "corriente": 2.11,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-10",
+      "lecturas": 8005,
+      "carga": 0.1639,
+      "arranques": 3.55,
+      "aceite": 61.7,
+      "corriente": 2.48,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-11",
+      "lecturas": 5181,
+      "carga": 0.2382,
+      "arranques": 5.0,
+      "aceite": 65.3,
+      "corriente": 2.72,
+      "lps": 0.0166
+    },
+    {
+      "dia": "2020-03-12",
+      "lecturas": 8129,
+      "carga": 0.5808,
+      "arranques": 1.46,
+      "aceite": 69.2,
+      "corriente": 3.91,
+      "lps": 0.0208
+    },
+    {
+      "dia": "2020-03-13",
+      "lecturas": 8624,
+      "carga": 0.091,
+      "arranques": 2.5,
+      "aceite": 60.5,
+      "corriente": 1.6,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-14",
+      "lecturas": 6928,
+      "carga": 0.107,
+      "arranques": 2.75,
+      "aceite": 62.0,
+      "corriente": 1.8,
+      "lps": 0.0039
+    },
+    {
+      "dia": "2020-03-15",
+      "lecturas": 3714,
+      "carga": 0.1136,
+      "arranques": 2.52,
+      "aceite": 59.1,
+      "corriente": 1.75,
+      "lps": 0.0108
+    },
+    {
+      "dia": "2020-03-16",
+      "lecturas": 7010,
+      "carga": 0.0725,
+      "arranques": 2.05,
+      "aceite": 53.5,
+      "corriente": 1.29,
+      "lps": 0.003
+    },
+    {
+      "dia": "2020-03-17",
+      "lecturas": 8476,
+      "carga": 0.07,
+      "arranques": 2.08,
+      "aceite": 56.3,
+      "corriente": 1.26,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-18",
+      "lecturas": 8640,
+      "carga": 0.0683,
+      "arranques": 1.96,
+      "aceite": 57.3,
+      "corriente": 1.23,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-19",
+      "lecturas": 7601,
+      "carga": 0.0676,
+      "arranques": 2.18,
+      "aceite": 57.5,
+      "corriente": 1.24,
+      "lps": 0.0
+    },
+    {
+      "dia": "2020-03-20",
+      "lecturas": 6302,
+      "carga": 0.0773,
+      "arranques": 2.4,
+      "aceite": 56.0,
+      "corriente": 1.38,
+      "lps": 0.0017
+    },
+    {
+      "dia": "2020-03-21",
+      "lecturas": 8183,
+      "carga": 0.1009,
+      "arranques": 2.77,
+      "aceite": 60.7,
+      "corriente": 1.68,
+      "lps": 0.0006
+    },
+    {
+      "dia": "2020-03-22",
+      "lecturas": 8640,
+      "carga": 0.0976,
+      "arranques": 2.58,
+      "aceite": 61.4,
+      "corriente": 1.59,
+      "lps": 0.0
+    }
+  ],
+  "dias_de_la_ventana_vieja": 43
+}
