@@ -794,10 +794,10 @@
       "title_en": "What a digital twin is, and what it is not",
       "subtitle_en": "Not a three dimensional drawing nor a pretty dashboard. It is a model running alongside the machine, whose disagreement means something",
       "cifra": {
-        "value": "por medir",
-        "label": "qué tiene que acertar el gemelo para servir",
-        "value_en": "to be measured",
-        "label_en": "what the twin must get right to be useful"
+        "value": "105,4 veces",
+        "label": "más grande el hueco entre gemelo y máquina el día de la avería que un día sano",
+        "value_en": "105.4 times",
+        "label_en": "wider the gap between twin and machine on the failure day than on a healthy one"
       },
       "accent": {
         "dark": "#CFB47E",
@@ -806,7 +806,10 @@
       "instrumento": "doble-trazo",
       "interactivo": false,
       "reto": null,
-      "scripts": [],
+      "scripts": [
+        "src/twin/model.py",
+        "src/twin/simulate.py"
+      ],
       "figuras": [
         "fig_m23_gemelo_y_residual"
       ]
@@ -820,10 +823,10 @@
       "title_en": "Compressor physics: receiver, pressure switch and motor",
       "subtitle_en": "A vessel that fills and empties, a switch that fires at 8.2 bar, and a motor drawing different current depending on what it is doing. Nothing more",
       "cifra": {
-        "value": "8,2 bar",
-        "label": "el umbral que arranca el compresor",
-        "value_en": "8.2 bar",
-        "label_en": "the threshold that starts the compressor"
+        "value": "8,2 contra 8,06",
+        "label": "lo que promete la ficha y lo que arranca el compresor de verdad",
+        "value_en": "8.2 against 8.06",
+        "label_en": "what the datasheet promises and what actually starts the compressor"
       },
       "accent": {
         "dark": "#D2B280",
@@ -831,13 +834,14 @@
       },
       "instrumento": "doble-trazo",
       "interactivo": true,
-      "reto": "Calcular a mano cuánto tarda el depósito en bajar de 8,2 bar con un consumo dado.",
+      "reto": "Medir tú la banda del presostato, con las transiciones de un día.",
       "scripts": [
         "src/twin/model.py"
       ],
       "figuras": [
         "fig_m24_balance_del_deposito"
-      ]
+      ],
+      "muestra": "un_dia"
     },
     {
       "number": 25,
@@ -848,10 +852,10 @@
       "title_en": "Simulating: stepping the model through time",
       "subtitle_en": "What integrating in time means, why the step size changes the answer, and how to check the simulation has not run away",
       "cifra": {
-        "value": "por medir",
-        "label": "el paso de tiempo que sale de la prueba",
-        "value_en": "to be measured",
-        "label_en": "the time step the test points to"
+        "value": "10 s",
+        "label": "el paso más grande que aún resuelve los dieciséis ciclos: el del propio registro",
+        "value_en": "10 s",
+        "label_en": "the largest step that still resolves all sixteen cycles: the record's own"
       },
       "accent": {
         "dark": "#D4B184",
@@ -859,14 +863,15 @@
       },
       "instrumento": "doble-trazo",
       "interactivo": true,
-      "reto": "Mover el paso de tiempo y ver a partir de cuál la simulación deja de parecerse a sí misma.",
+      "reto": "Medir cuánto dura cada carga y cada vacío, que es lo que la simulación tiene que reproducir.",
       "scripts": [
         "src/twin/simulate.py"
       ],
       "figuras": [
         "fig_m25_ciclo_carga_vacio",
         "fig_m25_paso_de_tiempo"
-      ]
+      ],
+      "muestra": "un_dia"
     },
     {
       "number": 26,

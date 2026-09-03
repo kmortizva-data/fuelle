@@ -267,6 +267,34 @@ TRADUCCIONES: dict[str, str] = {
     "copiar": "backing up",
     "restaurar": "restoring",
     "MB del mismo dato": "MB of the same data",
+
+    # --- módulo 24, la rampa del compresor -----------------------------
+    "lo que sube de verdad": "what it actually rises",
+    "la mediana instantánea": "the instantaneous median",
+    "la media por minuto cargando": "the mean per loaded minute",
+    "el motor arrancando": "the motor spinning up",
+    "segundos desde que el presostato pide carga":
+        "seconds since the pressure switch called for load",
+    "sube, bar/min": "rise, bar/min",
+
+    # --- módulo 25, simular y el paso de tiempo ------------------------
+    "minutos": "minutes",
+    "presión del depósito, bar": "receiver pressure, bar",
+    "paso de la simulación, segundos": "simulation step, seconds",
+    "error del ciclo de trabajo, puntos porcentuales":
+        "duty cycle error, percentage points",
+    "aquí la simulación resuelve todos los ciclos":
+        "here the simulation resolves every cycle",
+
+    # --- módulo 23, el gemelo al lado de la máquina --------------------
+    "la máquina": "the machine",
+    "el gemelo": "the twin",
+    "un día sano": "a healthy day",
+    "el 18 de abril, la avería #1": "18 April, failure #1",
+    "horas del día": "hours of the day",
+    "minutos cargando, acumulados": "minutes loaded, cumulative",
+    "mirando solo la línea,\n30 s parece el mejor de todos":
+        "going by the line alone,\n30 s looks like the best of them",
 }
 
 # Etiquetas construidas con f-strings: llevan un número dentro, así que no se
@@ -306,6 +334,10 @@ PATTERNS: list[tuple[str, str]] = [
      r"\1   every reading x  every report"),
     (r"^([\d.]+) veces mas disco$", r"\1 times more disk"),
     (r"^escribir ([\d,]+) filas$", r"writing \1 rows"),
+    (r"^([\d.]+) % de mas$", r"\1 % too high"),
+    (r"^arranca, ([\d.]+) bar$", r"starts, \1 bar"),
+    (r"^para, ([\d.]+) bar$", r"stops, \1 bar"),
+    (r"^ciclos perdidos de (\d+)$", r"cycles lost out of \1"),
 ]
 
 TABLE: dict[str, str] = {}

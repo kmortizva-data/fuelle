@@ -309,3 +309,4 @@ Para poder comparar. Un gemelo predice qué debería estar pasando ahora, y «ah
 sentido con el instante anterior al lado. Los huecos hay que conocerlos para no tratar como
 seguidas dos lecturas separadas por 48 horas, y el ciclo de arranques es la señal donde este
 proyecto espera ver la fuga.
+

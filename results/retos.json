@@ -358,5 +358,47 @@
     ],
     "sql": "SELECT day, count(*) AS lecturas FROM telemetria WHERE DV_eletric = COMP GROUP BY day ORDER BY lecturas DESC LIMIT 5",
     "muestra": "sql"
+  },
+  "m24_la_banda": {
+    "columns": [
+      "momento",
+      "veces",
+      "presion"
+    ],
+    "rows": [
+      [
+        "arranca",
+        31,
+        8.04
+      ],
+      [
+        "para",
+        30,
+        10.13
+      ]
+    ],
+    "sql": "SELECT CASE WHEN antes = 0 THEN 'arranca' ELSE 'para' END AS momento, count(*) AS veces, round(median(TP3), 2) AS presion FROM (SELECT TP3, DV_eletric, lag(DV_eletric) OVER (ORDER BY timestamp) AS antes FROM telemetria WHERE day = DATE '2020-06-05') WHERE antes IS NOT NULL AND antes <> DV_eletric GROUP BY momento ORDER BY momento",
+    "muestra": "un_dia"
+  },
+  "m25_cuanto_dura": {
+    "columns": [
+      "estado",
+      "tramos",
+      "minutos"
+    ],
+    "rows": [
+      [
+        "carga",
+        31,
+        2.13
+      ],
+      [
+        "vacio",
+        31,
+        19.98
+      ]
+    ],
+    "sql": "SELECT CASE WHEN cargando = 1 THEN 'carga' ELSE 'vacio' END AS estado, count(*) AS tramos, round(median(minutos), 2) AS minutos FROM (SELECT any_value(DV_eletric) AS cargando, date_diff('second', min(timestamp), max(timestamp)) / 60.0 AS minutos FROM (SELECT timestamp, DV_eletric, sum(CASE WHEN antes IS DISTINCT FROM DV_eletric THEN 1 ELSE 0 END) OVER (ORDER BY timestamp) AS tramo FROM (SELECT timestamp, DV_eletric, lag(DV_eletric) OVER (ORDER BY timestamp) AS antes FROM telemetria WHERE day = DATE '2020-06-05')) GROUP BY tramo) GROUP BY estado ORDER BY estado",
+    "muestra": "un_dia"
   }
 }

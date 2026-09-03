@@ -1,0 +1,14 @@
+{
+  "paso_s": 10.0,
+  "2020-03-08": {
+    "minutos_reales": 140.0,
+    "minutos_del_gemelo": 152.0,
+    "hueco_minutos": -12.0
+  },
+  "2020-04-18": {
+    "minutos_reales": 1416.2,
+    "minutos_del_gemelo": 152.0,
+    "hueco_minutos": 1264.2
+  },
+  "veces_mas_hueco_en_la_averia": 105.4
+}

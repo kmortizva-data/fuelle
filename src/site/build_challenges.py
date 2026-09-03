@@ -42,6 +42,8 @@ MUESTRA_DE = {
     "m17_oro_por_mes": "horas",
     "m18_donde_mentia": "antes",
     "m20_quien_la_rompe": "sql",
+    "m24_la_banda": "un_dia",
+    "m25_cuanto_dura": "un_dia",
 }
 
 SECONDS_PER_READING = 10
@@ -183,6 +185,38 @@ CHALLENGES = {
         GROUP BY day
         ORDER BY lecturas DESC
         LIMIT 5
+    """,
+    # Modulo 24: medir la banda del presostato con las propias manos. Es la
+    # misma cuenta que hace src/twin/model.py sobre el lago entero, aqui sobre
+    # un solo dia, y sale practicamente lo mismo.
+    "m24_la_banda": """
+        SELECT CASE WHEN antes = 0 THEN 'arranca' ELSE 'para' END AS momento,
+               count(*)              AS veces,
+               round(median(TP3), 2) AS presion
+        FROM (SELECT TP3, DV_eletric,
+                     lag(DV_eletric) OVER (ORDER BY timestamp) AS antes
+              FROM telemetria WHERE day = DATE '2020-06-05')
+        WHERE antes IS NOT NULL AND antes <> DV_eletric
+        GROUP BY momento
+        ORDER BY momento
+    """,
+    # Modulo 25: cuanto dura cada carga y cada vacio. Es lo que la simulacion
+    # tiene que reproducir, y contarlo a mano da la vara de medir.
+    "m25_cuanto_dura": """
+        SELECT CASE WHEN cargando = 1 THEN 'carga' ELSE 'vacio' END AS estado,
+               count(*)                  AS tramos,
+               round(median(minutos), 2) AS minutos
+        FROM (SELECT any_value(DV_eletric) AS cargando,
+                     date_diff('second', min(timestamp), max(timestamp)) / 60.0 AS minutos
+              FROM (SELECT timestamp, DV_eletric,
+                           sum(CASE WHEN antes IS DISTINCT FROM DV_eletric THEN 1 ELSE 0 END)
+                               OVER (ORDER BY timestamp) AS tramo
+                    FROM (SELECT timestamp, DV_eletric,
+                                 lag(DV_eletric) OVER (ORDER BY timestamp) AS antes
+                          FROM telemetria WHERE day = DATE '2020-06-05'))
+              GROUP BY tramo)
+        GROUP BY estado
+        ORDER BY estado
     """,
 }
 
