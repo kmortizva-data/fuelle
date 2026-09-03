@@ -734,6 +734,85 @@ se mueven entre corridas: fuera de la prosa, dentro de la figura.
 8. src/figures_build_en.py   las figuras inglesas
 ```
 
+### Parte 6a (2026-09-03): el gemelo existe, y los módulos 23 a 25
+
+**25 lecciones de 31 en español, 22 en inglés.** **Diez** verificadores en verde. La parte 6 se
+partió en dos por decisión de Kevin: 6a es la maquinaria más los módulos 23 a 25, y 6b serán el 26,
+27, 28 y la tanda de inglés.
+
+**El gemelo son cuatro números y cuatro líneas, y ninguno está inventado.** `src/twin/model.py` los
+mide del lago y **se niega a publicar** si no se sostienen. Sale así:
+
+| Qué | Medido | La ficha |
+|---|---|---|
+| Arranca | **8,06 bar** | 8,2 |
+| Para | **10,12 bar** | no lo dice |
+| Sube por minuto cargando | **0,6735 bar/min** | no lo dice |
+| Consumo | **0,0806 bar/min** | no lo dice |
+
+**El balance de aire cuadra al 0,8 %** en seis semanas, y con eso los dos parámetros predicen una
+carga de **0,1069** cuando la máquina hizo **0,1076**. Ninguno se ajustó a ella.
+
+**Medir bien costó tres intentos, y los tres errores están en las lecciones:**
+
+1. **Filtrar tramos cortos tiraba casi todas las cargas.** Duran 1,8 min y los vacíos 22, así que un
+   mínimo de 120 s se llevaba unas y no otras. El balance salía descuadrado por 2,3 y la culpa era
+   del filtro.
+2. **La mediana instantánea de llenado engaña un 53 %.** El compresor arranca despacio (0,516
+   bar/min los primeros diez segundos, la corriente de 9 A de la ficha), pica en 1,5 y **decae**
+   según se llena. Un modelo montado sobre la mediana predice **32,7 % por debajo**.
+3. **La rampa se medía sobre el registro entero** mientras todo lo demás salía de la ventana sana.
+
+**Y el paso de tiempo se mide con los ciclos, no con la carga.** Con paso de 30 s el error del ciclo
+de trabajo es **el más pequeño de la tabla** y ya se han perdido **2 ciclos de 16**: sus errores se
+compensan porque cada arranque perdido alarga un vacío y acorta una carga. Contando arranques la
+degradación es monótona, y el paso más grande que aún vale es **10 s, el ritmo del propio registro**.
+
+**Tres señales más que no aportan nada**, del mismo género que el hallazgo del módulo 1:
+`Caudal_impulses` es **binaria** en el fichero y la ficha la describe como caudalímetro;
+`Reservoirs` correlaciona **1,0** con TP3; y `MPG` es el inverso de `DV_eletric`.
+
+**El listón del gemelo, medido.** Un día sano y completo: la máquina 140,0 min de carga, el gemelo
+152,0, **12 minutos**. El 18 de abril: la máquina 1.416,2 y el gemelo los mismos 152,0, o sea
+**1.264,2 de hueco**. **105,4 veces más**, así que el error del gemelo queda dos órdenes de magnitud
+por debajo de la señal.
+
+### La perilla, y por qué va precalculada
+
+**El doble trazo ya sale en una lección**, con el bloque ` ```perilla `. La física se simula **una
+sola vez, en Python**, para cada posición del mando, y la página solo cambia de serie.
+
+Es una decisión, no una comodidad: escribirla otra vez en JavaScript dejaría dos implementaciones
+que se pueden separar, y **en esta máquina no hay node, ni deno, ni bun** con los que compararlas.
+Una sola implementación no se contradice. Cuesta unos 27 KB por lección.
+
+Se dibuja **en el servidor**, así que sin JavaScript se ven los dos trazos igual. El mando arranca
+en la posición más cercana a la máquina de verdad, y los números llevan el separador decimal de la
+página, que viaja en `data-decimal`.
+
+### `check_motion`, la décima puerta
+
+La prometía el plan desde el principio y **nunca se construyó**. Durante 22 lecciones nadie
+comprobó el estado final sin JavaScript, ni `prefers-reduced-motion`, ni la regla de un instrumento
+por lección. El campo `instrumento` de `temario.json` estaba declarado en los 31 módulos y **no lo
+leía nadie**.
+
+**Dos falsos verdes propios, cazados al probarla:**
+
+- La primera versión contaba la consulta viva y los bloques `diagrama` como instrumentos, y **acusó
+  a catorce lecciones correctas**. No lo son: la consulta viva es la capa interactiva, que el
+  temario declara aparte, y un `diagrama` es contenido. Los tres instrumentos son el grafo, la
+  carátula y el doble trazo, y **solo el tercero deja rastro en el Markdown**.
+- La segunda **daba verde con `prefers-reduced-motion` borrado del código**, porque la frase seguía
+  escrita en un comentario de al lado. Ahora quita los comentarios antes de mirar.
+
+Comprueba además que lo que el temario promete de interacción esté: una lección declarada
+interactiva tiene que traer consulta viva, reto o perilla, y un bloque de reto tiene que estar
+anunciado. Eso no lo miraba nadie.
+
+**`un_dia` se lleva ahora TP3**, en vez de publicar otra muestra: un día de presión son unos 9 KB y
+un fichero nuevo repetiría el `timestamp`, que es la columna cara. Pasa de 43 a 61 KB.
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo
