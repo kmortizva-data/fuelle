@@ -90,7 +90,7 @@ perfectamente regular (hay saltos de 9 s). Material del módulo 7.
 | Correr un script | `.venv\Scripts\python.exe src\<script>.py`, rutas vía `Path(__file__)` |
 | El plan | `temario.json`. Congelado. Manda sobre las lecciones |
 | El método | `MANUAL.md`. Anatomía de 10 secciones y reglas de escritura |
-| La puerta | `.venv\Scripts\python.exe src\site\check_all.py`. **Nueve verificadores, falla de verdad.** Nunca en un bucle de shell: el bucle devuelve cero pase lo que pase |
+| La puerta | `.venv\Scripts\python.exe src\site\check_all.py`. **Diez verificadores, falla de verdad.** Nunca en un bucle de shell: el bucle devuelve cero pase lo que pase |
 | Datos crudos | `data/`, fuera de git, se re-descargan de UCI |
 | El lago | `lake/`, fuera de git, se reconstruye entero con el pipeline |
 | Git | Lo corre Claude. Un módulo por commit, mensajes en inglés, sin comillas dobles en `-m` (PowerShell 5.1) |
@@ -107,7 +107,9 @@ regenerarlos. El orden importa: cada script depende de lo que dejó el anterior.
 3. src/transform/benchmark_formats.py   deja lake/_formatos/todo.parquet
 4. src/ingest/partition_profile.py      perfila lo que escribió el paso 2
 5. src/transform/silver.py              la plata, en rejilla de 10 s
-6. src/site/check_all.py                las nueve puertas
+6. src/twin/model.py                    los cuatro numeros del gemelo
+7. src/twin/simulate.py                 el paso de tiempo y las perillas
+8. src/site/check_all.py                las diez puertas
 ```
 
 La parte 4 añade cinco scripts más y una lista propia, al final de este fichero.
