@@ -880,6 +880,27 @@ avería de marzo y el más cargado de los candidatos, 140 min contra 81 de media
 cociente contra el 18 de abril se dispara a 6.677, que es un artefacto de dividir por casi cero.
 El suelo de ruido tiene que salir del **reparto de los días sanos**, no de un día elegido.
 
+### Módulo 26 cerrado (2026-09-03)
+
+**El resultado:** medir y ajustar coinciden dentro de un **7,8 %** (1,1796 contra 1,272 bar/min), y
+sobre una semana sana los dos gemelos se llevan **8,2 minutos de 497,2**. El ajuste no mejora, que
+es lo que el plan esperaba. Lo que sí hizo fue destapar los dos fallos de arriba.
+
+**La lección de identificabilidad, medida:** ajustando solo la carga hay **4 puntos empatados** con
+entregas de 0,72 a 1,08; solo los arranques, **40 empatados** de punta a punta de la rejilla; las
+dos cosas, **uno**. La perilla recorre el valle: la carga se queda en 5,5-5,6 % y los arranques van
+de 10 a 21.
+
+**Piezas nuevas:** `src/twin/ventana_sana.py` (comprueba que una ventana de calibración sea una
+máquina en un estado, y se niega si febrero pasa su propio listón), `src/figures_module26.py` con
+tres figuras, la perilla `m26_valle` y el reto `m26_los_dos_observables`.
+
+**Y un fallo de producción encontrado moviendo la perilla:** las figuras llevan huella de contenido
+en la URL y los datos de la perilla no. El techo del eje va en el HTML y las series las trae un
+`fetch`, así que un JSON viejo en caché dibuja contra otro techo: **seis de las veintiuna
+posiciones del módulo 24 se salían del marco**. Arreglado, y `check_motion` tiene una quinta regla
+que lo caza (probada rompiéndola).
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo
