@@ -65,11 +65,14 @@ SHIPPED = {
                     "TP2 para la presión. Sin TP3, que cuesta el doble que TP2"),
     },
     "un_dia": {
-        "columns": ["timestamp", "day", "DV_eletric", "COMP", "Motor_current"],
+        "columns": ["timestamp", "day", "DV_eletric", "COMP", "Motor_current", "TP3"],
         "where": f"day = DATE '{ONE_DAY}'",
-        "para": "módulo 13: funciones de ventana",
+        "para": "módulos 13, 24 y 25: ventanas, y la física del depósito",
         "por_que": ("comparar con la fila de al lado exige la hora exacta, y la hora "
-                    "cuesta 5,16 MB si se lleva el lago entero. Un día son 43 KB"),
+                    "cuesta 5,16 MB si se lleva el lago entero. Un día son 43 KB. "
+                    "TP3 se le añadió para la parte 6 en vez de publicar otra muestra: "
+                    "un día de presión son unos 9 KB, y otro fichero repetiría el "
+                    "timestamp, que es la columna cara"),
     },
 }
 

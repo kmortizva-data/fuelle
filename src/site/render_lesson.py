@@ -129,6 +129,8 @@ UI = {
         "modules_word": "módulos", "parts_word": "partes", "course": "el curso",
         "toc_kicker": "Temario",
         "portfolio": "English summary on the portfolio ↗",
+        "perilla_nota": "así el compresor pasa el {carga} % del tiempo cargando, con {arranques} arranques",
+        "perilla_referencia": "la línea de puntos es la referencia, con {valor} {unidad}",
     },
     "en": {
         "course_name": "Bellows",
@@ -154,6 +156,8 @@ UI = {
         "modules_word": "modules", "parts_word": "parts", "course": "the course",
         "toc_kicker": "Syllabus",
         "portfolio": "Resumen en el portafolio ↗",
+        "perilla_nota": "so the compressor spends {carga} % of its time loaded, with {arranques} starts",
+        "perilla_referencia": "the dotted line is the reference, at {valor} {unidad}",
     },
 }
 SOURCE_NOTE = UI["es"]["source_note"]
@@ -299,6 +303,12 @@ def render_blocks(lines: list[str]) -> str:
             # texto de verdad que se puede copiar y leer con un lector.
             elif language == "diagrama":
                 out.append(diagram_block(code))
+            # Un bloque `perilla` es el doble trazo con su deslizador. El bloque
+            # solo nombra un fichero de assets/perillas/, que escribe
+            # src/twin/simulate.py: la fisica no se toca ni aqui ni en el
+            # navegador, se elige entre trazos ya simulados en Python.
+            elif language == "perilla":
+                out.append(perilla_block(code))
             else:
                 css_class = f' class="language-{language}"' if language else ""
                 out.append(f"<pre><code{css_class}>{body}</code></pre>")
@@ -436,6 +446,93 @@ def _editor(sql: str, label: str, run_label: str, extra: str = "", data: str = "
 
 def live_block(escaped_sql: str) -> str:
     return _editor(escaped_sql, ui("live_label"), ui("run")) + "</div>"
+
+
+# ------------------------------------------------------------------- la perilla
+
+PERILLAS_DIR = ROOT / "assets" / "perillas"
+PERILLA_ANCHO, PERILLA_ALTO, PERILLA_MARGEN = 640, 200, 14
+
+
+def _traza(serie: list[float], techo: float) -> str:
+    """La serie, convertida en un camino de SVG. La misma cuenta que perilla.js."""
+    if not serie:
+        return ""
+    util = PERILLA_ANCHO - PERILLA_MARGEN * 2
+    alto_util = PERILLA_ALTO - PERILLA_MARGEN * 2
+    trozos = []
+    for i, v in enumerate(serie):
+        x = PERILLA_MARGEN + util * i / max(len(serie) - 1, 1)
+        y = PERILLA_ALTO - PERILLA_MARGEN - alto_util * v / techo
+        trozos.append(f"{'L' if i else 'M'}{x:.1f} {y:.1f}")
+    return " ".join(trozos)
+
+
+def _numero(v: float | int, coma: str) -> str:
+    """El número tal como se escribe en el idioma de la página."""
+    return str(v).replace(".", coma) if coma != "." else str(v)
+
+
+def perilla_block(lines: list[str]) -> str:
+    """El doble trazo con su deslizador. Módulos 24 y 25.
+
+    El bloque solo nombra un fichero de `assets/perillas/`, que escribe
+    `src/twin/simulate.py`. **La física no se toca aquí ni en el navegador**: cada
+    posición del mando trae su trazo ya simulado en Python.
+
+    Y como la consulta viva, se dibuja entero en el servidor: sin JavaScript se
+    ve el trazo de referencia contra el de la posición de partida, que es el
+    estado final de la pieza. El mando solo cambia cuál se enseña.
+    """
+    nombre = "\n".join(lines).strip()
+    fuente = PERILLAS_DIR / f"{nombre}.json"
+    if not fuente.exists():
+        print(f"  AVISO: falta la perilla {nombre}. Corre src/twin/simulate.py")
+        return f'<p class="gone">falta la perilla {html.escape(nombre)}</p>'
+
+    datos = json.loads(fuente.read_text(encoding="utf-8"))
+    referencia, posiciones = datos["referencia"], datos["posiciones"]
+    # El techo lo pone el trazo más alto de todos, para que mover el mando no
+    # cambie la escala: si cambiara, las dos posiciones no serían comparables y
+    # el instrumento mentiría.
+    techo = max(max(p["trazo"]) for p in posiciones) or 1.0
+    # Arranca en la posición más cercana a la de referencia, o sea en la máquina
+    # de verdad. Empezaba en el medio de la escala y eso enseñaba de entrada una
+    # máquina que no existe: el lector tenía que buscar la buena.
+    arranque = min(range(len(posiciones)),
+                   key=lambda i: abs(posiciones[i]["valor"] - referencia["valor"]))
+    inicial = posiciones[arranque]
+
+    ruta = f"assets/perillas/{nombre}.json"
+    etiqueta = html.escape(datos["etiqueta"])
+    unidad = html.escape(datos["unidad"])
+    plantilla = ui("perilla_nota")
+    # El separador decimal viaja con la página. Sin él, la edición española
+    # escribía «0.12 bar/min» y «15.3 %» en cuanto se movía el mando, porque los
+    # números los arma el JavaScript y no `es()`.
+    coma = "," if _lang == "es" else "."
+    return (
+        f'<figure class="perilla" data-perilla="../{ruta}" data-decimal="{coma}"'
+        f'>'
+        f'<figcaption>{inline(datos["titulo"])}</figcaption>'
+        f'<svg viewBox="0 0 {PERILLA_ANCHO} {PERILLA_ALTO}" role="img" '
+        f'data-margen="{PERILLA_MARGEN}" data-techo="{techo}" '
+        f'aria-label="{html.escape(datos["titulo"])}">'
+        f'<path class="perilla-referencia" d="{_traza(referencia["trazo"], techo)}"/>'
+        f'<path class="perilla-actual" d="{_traza(inicial["trazo"], techo)}"/>'
+        f"</svg>"
+        f'<div class="perilla-pie">'
+        f'<span class="perilla-leyenda">{html.escape(datos["eje"])}</span>'
+        f'<label class="perilla-mandos">{etiqueta}'
+        f'<input class="perilla-mando" type="range" min="0" '
+        f'max="{len(posiciones) - 1}" value="{arranque}" step="1">'
+        f'<output class="perilla-valor">{_numero(inicial["valor"], coma)} {unidad}</output>'
+        f"</label></div>"
+        f'<p class="perilla-nota" data-plantilla="{html.escape(plantilla)}">'
+        f'{html.escape(plantilla.format(carga=_numero(round(inicial["carga"] * 100, 1), coma), arranques=inicial["arranques"]))}</p>'
+        f'<p class="perilla-referencia-nota">{inline(ui("perilla_referencia").format(valor=_numero(referencia["valor"], coma), unidad=unidad))}</p>'
+        f"</figure>"
+    )
 
 
 def challenge_block(lines: list[str]) -> str:

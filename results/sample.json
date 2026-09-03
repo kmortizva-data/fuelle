@@ -21,11 +21,11 @@
     {
       "name": "un_dia",
       "rows": 8716,
-      "columns": 5,
-      "kb_on_disk": 42.9,
-      "kb_downloaded": 42.3,
+      "columns": 6,
+      "kb_on_disk": 61.0,
+      "kb_downloaded": 60.0,
       "recorta_filas": true,
-      "para": "módulo 13: funciones de ventana"
+      "para": "módulos 13, 24 y 25: ventanas, y la física del depósito"
     },
     {
       "name": "averias",

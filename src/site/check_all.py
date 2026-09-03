@@ -30,6 +30,7 @@ CHECKERS = [
     "check_palette",   # los acentos calculados, y AA en los dos temas
     "check_layout",    # la maqueta no vuelve a ser la de Sílice
     "check_english",   # las dos ediciones dicen los mismos números
+    "check_motion",    # estado final sin JS, movimiento reducido, un instrumento
 ]
 
 

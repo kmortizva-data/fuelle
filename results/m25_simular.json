@@ -1,0 +1,102 @@
+{
+  "carga_simulada": 0.1062,
+  "carga_observada": 0.1076,
+  "carga_observada_por_lecturas": 0.1005,
+  "error_relativo": 0.0125,
+  "arranques_simulados": 50,
+  "horas_de_la_prueba": 8,
+  "arranques_del_patron": 16,
+  "paso_mas_grande_que_vale": 10,
+  "ritmo_del_registro_s": 10,
+  "paso_patron_s": 0.1,
+  "pasos": [
+    {
+      "segundos": "patrón",
+      "carga": 0.102,
+      "arranques": 16,
+      "error_de_carga": 0.0,
+      "ciclos_perdidos": 0,
+      "se_parece": true
+    },
+    {
+      "segundos": 0.1,
+      "carga": 0.102,
+      "arranques": 16,
+      "error_de_carga": 0.0,
+      "ciclos_perdidos": 0,
+      "se_parece": true
+    },
+    {
+      "segundos": 0.5,
+      "carga": 0.1022,
+      "arranques": 16,
+      "error_de_carga": 0.00022,
+      "ciclos_perdidos": 0,
+      "se_parece": true
+    },
+    {
+      "segundos": 1,
+      "carga": 0.1022,
+      "arranques": 16,
+      "error_de_carga": 0.00022,
+      "ciclos_perdidos": 0,
+      "se_parece": true
+    },
+    {
+      "segundos": 2,
+      "carga": 0.1022,
+      "arranques": 16,
+      "error_de_carga": 0.00022,
+      "ciclos_perdidos": 0,
+      "se_parece": true
+    },
+    {
+      "segundos": 5,
+      "carga": 0.1028,
+      "arranques": 16,
+      "error_de_carga": 0.00078,
+      "ciclos_perdidos": 0,
+      "se_parece": true
+    },
+    {
+      "segundos": 10,
+      "carga": 0.1056,
+      "arranques": 16,
+      "error_de_carga": 0.00356,
+      "ciclos_perdidos": 0,
+      "se_parece": true
+    },
+    {
+      "segundos": 20,
+      "carga": 0.1042,
+      "arranques": 15,
+      "error_de_carga": 0.00217,
+      "ciclos_perdidos": 1,
+      "se_parece": false
+    },
+    {
+      "segundos": 30,
+      "carga": 0.1021,
+      "arranques": 14,
+      "error_de_carga": 8e-05,
+      "ciclos_perdidos": 2,
+      "se_parece": false
+    },
+    {
+      "segundos": 60,
+      "carga": 0.1083,
+      "arranques": 13,
+      "error_de_carga": 0.00633,
+      "ciclos_perdidos": 3,
+      "se_parece": false
+    },
+    {
+      "segundos": 120,
+      "carga": 0.1083,
+      "arranques": 13,
+      "error_de_carga": 0.00633,
+      "ciclos_perdidos": 3,
+      "se_parece": false
+    }
+  ]
+}

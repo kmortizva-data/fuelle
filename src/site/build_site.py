@@ -160,6 +160,9 @@ def main() -> None:
     # El JS de las consultas vivas viaja junto a las páginas, no se enlaza al
     # código fuente desde el HTML publicado.
     shutil.copy2(TEMPLATES / "live.js", OUT_DIR / "live.js")
+    # Y el de la perilla del gemelo, que no simula nada: solo elige entre los
+    # trazos que src/twin/simulate.py dejó calculados.
+    shutil.copy2(TEMPLATES / "perilla.js", OUT_DIR / "perilla.js")
 
     for lang in ("es", "en"):
         if not (source_dir(lang) / "curso.md").exists():
