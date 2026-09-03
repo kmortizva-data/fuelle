@@ -950,6 +950,29 @@ unidades físicas, en no necesitar historial y en poder preguntar por una fuga q
 **Verificado a mano** contra el lago, sin código del proyecto: 4 de 4 y 12 días falsos en 8 meses,
 idéntico a lo que dice el script.
 
+### Parte 6 CERRADA en los dos idiomas (2026-09-03)
+
+**28 lecciones de 31, las 28 en español y en inglés.** Solo queda la parte 7 (módulos 29, 30 y 31).
+
+**Tres fallos que las diez puertas no veían**, encontrados al traducir:
+
+- El bloque `sql` del módulo 24 seguía consultando hasta el 15 de marzo y su salida enseñaba 8.06 y
+  10.12. `check_sql` daba verde porque **la salida es correcta para esa consulta**: lo caducado era
+  la consulta, y la prosa de al lado ya citaba los números de febrero.
+- El puente del módulo 24 seguía diciendo que el aire cuadraba al 0,8 %. `check_numbers` daba verde
+  porque 0.8 existe en otro fichero de resultados. **Lo cazó la puerta de paridad inglesa**, que es
+  para lo que sirve que las puertas se solapen.
+- El módulo 25 seguía llamando al paso de 5 s «el ritmo del propio registro» y diciendo 2 ciclos de
+  16. Las dos cosas eran ciertas con los parámetros viejos.
+
+**Y una convención que se estaba torciendo:** la clave de `anota` tiene que ser **el fragmento de
+código** que se anota, no prosa, o la edición inglesa tiene que repetir el español. Once claves de
+los módulos 23, 26, 27 y 28 son ahora fragmentos de verdad.
+
+**Regla que sale de esto:** un bloque `sql` publicado puede quedarse caducado sin que ninguna puerta
+lo note, porque su salida sigue siendo cierta para su propia consulta. Al cambiar una ventana de
+análisis hay que **buscar las fechas a mano** en las lecciones, no fiarse de los verificadores.
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo
