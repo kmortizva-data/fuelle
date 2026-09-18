@@ -95,6 +95,7 @@ perfectamente regular (hay saltos de 9 s). Material del módulo 7.
 | El lago | `lake/`, fuera de git, se reconstruye entero con el pipeline |
 | Git | Lo corre Claude. Un módulo por commit, mensajes en inglés, sin comillas dobles en `-m` (PowerShell 5.1) |
 | Regla de oro | Ningún número se publica sin recalcularlo corriendo su script |
+| Antes de empujar al remoto público | `.venv\Scripts\python.exe src\site\check_history.py`. Mira **cada fichero de cada commit**, no el árbol de hoy: más de 10 MB, `data/`, `lake/`, claves, correos, teléfonos y rutas de esta máquina. Probada plantando las cinco cosas en una rama de usar y tirar |
 
 ### Reconstruir el lago desde cero, en orden
 

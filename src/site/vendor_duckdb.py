@@ -26,6 +26,7 @@ Run:  .venv\\Scripts\\python.exe src\\site\\vendor_duckdb.py
 from __future__ import annotations
 
 import gzip
+import json
 import io
 import re
 import sys
@@ -90,6 +91,47 @@ def vendor_modules() -> dict[str, str]:
     return seen
 
 
+LICENCE_NAMES = ("LICENSE", "LICENSE.txt", "LICENSE.md")
+
+
+def licence_text(package: str) -> tuple[bytes | None, str]:
+    """A package's licence, and where it came from.
+
+    First from the npm package itself, at the vendored version. Some packages
+    declare their licence in package.json and ship no text: @duckdb/duckdb-wasm
+    is one, it says MIT and brings no LICENSE file. For those, the text comes
+    from the repository the package itself declares on npm, and the file says
+    so in its first line, so nobody mistakes it for a copy from the package.
+    """
+    for candidate in LICENCE_NAMES:
+        try:
+            return fetch(f"{package}/{candidate}"), f"npm {package}/{candidate}"
+        except Exception:
+            continue
+
+    spec = package.removeprefix("/npm/")
+    name, version = spec.rsplit("@", 1)
+    registry = f"https://registry.npmjs.org/{name.replace('/', '%2f')}/{version}"
+    try:
+        with urllib.request.urlopen(registry, timeout=60) as response:
+            meta = json.load(response)
+    except Exception:
+        return None, ""
+    repo = (meta.get("repository") or {}).get("url", "")
+    match = re.search(r"github\.com[/:]([^/]+)/([^/.]+)", repo)
+    if not match:
+        return None, ""
+    owner, project = match.groups()
+    for candidate in LICENCE_NAMES:
+        try:
+            return (fetch(f"/gh/{owner}/{project}/{candidate}"),
+                    f"github {owner}/{project}/{candidate} (declared licence: "
+                    f"{meta.get('license')}; the npm package ships no text)")
+        except Exception:
+            continue
+    return None, ""
+
+
 def main() -> None:
     VENDOR.mkdir(parents=True, exist_ok=True)
 
@@ -108,6 +150,25 @@ def main() -> None:
 
     (VENDOR / "VERSION").write_text(DUCKDB_VERSION + "\n", encoding="utf-8")
 
+    # The licences travel with the code. These files get published on a public
+    # site, and two of the four packages are Apache 2.0, which requires a copy of
+    # the licence with any redistribution. Each one is fetched from the exact
+    # version that was vendored, so the text matches the code beside it.
+    print("Licences (one per vendored package, from its own version):")
+    licences = VENDOR / "licenses"
+    licences.mkdir(exist_ok=True)
+    packages = {f"/npm/@duckdb/duckdb-wasm@{DUCKDB_VERSION}"}
+    packages |= {path.split("/+esm")[0] for path in modules}
+    for package in sorted(packages):
+        name = (package.removeprefix("/npm/").rsplit("@", 1)[0]
+                .replace("/", "-").lstrip("@-"))
+        text, source = licence_text(package)
+        if text is None:
+            raise SystemExit(f"No licence found for {package}. Do not publish without it.")
+        (licences / f"{name}.txt").write_bytes(
+            f"Source: {source}\n\n".encode("utf-8") + text)
+        print(f"  {name:<28} {source}")
+
     # The gate: nothing may still point at the CDN.
     escapes = []
     for module in VENDOR.glob("*.mjs"):
@@ -119,7 +180,8 @@ def main() -> None:
     print()
     print("What the reader actually pays for:")
     for f in sorted(VENDOR.iterdir()):
-        if f.name == "VERSION":
+        # The licences are a folder, and the reader never downloads them.
+        if f.name == "VERSION" or f.is_dir():
             continue
         raw = f.stat().st_size
         gz = len(gzip.compress(f.read_bytes(), 6))

@@ -1,12 +1,14 @@
-# El entorno completo del proyecto (2026-09-01), despues de instalar dbt, Delta e Iceberg.
+# El entorno completo del proyecto, congelado el 2026-09-18: el de la parte 4
+# (dbt, Delta e Iceberg) más psycopg, que entró el 2026-09-02 para PostgreSQL y no
+# se había apuntado aquí. Quien clonara el repo no habría podido correr la parte 5.
 #
-# Para reconstruirlo entero:
+# Para reconstruirlo entero, con Python 3.12 (no 3.14: dbt y mashumaro):
 #     .venv\Scripts\python.exe -m pip install -r requirements.txt
 #
-# Ademas hacen falta dos extensiones de DuckDB, que se bajan solas la primera vez:
+# Además hacen falta dos extensiones de DuckDB, que se bajan solas la primera vez:
 #     INSTALL delta; INSTALL iceberg;
 #
-# requirements.lock.txt guarda el estado ANTERIOR a esta instalacion, por si hay que volver.
+# requirements.lock.txt guarda el estado de ANTES de instalar dbt, por si hay que volver.
 
 agate==1.9.1
 annotated-types==0.8.0
@@ -62,6 +64,8 @@ parsedatetime==2.6
 pathspec==1.0.4
 pillow==12.3.0
 protobuf==6.33.6
+psycopg==3.3.5
+psycopg-binary==3.3.5
 pyarrow==25.0.1
 pydantic==2.13.5
 pydantic_core==2.46.5
