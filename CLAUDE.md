@@ -1003,10 +1003,42 @@ análisis hay que **buscar las fechas a mano** en las lecciones, no fiarse de lo
 | 2026-08-29 | **Stack completo por fases**, incluido PostgreSQL con instalador oficial |
 | 2026-08-29 | **Los cuatro entregables**: panel, curso en el portafolio, repo público, informe de un folio |
 | 2026-08-29 | **Diseño sobrio de ingeniero**, con la ambición en la interacción y no en los efectos |
+| 2026-09-02 | **PostgreSQL portable** en `~/tools/pgsql`, sin administrador. Corrige la fila del instalador |
+| 2026-09-02 | **Figuras bilingües ya**, antes de la parte 5 |
+| 2026-09-02 | **El residual en bar/min**, no en litros: la ficha no da el volumen del depósito |
+| 2026-09-02 | **La parte 6 en dos bloques**, 6a y 6b |
+| 2026-09-03 | **El veredicto lleva dos cuentas**, detector y predictor, por separado |
+| 2026-09-03 | **Los días de residual alto sin parte cuentan como falsas alarmas**, con la duda declarada |
+| 2026-09-03 | **La ventana sana es febrero solo** |
+| 2026-09-03 | **El residual con dos indicadores**, congelado contra febrero y móvil contra 14 días |
+| 2026-09-03 | **Marzo lleva las dos cuentas** en el módulo 28, con y sin él como acierto |
+| 2026-09-18 | **Se instala Dagster** (dagster, dagster-webserver, dagster-dbt, dagster-duckdb) para el módulo 29. Comprobado antes contra PyPI: protobuf 6.33.6 sirve a dbt, Dagster y Streamlit, y no baja nada |
+| 2026-09-18 | **El panel del 30 es una página estática** con la maquinaria de las perillas, enlazada desde el portafolio. Sin Streamlit |
+| 2026-09-18 | **El repo público lleva código y lecciones**, con todo el historial y la cita CC BY 4.0 |
+| 2026-09-18 | **Las partes 1 a 6 se publican ya** en el portafolio; 29 a 31 se añaden al cerrarse |
 
 ## Decisiones pendientes de Kevin
 
-- El visto bueno a la maqueta de la fase 0,5, antes de escribir las 34 lecciones restantes.
-- Si el repo público lleva también las lecciones o solo el código del pipeline.
-- Con 31 módulos, si prefiere que el curso se publique **por partes según se cierren** (la parte 3
-  ya es un curso de SQL entero y publicable) o de una vez al final. Recomendación: por partes.
+- **El nombre del repo público.** Propuesta: `fuelle`.
+- **El visto bueno antes de cada empuje público**: la ficha y el curso en el portafolio, y el repo.
+- **Medir la cifra del módulo 30**, «segundos hasta entender qué pasa»: enseñar el panel a una o dos
+  personas que no conozcan el proyecto y cronometrar. Si no se puede, la cifra se cambia por una
+  que se mida sola, y se dice en la lección.
+
+## Parte 7, el plan (2026-09-18)
+
+El plan entero está en `~/.claude/plans/proyecto-portafolio-data-lakes-iterative-volcano.md`,
+sección «Parte 7». En corto, cinco pasos del hito 8:
+
+| Paso | Qué |
+|---|---|
+| 8.1 | Publicar 1 a 6: ficha en `sitio/content/site.json`, el curso en `EMBEDDED` de `sitio/src/build.py` (con `out`, `figuras` y `assets`), repo público con guarda de privacidad sobre **todo el historial** |
+| 8.2 | Módulo 29: Dagster. `lake/` pasa a `lake_antes/`, se reconstruye todo, se compara **tabla a tabla por huella** y se pasan las diez puertas contra el lago nuevo. PostgreSQL cronometrado aparte |
+| 8.3 | Módulo 30: `src/twin/panel.py` precalcula, `panel.html` estático con huella en la URL |
+| 8.4 | Módulo 31: folio PDF bilingüe con Tectonic, «qué se rompería», figura del arco |
+| 8.5 | Inglés de 29 a 31 y republicar |
+
+**Medido antes de planear:** Fuelle pesaría unos 49 MB en el portafolio (el motor SQL son 34,3 de
+un solo fichero, `duckdb-eh.wasm`). El repo tiene 372 ficheros, el mayor de 2,2 MB, y **ninguno
+contiene correos, claves, teléfonos ni rutas de la máquina**. Datos, lago, `out/` y el motor ya
+quedan fuera por `.gitignore`; el motor se baja con `src/site/vendor_duckdb.py`.
