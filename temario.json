@@ -8,7 +8,7 @@
   "dataset_en": "MetroPT-3 (UCI, DOI 10.24432/C5VW3R, CC BY 4.0): air production unit of a Porto Metro train, 1 February to 1 September 2020, 1,516,948 readings across 15 signals, with four documented real failures",
   "citation": "Davari, N., Veloso, B., Ribeiro, R., & Gama, J. (2021). MetroPT-3 Dataset. UCI Machine Learning Repository. https://doi.org/10.24432/C5VW3R",
   "license": "CC BY 4.0",
-  "repo": "por definir",
+  "repo": "https://github.com/kmortizva-data/fuelle",
   "verdict": "por medir",
   "verdict_en": "to be measured",
   "_verdict_note": "El veredicto se escribe cuando el módulo 28 termine de medir. No se adelanta.",
