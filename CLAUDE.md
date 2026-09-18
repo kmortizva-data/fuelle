@@ -1,7 +1,7 @@
 # Fuelle: un gemelo digital y su lago de datos
 
 > **Proyecto:** Fuelle (ES) / Bellows (EN) · **Carpeta:** `Documents\02_Personal\Portafolio\Fuelle`
-> **Categoría:** personal (portafolio) · **Estado:** fase 0, nació el 2026-08-29
+> **Categoría:** personal (portafolio) · **Estado:** parte 7 en curso, publicado en el portafolio desde el 2026-09-18 · nació el 2026-08-29
 > Índice de todos los proyectos: `Documents\_INDICE\INDICE.md`
 > Plan aprobado: `~/.claude/plans/proyecto-portafolio-data-lakes-iterative-volcano.md`
 
@@ -189,7 +189,9 @@ obligatoria (`## Hazlo tú`) en los módulos que lo declaran: el lector escribe 
 página la ejecuta contra los datos reales y le dice si acertó**, comparando el resultado, nunca el
 texto de la consulta. Punto de partida siempre dado, pista y solución plegadas.
 
-**La consulta viva:** DuckDB por WebAssembly, cargado solo cuando el lector lo pide. **7,74 MB
+**La consulta viva:** DuckDB por WebAssembly, cargado solo cuando el lector lo pide. **8,12 MB
+por la red, medido sobre el sitio publicado el 2026-09-18** (el 2026-09-01 se apuntó 7,74, que
+era solo el wasm comprimido a otro nivel). Antes de eso: **7,74 MB
 comprimido, medido el 2026-09-01**, no los «unos 3 MB» que decía esta línea antes de pesarlo.
 Quien solo lee no paga nada.
 
@@ -449,7 +451,8 @@ distintas y una sola sería peso muerto en casi todas las páginas:
 
 El módulo 13 se lleva un solo día porque **la hora exacta del lago entero cuesta 5,16 MB**, que
 es el hallazgo del módulo 7 cobrado. El motor pesa 7,74 MB comprimido (no los «unos 3 MB» que
-decía el riesgo 8, que ahora se corrige), así que la muestra más cara añade un 28 %.
+decía el riesgo 8, que ahora se corrige), así que la muestra más cara añade un 28 %. *(Corregido el 2026-09-18: el motor entero son
+8,12 MB y la muestra añade un 26 %.)*
 
 **La consulta viva llevaba rota quién sabe cuánto.** `live.js` pedía `muestras/muestra.parquet`,
 un nombre que **nunca ha existido en el repo**. Comprobado en el navegador: el viejo daba 404 y
@@ -989,9 +992,10 @@ análisis hay que **buscar las fechas a mano** en las lecciones, no fiarse de lo
 6. **CC BY 4.0 obliga a citar**, en el repo, en el curso y en la página del portafolio.
 7. Red corporativa con SSL interceptado: inyectar `truststore` temprano. Consola cp1252: forzar
    UTF-8 en las salidas de Python.
-8. **El motor SQL del navegador pesa 7,74 MB comprimido**, medido el 2026-09-01 sobre los ficheros
+8. **El motor SQL del navegador pesa 8,12 MB comprimido**, medido el 2026-09-18 sobre el sitio
+   publicado (el 7,74 del 2026-09-01 era solo el wasm, y comprimido a otro nivel). Medido antes sobre los ficheros
    que se sirven de verdad. El plan decía «unos 3 MB» a ojo. Se descarga solo al pulsar y se
-   cachea, así que el que solo lee no paga nada, pero en móvil con datos son 7,74 MB reales. La
+   cachea, así que el que solo lee no paga nada, pero en móvil con datos son 8,12 MB reales. La
    muestra más cara del curso, la de la parte 3, añade 2,14 MB encima.
 
 ## Decisiones ya cerradas por Kevin
@@ -1017,10 +1021,10 @@ análisis hay que **buscar las fechas a mano** en las lecciones, no fiarse de lo
 | 2026-09-18 | **El panel del 30 es una página estática** con la maquinaria de las perillas, enlazada desde el portafolio. Sin Streamlit |
 | 2026-09-18 | **El repo público lleva código y lecciones**, con todo el historial y la cita CC BY 4.0 |
 | 2026-09-18 | **Las partes 1 a 6 se publican ya** en el portafolio; 29 a 31 se añaden al cerrarse |
+| 2026-09-18 | **El repo público es `kmortizva-data/fuelle`**, creado por Kevin en la web |
 
 ## Decisiones pendientes de Kevin
 
-- **El nombre del repo público.** Propuesta: `fuelle`.
 - **El visto bueno antes de cada empuje público**: la ficha y el curso en el portafolio, y el repo.
 - **Medir la cifra del módulo 30**, «segundos hasta entender qué pasa»: enseñar el panel a una o dos
   personas que no conozcan el proyecto y cronometrar. Si no se puede, la cifra se cambia por una
@@ -1038,6 +1042,27 @@ sección «Parte 7». En corto, cinco pasos del hito 8:
 | 8.3 | Módulo 30: `src/twin/panel.py` precalcula, `panel.html` estático con huella en la URL |
 | 8.4 | Módulo 31: folio PDF bilingüe con Tectonic, «qué se rompería», figura del arco |
 | 8.5 | Inglés de 29 a 31 y republicar |
+
+### Paso 8.1 HECHO (2026-09-18): el curso en el portafolio y el repo público
+
+- **Repo público `https://github.com/kmortizva-data/fuelle`**, con todo el historial. Lo creó
+  Kevin en la web y el nombre lo eligió él. `check_history.py` en verde antes de cada empuje
+  (64 commits y 698 ficheros distintos al cerrar este paso, el mayor `sql.parquet` con 2,15 MB).
+- **La ficha en el portafolio**: «Bellows / Fuelle», acento `air` (#83A0E0, el azul de las
+  líneas de aire comprimido), captura del índice en oscuro y botón al código. El curso vive
+  dentro del sitio en `fuelle/curso`, con `fuelle/figuras` y `fuelle/assets` al lado.
+  Publicado el 2026-09-18 (sitio 5c4ec2a). **Comprobado en vivo: los 233 ficheros de `fuelle/`
+  responden 200** y el wasm llega comprimido.
+- **Hallazgo al comprobarlo en vivo: el motor pesa 8,12 MB por la red, no 7,74.** Dos fallos
+  sumados en `make_sample.py`: solo contaba el wasm (la página baja también el worker y cuatro
+  módulos) y comprimía a gzip nivel 6, cuando **GitHub Pages comprime a nivel 5**. El nivel 5
+  reproduce byte a byte lo que manda Pages del wasm y del worker. Ninguna lección citaba la
+  cifra; la ficha sí. Corregido en Fuelle (555fe87) y en la ficha (sitio cc06bde).
+- **Esperan el visto bueno de Kevin para subir:** esos dos commits.
+- **Lo único de 8.1 que solo puede hacer Kevin:** abrir en su Chrome una lección con consulta
+  viva sobre el sitio publicado (por ejemplo el módulo 10) y pulsar «pruébalo». El panel del
+  navegador de la herramienta no arranca el motor, así que desde aquí no se puede comprobar.
+
 
 **Medido antes de planear:** Fuelle pesaría unos 49 MB en el portafolio (el motor SQL son 34,3 de
 un solo fichero, `duckdb-eh.wasm`). El repo tiene 372 ficheros, el mayor de 2,2 MB, y **ninguno
