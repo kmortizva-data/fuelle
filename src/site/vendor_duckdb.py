@@ -5,8 +5,9 @@ there: load it from a CDN, or host it ourselves. This project hosts it.
 
 Why self-host, decided on measurements taken 2026-08-30:
   - Silica and Geostatistics depend on nobody, and this course should not either.
-  - The CDN saves about 1 MB over GitHub Pages (6.79 vs 7.74 compressed). Not
-    worth a runtime dependency on a third party.
+  - The CDN saves about 1 MB over GitHub Pages on the wasm alone: 6.79 against
+    7.88 MB, remeasured on 2026-09-18, because the CDN answers with brotli and
+    Pages with gzip at level 5. Not worth a runtime dependency on a third party.
   - No reader IP addresses leak to someone else's server.
   - GitHub Pages DOES compress application/wasm: measured against a real wasm
     served from Pages, which came back with Content-Encoding: gzip. So the

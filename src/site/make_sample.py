@@ -114,8 +114,13 @@ VERSIONES = {
 
 
 def gzipped_size(path: Path) -> int:
-    """What the reader really downloads: GitHub Pages serves this compressed."""
-    return len(gzip.compress(path.read_bytes(), 6))
+    """What the reader really downloads: GitHub Pages serves this compressed.
+
+    At level 5, not the 6 this used to assume. Measured on 2026-09-18 against the
+    published site: level 5 reproduces the bytes Pages sends for the wasm and the
+    worker exactly, and 6 came out 149 KB short on the wasm alone.
+    """
+    return len(gzip.compress(path.read_bytes(), 5))
 
 
 def write(con: duckdb.DuckDBPyConnection, name: str, columns: list[str],
@@ -299,8 +304,10 @@ def main() -> None:
               f"{row.get('para', 'módulo 12: el JOIN')}")
 
     # El listón con el que se compara el peso: el motor, que se baja una vez.
+    # Entero: el wasm, su worker y los cuatro módulos que los cargan. Antes solo
+    # se sumaba el wasm, y la cifra publicada se quedaba un 5 % corta.
     engine = sum(gzipped_size(f) for f in (PROJECT / "assets" / "duckdb-wasm").iterdir()
-                 if f.is_file() and f.name.startswith("duckdb-eh"))
+                 if f.is_file() and f.suffix in (".wasm", ".js", ".mjs"))
     mayor = max(shipped, key=lambda r: r["kb_downloaded"])
     print()
     print(f"  el motor pesa {engine / 1024 / 1024:.2f} MB comprimido y se baja una sola vez")

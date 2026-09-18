@@ -5,7 +5,7 @@
       "rows": 1516948,
       "columns": 3,
       "kb_on_disk": 64.3,
-      "kb_downloaded": 56.3,
+      "kb_downloaded": 56.4,
       "recorta_filas": false,
       "para": "módulos 10 y 11: agrupar y WITH"
     },
@@ -73,7 +73,7 @@
     }
   ],
   "un_dia": "2020-06-05",
-  "motor_mb": 7.74,
+  "motor_mb": 8.12,
   "sample_avg_loaded_hours": 3.42,
   "lake_avg_loaded_hours": 3.42,
   "reproduces": true,
