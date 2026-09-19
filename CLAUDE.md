@@ -1,7 +1,7 @@
 # Fuelle: un gemelo digital y su lago de datos
 
 > **Proyecto:** Fuelle (ES) / Bellows (EN) · **Carpeta:** `Documents\02_Personal\Portafolio\Fuelle`
-> **Categoría:** personal (portafolio) · **Estado:** parte 7 en curso, publicado en el portafolio desde el 2026-09-18 · nació el 2026-08-29
+> **Categoría:** personal (portafolio) · **Estado:** parte 7 en curso (29 de 31 en español, 28 en inglés), publicado en el portafolio desde el 2026-09-18 · nació el 2026-08-29
 > Índice de todos los proyectos: `Documents\_INDICE\INDICE.md`
 > Plan aprobado: `~/.claude/plans/proyecto-portafolio-data-lakes-iterative-volcano.md`
 
@@ -95,6 +95,8 @@ perfectamente regular (hay saltos de 9 s). Material del módulo 7.
 | El lago | `lake/`, fuera de git, se reconstruye entero con el pipeline |
 | Git | Lo corre Claude. Un módulo por commit, mensajes en inglés, sin comillas dobles en `-m` (PowerShell 5.1) |
 | Regla de oro | Ningún número se publica sin recalcularlo corriendo su script |
+| Construir todo con Dagster | `.venv\Scripts\python.exe src\orchestration\construye.py` (la interfaz: `abre.py`, puerto 3029) |
+| Probar que se reconstruye igual | `src\orchestration\reconstruye.py`: aparta el lago, lo rehace, compara por contenido y por bytes, y pasa las puertas |
 | Antes de empujar al remoto público | `.venv\Scripts\python.exe src\site\check_history.py`. Mira **cada fichero de cada commit**, no el árbol de hoy: más de 10 MB, `data/`, `lake/`, claves, correos, teléfonos y rutas de esta máquina. Probada plantando las cinco cosas en una rama de usar y tirar |
 
 ### Reconstruir el lago desde cero, en orden
@@ -977,46 +979,60 @@ los módulos 23, 26, 27 y 28 son ahora fragmentos de verdad.
 lo note, porque su salida sigue siendo cierta para su propia consulta. Al cambiar una ventana de
 análisis hay que **buscar las fechas a mano** en las lecciones, no fiarse de los verificadores.
 
-### Paso 8.2 EN CURSO (2026-09-19): la primera reconstrucción NO salió igual
+### Paso 8.2 HECHO (2026-09-19): módulo 29, y lo que destapó reconstruir
 
-**Hecho:** Dagster instalado (commit 51fa549; bajó sqlglot 30.17 a 28.0, pip check limpio, diez
-puertas en verde). `src/orchestration/definitions.py` con 27 activos (24 construibles y 3 crudos),
-31 dependencias y 13 comprobaciones (11 de dbt, el contrato del 16 sobre la plata y la restauración
-del 22 sobre la copia). `reconstruye.py` aparta `lake/` a `lake_antes/`, lo pide todo a Dagster,
-compara por contenido (recuento más suma de `hash(fila)`) y por bytes lo versionado, pasa las
-puertas y prueba un relleno de un día. `abre.py` abre la interfaz en el puerto 3029 con
-`DAGSTER_HOME=dagster_home` (sin eso la telemetría va encendida: leído en su código).
+**29 lecciones de 31 en español, 28 en inglés. Diez puertas en verde.** Commits 51fa549 (Dagster),
+0998f1c (orquestación y escritura determinista), 97ba99f (correcciones de 7, 14, 19 y 22) y
+49c3892 (el módulo 29). **Nada subido todavía: espera el visto bueno de Kevin.**
 
-**Regla del orquestador:** lo que corre tiene que dar lo mismo cada vez, así que el cronómetro se
-queda fuera. Seis scripts se partieron en construir y medir (bronze, silver, benchmark_formats,
-table_format, indexes, backup); su `main()` hace lo mismo que antes.
+**La maquinaria**, en `src/orchestration/`:
 
-**Lo que destapó la primera reconstrucción (13 de 14 tablas iguales, puertas en rojo):**
+| Fichero | Qué |
+|---|---|
+| `definitions.py` | 27 activos (24 construibles y 3 crudos), 31 dependencias, 13 comprobaciones (11 de dbt, el contrato del 16 sobre la plata, la restauración del 22 sobre la copia). El bronce va por días, 214 de calendario; el clima con 3 reintentos exponenciales |
+| `construye.py` | lo construye todo desde el CSV, en orden. Es lo que usa una máquina recién clonada |
+| `reconstruye.py` | la prueba: aparta `lake/` a `lake_antes/`, llama a `construye_todo()`, compara por contenido (recuento y suma de `hash(fila)`), por bytes los Parquet y lo versionado, pasa las puertas, rellena un día, y solo si todo cuadra borra `lake_antes/` |
+| `hilos.py` | el experimento que separa las dos causas (abajo) |
+| `abre.py` | la interfaz en el puerto 3029, con `DAGSTER_HOME=dagster_home` |
 
-1. **Dependencia escondida:** `weather.py` lee la plata para las correlaciones del módulo 15. En el
-   grafo el clima no dependía de la plata, Dagster lo corrió antes, y el script escribió `null` en
-   siete cifras publicadas **sin quejarse**. A mano no se veía porque el 15 siempre iba después del
-   14. Arreglo: separar construir (descarga y bronce) de analizar, y que `main()` se niegue sin plata.
-2. **DuckDB no escribe dos veces los mismos bytes con varios hilos.** Mismas filas, otro orden y
-   otro reparto en ficheros: bronce 198 de 212 idénticos, plata 0 (404 contra 414 ficheros).
-   Consecuencias medidas: **5 de 4.416 horas de `oro_horas` cambian una centésima** (la media en coma
-   flotante cae justo en la mitad del redondeo y el orden de la suma la manda a un lado u otro), y
-   los pesos exactos de columna del módulo 7 se mueven hasta 2 KB (check_sql en rojo).
-3. **Con `SET threads = 1` salen idénticos byte a byte** (bronce 212 de 212, plata 400 de 400),
-   unos dos segundos más. **Y la plata baja de ~24 MB a 22,08 MB**: el escritor en paralelo la
-   inflaba. El bronce se queda en 22,05.
+`dagster_home/dagster.yaml` apaga la telemetría: leído en su código, va encendida si no se dice.
+`src/escritura.py` tiene `un_solo_hilo(con)`. **Regla del orquestador: lo que corre tiene que dar
+lo mismo cada vez**, así que seis scripts se partieron en construir y medir (bronze, silver,
+benchmark_formats, table_format, indexes, backup) y `weather.py` en `construye()` y `main()`.
 
-**Cifras publicadas que dependen del tamaño inflado de la plata, a corregir:**
-- m14: «23,85 MB contra 22,06 del bronce, casi dos megas por ver los agujeros». Pasaría a centésimas.
-- m19: «23,8 MB en Parquet contra 267,8 en el servidor, 11,2 veces» (tres sitios y la figura).
-- m22: «la copia (22,2 MB) pesa menos incluso que los 23,8 del Parquet». **Se da la vuelta.**
-- m07: los bytes exactos de la salida de `parquet_metadata` (el fichero cambia con el bronce).
+**Lo que destapó la primera reconstrucción (13 de 14 tablas iguales):**
 
-**Plan en marcha:** escritura determinista en bronce y plata; separar weather.py; reconstruir y
-comparar contra el lago actual; volver a medir m14, m19 y m07 y corregir las lecciones (y sus
-gemelas inglesas); segunda reconstrucción que tiene que salir idéntica byte a byte; después figura,
-lección 29 y temario. `lake_antes/` (el lago original) se guarda hasta el final. **Nada se sube sin
-el visto bueno de Kevin.**
+1. **Dependencia escondida:** `weather.py` leía la plata para el módulo 15 y el grafo no lo decía.
+   Corrido antes que la plata, escribió `null` en siete cifras publicadas sin quejarse. Ahora el
+   orquestador solo llama a `construye()`, y `main()` se niega sin plata.
+2. **DuckDB escribía las mismas filas en otros ficheros y en otro orden cada vez.** `hilos.py` lo
+   separa en dos causas: **el orden de las filas** decide las medias y casi todo el tamaño (la plata
+   salía revuelta: unos 24 MB, algunas medias horarias saltaban una centésima), y **los hilos**
+   deciden si los bytes se repiten. La plata va ahora con `ORDER BY r.timestamp` y un hilo; el
+   bronce con un hilo. Plata: **21,88 MB en 214 ficheros**, uno por día. Bronce: 22,05.
+3. **Correcciones publicadas** (97ba99f), cada lección dice qué decía: m14 (los huecos cuestan
+   **1,38 MB** medidos aparte, no «casi dos megas»; la plata pesa menos que el bronce), m19 (**12,2
+   veces**, 21,9 contra 267,8), m22 (la copia de 22,2 pesa **un poco más** que el Parquet, no menos),
+   m07 (16,84 MB, pesos de columna nuevos, el factor de siete columnas baja de 25 a 22). El 15 y
+   todo el gemelo salieron **idénticos**.
+4. **El README no tenía `weather.py` ni `failures.py`** en su tabla de reconstrucción. Arreglado.
+
+**La prueba final: 14 de 14 tablas, 642 de 642 Parquet byte a byte, 0 ficheros versionados
+distintos, 13 de 13 comprobaciones, 10 de 10 puertas; el 5 de junio rehecho idéntico sin tocar
+los otros 211.** Unos 5 minutos. **La cifra del 29 es «14 de 14»**, no minutos: el manual prohíbe
+tiempos en la prosa, igual que se decidió en el 22.
+
+**Tropiezos que conviene recordar:**
+- Volver a correr `db/load_silver.py` recrea `lecturas` y **se lleva el esquema, el índice y los
+  permisos**. Se arregla pidiéndole a Dagster lo que cuelga de `servidor/lecturas`, sin volver a
+  cronometrar el 20, el 21 ni el 22.
+- `lake_*/` va en `.gitignore`: `lake_original/` pesaba 1,1 GB y salía como carpeta sin ignorar.
+- Una negrita que cruza un salto de línea dentro de una viñeta **sale con los asteriscos**, y
+  ninguna puerta lo ve. Se cazó mirando la página.
+- El scratchpad tenía un `huecos.py` viejo de otra sesión y se ejecutó en lugar del parche.
+
+**Pendiente de Kevin:** mirar la página del 29 y su figura (la ventana estaba minimizada y no hubo
+captura), y el visto bueno para subir el repo y el portafolio.
 
 ## Riesgos declarados
 
@@ -1063,6 +1079,8 @@ el visto bueno de Kevin.**
 | 2026-09-18 | **El repo público lleva código y lecciones**, con todo el historial y la cita CC BY 4.0 |
 | 2026-09-18 | **Las partes 1 a 6 se publican ya** en el portafolio; 29 a 31 se añaden al cerrarse |
 | 2026-09-18 | **El repo público es `kmortizva-data/fuelle`**, creado por Kevin en la web |
+| 2026-09-19 | **La cifra del 29 es «14 de 14»** y no minutos: el manual prohíbe tiempos en la prosa, como en el 22 |
+| 2026-09-19 | **Todo lo que escribe el lago es determinista**: un hilo, y la plata en orden de tiempo. Las lecciones que dependían del escritor en paralelo se corrigen diciendo qué decían |
 
 ## Decisiones pendientes de Kevin
 

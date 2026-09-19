@@ -260,12 +260,12 @@ que se repite es cada «igual».
   1. las huellas del lago de ahora, tabla a tabla
      14 tablas y versiones, 642 ficheros Parquet
   2. el lago entero pasa a lake_antes/: desde aquí, no hay lago
-  3. Dagster lo construye todo
-     bien  el bronce, los 214 días en una corrida       27.4 s
-     bien  el resto del lago, con el oro de dbt         54.9 s
-     bien  lo que consultan las lecciones                6.9 s
-     bien  el gemelo, de la física al veredicto         50.6 s
-     bien  PostgreSQL, desde initdb                    150.0 s
+  3. Dagster lo construye todo, con los mismos pasos que construye.py
+     bien  el bronce, los 214 días en una corrida       26.0 s
+     bien  el resto del lago, con el oro de dbt         51.4 s
+     bien  lo que consultan las lecciones                5.3 s
+     bien  el gemelo, de la física al veredicto         45.0 s
+     bien  PostgreSQL, desde initdb                    146.2 s
   4. las huellas del lago nuevo, y la comparación
      igual    lago/bronce                          1,516,948 filas
      igual    lago/clima                               5,136 filas
@@ -291,7 +291,7 @@ que se repite es cada «igual».
      igual    el día rehecho, byte a byte
      211 de 211 ficheros de los otros días, sin tocar
   todo igual: lake_antes/ borrado
-  4.8 minutos en total
+  4.6 minutos en total
 ```
 
 ### Paso 13. Escribir con un solo hilo

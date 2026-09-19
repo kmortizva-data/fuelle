@@ -18,18 +18,18 @@
   "ficheros_versionados_distintos": 0,
   "puertas_en_verde": 10,
   "minutos": {
-    "lago": 1.4,
+    "lago": 1.3,
     "lecciones": 0.1,
-    "gemelo": 0.8,
-    "servidor": 2.5
+    "gemelo": 0.7,
+    "servidor": 2.4
   },
-  "minutos_en_total": 4.8,
+  "minutos_en_total": 4.6,
   "relleno": {
     "dia": "2020-06-05",
     "igual_byte_a_byte": true,
     "ficheros_de_otros_dias": 211,
     "sin_tocar": 211,
-    "segundos": 7.6
+    "segundos": 6.6
   },
   "huellas": {
     "lago/bronce": [
