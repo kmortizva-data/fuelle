@@ -8,7 +8,7 @@ module: 7
 - Asking for one column comes out **54 times** faster in Parquet than in the CSV.
 - The advantage **shrinks** when the question uses more columns: from 54 times to **25**.
 - A Parquet's weight is not in the rows: the `timestamp` column is **30.4 %** of the file.
-- The same 1,516,948 rows take **16.83 MB with 17 columns and 0.03 MB with 2**.
+- The same 1,516,948 rows take **16.84 MB with 17 columns and 0.03 MB with 2**.
 
 ## What this module solves
 
@@ -130,9 +130,9 @@ With that question and two others, the benchmark prints this:
 ```salida
 Three questions, two formats, median of 7 runs each.
   question                 CSV   Parquet    factor
-  contar_filas          0.552s   0.0043s    128.7x
-  una_columna           0.594s   0.0111s     53.6x
-  siete_columnas        0.680s   0.0274s     24.8x
+  contar_filas          0.553s   0.0031s    180.6x
+  una_columna           0.561s   0.0104s     54.0x
+  siete_columnas        0.616s   0.0285s     21.6x
 ```
 
 Look at the CSV column: its three times are nearly equal. It makes no difference what you ask,
@@ -162,12 +162,12 @@ ORDER BY comprimido DESC | largest to smallest; DESC is descending
 │     columna     │ comprimido │ sin_comprimir │
 │     varchar     │   int128   │    int128     │
 ├─────────────────┼────────────┼───────────────┤
-│ timestamp       │    5284726 │      12135987 │
-│ Oil_temperature │    1971125 │       2147372 │
-│ TP3             │    1944693 │       2223233 │
-│ Reservoirs      │    1942403 │       2222913 │
-│ H1              │    1804798 │       2162780 │
-│ source_index    │    1651898 │      12135987 │
+│ timestamp       │    5284328 │      12135987 │
+│ Oil_temperature │    1971208 │       2146701 │
+│ TP3             │    1952900 │       2222852 │
+│ Reservoirs      │    1950754 │       2222524 │
+│ H1              │    1805401 │       2162400 │
+│ source_index    │    1643185 │      12135987 │
 └─────────────────┴────────────┴───────────────┘
 ```
 
@@ -176,14 +176,14 @@ and counts the distinct values of each column:
 
 ```salida
   column                    KB   % file   distinct
-  timestamp             5160.9     30.4  1,516,948
-  Oil_temperature       1924.9     11.3      2,462
-  TP3                   1899.1     11.2      3,683
-  source_index          1613.2      9.5  1,516,948
-  Motor_current         1154.1      6.8      1,809
-  TP2                    887.5      5.2      5,257
-  Towers                  42.3      0.2          2
-  COMP                    28.7      0.2          2
+  timestamp             5160.5     30.4  1,516,948
+  Oil_temperature       1925.0     11.3      2,462
+  TP3                   1907.1     11.2      3,683
+  source_index          1604.7      9.4  1,516,948
+  Motor_current         1151.9      6.8      1,809
+  TP2                    886.9      5.2      5,257
+  Towers                  42.2      0.2          2
+  COMP                    28.6      0.2          2
   LPS                      1.7      0.0          2
 ```
 
@@ -206,10 +206,10 @@ SELECT CAST(timestamp AS DATE) AS day, COMP | keeps two columns: the day and one
 ```
 
 ```salida
-  las 17 columns ->  16.83 MB   la contabilidad predecia 16,985.4 KB, midio 17,235.4 KB
-       5 columns ->   9.04 MB   la contabilidad predecia 9,130.3 KB, midio 9,257.0 KB
-       4 columns ->   4.00 MB   la contabilidad predecia 3,969.4 KB, midio 4,095.0 KB
-       2 columns ->   0.03 MB   la contabilidad predecia 28.7 KB, midio 34.4 KB
+  las 17 columns ->  16.84 MB   la contabilidad predecia 16,995.3 KB, midio 17,245.4 KB
+       5 columns ->   9.04 MB   la contabilidad predecia 9,135.0 KB, midio 9,261.8 KB
+       4 columns ->   4.00 MB   la contabilidad predecia 3,974.5 KB, midio 4,100.2 KB
+       2 columns ->   0.03 MB   la contabilidad predecia 28.6 KB, midio 34.3 KB
 ```
 
 The number of rows does not change in any of the four. It is always 1,516,948.
@@ -222,7 +222,7 @@ The number of rows does not change in any of the four. It is always 1,516,948.
 across the three questions.
 
 **What came out.** It won, and the advantage is **not** similar. With one column it is **54
-times**, and with seven it drops to **25 times**. The module's figure is the first, because
+times**, and with seven it drops to **22 times**. The module's figure is the first, because
 asking for a single column is the normal case.
 
 That slope is the definition of columnar, measured. The more columns the question asks for, the
@@ -232,11 +232,11 @@ advantage would keep falling.
 **And counting rows is left out of that comparison on purpose.** Parquet reads not one datum to
 answer it: the number of rows is written in the file's header. So what is compared there is not
 two ways of reading, it is reading 208 MB against reading nothing. The factor comes out enormous
-and it also **bounces a great deal between runs**: in this one it was **129 times** and in
-another it was more than double that. Parquet's side sits at the floor of what the clock
+and it also **bounces a great deal between runs**: in the run this lesson publishes it was **181 times**,
+and in the one before, 129. Parquet's side sits at the floor of what the clock
 resolves, so that number heads nothing.
 
-**And the result nobody expected.** The same **1,516,948 rows** take **16.83 MB with the 17
+**And the result nobody expected.** The same **1,516,948 rows** take **16.84 MB with the 17
 columns and 0.03 MB with 2**. Five hundred and sixty one times less, without removing a single
 row.
 
@@ -256,7 +256,7 @@ The eight digital ones are at the opposite extreme. They are only zero or one, s
 those two values once and then references. `LPS` in full weighs less than two kilobytes.
 
 And a check that this accounting is trustworthy. The script adds up what the four columns of the
-ladder's third row weigh and gets **3,969.4 KB**, while that file measures **4,095.0 KB**. The
+ladder's third row weigh and gets **3,974.5 KB**, while that file measures **4,100.2 KB**. The
 deviation is **3.1 %** and it is the file's own header. Put another way: the split by columns
 predicts the size before writing it.
 
@@ -297,13 +297,13 @@ By rows, each record goes complete and the next one follows. By columns, all the
 column go together and then the next column starts. The content is the same and what changes is
 what has to be read to answer a question.
 
-### Why does Parquet's advantage drop from 54 times to 25
+### Why does Parquet's advantage drop from 54 times to 22
 
 Because the advantage consists of not reading the columns that are not asked for. With a single
 column, one seventeenth of the file gets read. Asking for seven of seventeen means reading nearly
 half of it already, and the advantage shrinks to what the binary format contributes over text.
 
-### The same rows take 16.83 MB or 0.03 MB. How can that be
+### The same rows take 16.84 MB or 0.03 MB. How can that be
 
 Because the weight comes from repetition, not from the row count. The two column version stores
 the day and a signal that is only zero or one, and both repeat a great deal, so they compress to

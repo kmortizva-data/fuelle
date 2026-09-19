@@ -7,7 +7,7 @@ module: 19
 - Until now the database was **a file**. Now it is **a service** you have to start.
 - Handing it the **1,841,760** readings costs **about 20 s**. The file already had them.
 - And the surprise: answering **does not get faster**. The ranges overlap, so they do not differ.
-- What does change is disk: **23.8 MB** in Parquet against **267.8** in the server.
+- What does change is disk: **21.9 MB** in Parquet against **267.8** in the server.
 - The table we just created accepts any nonsense. That is module 20.
 
 ## What this module solves
@@ -166,7 +166,7 @@ fh.read(1 << 20) | it goes a megabyte at a time, so 190 MB never sit in memory
   1,841,760 filas en el servidor
 ```
 
-The intermediate CSV weighs **190.0 MB** for data that takes 23.8 in Parquet. It is module 7 again:
+The intermediate CSV weighs **190.0 MB** for data that takes 21.9 in Parquet. It is module 7 again:
 text compresses badly, and here you pay for it twice, on disk and in what has to be pushed down the
 connection.
 
@@ -221,12 +221,12 @@ What does separate, and by a lot, is everything else:
 | What | A file | A service |
 |---|---|---|
 | Having it ready | it already was | **about 20 s** of loading |
-| On disk | 23.8 MB | **267.8 MB** |
+| On disk | 21.9 MB | **267.8 MB** |
 | Starting it | nothing | a process kept up |
 | Several at once | no | yes |
 | Per user permissions | no | yes |
 
-**Eleven times more disk.** **11.2** to be exact, for the very same readings. And the whole cluster
+**Twelve times more disk.** **12.2** to be exact, for the very same readings. This lesson used to say eleven, with the silver DuckDB wrote back then with several threads, which came out inflated: module 29 found it. And the whole cluster
 folder goes past the gigabyte, because besides the table it keeps the write ahead log that lets it
 lose nothing when the power goes.
 
@@ -295,7 +295,7 @@ table already armoured would hide module 20's lesson, that a database protects a
 until you tell it what is impossible. It is module 4's criterion, which partitions by day knowing
 full well it is the worst option.
 
-### The server takes eleven times more for the same data. In exchange for what
+### The server takes twelve times more for the same data. In exchange for what
 
 For being able to recover. Much of that weight is the write ahead log, which notes every change
 before applying it so a power cut does not leave the table half written. A Parquet offers nothing

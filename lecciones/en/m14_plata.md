@@ -222,12 +222,19 @@ compressor starting. The first four readings after the hole are the ones from st
 pressure climbing from 7.212 to 7.79 bar in four slots.
 
 **What it means.** Bronze looked complete because it had no way to show what it was missing.
-Putting the data on a grid adds no information: it **turns an absence into something countable**.
-That is why the silver layer weighs 23.85 MB against bronze's 22.06.
+Putting the data on a grid adds no information: it **turns an absence into something countable**,
+and counting it has a price. The same silver written without its empty slots takes 20.49 MB
+instead of 21.88: **the holes cost 1.38 MB**.
 
-That is the price: nearly two megabytes for being able to see the holes. In exchange, comparing a
-row with the previous one stops depending on whether the clock jumped, and that is all the twin
-will ever do.
+This lesson used to say they cost nearly two megabytes, and it measured that by subtracting bronze
+from silver. That subtraction does not measure the holes, because silver changes several things at
+once: it rounds, it merges readings and it drops the original index column. And the silver of
+back then came out inflated, because DuckDB wrote it with several threads at once. Module 29 found
+that out by deleting the lake and rebuilding it. Today the whole of silver weighs less than
+bronze: 21.88 MB against 22.05.
+
+In exchange for that price, comparing a row with the previous one stops depending on whether the
+clock jumped, and that is all the twin will ever do.
 
 **And the check that matters.** Silver holds bronze's **1,516,948** readings, not one fewer,
 spread across its 1,504,107 slots. The script refuses to finish if that count does not come out,
@@ -290,8 +297,9 @@ Merge them and leave a trace. Analogue signals get averaged and digital ones tak
 because a valve open at any instant of those ten seconds was open. And a column keeps how many
 readings there were, so nobody meets an average thinking it is a measurement.
 
-### Silver takes more space than bronze. What is it for, then
+### The holes take up space. What are they for, then
 
-For the holes to exist. Bronze looked complete because it had no rows where data was missing, and
-only subtracting timestamps could tell you. Silver has 337,653 rows saying "nothing here", and
-that is the entire overhead: nearly two megabytes for being able to count what is missing.
+For them to exist. Bronze looked complete because it had no rows where data was missing, and only
+subtracting timestamps could tell you. Silver has 337,653 rows saying "nothing here", and they cost
+1.38 MB, measured by writing the same silver without them. That is the price of being able
+to count what is missing.

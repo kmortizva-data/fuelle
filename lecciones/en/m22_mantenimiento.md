@@ -6,7 +6,7 @@ module: 22
 
 - A server can decide **who gets in and to what**. A read only role is created and asked to delete.
 - It cannot: `permission denied for table lecturas`. A permission never seen refusing does not count.
-- The database's backup weighs **22.2 MB**, less than the Parquet it came from.
+- The database's backup weighs **22.2 MB**, twelve times less than the table inside the server.
 - And it gets really restored, into another database, comparing **count and fingerprint** table by table.
 - Both match, and so do the **12** guards. That is now a backup.
 
@@ -177,7 +177,10 @@ That row gets asked of both databases and compared. If they do not match, the ba
 **What we expected.** That the backup would weigh something like the database.
 
 **What came out.** That it weighs **22.2 MB** when the table inside the server takes **267.8**.
-Twelve times less, and **less even than the 23.8 MB of Parquet** everything came from.
+Twelve times less, and **nearly the same as the 21.9 MB of Parquet** everything came from,
+because both keep only the data, compressed. This lesson used to say "less even than the Parquet",
+and that was because the Parquet of back then came out inflated: module 29 corrected it and the
+comparison turned around.
 
 There is no magic: the dump keeps the data compressed and **keeps none of the machinery** module 19
 was paying for. No write ahead log, no space the table reserves to grow into, no indexes, which get
@@ -239,7 +242,7 @@ That it is not a superuser, and that it gets only the permissions it needs: conn
 and read the tables. And then, trying to write with it. If the `DELETE` goes through the role is
 decoration, and that is only found out by trying.
 
-### Why the backup weighs less than the original Parquet
+### Why the backup weighs twelve times less than the server's table
 
 Because it keeps the data compressed and none of the server's machinery. Out goes the write ahead
 log, out goes the space reserved to grow into, and out go the indexes, which get rebuilt on

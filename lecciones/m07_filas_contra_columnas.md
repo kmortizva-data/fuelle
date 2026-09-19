@@ -8,7 +8,7 @@ module: 7
 - Preguntar por una columna sale **54 veces** más rápido en Parquet que en el CSV.
 - La ventaja **se encoge** cuando la pregunta usa más columnas: de 54 veces a **25**.
 - El peso de un Parquet no está en las filas: la columna `timestamp` es el **30,4 %** del fichero.
-- Las mismas 1.516.948 filas ocupan **16,83 MB con 17 columnas y 0,03 MB con 2**.
+- Las mismas 1.516.948 filas ocupan **16,84 MB con 17 columnas y 0,03 MB con 2**.
 
 ## Qué resuelve este módulo
 
@@ -130,9 +130,9 @@ Con esa pregunta y otras dos, el banco de pruebas imprime esto:
 ```salida
 Three questions, two formats, median of 7 runs each.
   question                 CSV   Parquet    factor
-  contar_filas          0.552s   0.0043s    128.7x
-  una_columna           0.594s   0.0111s     53.6x
-  siete_columnas        0.680s   0.0274s     24.8x
+  contar_filas          0.553s   0.0031s    180.6x
+  una_columna           0.561s   0.0104s     54.0x
+  siete_columnas        0.616s   0.0285s     21.6x
 ```
 
 Fíjate en la columna del CSV: sus tres tiempos son casi iguales. Da lo mismo lo que preguntes,
@@ -162,12 +162,12 @@ ORDER BY comprimido DESC | de mayor a menor; DESC es descendente
 │     columna     │ comprimido │ sin_comprimir │
 │     varchar     │   int128   │    int128     │
 ├─────────────────┼────────────┼───────────────┤
-│ timestamp       │    5284726 │      12135987 │
-│ Oil_temperature │    1971125 │       2147372 │
-│ TP3             │    1944693 │       2223233 │
-│ Reservoirs      │    1942403 │       2222913 │
-│ H1              │    1804798 │       2162780 │
-│ source_index    │    1651898 │      12135987 │
+│ timestamp       │    5284328 │      12135987 │
+│ Oil_temperature │    1971208 │       2146701 │
+│ TP3             │    1952900 │       2222852 │
+│ Reservoirs      │    1950754 │       2222524 │
+│ H1              │    1805401 │       2162400 │
+│ source_index    │    1643185 │      12135987 │
 └─────────────────┴────────────┴───────────────┘
 ```
 
@@ -176,14 +176,14 @@ cuenta los valores distintos de cada columna:
 
 ```salida
   column                    KB   % file   distinct
-  timestamp             5160.9     30.4  1,516,948
-  Oil_temperature       1924.9     11.3      2,462
-  TP3                   1899.1     11.2      3,683
-  source_index          1613.2      9.5  1,516,948
-  Motor_current         1154.1      6.8      1,809
-  TP2                    887.5      5.2      5,257
-  Towers                  42.3      0.2          2
-  COMP                    28.7      0.2          2
+  timestamp             5160.5     30.4  1,516,948
+  Oil_temperature       1925.0     11.3      2,462
+  TP3                   1907.1     11.2      3,683
+  source_index          1604.7      9.4  1,516,948
+  Motor_current         1151.9      6.8      1,809
+  TP2                    886.9      5.2      5,257
+  Towers                  42.2      0.2          2
+  COMP                    28.6      0.2          2
   LPS                      1.7      0.0          2
 ```
 
@@ -206,10 +206,10 @@ SELECT CAST(timestamp AS DATE) AS day, COMP | se queda con dos columnas: el día
 ```
 
 ```salida
-  las 17 columns ->  16.83 MB   la contabilidad predecia 16,985.4 KB, midio 17,235.4 KB
-       5 columns ->   9.04 MB   la contabilidad predecia 9,130.3 KB, midio 9,257.0 KB
-       4 columns ->   4.00 MB   la contabilidad predecia 3,969.4 KB, midio 4,095.0 KB
-       2 columns ->   0.03 MB   la contabilidad predecia 28.7 KB, midio 34.4 KB
+  las 17 columns ->  16.84 MB   la contabilidad predecia 16,995.3 KB, midio 17,245.4 KB
+       5 columns ->   9.04 MB   la contabilidad predecia 9,135.0 KB, midio 9,261.8 KB
+       4 columns ->   4.00 MB   la contabilidad predecia 3,974.5 KB, midio 4,100.2 KB
+       2 columns ->   0.03 MB   la contabilidad predecia 28.6 KB, midio 34.3 KB
 ```
 
 El número de filas no cambia en ninguna de las cuatro. Es siempre 1.516.948.
@@ -222,7 +222,7 @@ El número de filas no cambia en ninguna de las cuatro. Es siempre 1.516.948.
 preguntas.
 
 **Qué salió.** Ganó, y la ventaja **no** es parecida. Con una columna es de **54 veces**, y con
-siete baja a **25 veces**. La cifra del módulo es la primera, porque preguntar por una sola
+siete baja a **22 veces**. La cifra del módulo es la primera, porque preguntar por una sola
 columna es el caso normal.
 
 Esa pendiente es la definición de columnar, medida. Cuantas más columnas pide la pregunta, más se
@@ -232,11 +232,11 @@ cayendo.
 **Y contar filas queda fuera de esa comparación a propósito.** Parquet no lee ni un dato para
 contestarla: el número de filas está escrito en la cabecera del fichero. Así que ahí no se
 comparan dos formas de leer, se compara leer 208 MB contra no leer nada. El factor sale enorme y
-además **baila mucho entre corridas**: en esta salió de **129 veces** y en otra pasó del doble.
+además **baila mucho entre corridas**: en la corrida que publica esta lección salió de **181 veces**, y en la anterior de 129.
 El lado de Parquet está en el suelo de lo que el reloj distingue, así que ese número no titula
 nada.
 
-**Y el resultado que no esperaba nadie.** Las mismas **1.516.948 filas** ocupan **16,83 MB con
+**Y el resultado que no esperaba nadie.** Las mismas **1.516.948 filas** ocupan **16,84 MB con
 las 17 columnas y 0,03 MB con 2**. Quinientas sesenta y una veces menos, sin quitar una sola fila.
 
 {{FIG:fig_m07_filas_vs_columnas}}
@@ -255,8 +255,8 @@ Las ocho digitales están en el extremo contrario. Solo valen cero o uno, así q
 guarda esos dos valores una vez y luego referencias. `LPS` entera pesa menos de dos kilobytes.
 
 Y una comprobación de que esa contabilidad es de fiar. El script suma lo que pesan las cuatro
-columnas de la tercera fila de la escalera y le salen **3.969,4 KB**, mientras que ese fichero
-mide **4.095,0 KB**. El desvío es del **3,1 %** y es la cabecera del propio fichero. Dicho de
+columnas de la tercera fila de la escalera y le salen **3.974,5 KB**, mientras que ese fichero
+mide **4.100,2 KB**. El desvío es del **3,1 %** y es la cabecera del propio fichero. Dicho de
 otro modo: el reparto por columnas predice el tamaño antes de escribirlo.
 
 ## Ojo
@@ -297,13 +297,13 @@ Por filas, cada registro va completo y detrás va el siguiente. Por columnas, to
 una misma columna van juntos y luego empieza la siguiente columna. El contenido es el mismo y lo
 que cambia es qué hace falta leer para contestar una pregunta.
 
-### Por qué la ventaja de Parquet baja de 54 veces a 25
+### Por qué la ventaja de Parquet baja de 54 veces a 22
 
 Porque la ventaja consiste en no leer las columnas que no se piden. Con una sola columna se lee
 una diecisieteava parte del fichero. Pidiendo siete de diecisiete ya hay que leer casi la mitad,
 y la ventaja se encoge hasta lo que aporta el formato binario frente al texto.
 
-### Las mismas filas ocupan 16,83 MB o 0,03 MB. Cómo puede ser
+### Las mismas filas ocupan 16,84 MB o 0,03 MB. Cómo puede ser
 
 Porque el peso lo pone la repetición, no el recuento de filas. La versión de dos columnas guarda
 el día y una señal que solo vale cero o uno, y las dos repiten muchísimo, así que se comprimen

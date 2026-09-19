@@ -6,7 +6,7 @@ module: 22
 
 - Un servidor puede decidir **quién entra y a qué**. Se crea un rol de solo lectura y se le pide borrar.
 - No puede: `permission denied for table lecturas`. Un permiso que no se ha visto negar no cuenta.
-- La copia de la base pesa **22,2 MB**, menos que el Parquet del que salió.
+- La copia de la base pesa **22,2 MB**, doce veces menos que la tabla dentro del servidor.
 - Y se restaura de verdad, en otra base, comparando **recuento y huella** tabla por tabla.
 - Coinciden las dos, y también las **12** guardas. Eso ya es una copia de seguridad.
 
@@ -177,7 +177,10 @@ Esa fila se pide a las dos bases y se comparan. Si no coinciden, la copia no val
 **Qué esperábamos.** Que la copia pesara algo parecido a la base.
 
 **Qué salió.** Que pesa **22,2 MB** cuando la tabla dentro del servidor ocupa **267,8**. Doce veces
-menos, y **menos incluso que los 23,8 MB del Parquet** del que salió todo.
+menos, y **casi lo mismo que los 21,9 MB del Parquet** del que salió todo, porque los dos
+guardan solo los datos, comprimidos. Esta lección decía «menos incluso que el Parquet», y era
+porque el Parquet de entonces salía inflado: el módulo 29 lo corrigió y la comparación se dio la
+vuelta.
 
 No hay magia: el volcado guarda los datos comprimidos y **no guarda nada de la maquinaria** que el
 módulo 19 pagaba. Ni el registro de transacciones, ni el espacio que la tabla reserva para crecer,
@@ -240,7 +243,7 @@ Que no sea superusuario, y que reciba solo los permisos necesarios: conectar, ve
 leer las tablas. Y después, intentar escribir con él. Si el `DELETE` pasa, el rol es decoración, y
 eso solo se descubre probándolo.
 
-### Por qué la copia pesa menos que el Parquet original
+### Por qué la copia pesa doce veces menos que la tabla del servidor
 
 Porque guarda los datos comprimidos y nada de la maquinaria del servidor. Fuera el registro de
 transacciones, fuera el espacio reservado para crecer y fuera los índices, que se reconstruyen al

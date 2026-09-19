@@ -219,10 +219,17 @@ de 7,212 a 7,79 bar en cuatro casillas.
 
 **Qué significa.** El bronce parecía completo porque no tenía forma de enseñar lo que le faltaba.
 Poner el dato en una rejilla no añade información: **convierte una ausencia en algo que se puede
-contar**. Por eso la capa de plata pesa 23,85 MB contra los 22,06 del bronce.
+contar**, y contarla tiene un precio. La misma plata escrita sin sus casillas vacías ocupa
+20,49 MB en vez de 21,88: **los huecos cuestan 1,38 MB**.
 
-Eso es lo que se paga: casi dos megas por poder ver los agujeros. A cambio, comparar una fila con
-la anterior deja de depender de si el reloj saltó, y eso es todo lo que hará el gemelo.
+Esta lección decía antes que costaban casi dos megas, y los medía restando la plata menos el
+bronce. Esa resta no mide los huecos, porque la plata cambia varias cosas a la vez: redondea, junta
+lecturas y no lleva la columna del índice original. Y la plata de entonces salía inflada, porque
+DuckDB la escribía con varios hilos a la vez. Lo destapó el módulo 29 al borrar el lago y
+reconstruirlo. Hoy la plata entera pesa menos que el bronce: 21,88 MB contra 22,05.
+
+A cambio de ese precio, comparar una fila con la anterior deja de depender de si el reloj saltó, y
+eso es todo lo que hará el gemelo.
 
 **Y la comprobación que importa.** La plata conserva las **1.516.948** lecturas del bronce, ni una
 menos, repartidas en sus 1.504.107 casillas. El script se niega a terminar si esa cuenta no sale,
@@ -284,8 +291,9 @@ Fundirlas dejando rastro. Las analógicas se promedian y las digitales se quedan
 porque una válvula abierta en algún instante de esos diez segundos estuvo abierta. Y una columna
 guarda cuántas lecturas había, para que nadie se encuentre un promedio creyendo que es una medida.
 
-### La plata ocupa más que el bronce. Para qué sirve entonces
+### Los huecos ocupan sitio. Para qué sirven entonces
 
-Para que los huecos existan. El bronce parecía completo porque no tenía filas donde faltaban
-datos, y solo restando marcas de tiempo se podía saber. La plata tiene 337.653 filas que dicen
-«aquí no hay nada», y ese es todo el sobrecoste: casi dos megas por poder contar lo que falta.
+Para que existan. El bronce parecía completo porque no tenía filas donde faltaban datos, y solo
+restando marcas de tiempo se podía saber. La plata tiene 337.653 filas que dicen «aquí no hay
+nada», y cuestan 1,38 MB, medidos escribiendo la misma plata sin ellas. Es lo que se paga
+por poder contar lo que falta.

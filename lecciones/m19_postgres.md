@@ -7,7 +7,7 @@ module: 19
 - Hasta aquí la base de datos era **un fichero**. Ahora es **un servicio** que hay que arrancar.
 - Pasarle las **1.841.760** lecturas cuesta **unos 20 s**. Al fichero ya las tenía.
 - Y la sorpresa: responder **no va más rápido**. Los rangos se pisan, así que no se distinguen.
-- Lo que sí cambia es el disco: **23,8 MB** en Parquet contra **267,8** en el servidor.
+- Lo que sí cambia es el disco: **21,9 MB** en Parquet contra **267,8** en el servidor.
 - La tabla que acabamos de crear acepta cualquier disparate. Eso es el módulo 20.
 
 ## Qué resuelve este módulo
@@ -167,7 +167,7 @@ fh.read(1 << 20) | se manda de mega en mega, para no cargar 190 MB en memoria
   1,841,760 filas en el servidor
 ```
 
-El CSV intermedio pesa **190,0 MB** para unos datos que en Parquet ocupan 23,8. Es el módulo 7
+El CSV intermedio pesa **190,0 MB** para unos datos que en Parquet ocupan 21,9. Es el módulo 7
 otra vez: el texto no comprime nada y aquí se paga por partida doble, en disco y en lo que hay que
 empujar por la conexión.
 
@@ -222,12 +222,12 @@ Lo que sí se separa, y por mucho, es todo lo demás:
 | Qué | Un fichero | Un servicio |
 |---|---|---|
 | Tenerlo listo | ya lo estaba | **unos 20 s** de carga |
-| En disco | 23,8 MB | **267,8 MB** |
+| En disco | 21,9 MB | **267,8 MB** |
 | Arrancarlo | nada | un proceso levantado |
 | Varios a la vez | no | sí |
 | Permisos por usuario | no | sí |
 
-**Once veces más disco.** Concretamente **11,2**, para exactamente las mismas lecturas. Y la
+**Doce veces más disco.** Concretamente **12,2**, para exactamente las mismas lecturas. Esta lección decía once, con la plata que DuckDB escribía entonces con varios hilos y que salía inflada: el módulo 29 lo destapó. Y la
 carpeta entera del clúster pasa del gigabyte, porque además de la tabla guarda el registro de
 transacciones que le permite no perder nada si se va la luz.
 
@@ -298,7 +298,7 @@ Crear la tabla ya blindada escondería la lección del módulo 20: una base de d
 nada hasta que le dices qué es imposible. Es el mismo criterio del módulo 4, que particiona por
 día a sabiendas de que es la peor opción.
 
-### El servidor ocupa once veces más para los mismos datos. A cambio de qué
+### El servidor ocupa doce veces más para los mismos datos. A cambio de qué
 
 De poder recuperarse. Buena parte de ese peso es el registro de transacciones, que apunta cada
 cambio antes de aplicarlo para que un corte de luz no deje la tabla a medias. Un Parquet no ofrece
