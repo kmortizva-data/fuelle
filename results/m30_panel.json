@@ -127,6 +127,9 @@
   "ahorro_de_los_caracteres_kb": 2.6,
   "redondeo_por_tramo_peor_min": 72.0,
   "redondeo_acumulado_peor_min": 0.5,
+  "compresion_del_fichero": 10.7,
+  "motor_mb": 8.12,
+  "motor_contra_panel": 314,
   "dia_inicial": {
     "dia": "2020-06-05",
     "clase": "acierto",

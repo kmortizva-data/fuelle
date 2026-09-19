@@ -645,6 +645,12 @@ def main() -> None:
 
     diez = next(p for p in pesos if p["minutos_por_punto"] == MINUTOS_POR_PUNTO)
     uno = next(p for p in pesos if p["minutos_por_punto"] == 1)
+    # El motor SQL del módulo 8, pesado igual que esto en src/site/make_sample.py,
+    # para comparar las dos maneras de llevar datos al lector: precalcular las
+    # respuestas o llevarle el motor para que pregunte lo que quiera.
+    muestra = PROJECT / "results" / "sample.json"
+    motor_mb = (json.load(io.open(muestra, encoding="utf-8")).get("motor_mb")
+                if muestra.exists() else None)
     payload = {
         "dias": len(registros),
         "juzgables": len(por_dia),
@@ -664,6 +670,10 @@ def main() -> None:
             diez["tramos"]["kb_red"] - diez["caracteres"]["kb_red"], 1),
         "redondeo_por_tramo_peor_min": round(peor_por_tramo, 1),
         "redondeo_acumulado_peor_min": round(peor_acumulado, 1),
+        "compresion_del_fichero": round(ficheros["es"]["kb"] / ficheros["es"]["kb_red"], 1),
+        "motor_mb": motor_mb,
+        "motor_contra_panel": (round(motor_mb * 1024 / ficheros["es"]["kb_red"])
+                               if motor_mb else None),
         "dia_inicial": resumen(DIA_INICIAL),
         "dias_que_cuentan": [resumen(d) for d in DIAS_QUE_CUENTAN],
     }

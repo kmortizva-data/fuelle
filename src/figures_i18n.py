@@ -86,6 +86,9 @@ NEUTRAL_PATTERNS = (
     # la barra para que quepan. Son identificadores de definitions.py, y la figura
     # inglesa tiene que enseñar las mismas que la interfaz de Dagster.
     r"^(crudo|lago|lecciones|gemelo|servidor)/ [a-z_]+$",
+    # El eje del módulo 30: puntos por día y cada cuánto va uno, que se escriben
+    # igual en los dos idiomas. El salto de línea se vuelve espacio al normalizar.
+    r"^\d+ \d+ (min|h)$",
 )
 
 # La tabla, escrita en español legible: las claves se normalizan al final del
@@ -338,6 +341,14 @@ TRADUCCIONES: dict[str, str] = {
     "el borde discontinuo: existe, pero aquí no se construye":
         "the circled number: the checks Dagster runs once that asset is built      "
         "the dashed border: it exists, but nothing here builds it",
+    # --- módulo 30, lo que pesa el semestre --------------------------------
+    "el acumulado, en horas con dos decimales": "the running total, in hours with two decimals",
+    "un carácter por tramo": "one character per slot",
+    "los minutos de cada tramo, enteros": "the minutes in each slot, whole",
+    "lo que usa el panel": "what the panel uses",
+    "puntos por día, y cada cuánto va uno (escala logarítmica)":
+        "points per day, and how often one comes (log scale)",
+    "KB por la red (escala logarítmica)": "KB over the network (log scale)",
 }
 
 # Etiquetas construidas con f-strings: llevan un número dentro, así que no se

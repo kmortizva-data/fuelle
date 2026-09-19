@@ -134,5 +134,12 @@
   "m27_residual_en": {
     "1800": "the toy water tank example: 180 min of pump at 10 l/min, chosen so the subtraction works by hand",
     "1200": "the subtraction in the same toy example, 1,800 minus 600"
+  },
+  "m30_panel": {
+    "0.4": "el ejemplo de juguete del redondeo: cinco tramos de 0,4 minutos de carga, elegidos para que redondear cada uno dé cero y el acumulado no",
+    "0.8": "el acumulado del mismo ejemplo de juguete tras dos tramos, 0,4 más 0,4",
+    "1.2": "el acumulado del mismo ejemplo de juguete tras tres tramos",
+    "1.6": "el acumulado del mismo ejemplo de juguete tras cuatro tramos",
+    "2.0": "el acumulado del mismo ejemplo de juguete al final, cinco por 0,4"
   }
 }

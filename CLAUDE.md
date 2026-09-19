@@ -1,7 +1,7 @@
 # Fuelle: un gemelo digital y su lago de datos
 
 > **Proyecto:** Fuelle (ES) / Bellows (EN) · **Carpeta:** `Documents\02_Personal\Portafolio\Fuelle`
-> **Categoría:** personal (portafolio) · **Estado:** parte 7 en curso (29 de 31 en español, 28 en inglés), publicado en el portafolio desde el 2026-09-18 · nació el 2026-08-29
+> **Categoría:** personal (portafolio) · **Estado:** parte 7 en curso (30 de 31 en español, 28 en inglés, y el panel), publicado en el portafolio desde el 2026-09-18 · nació el 2026-08-29
 > Índice de todos los proyectos: `Documents\_INDICE\INDICE.md`
 > Plan aprobado: `~/.claude/plans/proyecto-portafolio-data-lakes-iterative-volcano.md`
 
@@ -1034,19 +1034,54 @@ tiempos en la prosa, igual que se decidió en el 22.
 **Pendiente de Kevin:** mirar la página del 29 y su figura (la ventana estaba minimizada y no hubo
 captura), y el visto bueno para subir el repo y el portafolio.
 
-### Paso 8.3 EN CURSO (2026-09-19): el panel del módulo 30
+### Paso 8.3 (2026-09-19): el panel, y el módulo 30 en español
 
-Plan entero, con lo medido antes de construir, en el plan del proyecto, sección «Paso 8.3 en
-detalle». Lo esencial:
+**30 lecciones de 31 en español, 28 en inglés.** El inglés del 29 y el 30 va en 8.5 con el 31.
+Plan con lo medido antes de construir: plan del proyecto, sección «Paso 8.3 en detalle».
 
-- **Abre en el 5 de junio**: el residual salta a 1,18 a las 10:00 en punto, que es la hora a la que
-  empieza el parte #3. Las dos curvas se separan a la hora del parte.
-- **El peso manda en la escritura, no en la resolución**: el semestre entero a un punto cada diez
-  minutos pesa 58,9 KB comprimido como acumulado con decimales y 12,6 KB como minutos enteros de
-  cada tramo. A un punto por minuto, los tramos siguen pesando menos (31,1) que el acumulado a diez.
-- Un solo renderizador (`src/site/render_panel.py`) y un solo `panel.js` para la página propia y
-  para el bloque ` ```panel ` de la lección. El veredicto de cada día es una frase escrita en Python.
-- **Decisión pendiente de Kevin**: la cifra del 30, con personas o «214 días en N KB».
+**Lo construido**, commit 0fdb50b más el del módulo:
+
+| Pieza | Qué |
+|---|---|
+| `src/twin/panel.py` | escribe `assets/panel/semestre.es.json` y `.en.json` (26,5 KB por la red cada uno) y `results/m30_panel.json`. Se niega si sus cuentas no cuadran con el 28 |
+| `src/site/render_panel.py` | un solo renderizador: la página propia `out/panel.html` y `panel.en.html`, y el bloque ` ```panel ` de las lecciones |
+| `templates/panel.js` | suma minutos y cambia de frase; no decide nada. `panel.html#2020-04-18` abre ese día |
+| `lecciones/panel.md` y `en/panel.md` | el texto de la página propia, que pasa por las puertas de escritura |
+| el índice | una puerta al panel justo debajo de la cabecera |
+
+**Hallazgos medidos, todos en la lección 30:**
+
+1. **Manda la escritura, no la resolución.** A un punto cada diez minutos, el acumulado en horas
+   pesa 44,8 KB por la red y los minutos enteros de cada tramo 14,3 (3,1 veces menos). Los tramos a
+   un punto por minuto, 40,3, siguen pesando menos que el acumulado a diez. Un carácter por tramo
+   ahorra solo 2,6 KB más y exige un decodificador propio: descartado.
+2. **Redondear cada tramo por separado aparta la curva hasta 72 minutos**; redondear el acumulado y
+   restar, 0,5 como mucho. Es el totalizador de una báscula de banda.
+3. **El 5 de junio salta a la hora del parte** (10:00), y por eso el panel abre en él. El 15 de
+   julio es el único con rampa: el residual ya va por 0,37 a medianoche.
+4. El fichero comprime 10,7 veces (284,4 KB en disco) y el motor SQL pesa 314 veces más.
+
+**Las cuentas del panel cuadran con el 28 o no se escribe nada**: 18 días con alarma, 4 de 4 partes,
+12 falsas alarmas con marzo como falsa y 10 sin él, y el mismo residual máximo de cada día.
+
+**La cifra del 30 cambió** de «segundos hasta entender qué pasa» (necesita personas) a **«214 días
+en 26,5 KB»**, y la lección lo dice. Si Kevin la mide con personas, se vuelve a cambiar.
+
+**Fallo de producción cazado mirando la página.** Una negrita que cruza un salto de línea dentro
+de una viñeta salía con los asteriscos a la vista (ya pasó en el 29). La causa era
+`render_lesson.py`, que convertía cada línea por separado; ahora convierte la viñeta entera. Y
+`check_lesson` mira ahora **la página construida**: su primera corrida encontró el mismo fallo
+**ya publicado** en el 9 y el 19 (los dos idiomas) y en el 28 inglés. El arreglo los repara al
+republicar.
+
+**Capturas sin el panel del navegador** (su ventana minimizada no dibuja): Edge sin ventana desde
+PowerShell, con `Start-Process -Wait`. Edge no baja de unos 500 px de ancho, así que el móvil se
+captura metiendo la página en un marco de 375 px. Las imágenes con carga diferida salen rotas en
+esas capturas y en el navegador real cargan bien: no es un fallo de la página.
+
+**Pendiente:** el enlace al panel en la ficha del portafolio (8.3.g), que Kevin mire el panel, y
+el «sube». **Idea para proponer, no hecha:** el panel como activo de Dagster; hoy queda fuera del
+grafo del 29 y meterlo cambia las cifras publicadas de ese módulo (27 activos).
 
 ## Riesgos declarados
 
@@ -1099,9 +1134,10 @@ detalle». Lo esencial:
 ## Decisiones pendientes de Kevin
 
 - **El visto bueno antes de cada empuje público**: la ficha y el curso en el portafolio, y el repo.
-- **Medir la cifra del módulo 30**, «segundos hasta entender qué pasa»: enseñar el panel a una o dos
-  personas que no conozcan el proyecto y cronometrar. Si no se puede, la cifra se cambia por una
-  que se mida sola, y se dice en la lección.
+- **La cifra del módulo 30.** Ya cambiada a «214 días en 26,5 KB», que se mide sola, y la lección
+  dice por qué. Si Kevin quiere la de antes, «segundos hasta entender qué pasa», hay que enseñar el
+  panel a una o dos personas que no conozcan el proyecto y cronometrar.
+- **Mirar el panel** con su ojo: `out/panel.html` en local, o la página publicada tras el «sube».
 
 ## Parte 7, el plan (2026-09-18)
 

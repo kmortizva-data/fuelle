@@ -1011,14 +1011,14 @@
       "slug": "m30_panel",
       "parte": 7,
       "title": "El panel del gemelo",
-      "subtitle": "Lo que ve alguien que no va a leer treinta y cinco módulos: una perilla, dos curvas, y el momento en que se separan",
+      "subtitle": "Lo que ve alguien que no va a leer treinta y un módulos: una perilla, dos curvas, y el momento en que se separan",
       "title_en": "The twin's panel",
-      "subtitle_en": "What someone who will not read thirty five modules sees: one knob, two curves, and the moment they part",
+      "subtitle_en": "What someone who will not read thirty one modules sees: one knob, two curves, and the moment they part",
       "cifra": {
-        "value": "por medir",
-        "label": "segundos hasta entender qué pasa",
-        "value_en": "to be measured",
-        "label_en": "seconds to understand what is happening"
+        "value": "214 días en 26,5 KB",
+        "label": "el semestre entero, día a día, lo que baja el navegador sin ningún servidor detrás",
+        "value_en": "214 days in 26.5 KB",
+        "label_en": "the whole semester, day by day, what the browser downloads with no server behind it"
       },
       "accent": {
         "dark": "#D8AC99",
@@ -1028,10 +1028,12 @@
       "interactivo": true,
       "reto": null,
       "scripts": [
-        "app/panel.py"
+        "src/twin/panel.py",
+        "src/site/render_panel.py",
+        "src/figures_module30.py"
       ],
       "figuras": [
-        "fig_m30_panel"
+        "fig_m30_peso_del_semestre"
       ]
     },
     {
