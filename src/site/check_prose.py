@@ -22,6 +22,7 @@ Exits 1 when it finds something, so it works as a guard before committing.
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -86,11 +87,43 @@ def scan(path: Path) -> list[tuple[int, str, str]]:
     return findings
 
 
+PANEL_DIR = ROOT / "assets" / "panel"
+
+
+def scan_panel() -> list[tuple[str, str, str]]:
+    """Las frases del panel del módulo 30, que no viven en ningún Markdown.
+
+    Las escribe src/twin/panel.py, una por día y por idioma, y la página las
+    publica tal cual. Sin esto serían el único texto del curso que no pasa por
+    esta puerta.
+    """
+    findings: list[tuple[str, str, str]] = []
+    for fuente in sorted(PANEL_DIR.glob("semestre.*.json")):
+        datos = json.loads(fuente.read_text(encoding="utf-8"))
+        textos = [(a["t"], "atajo") for a in datos["atajos"]]
+        for dia in datos["dias"]:
+            textos += [(dia["frase"], dia["dia"]), (dia["etiqueta"], dia["dia"])]
+            textos += [(m["t"], dia["dia"]) for m in dia["marcas"]]
+        for texto, donde in textos:
+            for mark, name in DASHES.items():
+                if mark in texto:
+                    findings.append((f"{fuente.name} {donde}", name, texto))
+            for regla, nombre in ((FILLER_RE, "muletilla"), (DIARY_RE, "voz de diario")):
+                hallado = regla.search(texto)
+                if hallado:
+                    findings.append((f"{fuente.name} {donde}",
+                                     f"{nombre} «{hallado.group(0)}»", texto))
+    return findings
+
+
 def main() -> None:
     paths = [Path(a) for a in sys.argv[1:]]
+    del_panel = not paths
     if not paths:
         paths = sorted(COURSE_DIR.glob(LESSON_GLOB))
-        paths += [p for p in (COURSE_DIR / "curso.md",)
+        # La portada, y el texto de la página propia del panel en los dos idiomas.
+        paths += [p for p in (COURSE_DIR / "curso.md", COURSE_DIR / "panel.md",
+                              COURSE_DIR / "en" / "panel.md")
                   if p.exists()]
     if not paths:
         print("Todavía no hay nada que revisar.")
@@ -104,6 +137,15 @@ def main() -> None:
         for number, what, line in findings:
             print(f"     línea {number}: {what}")
             print(f"       {line[:100]}")
+
+    if del_panel:
+        findings_panel = scan_panel()
+        total += len(findings_panel)
+        estado = "OK" if not findings_panel else f"{len(findings_panel)} avisos"
+        print(f"{'las frases del panel':<48} {estado}")
+        for donde, what, texto in findings_panel:
+            print(f"     {donde}: {what}")
+            print(f"       {texto[:100]}")
 
     print(f"\n{'-' * 60}")
     if total:

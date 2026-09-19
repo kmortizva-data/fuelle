@@ -1034,6 +1034,20 @@ tiempos en la prosa, igual que se decidió en el 22.
 **Pendiente de Kevin:** mirar la página del 29 y su figura (la ventana estaba minimizada y no hubo
 captura), y el visto bueno para subir el repo y el portafolio.
 
+### Paso 8.3 EN CURSO (2026-09-19): el panel del módulo 30
+
+Plan entero, con lo medido antes de construir, en el plan del proyecto, sección «Paso 8.3 en
+detalle». Lo esencial:
+
+- **Abre en el 5 de junio**: el residual salta a 1,18 a las 10:00 en punto, que es la hora a la que
+  empieza el parte #3. Las dos curvas se separan a la hora del parte.
+- **El peso manda en la escritura, no en la resolución**: el semestre entero a un punto cada diez
+  minutos pesa 58,9 KB comprimido como acumulado con decimales y 12,6 KB como minutos enteros de
+  cada tramo. A un punto por minuto, los tramos siguen pesando menos (31,1) que el acumulado a diez.
+- Un solo renderizador (`src/site/render_panel.py`) y un solo `panel.js` para la página propia y
+  para el bloque ` ```panel ` de la lección. El veredicto de cada día es una frase escrita en Python.
+- **Decisión pendiente de Kevin**: la cifra del 30, con personas o «214 días en N KB».
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo

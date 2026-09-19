@@ -22,6 +22,7 @@ Exits 1 when a hard limit is broken.
 
 from __future__ import annotations
 
+import json
 import re
 import statistics
 import sys
@@ -140,11 +141,45 @@ def check(path: Path) -> tuple[list[str], dict]:
     return problems, stats
 
 
+PANEL_DIR = ROOT / "assets" / "panel"
+
+
+def check_panel() -> tuple[list[str], int]:
+    """Las frases del panel del módulo 30, con los mismos límites que la prosa.
+
+    Son una o dos frases por día y por idioma, escritas por src/twin/panel.py a
+    partir de plantillas. Una plantilla que se enreda se enreda 214 veces, así
+    que se miran todas y no una muestra.
+    """
+    problems: list[str] = []
+    contadas = 0
+    for fuente in sorted(PANEL_DIR.glob("semestre.*.json")):
+        datos = json.loads(fuente.read_text(encoding="utf-8"))
+        for dia in datos["dias"]:
+            for clean in sentences(dia["frase"]):
+                words = len(clean.split())
+                if words < 3:
+                    continue
+                contadas += 1
+                commas = len(re.findall(r"(?<!\d),|,(?!\d)", clean))
+                ques = len(re.findall(r"\bque\b", clean, re.I))
+                donde = f"{fuente.name} {dia['dia']}"
+                if words > MAX_WORDS:
+                    problems.append(f"{donde}: frase de {words} palabras · {clean[:78]}...")
+                if commas > MAX_COMMAS:
+                    problems.append(f"{donde}: {commas} comas en una frase · {clean[:78]}...")
+                if ques > MAX_QUE:
+                    problems.append(f"{donde}: {ques} veces «que» · {clean[:78]}...")
+    return problems, contadas
+
+
 def main() -> None:
     paths = [Path(a) for a in sys.argv[1:]]
+    del_panel = not paths
     if not paths:
         paths = sorted(COURSE_DIR.glob(LESSON_GLOB))
-        paths += [p for p in (COURSE_DIR / "curso.md",) if p.exists()]
+        paths += [p for p in (COURSE_DIR / "curso.md", COURSE_DIR / "panel.md",
+                              COURSE_DIR / "en" / "panel.md") if p.exists()]
     if not paths:
         print("Todavía no hay nada que revisar.")
         return
@@ -157,6 +192,14 @@ def main() -> None:
         print(f"  {stats['frases']} frases · mediana {stats['mediana']:.0f} palabras · "
               f"media {stats['media']:.1f} · la más larga {stats['maxima']} · "
               f"{stats['vigiladas']} entre {LONG_ENOUGH} y {MAX_WORDS}")
+        for problem in problems:
+            print(f"    {problem}")
+
+    if del_panel:
+        problems, contadas = check_panel()
+        total += len(problems)
+        print(f"\nlas frases del panel")
+        print(f"  {contadas} frases, en los dos idiomas")
         for problem in problems:
             print(f"    {problem}")
 

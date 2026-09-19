@@ -17,8 +17,10 @@ Empezó con tres reglas y ya son cinco. Cada una se prueba rompiéndola:
      para que el curso no acabe siendo tres cursos pegados.
   4. **Lo que el temario promete de interacción está.** Una lección declarada
      interactiva tiene que traer con qué interactuar.
-  5. **Los datos de cada perilla llevan su huella en la URL**, o una caché vieja
-     dibuja el trazo contra un techo que no es el suyo. Pasó en el módulo 24.
+  5. **Los datos de cada perilla y del panel llevan su huella en la URL**, o una
+     caché vieja dibuja el trazo contra un techo que no es el suyo. Pasó en el
+     módulo 24, y desde el 30 se mira en todas las páginas, no solo en las
+     lecciones: el panel tiene la suya propia.
 
 Correr:  .venv\\Scripts\\python.exe src\\site\\check_motion.py
 """
@@ -48,10 +50,13 @@ TEMARIO = PROJECT / "temario.json"
 # es un instrumento: la consulta viva es la capa interactiva, que el temario
 # declara aparte en `interactivo`, y un `diagrama` es un esquema de contenido,
 # como las capas del lago del módulo 4. El fallo era del verificador.
-BLOQUES_DE_INSTRUMENTO = {"perilla": "doble-trazo"}
+#
+# El panel del módulo 30 es el mismo instrumento: la máquina medida contra el
+# gemelo, con un mando que elige el día en vez de una perilla que mueve la física.
+BLOQUES_DE_INSTRUMENTO = {"perilla": "doble-trazo", "panel": "doble-trazo"}
 
 # Lo que cuenta como interactivo, para contrastarlo con lo que declara el temario.
-BLOQUES_INTERACTIVOS = {"sql-vivo", "reto", "perilla"}
+BLOQUES_INTERACTIVOS = {"sql-vivo", "reto", "perilla", "panel"}
 
 # Lo que cada pieza interactiva tiene que dejar dibujado sin JavaScript, y en qué
 # fichero se comprueba que lo hace.
@@ -63,6 +68,14 @@ SIN_JAVASCRIPT = {
         # La perilla llega con los dos caminos ya calculados en el servidor.
         ("perilla-referencia", "la perilla no trae su trazo de referencia dibujado"),
         ("perilla-actual", "la perilla no trae dibujada su posición de partida"),
+    ],
+    # El panel llega con el día de partida entero: las dos curvas, la zona sana,
+    # la frase del veredicto y la tira del semestre, todo del servidor.
+    "render_panel.py": [
+        ("pg-maquina", "el panel no trae dibujada la curva de la máquina"),
+        ("pg-gemelo", "el panel no trae dibujada la curva del gemelo"),
+        ("pg-frase", "el panel no trae escrita la frase del día de partida"),
+        ("pg-barras", "el panel no trae dibujada la tira del semestre"),
     ],
 }
 
@@ -170,15 +183,20 @@ def revisa_huella_de_las_perillas() -> list[str]:
 
     Nadie lo habría visto desde aquí. Solo se ve moviendo el mando con una caché
     vieja delante, que es exactamente lo que le pasa a quien vuelve a la página.
+
+    Se miran todas las páginas y no solo las lecciones, porque el panel del
+    módulo 30 vive también en la suya, y sus datos cambian cada vez que cambia
+    un día del veredicto.
     """
     problemas = []
-    for pagina in sorted(OUT.glob("m[0-9][0-9]_*.html")):
+    for pagina in sorted(OUT.glob("*.html")):
         texto = io.open(pagina, encoding="utf-8").read()
-        for fuente in re.findall(r'data-perilla="([^"]+)"', texto):
-            if "?v=" not in fuente:
-                problemas.append(
-                    f"{pagina.name}: la perilla apunta a «{fuente}» sin huella. "
-                    "Un lector con la caché vieja vería el trazo contra otro techo.")
+        for atributo in ("data-perilla", "data-panel"):
+            for fuente in re.findall(atributo + r'="([^"]+)"', texto):
+                if "?v=" not in fuente:
+                    problemas.append(
+                        f"{pagina.name}: {atributo} apunta a «{fuente}» sin huella. "
+                        "Un lector con la caché vieja vería el trazo contra otro techo.")
     return problemas
 
 

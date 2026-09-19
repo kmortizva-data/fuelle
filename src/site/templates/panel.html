@@ -4,9 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{PAGE_TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
 {{ALTERNATE}}
 <style>
 {{STYLE}}
+/* El acento del módulo 30, el del panel, uno por tema. */
 :root { --accent: {{ACCENT_LIGHT}}; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) { --accent: {{ACCENT_DARK}}; }
@@ -17,9 +19,11 @@
 <body>
 <div class="shell">
 
+  <!-- La misma barra que las lecciones: quien llega aquí desde el portafolio ve
+       dónde queda el panel, al final del lago, y la cifra del veredicto. -->
   <aside class="panel">
-    <span class="panel-brand">{{COURSE_TITLE}}
-      <small>{{EYEBROW}}</small></span>
+    <a class="panel-brand" href="index{{LANG_SUFFIX}}.html">{{COURSE_NAME}}
+      <small>{{EYEBROW}}</small></a>
 
     <nav class="rail" aria-label="{{UI_RAIL}}">
       <p class="panel-label">{{UI_RAIL}}</p>
@@ -27,38 +31,32 @@
     </nav>
 
     <div class="panel-figure">
-      <span class="v">{{WRITTEN}} / {{TOTAL}}</span>
-      <span class="l">{{UI_WRITTEN}}</span>
+      <span class="v">{{CIFRA_VALUE}}</span>
+      <span class="l">{{CIFRA_LABEL}}</span>
     </div>
 
     <div class="panel-progress">
-      {{TOTAL}} {{UI_MODULES}} · {{PARTS}} {{UI_PARTS}}
-      <span class="panel-bar"><i style="width: {{PROGRESS}}%"></i></span>
+      {{PROGRESS_TEXT}}
+      <span class="panel-bar"><i style="width: 100%"></i></span>
     </div>
 
-    <nav class="panel-nav">{{TOPLINK}}</nav>
+    <nav class="panel-nav">{{NAV}}</nav>
   </aside>
 
   <main class="stage">
     <div class="stage-inner">
       <header class="head">
-        <p class="head-id"><b>{{UI_COURSE}}</b> <span>{{TOTAL}} {{UI_MODULES}}</span></p>
-        <h1>{{HEADLINE}}</h1>
+        <p class="head-id"><b>{{PANEL_ID}}</b> <span>{{PANEL_ID_TEXT}}</span></p>
+        <h1>{{TITLE}}</h1>
         <p class="standfirst">{{SUBTITLE}}</p>
       </header>
 
-      {{DOOR}}
+      {{WIDGET}}
 
       {{CONTENT}}
 
-      <section class="block">
-        <span class="kicker">{{UI_TOC_KICKER}}</span>
-        <h2 class="block-title">{{UI_TOC_TITLE}}</h2>
-        <div class="toc">{{TOC}}</div>
-      </section>
-
       <footer class="footer">
-        <span>{{COURSE_NAME}}</span>
+        <span>{{COURSE_NAME}} / {{EYEBROW}}</span>
         <span>{{UI_GENERATED}} {{GENERATED}}</span>
         <span>{{UI_SOURCE}}: {{SOURCE_NOTE}}</span>
       </footer>
@@ -66,5 +64,7 @@
   </main>
 
 </div>
+<!-- Sin motor ni librerías: el script suma minutos y cambia de frase. -->
+<script src="panel.js" defer></script>
 </body>
 </html>

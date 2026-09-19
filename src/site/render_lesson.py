@@ -309,6 +309,10 @@ def render_blocks(lines: list[str]) -> str:
             # navegador, se elige entre trazos ya simulados en Python.
             elif language == "perilla":
                 out.append(perilla_block(code))
+            # Un bloque `panel` es el panel del gemelo del módulo 30, el mismo que
+            # tiene su página propia: un solo renderizador para los dos sitios.
+            elif language == "panel":
+                out.append(panel_block(code))
             else:
                 css_class = f' class="language-{language}"' if language else ""
                 out.append(f"<pre><code{css_class}>{body}</code></pre>")
@@ -564,6 +568,21 @@ def perilla_block(lines: list[str]) -> str:
         f'<p class="perilla-referencia-nota">{inline(ui("perilla_referencia").format(valor=_numero(referencia["valor"], coma), unidad=unidad))}</p>'
         f"</figure>"
     )
+
+
+def panel_block(lines: list[str]) -> str:
+    """El panel del gemelo dentro de una lección. Módulo 30.
+
+    El bloque nombra el fichero de `assets/panel/` sin idioma, y el idioma lo
+    pone la página. Hoy solo existe uno, el semestre entero.
+    """
+    # Importado aquí dentro porque render_panel importa de este fichero.
+    from render_panel import widget
+
+    nombre = "\n".join(lines).strip()
+    if nombre != "semestre":
+        raise SystemExit(f"El bloque panel pide «{nombre}» y solo existe «semestre».")
+    return widget(_lang, "../")
 
 
 def challenge_block(lines: list[str]) -> str:
@@ -960,6 +979,9 @@ def build_page(source_path: Path, lang: str | None = None) -> Path:
         "{{PAGER}}": build_pager(syllabus, number, lang),
         "{{TOPLINK}}": link,
         "{{ALTERNATE}}": alternate,
+        # El script del panel solo viaja con la lección que lo lleva dentro.
+        "{{EXTRA_SCRIPTS}}": ('<script src="panel.js" defer></script>'
+                              if re.search(r"^```panel\s*$", body, re.M) else ""),
     }
     for key, value in text_values.items():
         page = page.replace(key, html.escape(value, quote=True))

@@ -1,0 +1,195 @@
+{
+  "dias": 214,
+  "juzgables": 207,
+  "umbral": 1.15,
+  "suelo": 0.1165,
+  "minutos_por_punto": 10,
+  "puntos_por_dia": 144,
+  "por_clase": {
+    "normal": 79,
+    "encima": 99,
+    "sin_juzgar": 7,
+    "marzo": 10,
+    "marzo_alarma": 2,
+    "falsa": 10,
+    "acierto": 6,
+    "escapa": 1
+  },
+  "pesos": [
+    {
+      "minutos_por_punto": 60,
+      "puntos_por_dia": 24,
+      "acumulado": {
+        "kb": 77.0,
+        "kb_red": 12.4
+      },
+      "tramos": {
+        "kb": 35.3,
+        "kb_red": 6.2
+      },
+      "caracteres": null
+    },
+    {
+      "minutos_por_punto": 30,
+      "puntos_por_dia": 48,
+      "acumulado": {
+        "kb": 150.2,
+        "kb_red": 20.8
+      },
+      "tramos": {
+        "kb": 65.2,
+        "kb_red": 8.4
+      },
+      "caracteres": {
+        "kb": 35.1,
+        "kb_red": 7.0
+      }
+    },
+    {
+      "minutos_por_punto": 15,
+      "puntos_por_dia": 96,
+      "acumulado": {
+        "kb": 296.5,
+        "kb_red": 34.5
+      },
+      "tramos": {
+        "kb": 125.8,
+        "kb_red": 12.0
+      },
+      "caracteres": {
+        "kb": 65.2,
+        "kb_red": 9.8
+      }
+    },
+    {
+      "minutos_por_punto": 10,
+      "puntos_por_dia": 144,
+      "acumulado": {
+        "kb": 441.7,
+        "kb_red": 44.8
+      },
+      "tramos": {
+        "kb": 186.0,
+        "kb_red": 14.3
+      },
+      "caracteres": {
+        "kb": 95.3,
+        "kb_red": 11.7
+      }
+    },
+    {
+      "minutos_por_punto": 5,
+      "puntos_por_dia": 288,
+      "acumulado": {
+        "kb": 880.4,
+        "kb_red": 77.6
+      },
+      "tramos": {
+        "kb": 365.5,
+        "kb_red": 20.1
+      },
+      "caracteres": {
+        "kb": 185.6,
+        "kb_red": 16.0
+      }
+    },
+    {
+      "minutos_por_punto": 1,
+      "puntos_por_dia": 1440,
+      "acumulado": {
+        "kb": 4385.7,
+        "kb_red": 230.9
+      },
+      "tramos": {
+        "kb": 1810.0,
+        "kb_red": 40.3
+      },
+      "caracteres": {
+        "kb": 907.8,
+        "kb_red": 29.2
+      }
+    }
+  ],
+  "ficheros": {
+    "es": {
+      "fichero": "semestre.es.json",
+      "kb": 284.4,
+      "kb_red": 26.5
+    },
+    "en": {
+      "fichero": "semestre.en.json",
+      "kb": 285.3,
+      "kb_red": 26.5
+    }
+  },
+  "acumulado_contra_tramos_a_10_min": 3.1,
+  "tramos_a_1_min_pesan_menos_que_acumulado_a_10": true,
+  "ahorro_de_los_caracteres_kb": 2.6,
+  "redondeo_por_tramo_peor_min": 72.0,
+  "redondeo_acumulado_peor_min": 0.5,
+  "dia_inicial": {
+    "dia": "2020-06-05",
+    "clase": "acierto",
+    "cargado_h": 15.27,
+    "registrado_h": 24.0,
+    "gemelo_h": 1.34,
+    "pico": 1.18,
+    "alarma": "10:00"
+  },
+  "dias_que_cuentan": [
+    {
+      "dia": "2020-02-18",
+      "clase": "normal",
+      "cargado_h": 1.35,
+      "registrado_h": 24.0,
+      "gemelo_h": 1.34,
+      "pico": 0.05,
+      "alarma": null
+    },
+    {
+      "dia": "2020-03-12",
+      "clase": "marzo_alarma",
+      "cargado_h": 13.11,
+      "registrado_h": 22.58,
+      "gemelo_h": 1.28,
+      "pico": 1.18,
+      "alarma": "01:00"
+    },
+    {
+      "dia": "2020-04-18",
+      "clase": "acierto",
+      "cargado_h": 23.6,
+      "registrado_h": 23.86,
+      "gemelo_h": 1.34,
+      "pico": 1.18,
+      "alarma": "01:00"
+    },
+    {
+      "dia": "2020-05-30",
+      "clase": "acierto",
+      "cargado_h": 7.98,
+      "registrado_h": 23.73,
+      "gemelo_h": 1.34,
+      "pico": 1.18,
+      "alarma": "00:00"
+    },
+    {
+      "dia": "2020-06-05",
+      "clase": "acierto",
+      "cargado_h": 15.27,
+      "registrado_h": 24.0,
+      "gemelo_h": 1.34,
+      "pico": 1.18,
+      "alarma": "10:00"
+    },
+    {
+      "dia": "2020-07-15",
+      "clase": "acierto",
+      "cargado_h": 11.48,
+      "registrado_h": 23.85,
+      "gemelo_h": 1.34,
+      "pico": 1.18,
+      "alarma": "15:00"
+    }
+  ]
+}

@@ -28,6 +28,7 @@ from render_lesson import (  # noqa: E402
     module_title, page_name, render_document, set_language, source_dir,
     suffix, top_link, ui_values, SECTION_STYLES, STAGES, build_rail,
 )
+from render_panel import build_panel_page  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -57,6 +58,10 @@ INDEX_UI = {
         "modules": "módulos",
         "parts": "partes",
         "graph_title": "Lo que construye el curso",
+        "door_kicker": "el panel",
+        "door_title": "El semestre entero, día a día, en una página",
+        "door_sub": "Para quien no va a leer treinta y un módulos: una perilla, dos curvas "
+                    "y el veredicto de cada día.",
     },
     "en": {
         "eyebrow": "· data engineering and digital twins, from scratch",
@@ -65,8 +70,26 @@ INDEX_UI = {
         "modules": "modules",
         "parts": "parts",
         "graph_title": "What the course builds",
+        "door_kicker": "the panel",
+        "door_title": "The whole semester, day by day, on one page",
+        "door_sub": "For anyone who will not read thirty one modules: one knob, two curves "
+                    "and each day's verdict.",
     },
 }
+
+
+def build_door(lang: str) -> str:
+    """La puerta hacia el panel, justo debajo de la cabecera del índice.
+
+    El panel existe para quien no va a leer el curso, así que no puede quedar al
+    final de una lista de treinta y un módulos: va arriba, antes que nada.
+    """
+    strings = INDEX_UI[lang]
+    return (f'<a class="door" href="panel{suffix(lang)}.html">'
+            f'<span class="door-k">{html.escape(strings["door_kicker"])}</span>'
+            f'<span class="door-t">{html.escape(strings["door_title"])}</span>'
+            f'<span class="door-s">{html.escape(strings["door_sub"])}</span>'
+            f'<span class="door-a" aria-hidden="true">→</span></a>')
 
 def build_toc(syllabus: dict, lang: str) -> str:
     """Cada módulo con su cifra, agrupados por parte y diciendo cuál está escrito."""
@@ -136,6 +159,7 @@ def build_index(syllabus: dict, written: int, lang: str) -> Path:
     html_values = {
         "{{STYLE}}": load_style(),
         "{{CONTENT}}": render_document(body, COURSE_SECTION_STYLES[lang], figures=False),
+        "{{DOOR}}": build_door(lang),
         "{{RAIL}}": build_rail(None, lang),
         "{{TOC}}": build_toc(syllabus, lang),
         "{{TOPLINK}}": link,
@@ -163,6 +187,9 @@ def main() -> None:
     # Y el de la perilla del gemelo, que no simula nada: solo elige entre los
     # trazos que src/twin/simulate.py dejó calculados.
     shutil.copy2(TEMPLATES / "perilla.js", OUT_DIR / "perilla.js")
+    # Y el del panel del módulo 30, que tampoco decide nada: suma minutos y
+    # cambia de frase, todo escrito antes por src/twin/panel.py.
+    shutil.copy2(TEMPLATES / "panel.js", OUT_DIR / "panel.js")
 
     for lang in ("es", "en"):
         if not (source_dir(lang) / "curso.md").exists():
@@ -179,6 +206,9 @@ def main() -> None:
         index = build_index(syllabus, written, lang)
         print(f"  {lang}  {written}/{total} lecciones  ->  {index.relative_to(ROOT)} "
               f"({index.stat().st_size:,} bytes)")
+        panel = build_panel_page(lang)
+        print(f"  {lang}  el panel  ->  {panel.relative_to(ROOT)} "
+              f"({panel.stat().st_size:,} bytes)")
 
 
 if __name__ == "__main__":
