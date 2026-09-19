@@ -9,8 +9,8 @@ ten checks stand between a lesson and a commit.
 ## Start here
 
 The course is published at **https://kmortizva-data.github.io/fuelle/curso/index.en.html**, and
-the Spanish edition sits next to it as `index.html`. Twenty eight of its thirty one modules are
-written, in both languages.
+the Spanish edition sits next to it as `index.html`. Twenty nine of its thirty one modules are
+written, twenty eight of them in both languages.
 
 The SQL lessons run a database engine inside your browser, against real compressor data, and check
 your answer by its result rather than its text. The engine only downloads when you ask for it.
@@ -65,11 +65,23 @@ python -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-Then rebuild the lake in order, since each script reads what the one before it wrote:
+Download the CSV from the DOI above into `data/`, and then build everything with Dagster, the
+orchestrator of module 29. It knows the order because every asset declares what it is built from:
+
+```
+.venv\Scripts\python.exe src\orchestration\construye.py
+```
+
+`src/orchestration/abre.py` opens Dagster's interface at http://localhost:3029, with its usage
+statistics switched off. `src/orchestration/reconstruye.py` is module 29's proof: it sets the lake
+aside, rebuilds it and compares, table by table and file by file.
+
+The long way, script by script, is how the lessons ran them. Each script reads what the one
+before it wrote:
 
 | Stage | Scripts, in `src/` |
 |---|---|
-| The lake | `ingest/bronze.py`, `transform/benchmark_formats.py`, `ingest/partition_profile.py`, `transform/silver.py` |
+| The lake | `ingest/bronze.py`, `ingest/failures.py`, `transform/benchmark_formats.py`, `ingest/partition_profile.py`, `transform/silver.py`, `ingest/weather.py` (after silver, which its analysis reads) |
 | Gold and quality | `transform/contracts.py`, `transform/dbt_gold.py`, `transform/table_format.py` |
 | The server, optional | `db/load_silver.py`, `db/schema.py`, `db/indexes.py`, `db/backup.py`. They need portable PostgreSQL unzipped in `~/tools/pgsql`, and `db/servidor.py` starts and stops it |
 | The twin | `twin/model.py`, `twin/simulate.py`, `twin/ventana_sana.py`, `twin/calibrate.py`, `twin/residual.py`, `twin/evaluate.py` |
@@ -87,7 +99,9 @@ http://localhost:8531/out/index.en.html, compressing files the way GitHub Pages 
 | `src/ingest`, `src/transform` | bronze, silver and gold |
 | `src/db` | PostgreSQL, portable |
 | `src/twin` | the twin: physics, simulation, calibration, residual and verdict |
+| `src/orchestration` | Dagster: the asset graph, the build, the rebuild proof and the threads experiment |
 | `src/site` | the site builder and the ten checks |
+| `dagster_home/` | Dagster's settings, which switch its telemetry off; its run history stays out of git |
 | `dbt/` | the dbt project for the gold layer |
 | `results/` | every measured number, as JSON, written only by scripts |
 | `figuras/` | every figure, in two themes and two languages |

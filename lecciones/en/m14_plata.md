@@ -229,7 +229,7 @@ instead of 21.88: **the holes cost 1.38 MB**.
 This lesson used to say they cost nearly two megabytes, and it measured that by subtracting bronze
 from silver. That subtraction does not measure the holes, because silver changes several things at
 once: it rounds, it merges readings and it drops the original index column. And the silver of
-back then came out inflated, because DuckDB wrote it with several threads at once. Module 29 found
+back then came out inflated, because DuckDB wrote it with several threads at once and in no order at all. Module 29 found
 that out by deleting the lake and rebuilding it. Today the whole of silver weighs less than
 bronze: 21.88 MB against 22.05.
 

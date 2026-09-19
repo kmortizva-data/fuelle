@@ -225,7 +225,7 @@ contar**, y contarla tiene un precio. La misma plata escrita sin sus casillas va
 Esta lección decía antes que costaban casi dos megas, y los medía restando la plata menos el
 bronce. Esa resta no mide los huecos, porque la plata cambia varias cosas a la vez: redondea, junta
 lecturas y no lleva la columna del índice original. Y la plata de entonces salía inflada, porque
-DuckDB la escribía con varios hilos a la vez. Lo destapó el módulo 29 al borrar el lago y
+DuckDB la escribía con varios hilos a la vez y sin ningún orden. Lo destapó el módulo 29 al borrar el lago y
 reconstruirlo. Hoy la plata entera pesa menos que el bronce: 21,88 MB contra 22,05.
 
 A cambio de ese precio, comparar una fila con la anterior deja de depender de si el reloj saltó, y

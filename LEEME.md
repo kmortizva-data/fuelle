@@ -9,8 +9,8 @@ corrida de un script, y diez comprobaciones se ponen entre una lección y un com
 ## Por dónde empezar
 
 El curso está publicado en **https://kmortizva-data.github.io/fuelle/curso/index.html**, con la
-edición inglesa al lado como `index.en.html`. Hay escritos veintiocho de sus treinta y un módulos,
-en los dos idiomas.
+edición inglesa al lado como `index.en.html`. Hay escritos veintinueve de sus treinta y un
+módulos, veintiocho de ellos en los dos idiomas.
 
 Las lecciones de SQL corren un motor de base de datos dentro de tu navegador, contra datos reales
 del compresor, y comprueban tu respuesta por su resultado, no por su texto. El motor solo se
@@ -67,11 +67,23 @@ python -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-Después se reconstruye el lago en orden, porque cada script lee lo que escribió el anterior:
+Se descarga el CSV desde el DOI de arriba a `data/`, y después se construye todo con Dagster, el
+orquestador del módulo 29. Sabe el orden porque cada activo declara de qué se construye:
+
+```
+.venv\Scripts\python.exe src\orchestration\construye.py
+```
+
+`src/orchestration/abre.py` abre la interfaz de Dagster en http://localhost:3029, con sus
+estadísticas de uso apagadas. `src/orchestration/reconstruye.py` es la prueba del módulo 29: aparta
+el lago, lo reconstruye y compara, tabla a tabla y fichero a fichero.
+
+El camino largo, script a script, es como los corrieron las lecciones. Cada script lee lo que
+escribió el anterior:
 
 | Etapa | Scripts, en `src/` |
 |---|---|
-| El lago | `ingest/bronze.py`, `transform/benchmark_formats.py`, `ingest/partition_profile.py`, `transform/silver.py` |
+| El lago | `ingest/bronze.py`, `ingest/failures.py`, `transform/benchmark_formats.py`, `ingest/partition_profile.py`, `transform/silver.py`, `ingest/weather.py` (después de la plata, que su análisis lee) |
 | Oro y calidad | `transform/contracts.py`, `transform/dbt_gold.py`, `transform/table_format.py` |
 | El servidor, opcional | `db/load_silver.py`, `db/schema.py`, `db/indexes.py`, `db/backup.py`. Necesitan PostgreSQL portable descomprimido en `~/tools/pgsql`, y `db/servidor.py` lo arranca y lo para |
 | El gemelo | `twin/model.py`, `twin/simulate.py`, `twin/ventana_sana.py`, `twin/calibrate.py`, `twin/residual.py`, `twin/evaluate.py` |
@@ -90,7 +102,9 @@ Pages.
 | `src/ingest`, `src/transform` | bronce, plata y oro |
 | `src/db` | PostgreSQL, portable |
 | `src/twin` | el gemelo: física, simulación, calibración, residual y veredicto |
+| `src/orchestration` | Dagster: el grafo de activos, la construcción, la prueba de reconstruir y el experimento de los hilos |
 | `src/site` | el generador del sitio y las diez comprobaciones |
+| `dagster_home/` | la configuración de Dagster, que apaga su telemetría; su historial de corridas no entra en git |
 | `dbt/` | el proyecto dbt de la capa de oro |
 | `results/` | cada número medido, en JSON, escrito solo por scripts |
 | `figuras/` | cada figura, en dos temas y dos idiomas |

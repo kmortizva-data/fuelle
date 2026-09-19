@@ -74,7 +74,7 @@ DIGITALES = ["COMP", "DV_eletric", "Towers", "MPG", "LPS",
              "Pressure_switch", "Oil_level", "Caudal_impulses"]
 
 
-def escribe(con: duckdb.DuckDBPyConnection, borde: tuple) -> None:
+def escribe(con: duckdb.DuckDBPyConnection, borde: tuple, ordenada: bool = True) -> None:
     """La capa, escrita. `con` trae la vista `bronce`, y `borde` sus dos extremos.
 
     Nada se tira. Las lecturas que comparten casilla se promedian si son
@@ -83,10 +83,12 @@ def escribe(con: duckdb.DuckDBPyConnection, borde: tuple) -> None:
     `lecturas` guarda cuántas había, para que la fusión quede a la vista en vez
     de esconderse.
 
-    Con un solo hilo y en orden de tiempo, que es lo que el módulo 29 descubrió
-    que hacía falta: con varios, cada corrida repartía las mismas filas en otros
-    ficheros y en otro orden, y eso movía medias en su último decimal. De paso la
-    capa bajó de unos 24 MB a 22,08, porque el escritor en paralelo la inflaba.
+    En orden de tiempo y con un solo hilo, que es lo que el módulo 29 descubrió
+    que hacía falta. Antes salía sin orden y con varios hilos: cada corrida
+    revolvía las mismas filas de otra manera y en otros ficheros, eso movía medias
+    en su último decimal, y la capa pesaba unos 24 MB en vez de 21,88. El orden
+    arregla las medias y el tamaño; el hilo único, que los bytes se repitan.
+    `ordenada=False` existe solo para que src/orchestration/hilos.py pueda medirlo.
     """
     señales = ", ".join(
         f'round(avg(b."{c}"), {DECIMALES}) AS "{c}"' for c in ANALOGICAS)
@@ -124,7 +126,7 @@ def escribe(con: duckdb.DuckDBPyConnection, borde: tuple) -> None:
                    f.* EXCLUDE (casilla, lecturas, dudoso)
             FROM rejilla r
             LEFT JOIN fundido f ON f.casilla = r.timestamp
-            ORDER BY r.timestamp
+            {"ORDER BY r.timestamp" if ordenada else ""}
         )
         TO '{SILVER.as_posix()}'
         (FORMAT PARQUET, PARTITION_BY (day), OVERWRITE_OR_IGNORE, COMPRESSION ZSTD)

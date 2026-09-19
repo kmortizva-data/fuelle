@@ -1,0 +1,93 @@
+{
+  "activos": 27,
+  "activos_que_se_construyen": 24,
+  "activos_externos": 3,
+  "dependencias": 31,
+  "comprobaciones": 13,
+  "comprobaciones_en_verde": 13,
+  "comprobaciones_de_dbt": 11,
+  "dias_de_calendario": 214,
+  "tablas_comparadas": 14,
+  "tablas_iguales": 14,
+  "parquet_comparados": 642,
+  "parquet_iguales_byte_a_byte": 642,
+  "el_servidor_igual": true,
+  "guardas_del_servidor": 12,
+  "indices_del_servidor": 3,
+  "lo_que_no_vuelve": {},
+  "ficheros_versionados_distintos": 0,
+  "puertas_en_verde": 10,
+  "minutos": {
+    "lago": 1.4,
+    "lecciones": 0.1,
+    "gemelo": 0.8,
+    "servidor": 2.5
+  },
+  "minutos_en_total": 4.8,
+  "relleno": {
+    "dia": "2020-06-05",
+    "igual_byte_a_byte": true,
+    "ficheros_de_otros_dias": 211,
+    "sin_tocar": 211,
+    "segundos": 7.6
+  },
+  "huellas": {
+    "lago/bronce": [
+      1516948,
+      "13992469205993652407136068"
+    ],
+    "lago/clima": [
+      5136,
+      "46830826420711425891552"
+    ],
+    "lago/averias": [
+      4,
+      "41458351517739629285"
+    ],
+    "lago/plata": [
+      1841760,
+      "16986841870057461993089441"
+    ],
+    "lago/historia, Delta, versión 0": [
+      212,
+      "2019376520320610637587"
+    ],
+    "lago/historia, Delta, versión 1": [
+      212,
+      "1911088137662683601528"
+    ],
+    "lago/historia, Iceberg, versión 0": [
+      212,
+      "2019376520320610637587"
+    ],
+    "lago/historia, Iceberg, versión 1": [
+      212,
+      "1911088137662683601528"
+    ],
+    "lecciones/todo_en_un_parquet": [
+      1516948,
+      "13993629709604111296269612"
+    ],
+    "lago/oro_averias": [
+      4,
+      "33434709929734552560"
+    ],
+    "lago/oro_ciclo_diario": [
+      212,
+      "2042005313316321322313"
+    ],
+    "lago/oro_horas": [
+      4416,
+      "40649870584136834573639"
+    ],
+    "servidor/lecturas": [
+      1841760,
+      "-896573514269"
+    ],
+    "servidor/dias": [
+      214,
+      "2156742245"
+    ]
+  },
+  "todo_bien": true
+}

@@ -983,10 +983,10 @@
       "title_en": "Making all of this run by itself",
       "subtitle_en": "An orchestrator knows the order, retries what fails and backfills. Deleting the whole lake and watching it rebuild is the only proof that counts",
       "cifra": {
-        "value": "por medir",
-        "label": "minutos en reconstruir el lago desde cero",
-        "value_en": "to be measured",
-        "label_en": "minutes to rebuild the lake from scratch"
+        "value": "14 de 14",
+        "label": "tablas que vuelven iguales tras borrar el lago entero y pedírselo a Dagster; la primera vez fueron 13",
+        "value_en": "14 of 14",
+        "label_en": "tables that come back identical after deleting the whole lake and asking Dagster for it; the first time it was 13"
       },
       "accent": {
         "dark": "#D8AD94",
@@ -996,7 +996,11 @@
       "interactivo": false,
       "reto": null,
       "scripts": [
-        "src/orchestration/definitions.py"
+        "src/orchestration/definitions.py",
+        "src/orchestration/construye.py",
+        "src/orchestration/reconstruye.py",
+        "src/orchestration/hilos.py",
+        "src/figures_module29.py"
       ],
       "figuras": [
         "fig_m29_grafo_de_activos"

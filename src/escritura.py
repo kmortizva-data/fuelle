@@ -13,9 +13,12 @@ it falls exactly on the half of a rounding it goes one way or the other: five
 hours out of 4,416 in `oro_horas` moved by a hundredth. The compressed size of
 each column moves too, and module 7 publishes those bytes.
 
-With a single thread the files come out identical, 212 of 212 in bronze and 400
-of 400 in silver, for about two seconds more. And silver drops from about 24 MB
-to 22.08: the parallel writer was also inflating it.
+Two causes, which src/orchestration/hilos.py separates. **Row order** decides the
+averages and most of the size: the old silver came out in a scrambled order,
+and writing it in time order alone gives back the averages and takes it from
+about 24 MB to 21.88. **Threads** decide whether the bytes repeat: with several,
+even sorted, a few files still differ from one run to the next. With one thread
+they come out identical, for about two seconds more.
 """
 
 from __future__ import annotations

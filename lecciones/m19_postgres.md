@@ -227,7 +227,7 @@ Lo que sí se separa, y por mucho, es todo lo demás:
 | Varios a la vez | no | sí |
 | Permisos por usuario | no | sí |
 
-**Doce veces más disco.** Concretamente **12,2**, para exactamente las mismas lecturas. Esta lección decía once, con la plata que DuckDB escribía entonces con varios hilos y que salía inflada: el módulo 29 lo destapó. Y la
+**Doce veces más disco.** Concretamente **12,2**, para exactamente las mismas lecturas. Esta lección decía once, con la plata que DuckDB escribía entonces con varios hilos y sin orden, y que salía inflada: el módulo 29 lo destapó. Y la
 carpeta entera del clúster pasa del gigabyte, porque además de la tabla guarda el registro de
 transacciones que le permite no perder nada si se va la luz.
 

@@ -56,6 +56,7 @@ import dagster as dg  # noqa: E402
 from db import backup  # noqa: E402
 from db.servidor import conecta, esta_vivo, para, servidor  # noqa: E402
 from orchestration import definitions as d  # noqa: E402
+from orchestration.construye import construye_todo  # noqa: E402
 from transform.table_format import conecta_con_extensiones  # noqa: E402
 
 LAGO = PROJECT / "lake"
@@ -74,9 +75,6 @@ RESTOS = {
         "un catálogo SQLite de prueba del 1 de septiembre, de cuando se montó el "
         "módulo 18. No lo crea ningún script: estaba ahí por accidente",
 }
-
-TODO = [*d.defs.assets, *d.defs.asset_checks]
-
 
 # --- Huellas ------------------------------------------------------------------
 
@@ -162,19 +160,6 @@ def ficheros_versionados_cambiados() -> list[str]:
     return [linea[3:] for linea in r.stdout.splitlines() if linea.strip()]
 
 
-# --- Materializar -------------------------------------------------------------
-
-def materializa(seleccion, **kw) -> tuple[float, dg.ExecuteInProcessResult]:
-    t0 = time.perf_counter()
-    r = dg.materialize(TODO, selection=seleccion, instance=dg.DagsterInstance.get(),
-                       resources=d.defs.resources, raise_on_error=False, **kw)
-    return time.perf_counter() - t0, r
-
-
-def comprobaciones(r: dg.ExecuteInProcessResult) -> list[tuple[str, bool]]:
-    return [(e.asset_check_key.name, e.passed) for e in r.get_asset_check_evaluations()]
-
-
 def como_volver() -> str:
     return (f"El lago de antes sigue entero en {ANTES.name}/. Para volver a él:\n"
             f"  borra {LAGO.name}/ y renombra {ANTES.name}/ a {LAGO.name}/")
@@ -208,28 +193,8 @@ def main() -> None:
     print(f"  2. el lago entero pasa a {ANTES.name}/: desde aquí, no hay lago")
     LAGO.rename(ANTES)
 
-    print("  3. Dagster lo construye todo")
-    tramo = {"dagster/asset_partition_range_start": d.DIAS.get_first_partition_key(),
-             "dagster/asset_partition_range_end": d.DIAS.get_last_partition_key()}
-    pasos = [
-        ("lago", "el bronce, los 214 días en una corrida",
-         dg.AssetSelection.assets(d.bronce), {"tags": tramo}),
-        ("lago", "el resto del lago, con el oro de dbt",
-         dg.AssetSelection.groups("lago") - dg.AssetSelection.assets(d.bronce), {}),
-        ("lecciones", "lo que consultan las lecciones", dg.AssetSelection.groups("lecciones"), {}),
-        ("gemelo", "el gemelo, de la física al veredicto", dg.AssetSelection.groups("gemelo"), {}),
-        ("servidor", "PostgreSQL, desde initdb", dg.AssetSelection.groups("servidor"), {}),
-    ]
-    segundos = {grupo: 0.0 for grupo, *_ in pasos}
-    evaluadas = []
-    for grupo, que, seleccion, extra in pasos:
-        tardo, r = materializa(seleccion, **extra)
-        segundos[grupo] += tardo
-        evaluadas += comprobaciones(r)
-        print(f"     {'bien ' if r.success else 'FALLA'} {que:<42} {tardo:6.1f} s")
-        if not r.success:
-            raise SystemExit(f"Un paso de Dagster ha fallado: {que}. Mira el registro de la "
-                             f"corrida {r.run_id}.\n{como_volver()}")
+    print("  3. Dagster lo construye todo, con los mismos pasos que construye.py")
+    segundos, evaluadas = construye_todo(si_falla=como_volver())
 
     print("  4. las huellas del lago nuevo, y la comparación")
     despues, forma_despues = huellas()
@@ -275,7 +240,12 @@ def main() -> None:
               for f in telemetria.rglob("*.parquet") if f.parent != carpeta}
     del_dia = {f.name: _sha(f) for f in carpeta.glob("*.parquet")}
     shutil.rmtree(carpeta)
-    tardo_el_dia, r = materializa(dg.AssetSelection.assets(d.bronce), partition_key=DIA_A_RELLENAR)
+    t0 = time.perf_counter()
+    r = dg.materialize([*d.defs.assets, *d.defs.asset_checks],
+                       selection=dg.AssetSelection.assets(d.bronce),
+                       instance=dg.DagsterInstance.get(), resources=d.defs.resources,
+                       partition_key=DIA_A_RELLENAR, raise_on_error=False)
+    tardo_el_dia = time.perf_counter() - t0
     vuelve = {f.name: _sha(f) for f in carpeta.glob("*.parquet")}
     intactos = sum(1 for rel, (sha, mtime) in ajenos.items()
                    if (telemetria / rel).exists()

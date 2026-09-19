@@ -82,6 +82,10 @@ NEUTRAL_PATTERNS = (
     # `lecturas.tp2`, `dias.dia`: tabla y columna de PostgreSQL, o sea
     # identificadores del esquema. Traducirlos rompería el enlace con la base.
     r"^(lecturas|dias|origen)\.\w+$",
+    # Las claves de los activos de Dagster en la figura del módulo 29, partidas en
+    # la barra para que quepan. Son identificadores de definitions.py, y la figura
+    # inglesa tiene que enseñar las mismas que la interfaz de Dagster.
+    r"^(crudo|lago|lecciones|gemelo|servidor)/ [a-z_]+$",
 )
 
 # La tabla, escrita en español legible: las claves se normalizan al final del
@@ -329,6 +333,11 @@ TRADUCCIONES: dict[str, str] = {
     "falsas alarmas por mes": "false alarms per month",
     "el gemelo, umbral a umbral": "the twin, threshold by threshold",
     "la alarma que la máquina ya lleva": "the alarm the machine already carries",
+    # --- módulo 29, el grafo de activos ------------------------------------
+    "el número en círculo: las comprobaciones que Dagster corre al terminar ese activo      "
+    "el borde discontinuo: existe, pero aquí no se construye":
+        "the circled number: the checks Dagster runs once that asset is built      "
+        "the dashed border: it exists, but nothing here builds it",
 }
 
 # Etiquetas construidas con f-strings: llevan un número dentro, así que no se
@@ -374,6 +383,11 @@ PATTERNS: list[tuple[str, str]] = [
     (r"^arranca, ([\d.]+) bar$", r"starts, \1 bar"),
     (r"^para, ([\d.]+) bar$", r"stops, \1 bar"),
     (r"^ciclos perdidos de (\d+)$", r"cycles lost out of \1"),
+    # El grafo de activos del módulo 29: los días de calendario que el bronce
+    # tiene como particiones, los reintentos del clima y las columnas del orden.
+    (r"^(\d+) dias$", r"\1 days"),
+    (r"^(\d+) reintentos$", r"\1 retries"),
+    (r"^paso (\d+)$", r"step \1"),
 ]
 
 TABLE: dict[str, str] = {}

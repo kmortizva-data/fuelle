@@ -226,7 +226,7 @@ What does separate, and by a lot, is everything else:
 | Several at once | no | yes |
 | Per user permissions | no | yes |
 
-**Twelve times more disk.** **12.2** to be exact, for the very same readings. This lesson used to say eleven, with the silver DuckDB wrote back then with several threads, which came out inflated: module 29 found it. And the whole cluster
+**Twelve times more disk.** **12.2** to be exact, for the very same readings. This lesson used to say eleven, with the silver DuckDB wrote back then with several threads and in no order, which came out inflated: module 29 found it. And the whole cluster
 folder goes past the gigabyte, because besides the table it keeps the write ahead log that lets it
 lose nothing when the power goes.
 

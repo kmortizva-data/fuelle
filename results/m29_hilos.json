@@ -1,0 +1,50 @@
+{
+  "bronce": {
+    "varios hilos": {
+      "ficheros_primera": 213,
+      "ficheros_segunda": 213,
+      "identicos": 198,
+      "mb": 22.06
+    },
+    "un hilo": {
+      "ficheros_primera": 212,
+      "ficheros_segunda": 212,
+      "identicos": 212,
+      "mb": 22.05
+    }
+  },
+  "plata": {
+    "varios hilos, sin orden": {
+      "ficheros_primera": 402,
+      "ficheros_segunda": 405,
+      "identicos": 1,
+      "mb": 24.12,
+      "horas": 4416,
+      "horas_distintas": 2
+    },
+    "un hilo, sin orden": {
+      "ficheros_primera": 400,
+      "ficheros_segunda": 400,
+      "identicos": 400,
+      "mb": 22.08,
+      "horas": 4416,
+      "horas_distintas": 0
+    },
+    "varios hilos, en orden": {
+      "ficheros_primera": 214,
+      "ficheros_segunda": 214,
+      "identicos": 207,
+      "mb": 21.88,
+      "horas": 4416,
+      "horas_distintas": 0
+    },
+    "un hilo, en orden": {
+      "ficheros_primera": 214,
+      "ficheros_segunda": 214,
+      "identicos": 214,
+      "mb": 21.88,
+      "horas": 4416,
+      "horas_distintas": 0
+    }
+  }
+}
