@@ -159,17 +159,20 @@ def apunta_al_metadato() -> None:
     shutil.copyfile(metadatos[-1], PUNTERO_ULTIMA)
 
 
-def main() -> None:
-    if not (BRONZE.exists() and SILVER.exists()):
-        raise SystemExit("Faltan bronce o plata. Corre src/ingest/bronze.py y "
-                         "src/transform/silver.py primero.")
-
+def abre_el_lago() -> duckdb.DuckDBPyConnection:
     con = duckdb.connect()
     con.execute(f"CREATE VIEW bronce AS "
                 f"SELECT * FROM read_parquet('{BRONZE.as_posix()}/**/*.parquet')")
     con.execute(f"CREATE VIEW plata AS "
                 f"SELECT * FROM read_parquet('{SILVER.as_posix()}/**/*.parquet')")
+    return con
 
+
+def versiones(con: duckdb.DuckDBPyConnection) -> tuple[pa.Table, pa.Table, int, int]:
+    """El oro diario dos veces: desde la plata con el fallo y desde la buena.
+
+    Devuelve también cuántas lecturas ve cada una, que es la noticia del módulo.
+    """
     borde = con.sql("SELECT min(timestamp), max(timestamp) FROM bronce").fetchone()
     con_el_fallo = PLATA_CON_EL_FALLO.format(desde=borde[0], hasta=borde[1], paso=PASO)
 
@@ -181,6 +184,70 @@ def main() -> None:
     # escriben siete veces cada una: hay que materializarlas.
     v0 = con.sql(CICLO.format(plata=con_el_fallo, paso=PASO)).arrow().read_all()
     v1 = con.sql(CICLO.format(plata="plata WHERE medido", paso=PASO)).arrow().read_all()
+    return v0, v1, lecturas_del_fallo, lecturas_de_verdad
+
+
+def limpia_delta() -> None:
+    shutil.rmtree(DELTA, ignore_errors=True)
+
+
+def escribe_delta(v0: pa.Table, v1: pa.Table) -> None:
+    from deltalake import write_deltalake
+
+    write_deltalake(str(DELTA), v0, mode="overwrite")
+    write_deltalake(str(DELTA), v1, mode="overwrite")
+
+
+def limpia_iceberg() -> None:
+    from pyiceberg.exceptions import NoSuchTableError
+
+    cat = catalogo_iceberg()
+    try:
+        cat.drop_table("oro.ciclo_diario")
+    except NoSuchTableError:
+        pass
+    shutil.rmtree(ICEBERG, ignore_errors=True)
+    ICEBERG.mkdir(parents=True, exist_ok=True)
+
+
+def escribe_iceberg(v0: pa.Table, v1: pa.Table) -> None:
+    from pyiceberg.exceptions import NoSuchTableError
+
+    cat = catalogo_iceberg()
+    cat.create_namespace_if_not_exists("oro")
+    try:
+        cat.drop_table("oro.ciclo_diario")
+    except NoSuchTableError:
+        pass
+    tabla = cat.create_table("oro.ciclo_diario", schema=v0.schema)
+    tabla.append(v0)
+    tabla.overwrite(v1)
+
+
+def construye() -> dict:
+    """Las dos tablas con sus dos versiones, escritas una vez y sin cronómetro.
+
+    Es lo que orquesta el módulo 29. `main()` hace esto mismo y además lo mide
+    siete veces, que es material de la lección del 18 y no del lago: un
+    orquestador que cronometrara reescribiría las cifras publicadas en cada
+    corrida.
+    """
+    v0, v1, _, _ = versiones(abre_el_lago())
+    limpia_delta()
+    escribe_delta(v0, v1)
+    limpia_iceberg()
+    escribe_iceberg(v0, v1)
+    apunta_al_metadato()
+    return {"dias_en_la_version_0": v0.num_rows, "dias_en_la_version_1": v1.num_rows}
+
+
+def main() -> None:
+    if not (BRONZE.exists() and SILVER.exists()):
+        raise SystemExit("Faltan bronce o plata. Corre src/ingest/bronze.py y "
+                         "src/transform/silver.py primero.")
+
+    con = abre_el_lago()
+    v0, v1, lecturas_del_fallo, lecturas_de_verdad = versiones(con)
 
     print(f"  version 0, con el fallo:  {v0.num_rows:>3} dias, "
           f"{lecturas_del_fallo:>9,} lecturas")
@@ -197,46 +264,17 @@ def main() -> None:
     print(f"  el panel decia {carga_v0} h de carga al dia, y son {carga_v1}")
 
     # --- Delta -----------------------------------------------------------
-    from deltalake import DeltaTable, write_deltalake
-    from pyiceberg.exceptions import NoSuchTableError
-
-    def escribe_delta() -> None:
-        write_deltalake(str(DELTA), v0, mode="overwrite")
-        write_deltalake(str(DELTA), v1, mode="overwrite")
-
-    def limpia_delta() -> None:
-        shutil.rmtree(DELTA, ignore_errors=True)
+    from deltalake import DeltaTable
 
     t0 = time.perf_counter()
     limpia_delta()
-    escribe_delta()
+    escribe_delta(v0, v1)
     montar_delta = time.perf_counter() - t0
 
     # --- Iceberg ---------------------------------------------------------
-    def escribe_iceberg() -> None:
-        cat = catalogo_iceberg()
-        cat.create_namespace_if_not_exists("oro")
-        try:
-            cat.drop_table("oro.ciclo_diario")
-        except NoSuchTableError:
-            pass
-        tabla = cat.create_table("oro.ciclo_diario", schema=v0.schema)
-        tabla.append(v0)
-        tabla.overwrite(v1)
-
-    def limpia_iceberg() -> None:
-        cat = catalogo_iceberg()
-        try:
-            cat.drop_table("oro.ciclo_diario")
-        except NoSuchTableError:
-            pass
-        shutil.rmtree(ICEBERG, ignore_errors=True)
-        ICEBERG.mkdir(parents=True, exist_ok=True)
-
     t0 = time.perf_counter()
     limpia_iceberg()
-    ICEBERG.mkdir(parents=True, exist_ok=True)
-    escribe_iceberg()
+    escribe_iceberg(v0, v1)
     montar_iceberg = time.perf_counter() - t0
 
     # --- Lo que ocupan ---------------------------------------------------
@@ -290,8 +328,8 @@ def main() -> None:
     print()
     print("  midiendo, mediana de siete:")
     medidas = {"escribir las dos versiones": {
-        "delta": measure(escribe_delta, setup=limpia_delta),
-        "iceberg": measure(escribe_iceberg, setup=limpia_iceberg),
+        "delta": measure(lambda: escribe_delta(v0, v1), setup=limpia_delta),
+        "iceberg": measure(lambda: escribe_iceberg(v0, v1), setup=limpia_iceberg),
     }}
     # Medir la escritura ha vuelto a escribir las dos tablas, asi que los
     # punteros del apano apuntan a ficheros que ya no existen. Se rehacen antes

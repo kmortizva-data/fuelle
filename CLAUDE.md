@@ -977,6 +977,47 @@ los módulos 23, 26, 27 y 28 son ahora fragmentos de verdad.
 lo note, porque su salida sigue siendo cierta para su propia consulta. Al cambiar una ventana de
 análisis hay que **buscar las fechas a mano** en las lecciones, no fiarse de los verificadores.
 
+### Paso 8.2 EN CURSO (2026-09-19): la primera reconstrucción NO salió igual
+
+**Hecho:** Dagster instalado (commit 51fa549; bajó sqlglot 30.17 a 28.0, pip check limpio, diez
+puertas en verde). `src/orchestration/definitions.py` con 27 activos (24 construibles y 3 crudos),
+31 dependencias y 13 comprobaciones (11 de dbt, el contrato del 16 sobre la plata y la restauración
+del 22 sobre la copia). `reconstruye.py` aparta `lake/` a `lake_antes/`, lo pide todo a Dagster,
+compara por contenido (recuento más suma de `hash(fila)`) y por bytes lo versionado, pasa las
+puertas y prueba un relleno de un día. `abre.py` abre la interfaz en el puerto 3029 con
+`DAGSTER_HOME=dagster_home` (sin eso la telemetría va encendida: leído en su código).
+
+**Regla del orquestador:** lo que corre tiene que dar lo mismo cada vez, así que el cronómetro se
+queda fuera. Seis scripts se partieron en construir y medir (bronze, silver, benchmark_formats,
+table_format, indexes, backup); su `main()` hace lo mismo que antes.
+
+**Lo que destapó la primera reconstrucción (13 de 14 tablas iguales, puertas en rojo):**
+
+1. **Dependencia escondida:** `weather.py` lee la plata para las correlaciones del módulo 15. En el
+   grafo el clima no dependía de la plata, Dagster lo corrió antes, y el script escribió `null` en
+   siete cifras publicadas **sin quejarse**. A mano no se veía porque el 15 siempre iba después del
+   14. Arreglo: separar construir (descarga y bronce) de analizar, y que `main()` se niegue sin plata.
+2. **DuckDB no escribe dos veces los mismos bytes con varios hilos.** Mismas filas, otro orden y
+   otro reparto en ficheros: bronce 198 de 212 idénticos, plata 0 (404 contra 414 ficheros).
+   Consecuencias medidas: **5 de 4.416 horas de `oro_horas` cambian una centésima** (la media en coma
+   flotante cae justo en la mitad del redondeo y el orden de la suma la manda a un lado u otro), y
+   los pesos exactos de columna del módulo 7 se mueven hasta 2 KB (check_sql en rojo).
+3. **Con `SET threads = 1` salen idénticos byte a byte** (bronce 212 de 212, plata 400 de 400),
+   unos dos segundos más. **Y la plata baja de ~24 MB a 22,08 MB**: el escritor en paralelo la
+   inflaba. El bronce se queda en 22,05.
+
+**Cifras publicadas que dependen del tamaño inflado de la plata, a corregir:**
+- m14: «23,85 MB contra 22,06 del bronce, casi dos megas por ver los agujeros». Pasaría a centésimas.
+- m19: «23,8 MB en Parquet contra 267,8 en el servidor, 11,2 veces» (tres sitios y la figura).
+- m22: «la copia (22,2 MB) pesa menos incluso que los 23,8 del Parquet». **Se da la vuelta.**
+- m07: los bytes exactos de la salida de `parquet_metadata` (el fichero cambia con el bronce).
+
+**Plan en marcha:** escritura determinista en bronce y plata; separar weather.py; reconstruir y
+comparar contra el lago actual; volver a medir m14, m19 y m07 y corregir las lecciones (y sus
+gemelas inglesas); segunda reconstrucción que tiene que salir idéntica byte a byte; después figura,
+lección 29 y temario. `lake_antes/` (el lago original) se guarda hasta el final. **Nada se sube sin
+el visto bueno de Kevin.**
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo

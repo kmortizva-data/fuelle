@@ -110,6 +110,43 @@ def prueba_el_rol(pg) -> dict:
     return {"lee": leyo, "puede_escribir": escribio, "error": error}
 
 
+def copia() -> float:
+    """La base entera con `pg_dump`, en el formato propio de PostgreSQL. Devuelve MB."""
+    COPIAS.mkdir(parents=True, exist_ok=True)
+    COPIA.unlink(missing_ok=True)
+    r = herramienta("pg_dump", "-d", BASE, "-Fc", "-f", str(COPIA))
+    if r.returncode:
+        raise SystemExit(f"pg_dump falló: {r.stderr[:200]}")
+    return COPIA.stat().st_size / 1024 / 1024
+
+
+def restaura(pg) -> None:
+    """La copia, restaurada en una base aparte. `pg` tiene que ir en autocommit."""
+    pg.execute(f'DROP DATABASE IF EXISTS "{RESTAURADA}" WITH (FORCE)')
+    pg.execute(f'CREATE DATABASE "{RESTAURADA}"')
+    r = herramienta("pg_restore", "-d", RESTAURADA, str(COPIA))
+    if r.returncode:
+        raise SystemExit(f"pg_restore falló: {r.stderr[:300]}")
+
+
+def la_copia_restaura(pg) -> dict:
+    """La prueba del módulo 22 sin cronómetro, para el orquestador del 29.
+
+    Restaura la copia en una base aparte, compara huellas y guardas con la base
+    viva y borra la restaurada. Una copia que nadie ha restaurado no es una
+    copia, así que el orquestador no la da por buena sin esto.
+    """
+    restaura(pg)
+    otra = conecta(base=RESTAURADA)
+    restaurado, guardas_restauradas = huellas_de(otra), guardas_de(otra)
+    otra.close()
+    pg.execute(f'DROP DATABASE IF EXISTS "{RESTAURADA}" WITH (FORCE)')
+    original, guardas = huellas_de(pg), guardas_de(pg)
+    return {"iguales": original == restaurado and guardas == guardas_restauradas,
+            "huellas": original, "huellas_restauradas": restaurado,
+            "guardas": guardas, "guardas_restauradas": guardas_restauradas}
+
+
 def main() -> None:
     with servidor():
         pg = conecta(autocommit=True)
@@ -133,25 +170,12 @@ def main() -> None:
         print()
         print("  midiendo la copia y la restauración, mediana de siete:")
 
-        def copia() -> None:
-            COPIA.unlink(missing_ok=True)
-            r = herramienta("pg_dump", "-d", BASE, "-Fc", "-f", str(COPIA))
-            if r.returncode:
-                raise SystemExit(f"pg_dump falló: {r.stderr[:200]}")
-
         copiar = measure(copia, runs=3)
         mb = COPIA.stat().st_size / 1024 / 1024
         print(f"    copiar      {copiar.median:.1f} s   ->  {mb:.1f} MB")
 
         # --- Y la restauración, que es la parte que casi nadie hace -------
-        def restaura() -> None:
-            pg.execute(f'DROP DATABASE IF EXISTS "{RESTAURADA}" WITH (FORCE)')
-            pg.execute(f'CREATE DATABASE "{RESTAURADA}"')
-            r = herramienta("pg_restore", "-d", RESTAURADA, str(COPIA))
-            if r.returncode:
-                raise SystemExit(f"pg_restore falló: {r.stderr[:300]}")
-
-        restaurar = measure(restaura, runs=3)
+        restaurar = measure(lambda: restaura(pg), runs=3)
         print(f"    restaurar   {restaurar.median:.1f} s")
 
         # --- La comprobación que convierte esto en una copia ---------------

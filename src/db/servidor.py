@@ -107,6 +107,33 @@ def acepta_conexiones() -> bool:
         capture_output=True).returncode == 0
 
 
+# Las tres líneas que este curso cambia en `postgresql.conf`. Todo lo demás es lo
+# que deja `initdb`. Viven aquí para que un clúster rehecho desde cero, que es lo
+# que hace el módulo 29, salga igual que el que se montó a mano en el 19.
+AJUSTES = ("listen_addresses = 'localhost'", f"port = {PUERTO}", "lc_messages = 'C'")
+
+
+def crea_cluster() -> bool:
+    """El directorio de datos desde cero, si no existe. Devuelve si lo ha creado.
+
+    Hasta el módulo 29 esto se hacía a mano una sola vez. Reconstruir el lago
+    entero borra también `lake/pg`, así que el orquestador tiene que saber
+    hacerlo, y la única forma de que salga igual es que lo haga siempre lo mismo.
+    """
+    if DATOS.exists():
+        return False
+    r = subprocess.run(
+        [str(_exe("initdb")), "-D", str(DATOS), "-U", USUARIO,
+         "--encoding=UTF8", "--locale=C", "--auth=trust"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if r.returncode:
+        raise SystemExit(f"initdb falló: {(r.stderr or r.stdout)[-300:]}")
+    lineas = ["", "# Lo que cambia este curso, desde src/db/servidor.py", *AJUSTES, ""]
+    with open(DATOS / "postgresql.conf", "a", encoding="utf-8") as fh:
+        fh.write("\n".join(lineas))
+    return True
+
+
 def arranca(espera: float = 20.0) -> bool:
     """Levanta el servidor si hace falta. Devuelve si lo ha levantado él."""
     if acepta_conexiones():

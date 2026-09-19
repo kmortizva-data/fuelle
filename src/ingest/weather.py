@@ -45,11 +45,16 @@ except ImportError:
 
 import duckdb
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from escritura import un_solo_hilo  # noqa: E402
+
 sys.stdout.reconfigure(encoding="utf-8")
 
 PROJECT = Path(__file__).resolve().parents[2]
 RAW = PROJECT / "data" / "clima_oporto.json"
 BRONZE = PROJECT / "lake" / "bronze" / "weather"
+SILVER = PROJECT / "lake" / "silver" / "telemetry"
 RESULTS = PROJECT / "results" / "m15_clima.json"
 
 # El Metro de Oporto. Coordenadas del centro de la ciudad, que es donde circula.
@@ -83,19 +88,58 @@ def descarga() -> dict:
     return json.loads(crudo)
 
 
-def main() -> None:
-    datos = descarga()
-    horas = datos["hourly"]["time"]
-    huella = hashlib.sha256(RAW.read_bytes()).hexdigest()
-
-    con = duckdb.connect()
+def vista_del_clima(con: duckdb.DuckDBPyConnection, datos: dict) -> None:
+    """El JSON de la API como una tabla `clima`, una fila por hora."""
     con.execute(f"""
         CREATE VIEW clima AS
-        SELECT CAST(unnest({horas!r}) AS TIMESTAMP) AS hora,
+        SELECT CAST(unnest({datos['hourly']['time']!r}) AS TIMESTAMP) AS hora,
                unnest({datos['hourly'][SEÑALES[0]]!r}) AS temperatura,
                unnest({datos['hourly'][SEÑALES[1]]!r}) AS humedad,
                unnest({datos['hourly'][SEÑALES[2]]!r}) AS lluvia
     """)
+
+
+def escribe_bronce(con: duckdb.DuckDBPyConnection) -> None:
+    """El clima al lago, una carpeta por día. Con un hilo: ver src/escritura.py."""
+    import shutil
+
+    if BRONZE.exists():
+        shutil.rmtree(BRONZE)
+    BRONZE.parent.mkdir(parents=True, exist_ok=True)
+    with un_solo_hilo(con):
+        con.execute(f"COPY (SELECT *, CAST(hora AS DATE) AS day FROM clima) "
+                    f"TO '{BRONZE.as_posix()}' "
+                    f"(FORMAT PARQUET, PARTITION_BY (day), OVERWRITE_OR_IGNORE, "
+                    f"COMPRESSION ZSTD)")
+
+
+def construye() -> dict:
+    """Bajar el clima si no está y escribir su bronce. Nada más, y sin la plata.
+
+    Es lo que orquesta el módulo 29. `main()` hace esto mismo y además cruza el
+    clima con la plata para la pregunta del módulo 15, y eso solo se puede hacer
+    con la plata construida. La primera versión mezclaba las dos cosas, y cuando
+    el orquestador la corrió antes que la plata escribió `null` en siete cifras
+    publicadas sin quejarse.
+    """
+    con = duckdb.connect()
+    vista_del_clima(con, descarga())
+    escribe_bronce(con)
+    horas = con.sql("SELECT count(*) FROM clima").fetchone()[0]
+    con.close()
+    return {"horas": horas}
+
+
+def main() -> None:
+    if not SILVER.exists():
+        raise SystemExit("Falta la plata. Corre src/transform/silver.py primero: las "
+                         "correlaciones del módulo 15 cruzan el clima con ella, y sin ella "
+                         "saldrían vacías.")
+    datos = descarga()
+    huella = hashlib.sha256(RAW.read_bytes()).hexdigest()
+
+    con = duckdb.connect()
+    vista_del_clima(con, datos)
 
     resumen = con.sql("""
         SELECT count(*) AS horas,
@@ -107,26 +151,16 @@ def main() -> None:
         FROM clima
     """).fetchone()
 
-    if BRONZE.exists():
-        import shutil
-
-        shutil.rmtree(BRONZE)
-    BRONZE.parent.mkdir(parents=True, exist_ok=True)
-    con.execute(f"COPY (SELECT *, CAST(hora AS DATE) AS day FROM clima) "
-                f"TO '{BRONZE.as_posix()}' "
-                f"(FORMAT PARQUET, PARTITION_BY (day), OVERWRITE_OR_IGNORE, COMPRESSION ZSTD)")
+    escribe_bronce(con)
 
     # La pregunta física del módulo: ¿explica la calle la temperatura del aceite?
     #
     #     Se cruza a la hora, que es la frecuencia de la fuente más lenta. La
     #     comparación con la correlación de la carga está a propósito: sirve para
     #     saber si el clima aporta algo que la máquina no explica ya.
-    SILVER = PROJECT / "lake" / "silver" / "telemetry"
-    correlacion = None
-    if SILVER.exists():
-        con.execute(f"CREATE VIEW plata AS "
-                    f"SELECT * FROM read_parquet('{SILVER.as_posix()}/**/*.parquet')")
-        correlacion = con.sql("""
+    con.execute(f"CREATE VIEW plata AS "
+                f"SELECT * FROM read_parquet('{SILVER.as_posix()}/**/*.parquet')")
+    correlacion = con.sql("""
             WITH por_hora AS (
                 SELECT time_bucket(INTERVAL 1 HOUR, timestamp) AS hora,
                        avg(Oil_temperature) AS aceite,
@@ -143,16 +177,14 @@ def main() -> None:
     # La meseta del aceite el día de la avería #3, que la lección cita al mirar
     # la figura. Medida aquí en vez de leída del dibujo, que es de donde salió
     # la primera versión de esa frase.
-    meseta = None
-    if SILVER.exists():
-        meseta = con.sql("""
-            SELECT round(avg(Oil_temperature), 1),
-                   round(min(Oil_temperature), 1),
-                   round(max(Oil_temperature), 1)
-            FROM plata
-            WHERE medido AND timestamp >= TIMESTAMP '2020-06-05 10:00:00'
-                        AND timestamp <  TIMESTAMP '2020-06-06 00:00:00'
-        """).fetchone()
+    meseta = con.sql("""
+        SELECT round(avg(Oil_temperature), 1),
+               round(min(Oil_temperature), 1),
+               round(max(Oil_temperature), 1)
+        FROM plata
+        WHERE medido AND timestamp >= TIMESTAMP '2020-06-05 10:00:00'
+                    AND timestamp <  TIMESTAMP '2020-06-06 00:00:00'
+    """).fetchone()
 
     # Las tres frecuencias que va a tener el lago, para la figura del módulo.
     lecturas = con.sql(
@@ -179,13 +211,13 @@ def main() -> None:
         ],
         "veces_mas_densa_la_telemetria": round(lecturas / resumen[0]),
         "lecturas_por_hora": 3600 // 10,
-        "aceite_meseta_media": float(meseta[0]) if meseta else None,
-        "aceite_meseta_minimo": float(meseta[1]) if meseta else None,
-        "aceite_meseta_maximo": float(meseta[2]) if meseta else None,
-        "horas_cruzadas": correlacion[0] if correlacion else None,
-        "correlacion_calle_aceite": float(correlacion[1]) if correlacion else None,
-        "correlacion_carga_aceite": float(correlacion[2]) if correlacion else None,
-        "grados_del_aceite_por_encima_de_la_calle": float(correlacion[3]) if correlacion else None,
+        "aceite_meseta_media": float(meseta[0]),
+        "aceite_meseta_minimo": float(meseta[1]),
+        "aceite_meseta_maximo": float(meseta[2]),
+        "horas_cruzadas": correlacion[0],
+        "correlacion_calle_aceite": float(correlacion[1]),
+        "correlacion_carga_aceite": float(correlacion[2]),
+        "grados_del_aceite_por_encima_de_la_calle": float(correlacion[3]),
     }
     RESULTS.parent.mkdir(exist_ok=True)
     with io.open(RESULTS, "w", encoding="utf-8") as fh:
@@ -200,15 +232,13 @@ def main() -> None:
         print(f"    {f['fuente']:<12} cada {f['cada']:<12} {f['filas']:>10,} filas")
     print(f"  la telemetría es {payload['veces_mas_densa_la_telemetria']:,} veces más densa "
           f"que el clima")
-    if meseta:
-        print(f"  el 5 de junio, desde las 10:00, el aceite se queda en {meseta[0]} grados "
-              f"de media (de {meseta[1]} a {meseta[2]})")
-    if correlacion:
-        print()
-        print(f"  cruzando {correlacion[0]:,} horas con la plata:")
-        print(f"    la calle explica el aceite con correlación {correlacion[1]}")
-        print(f"    la carga del compresor, con {correlacion[2]}")
-        print(f"    y el aceite va {correlacion[3]} grados por encima de la calle")
+    print(f"  el 5 de junio, desde las 10:00, el aceite se queda en {meseta[0]} grados "
+          f"de media (de {meseta[1]} a {meseta[2]})")
+    print()
+    print(f"  cruzando {correlacion[0]:,} horas con la plata:")
+    print(f"    la calle explica el aceite con correlación {correlacion[1]}")
+    print(f"    la carga del compresor, con {correlacion[2]}")
+    print(f"    y el aceite va {correlacion[3]} grados por encima de la calle")
     print(f"  escrito en {RESULTS.relative_to(PROJECT)}")
 
     if resumen[1] != resumen[0]:

@@ -3,6 +3,9 @@ data/
 
 # El lago se reconstruye entero desde data/ corriendo el pipeline
 lake/
+# Y sus copias mientras se prueba la reconstrucción del módulo 29: reconstruye.py
+# aparta el lago a lake_antes/, y lake_original/ guarda el primero de todos.
+lake_*/
 
 # Entornos
 .venv/
@@ -27,3 +30,8 @@ desktop.ini
 
 # Las fuentes SI se versionan (289 KB): sin ellas el sitio se ve con otra letra
 # y deja de parecerse a lo aprobado. El motor SQL no, porque son 35 MB.
+
+# Lo que Dagster escribe al correr (historial, registros, su base interna).
+# Su configuración sí se versiona: es la que apaga la telemetría.
+dagster_home/*
+!dagster_home/dagster.yaml

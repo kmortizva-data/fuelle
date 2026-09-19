@@ -39,6 +39,7 @@ RESULTS = PROJECT / "results" / "m21_indices.json"
 # pregunta que el módulo 6 le hacía al Parquet.
 UN_DIA = "2020-06-05"
 INDICE = "lecturas_por_dia"
+CREA_EL_INDICE = f"CREATE INDEX IF NOT EXISTS {INDICE} ON lecturas (day)"
 
 PREGUNTA = f"""
     SELECT count(*) AS lecturas,
@@ -76,6 +77,17 @@ def kb_del_indice(pg, nombre: str) -> float:
         "SELECT pg_relation_size(%s) / 1024.0", (nombre,)).fetchone()[0])
 
 
+def crea_indice(pg) -> None:
+    """El índice, puesto una vez y sin medir nada: lo que orquesta el módulo 29.
+
+    `ANALYZE` va detrás por lo mismo que en `main()`: sin estadísticas frescas el
+    planificador puede seguir recorriendo la tabla entera por costumbre.
+    """
+    pg.execute(CREA_EL_INDICE)
+    pg.execute("ANALYZE lecturas")
+    pg.commit()
+
+
 def main() -> None:
     with servidor():
         pg = conecta()
@@ -88,7 +100,7 @@ def main() -> None:
             pg.commit()
 
         def con_indice() -> None:
-            pg.execute(f"CREATE INDEX IF NOT EXISTS {INDICE} ON lecturas (day)")
+            pg.execute(CREA_EL_INDICE)
             pg.commit()
 
         def pregunta():

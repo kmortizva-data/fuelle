@@ -49,6 +49,7 @@ import duckdb
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from escritura import un_solo_hilo  # noqa: E402
 from medir import measure  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -71,6 +72,94 @@ ANALOGICAS = ["TP2", "TP3", "H1", "DV_pressure", "Reservoirs",
               "Oil_temperature", "Motor_current"]
 DIGITALES = ["COMP", "DV_eletric", "Towers", "MPG", "LPS",
              "Pressure_switch", "Oil_level", "Caudal_impulses"]
+
+
+def escribe(con: duckdb.DuckDBPyConnection, borde: tuple) -> None:
+    """La capa, escrita. `con` trae la vista `bronce`, y `borde` sus dos extremos.
+
+    Nada se tira. Las lecturas que comparten casilla se promedian si son
+    analógicas y se quedan con el máximo si son digitales, porque una válvula
+    que estuvo abierta en algún momento de esos diez segundos estuvo abierta. Y
+    `lecturas` guarda cuántas había, para que la fusión quede a la vista en vez
+    de esconderse.
+
+    Con un solo hilo y en orden de tiempo, que es lo que el módulo 29 descubrió
+    que hacía falta: con varios, cada corrida repartía las mismas filas en otros
+    ficheros y en otro orden, y eso movía medias en su último decimal. De paso la
+    capa bajó de unos 24 MB a 22,08, porque el escritor en paralelo la inflaba.
+    """
+    señales = ", ".join(
+        f'round(avg(b."{c}"), {DECIMALES}) AS "{c}"' for c in ANALOGICAS)
+    digitales = ", ".join(f'max(b."{c}") AS "{c}"' for c in DIGITALES)
+
+    if SILVER.exists():
+        shutil.rmtree(SILVER)
+    SILVER.parent.mkdir(parents=True, exist_ok=True)
+    with un_solo_hilo(con):
+        con.execute(f"""
+        COPY (
+            WITH ajustado AS (
+                SELECT time_bucket(INTERVAL {PASO} SECOND, b.timestamp) AS casilla, b.*
+                FROM bronce b
+            ),
+            fundido AS (
+                SELECT casilla,
+                       count(*) AS lecturas,
+                       max(CASE WHEN b.DV_eletric = b.COMP THEN 1 ELSE 0 END) AS dudoso,
+                       {señales},
+                       {digitales}
+                FROM ajustado b
+                GROUP BY casilla
+            ),
+            rejilla AS (
+                SELECT unnest(generate_series(
+                    TIMESTAMP '{borde[0]}', TIMESTAMP '{borde[1]}',
+                    INTERVAL {PASO} SECOND)) AS timestamp
+            )
+            SELECT r.timestamp,
+                   CAST(r.timestamp AS DATE) AS day,
+                   coalesce(f.lecturas, 0) AS lecturas,
+                   f.casilla IS NOT NULL   AS medido,
+                   coalesce(f.dudoso, 0) = 1 AS dudoso,
+                   f.* EXCLUDE (casilla, lecturas, dudoso)
+            FROM rejilla r
+            LEFT JOIN fundido f ON f.casilla = r.timestamp
+            ORDER BY r.timestamp
+        )
+        TO '{SILVER.as_posix()}'
+        (FORMAT PARQUET, PARTITION_BY (day), OVERWRITE_OR_IGNORE, COMPRESSION ZSTD)
+    """)
+
+
+def construye() -> dict:
+    """La capa escrita una sola vez y sin cronómetro, que es lo que orquesta el módulo 29.
+
+    Comprueba lo mismo que `main()` al terminar: que no se pierde ni una lectura
+    y que la rejilla tiene las casillas que debe. Lo demás que mide `main()` es
+    material de la lección del módulo 14, y la regla del orquestador es que lo
+    que corre dé lo mismo cada vez: un cronómetro nunca lo da.
+    """
+    con = duckdb.connect()
+    con.execute(f"CREATE VIEW bronce AS "
+                f"SELECT * FROM read_parquet('{BRONZE.as_posix()}/**/*.parquet')")
+    borde = con.sql("SELECT min(timestamp), max(timestamp) FROM bronce").fetchone()
+    escribe(con, borde)
+
+    filas_bronce = con.sql("SELECT count(*) FROM bronce").fetchone()[0]
+    casillas = con.sql(f"""
+        SELECT CAST(date_diff('second', min(timestamp), max(timestamp)) / {PASO} + 1 AS BIGINT)
+        FROM bronce
+    """).fetchone()[0]
+    filas, conservadas, huecos = con.sql(
+        f"SELECT count(*), sum(lecturas), count(*) FILTER (WHERE NOT medido) "
+        f"FROM read_parquet('{SILVER.as_posix()}/**/*.parquet')").fetchone()
+    con.close()
+    if conservadas != filas_bronce:
+        raise SystemExit(f"La plata perdió lecturas: conserva {conservadas:,} de "
+                         f"{filas_bronce:,}. Limpiar no es tirar.")
+    if filas != casillas:
+        raise SystemExit("La rejilla no tiene las casillas que debería.")
+    return {"filas": filas, "lecturas": conservadas, "huecos": huecos}
 
 
 def main() -> None:
@@ -105,54 +194,7 @@ def main() -> None:
     """).fetchone()[0]
 
     # --- La capa, escrita ------------------------------------------------
-    #
-    #     Nada se tira. Las lecturas que comparten casilla se promedian si son
-    #     analógicas y se quedan con el máximo si son digitales, porque una
-    #     válvula que estuvo abierta en algún momento de esos diez segundos
-    #     estuvo abierta. Y `lecturas` guarda cuántas había, para que la fusión
-    #     quede a la vista en vez de esconderse.
-    señales = ", ".join(
-        f'round(avg(b."{c}"), {DECIMALES}) AS "{c}"' for c in ANALOGICAS)
-    digitales = ", ".join(f'max(b."{c}") AS "{c}"' for c in DIGITALES)
-
-    def escribe():
-        if SILVER.exists():
-            shutil.rmtree(SILVER)
-        SILVER.parent.mkdir(parents=True, exist_ok=True)
-        con.execute(f"""
-            COPY (
-                WITH ajustado AS (
-                    SELECT time_bucket(INTERVAL {PASO} SECOND, b.timestamp) AS casilla, b.*
-                    FROM bronce b
-                ),
-                fundido AS (
-                    SELECT casilla,
-                           count(*) AS lecturas,
-                           max(CASE WHEN b.DV_eletric = b.COMP THEN 1 ELSE 0 END) AS dudoso,
-                           {señales},
-                           {digitales}
-                    FROM ajustado b
-                    GROUP BY casilla
-                ),
-                rejilla AS (
-                    SELECT unnest(generate_series(
-                        TIMESTAMP '{borde[0]}', TIMESTAMP '{borde[1]}',
-                        INTERVAL {PASO} SECOND)) AS timestamp
-                )
-                SELECT r.timestamp,
-                       CAST(r.timestamp AS DATE) AS day,
-                       coalesce(f.lecturas, 0) AS lecturas,
-                       f.casilla IS NOT NULL   AS medido,
-                       coalesce(f.dudoso, 0) = 1 AS dudoso,
-                       f.* EXCLUDE (casilla, lecturas, dudoso)
-                FROM rejilla r
-                LEFT JOIN fundido f ON f.casilla = r.timestamp
-            )
-            TO '{SILVER.as_posix()}'
-            (FORMAT PARQUET, PARTITION_BY (day), OVERWRITE_OR_IGNORE, COMPRESSION ZSTD)
-        """)
-
-    escrito = measure(escribe, runs=3)
+    escrito = measure(lambda: escribe(con, borde), runs=3)
 
     con.execute(f"CREATE VIEW plata AS "
                 f"SELECT * FROM read_parquet('{SILVER.as_posix()}/**/*.parquet')")
@@ -167,6 +209,22 @@ def main() -> None:
 
     mb_bronce = sum(f.stat().st_size for f in BRONZE.rglob("*.parquet")) / 1024 / 1024
     mb_plata = sum(f.stat().st_size for f in SILVER.rglob("*.parquet")) / 1024 / 1024
+
+    # Lo que cuestan de verdad los huecos: la misma plata sin sus casillas vacías,
+    # escrita igual y en una carpeta aparte que se borra al terminar. Hasta el
+    # módulo 29 esta lección restaba plata menos bronce y llamaba a eso el precio
+    # de los huecos, y la resta mezclaba tres cosas: los huecos, el redondeo y
+    # cómo troceaba los ficheros el escritor en paralelo.
+    sin_huecos = PROJECT / "lake" / "_plata_sin_huecos"
+    shutil.rmtree(sin_huecos, ignore_errors=True)
+    with un_solo_hilo(con):
+        con.execute(f"""
+            COPY (SELECT * FROM plata WHERE medido ORDER BY timestamp)
+            TO '{sin_huecos.as_posix()}'
+            (FORMAT PARQUET, PARTITION_BY (day), OVERWRITE_OR_IGNORE, COMPRESSION ZSTD)
+        """)
+    mb_sin_huecos = sum(f.stat().st_size for f in sin_huecos.rglob("*.parquet")) / 1024 / 1024
+    shutil.rmtree(sin_huecos)
 
     # La ventana que dibuja la figura y cita la lección, medida aquí para que
     # sus números tengan una corrida detrás como todos los demás. Leerlos del
@@ -197,6 +255,9 @@ def main() -> None:
         "filas_dudosas": resumen[3],
         "mb_bronce": round(mb_bronce, 2),
         "mb_plata": round(mb_plata, 2),
+        "mb_plata_sin_huecos": round(mb_sin_huecos, 2),
+        "mb_que_cuestan_los_huecos": round(mb_plata - mb_sin_huecos, 2),
+        "mb_de_la_plata_menos_el_bronce": round(mb_plata - mb_bronce, 2),
         "escribir": escrito.as_json(2),
         "ventana_desde": VENTANA[0],
         "ventana_hasta": VENTANA[1],
@@ -223,6 +284,8 @@ def main() -> None:
     print(f"       huecos   {resumen[2]:>9,}  ({payload['por_ciento_de_huecos']} %)")
     print(f"       dudosas  {resumen[3]:>9,}")
     print(f"  y ocupa {mb_plata:.2f} MB contra los {mb_bronce:.2f} del bronce")
+    print(f"  sin sus casillas vacías ocuparía {mb_sin_huecos:.2f}: los huecos cuestan "
+          f"{mb_plata - mb_sin_huecos:.2f} MB")
     print(f"  la ventana de la figura sube de {ventana[0]} a {ventana[1]} bar "
           f"en {ventana[2]} casillas")
     print(f"  escrito en {RESULTS.relative_to(PROJECT)}")

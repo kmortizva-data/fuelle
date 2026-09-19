@@ -37,6 +37,7 @@ import duckdb
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from escritura import un_solo_hilo  # noqa: E402
 from medir import RUNS, measure  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -57,15 +58,28 @@ def fingerprint(path: Path, chunk: int = 1 << 20) -> str:
     return digest.hexdigest()
 
 
-def clear() -> None:
-    """Empty the layer. Untimed: it is not part of writing."""
-    if BRONZE.exists():
-        shutil.rmtree(BRONZE)
+def clear(days: tuple[str, str] | None = None) -> None:
+    """Empty the layer, or only the days from `days[0]` to `days[1]`. Untimed.
+
+    The range exists for module 29: the orchestrator backfills a stretch of days
+    by clearing those folders and writing them again, and leaves the rest alone.
+    """
+    if days is None:
+        if BRONZE.exists():
+            shutil.rmtree(BRONZE)
+    else:
+        for folder in BRONZE.glob("day=*"):
+            if days[0] <= folder.name.removeprefix("day=") <= days[1]:
+                shutil.rmtree(folder)
     BRONZE.parent.mkdir(parents=True, exist_ok=True)
 
 
-def write(con: duckdb.DuckDBPyConnection) -> None:
-    """Read the CSV and write it out as Parquet, one folder per day."""
+def write(con: duckdb.DuckDBPyConnection, days: tuple[str, str] | None = None) -> None:
+    """Read the CSV and write it out as Parquet, one folder per day.
+
+    With `days`, only that stretch is written. The CSV is still read whole, since
+    it has no index to jump to a day, but only those folders are touched.
+    """
     # The first column of the file has no name: it is the original 1 Hz row
     # number, and it is the evidence that the published CSV is one reading in
     # ten. It is kept, renamed, never renumbered.
@@ -74,20 +88,26 @@ def write(con: duckdb.DuckDBPyConnection) -> None:
     # detail (it is "column00" today), so it is read back rather than hardcoded.
     source = f"read_csv_auto('{RAW_CSV.as_posix()}', header = true)"
     first = con.sql(f"SELECT * FROM {source} LIMIT 0").columns[0]
+    only = ("" if days is None else
+            f"WHERE CAST(timestamp AS DATE) BETWEEN DATE '{days[0]}' AND DATE '{days[1]}'")
 
-    con.execute(
-        f"""
+    # One thread, so that two runs write the same bytes: module 29 found that
+    # with several, the same rows land in different files. See src/escritura.py.
+    with un_solo_hilo(con):
+        con.execute(
+            f"""
         COPY (
             SELECT
                 "{first}" AS source_index,
                 * EXCLUDE ("{first}"),
                 CAST(timestamp AS DATE) AS day
             FROM {source}
+            {only}
         )
         TO '{BRONZE.as_posix()}'
         (FORMAT PARQUET, PARTITION_BY (day), OVERWRITE_OR_IGNORE, COMPRESSION ZSTD)
         """
-    )
+        )
 
 
 def inventory(con: duckdb.DuckDBPyConnection) -> dict:
@@ -101,6 +121,21 @@ def inventory(con: duckdb.DuckDBPyConnection) -> dict:
         "size_mb": round(size / 1024 / 1024, 2),
         "csv_mb": round(RAW_CSV.stat().st_size / 1024 / 1024, 2),
     }
+
+
+def write_manifest(source_hash: str, stats: dict) -> dict:
+    """What the layer was built from, so a later run can tell whether the source changed."""
+    manifest = {
+        "source_file": RAW_CSV.name,
+        "source_sha256": source_hash,
+        "source_bytes": RAW_CSV.stat().st_size,
+        "rows": stats["rows"],
+        "partitions": stats["partitions"],
+    }
+    MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+    with io.open(MANIFEST, "w", encoding="utf-8") as fh:
+        json.dump(manifest, fh, ensure_ascii=False, indent=2)
+    return manifest
 
 
 def main() -> None:
@@ -128,16 +163,7 @@ def main() -> None:
     second = inventory(con)
     idempotent = second["rows"] == stats["rows"]
 
-    manifest = {
-        "source_file": RAW_CSV.name,
-        "source_sha256": source_hash,
-        "source_bytes": RAW_CSV.stat().st_size,
-        "rows": stats["rows"],
-        "partitions": stats["partitions"],
-    }
-    MANIFEST.parent.mkdir(parents=True, exist_ok=True)
-    with io.open(MANIFEST, "w", encoding="utf-8") as fh:
-        json.dump(manifest, fh, ensure_ascii=False, indent=2)
+    write_manifest(source_hash, stats)
 
     results = {
         **stats,

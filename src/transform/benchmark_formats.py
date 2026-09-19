@@ -102,20 +102,28 @@ def column_weights(con: duckdb.DuckDBPyConnection, parquet: Path) -> list[dict]:
     return out
 
 
+def write_whole_file(con: duckdb.DuckDBPyConnection) -> Path:
+    """One Parquet file holding exactly what the CSV holds.
+
+    That way the comparison is about the format and nothing else. The module 7
+    queries read this file, so module 29's orchestrator builds it on its own,
+    without the timings around it.
+    """
+    SCRATCH.mkdir(parents=True, exist_ok=True)
+    full = SCRATCH / "todo.parquet"
+    con.execute(
+        f"COPY (SELECT * EXCLUDE (day) FROM read_parquet('{BRONZE.as_posix()}/**/*.parquet')) "
+        f"TO '{full.as_posix()}' (FORMAT PARQUET, COMPRESSION ZSTD)")
+    return full
+
+
 def main() -> None:
     if not RAW_CSV.exists() or not BRONZE.exists():
         raise SystemExit("Data missing. Run src/ingest/bronze.py first.")
 
     shutil.rmtree(SCRATCH, ignore_errors=True)
-    SCRATCH.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect()
-
-    # One Parquet file holding exactly what the CSV holds, so the comparison is
-    # about the format and nothing else.
-    full = SCRATCH / "todo.parquet"
-    con.execute(
-        f"COPY (SELECT * EXCLUDE (day) FROM read_parquet('{BRONZE.as_posix()}/**/*.parquet')) "
-        f"TO '{full.as_posix()}' (FORMAT PARQUET, COMPRESSION ZSTD)")
+    full = write_whole_file(con)
 
     csv_source = f"read_csv_auto('{RAW_CSV.as_posix()}')"
     parquet_source = f"read_parquet('{full.as_posix()}')"

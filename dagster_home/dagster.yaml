@@ -1,0 +1,13 @@
+# Dagster guarda en esta carpeta el historial de corridas, los registros y su
+# base de datos interna. Todo eso queda fuera de git; este fichero no.
+#
+# Por qué existe: sin él, Dagster manda estadísticas de uso anónimas a sus
+# autores. Leído en su propio código (dagster_shared/telemetry): la telemetría
+# está encendida salvo que DAGSTER_HOME apunte a una carpeta cuyo dagster.yaml
+# diga lo contrario. Este lo dice.
+#
+# src/orchestration/abre.py y reconstruye.py fijan DAGSTER_HOME aquí antes de
+# arrancar nada, así que no hay que acordarse.
+
+telemetry:
+  enabled: false
