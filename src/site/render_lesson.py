@@ -343,14 +343,19 @@ def render_blocks(lines: list[str]) -> str:
                 if not current:
                     # a plain indented line continues the previous bullet
                     if items and lines[index].startswith("  ") and lines[index].strip():
-                        items[-1] += " " + inline(lines[index].strip())
+                        items[-1] += " " + lines[index].strip()
                         index += 1
                         continue
                     break
-                items.append(inline(current.group(3)))
+                items.append(current.group(3))
                 index += 1
+            # The inline markup is converted once per whole item, never per line. It
+            # used to be per line, so a bold that crossed a line break inside a bullet
+            # was published with its asterisks showing, and no gate caught it: it
+            # happened in module 29 and again in module 30 before this changed.
             tag = "ol" if ordered else "ul"
-            out.append(f"<{tag}>" + "".join(f"<li>{item}</li>" for item in items) + f"</{tag}>")
+            out.append(f"<{tag}>" + "".join(f"<li>{inline(item)}</li>" for item in items)
+                       + f"</{tag}>")
             continue
 
         paragraph: list[str] = []

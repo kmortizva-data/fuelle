@@ -126,6 +126,36 @@ def promised_figure(path: str, body: str) -> list[str]:
     return []
 
 
+OUT_DIR = ROOT / "out"
+
+
+def stray_asterisks(path: Path) -> list[str]:
+    """Asterisks the reader would see on the published page: a bold that never closed.
+
+    The Markdown can look right and the page still be wrong. For weeks a bold that
+    crossed a line break inside a bullet was published with its asterisks showing,
+    because the renderer converted each line on its own, and nothing but a look at
+    the page could catch it. This looks at the page: the built HTML, with code,
+    output, editors, scripts and styles taken out, must not contain `**`.
+    """
+    # Las dos ediciones, porque la anatomía solo se mira sobre la española y la
+    # página inglesa se construye con el mismo renderizador y los mismos fallos.
+    problems = []
+    for page in (OUT_DIR / f"{path.stem}.html", OUT_DIR / f"{path.stem}.en.html"):
+        if not page.exists():
+            continue
+        text = page.read_text(encoding="utf-8")
+        for tag in ("pre", "code", "textarea", "script", "style"):
+            text = re.sub(rf"<{tag}\b.*?</{tag}>", " ", text, flags=re.S | re.I)
+        found = [m.start() for m in re.finditer(r"\*\*", text)]
+        if not found:
+            continue
+        around = re.sub(r"<[^>]+>", "", text[max(0, found[0] - 60):found[0] + 40])
+        problems.append(f"{page.name} enseña {len(found)} veces «**», empezando por "
+                        f"«{' '.join(around.split())}». Una negrita que no se cerró")
+    return problems
+
+
 def sections(body: str) -> list[str]:
     return [line[3:].strip() for line in body.splitlines() if line.startswith("## ")]
 
@@ -191,6 +221,7 @@ def check(path: Path) -> list[str]:
 
     problems += promised_figure(path.name, body)
     problems += figure_files(body)
+    problems += stray_asterisks(path)
 
     # The brief is the way in, so it goes first and stays short.
     if present and present[0] != "En 30 segundos":
