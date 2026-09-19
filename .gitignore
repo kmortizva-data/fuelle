@@ -35,3 +35,6 @@ desktop.ini
 # Su configuración sí se versiona: es la que apaga la telemetría.
 dagster_home/*
 !dagster_home/dagster.yaml
+
+# El traspaso entre sesiones de trabajo: estado de un día, no parte del proyecto.
+HANDOFF.md
