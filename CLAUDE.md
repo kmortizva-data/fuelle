@@ -1,7 +1,7 @@
 # Fuelle: un gemelo digital y su lago de datos
 
 > **Proyecto:** Fuelle (ES) / Bellows (EN) · **Carpeta:** `Documents\02_Personal\Portafolio\Fuelle`
-> **Categoría:** personal (portafolio) · **Estado:** parte 7 en curso (30 de 31 en español, 28 en inglés, y el panel), publicado en el portafolio desde el 2026-09-18 · nació el 2026-08-29
+> **Categoría:** personal (portafolio) · **Estado:** **31 de 31 en los dos idiomas**, con el panel y el folio. Lo publicado es hasta el panel (2026-09-20); el 31, el folio y el inglés del 29 al 31 esperan el «sube» · nació el 2026-08-29
 > Índice de todos los proyectos: `Documents\_INDICE\INDICE.md`
 > Plan aprobado: `~/.claude/plans/proyecto-portafolio-data-lakes-iterative-volcano.md`
 
@@ -1118,6 +1118,55 @@ plata», «el oro») para que sí se traduzcan.
 
 **El índice del curso tiene ahora dos puertas**: el panel (sólida) y el folio (apagada), en ese
 orden, porque una es para mirar y la otra para decidir.
+
+### Paso 8.5 (2026-09-20): el inglés del 29, el 30 y el 31
+
+**31 de 31 lecciones en los dos idiomas.** Diez puertas en verde. El curso está entero.
+
+**Cómo se tradujo, y por qué así.** Cada fichero inglés empezó siendo una copia byte a byte de
+su gemelo español. En ese momento la puerta de paridad está verde por construcción (mismas
+secciones, mismos bloques, mismos números), así que a partir de ahí **cada edición solo puede
+romperla**: la puerta pasa a ser un detector de regresiones en vez de un acertijo. Las tres
+lecciones, 8.574 palabras y la más larga del curso entre ellas, necesitaron **una sola
+corrección**: un número de módulo colado en una frase donde el español no lo tenía.
+
+El ayudante que lo localizó vive en el scratchpad y no en el repo: reusa `NUMBER` y `canonical`
+de la propia puerta para no inventar una lógica que pueda discrepar de ella, y su único trabajo
+es decir **en qué línea** de cada idioma sale el número descuadrado, que es lo que la puerta no
+dice.
+
+**Tres cosas más de este paso:**
+
+| Qué | Por qué |
+|---|---|
+| La frase del módulo 30 vuelve a `lecciones/en/panel.md` | Se había caído entera cuando la página inglesa del 30 no existía. Ninguna puerta mira `panel.md`, así que no iba a avisar nadie |
+| `m30_panel_en` en `results/permitidos.json` | `check_numbers` guarda sus excepciones por fichero **y por idioma**, así que el bloque español no cubre los cinco números del ejemplo de juguete |
+| `check_prose` mira ahora las lecciones inglesas | No había mirado ninguna nunca. Sus listas de muletillas son españolas y no pueden saltar en inglés, pero **la raya vale en los dos idiomas** y nadie la vigilaba en 28 ficheros publicados |
+
+**Las 28 lecciones inglesas ya publicadas pasan `check_prose` sin tocar nada**, medido antes de
+cambiar la puerta: la regla llega sin deuda detrás. Probada rompiéndola, con una raya plantada en
+el 28 inglés.
+
+**`check_clarity` NO se extiende, y es deliberado.** Marcaría **14 frases de más de 32 palabras**
+en lecciones inglesas ya publicadas. Es una limpieza con su propio coste, y va aparte con el
+número por delante para que se elija sabiendo.
+
+### La fuga que salió al revisar (2026-09-20)
+
+**`check_history.py` fallaba.** `src/entrega/imprime.py` llevaba el nombre de la carpeta de usuario
+escrito dentro de un comentario, y los dos commits sin subir lo arrastraban. Arreglarlo con un
+commit nuevo **no habría servido**: la guarda mira el historial, no el árbol de hoy. Como nada
+estaba subido, los dos commits se rehicieron como uno solo con `git reset --soft origin/master`.
+
+**Regla que deja:** un dato que no puede salir no se arregla hacia adelante mientras el commit que
+lo lleva siga sin subir. Se rehace el commit.
+
+**Y el portafolio ya publicaba la ruta de esta máquina**, en nueve informes de Concentra
+(`concentra/projects/curso*/*/04_reports/model_results.json`, la clave `source_csv`), vivos desde
+el commit ff3ec74. Arreglado en el origen (`Concentra/projects/common.py` guarda ahora solo el
+nombre del fichero) y en las nueve copias. **Pendiente y declarado:** reescribir el historial del
+portafolio para que no quede rastro, y darle su propia guarda como la de Fuelle. Es un bloque
+propio: obliga a un empuje forzado sobre un sitio ya publicado.
 
 ## Riesgos declarados
 
