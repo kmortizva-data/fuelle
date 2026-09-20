@@ -24,6 +24,7 @@
     "bar_metidos": 2311.7,
     "bar_gastados": 2295.0,
     "descuadre": 0.0073,
+    "descuadre_pct": 0.7,
     "minutos_cargando": 1960.0,
     "minutos_en_vacio": 32283.0,
     "sube_por_minuto_cargando": 1.1796,

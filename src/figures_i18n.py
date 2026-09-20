@@ -349,6 +349,21 @@ TRADUCCIONES: dict[str, str] = {
     "puntos por día, y cada cuánto va uno (escala logarítmica)":
         "points per day, and how often one comes (log scale)",
     "KB por la red (escala logarítmica)": "KB over the network (log scale)",
+    # --- módulo 31, el arco del proyecto -----------------------------------
+    # Las capas llevan artículo porque `plata` y `oro` a secas son nombres de
+    # tabla y están arriba, entre las neutrales.
+    "el fichero": "the file",
+    "de texto": "of text",
+    "el bronce": "bronze",
+    "la plata": "silver",
+    "el oro": "gold",
+    "filas en rejilla": "rows on the grid",
+    "nodos con dbt": "nodes with dbt",
+    "el gemelo": "the twin",
+    "números medidos": "measured numbers",
+    "el residual": "the residual",
+    "bar/min de suelo": "bar/min of floor",
+    "el veredicto": "the verdict",
 }
 
 # Etiquetas construidas con f-strings: llevan un número dentro, así que no se
@@ -361,7 +376,11 @@ PATTERNS: list[tuple[str, str]] = [
     (r"^#(\d+) con (\d{4}-\d{2}-\d{2})$", r"#\1 with \2"),
     # Los tamaños del módulo 5, que se recalculan en cada corrida.
     (r"^([\d.]+) m$", r"\1 M"),
-    (r"^(\d+) veces$", r"\1 times"),
+    (r"^([\d.,]+) veces$", r"\1 times"),
+    # El arco del módulo 31: el veredicto y sus falsas alarmas, con cifras que
+    # cambian si cambia el barrido.
+    (r"^(\d+) de (\d+)$", r"\1 of \2"),
+    (r"^([\d.,]+) falsas/mes$", r"\1 false/month"),
     # El umbral que elige el barrido del módulo 28, que cambia con los datos.
     (r"^umbral ([\d.,]+)$", r"threshold \1"),
 

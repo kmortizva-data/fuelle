@@ -1079,9 +1079,45 @@ PowerShell, con `Start-Process -Wait`. Edge no baja de unos 500 px de ancho, as�
 captura metiendo la página en un marco de 375 px. Las imágenes con carga diferida salen rotas en
 esas capturas y en el navegador real cargan bien: no es un fallo de la página.
 
-**Pendiente:** el enlace al panel en la ficha del portafolio (8.3.g), que Kevin mire el panel, y
-el «sube». **Idea para proponer, no hecha:** el panel como activo de Dagster; hoy queda fuera del
-grafo del 29 y meterlo cambia las cifras publicadas de ese módulo (27 activos).
+**PUBLICADO el 2026-09-20** con el «sube» de Kevin: Fuelle de 6b00b96 a 835a017, y el portafolio
+en 9f4e253. Comprobado en vivo: el panel y sus datos responden, **26,5 KB exactos por la red**
+(la cifra del módulo, medida otra vez contra GitHub Pages), el panel corre en el navegador desde
+el sitio publicado, y las cinco páginas que enseñaban asteriscos salen limpias.
+
+**Idea para proponer, no hecha:** el panel como activo de Dagster; hoy queda fuera del grafo del
+29 y meterlo cambia las cifras publicadas de ese módulo (27 activos).
+
+### Paso 8.4 (2026-09-20): el folio del veredicto y el módulo 31
+
+**31 de 31 lecciones en español**, 28 en inglés. Diez puertas en verde. **Sin subir.**
+
+**Cambio sobre el plan, declarado:** el folio **no se hace con LaTeX**. Es una página del propio
+curso (`out/folio.html` y `folio.en.html`) impresa a PDF con Edge sin ventana. Tectonic son 47 MB
+que la guarda de privacidad rechaza, un segundo sistema visual que mantener y una herramienta más
+para quien clone el repo. Así el folio lleva la tipografía del curso y además es página web.
+
+| Pieza | Qué |
+|---|---|
+| `lecciones/folio.md` y `en/folio.md` | el texto, **con huecos `{clave}` en vez de cifras** |
+| `src/entrega/folio.py` | rellena los huecos desde `results/`, escribe las dos páginas y **relee lo escrito**: si un número no sale de una corrida, no publica |
+| `src/entrega/imprime.py` | `veredicto.pdf` y `verdict.pdf` con Edge sin ventana, y **cuenta las caras del PDF**: falla con dos |
+| `src/figures_module31.py` | el arco del proyecto, ocho etapas con la cifra medida de cada una, leídas de `results/` |
+| `src/formato.py` | cómo se escribe un número en cada idioma, en un solo sitio (lo usaban el panel y ahora el folio) |
+
+**El folio, medido:** 553 palabras, 24 cifras (todas medidas), 8 cosas que se romperían, 59,4 KB
+y **una cara**. La primera impresión salió en dos: sobraban tres líneas, medidas en el navegador
+con el ancho y la letra de la impresión. Se arregló quitando texto y apretando el aire entre
+secciones en la hoja de impresión, sin tocar el tamaño de la letra.
+
+**La cifra del 31 es «8 cosas que se romperían»**: la última cifra del curso es su lista de
+límites.
+
+**Dos trampas del traductor de figuras, evitadas a tiempo:** `plata` y `oro` sueltas están entre
+las cadenas neutrales (son nombres de tabla), así que las capas del arco van con artículo («la
+plata», «el oro») para que sí se traduzcan.
+
+**El índice del curso tiene ahora dos puertas**: el panel (sólida) y el folio (apagada), en ese
+orden, porque una es para mirar y la otra para decidir.
 
 ## Riesgos declarados
 

@@ -68,6 +68,7 @@ UI = {
                       "trabajado sano. Cuando las dos líneas se separan, algo está gastando "
                       "el aire que no debería.",
         "curso": "el curso",
+        "folio": "el folio",
         "como": "cómo se hizo",
         "cambio": "English",
         "progreso": "el semestre entero, sin servidor",
@@ -103,6 +104,7 @@ UI = {
                       "it would have worked healthy. When the two lines part, something "
                       "is drawing air it should not.",
         "curso": "the course",
+        "folio": "the verdict",
         "como": "how it was made",
         "cambio": "Español",
         "progreso": "the whole semester, no server",
@@ -320,7 +322,8 @@ def build_panel_page(lang: str) -> Path:
         raise SystemExit(f"Falta {fuente.relative_to(ROOT)}, el texto de la página del panel.")
     cuerpo = fuente.read_text(encoding="utf-8")
 
-    enlaces = [f'<a href="index{suffix(lang)}.html">{html.escape(ui["curso"])}</a>']
+    enlaces = [f'<a href="index{suffix(lang)}.html">{html.escape(ui["curso"])}</a>',
+               f'<a href="folio{suffix(lang)}.html">{html.escape(ui["folio"])}</a>']
     if is_written(este["slug"], lang):
         enlaces.append(f'<a href="{page_name(este["slug"], lang)}">'
                        f'{html.escape(ui["como"])}</a>')

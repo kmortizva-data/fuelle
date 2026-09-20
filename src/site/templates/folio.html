@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="{{LANG}}" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{PAGE_TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+{{ALTERNATE}}
+<style>
+{{STYLE}}
+{{FOLIO_STYLE}}
+/* El acento del módulo 31, el de la entrega. En claro siempre: esto es papel. */
+:root { --accent: {{ACCENT_LIGHT}}; }
+</style>
+</head>
+<body class="folio-body">
+
+<main class="folio">
+  <header class="folio-head">
+    <p class="folio-brand">{{COURSE_NAME}}<span>{{EYEBROW}}</span></p>
+    <p class="folio-meta">{{META}}</p>
+  </header>
+
+  {{CONTENT}}
+
+  <footer class="folio-pie">
+    <span>{{UI_SOURCE}}: {{SOURCE_NOTE}}</span>
+    <span>{{UI_GENERATED}} {{GENERATED}}</span>
+  </footer>
+</main>
+
+<!-- Enlaces para quien lo lee en pantalla. No se imprimen: en papel sobran. -->
+<p class="folio-acciones">{{ACTIONS}}</p>
+
+</body>
+</html>

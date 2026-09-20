@@ -38,6 +38,7 @@ import duckdb
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from formato import numero  # noqa: E402
 from twin.evaluate import carga_horas, lee_partes  # noqa: E402
 from twin.model import MARZO, mide  # noqa: E402
 from twin.simulate import avanza  # noqa: E402
@@ -201,14 +202,6 @@ BASE36 = "0123456789abcdefghijklmnopqrstuvwxyz"
 
 
 # --------------------------------------------------------------- los números
-
-def numero(v: float, decimales: int, lang: str) -> str:
-    """Un número como se escribe en el idioma de la página."""
-    texto = f"{v:,.{decimales}f}"
-    if lang == "es":
-        texto = texto.replace(",", "\x00").replace(".", ",").replace("\x00", ".")
-    return texto
-
 
 def horas(minutos: float, lang: str) -> str:
     """Horas con dos decimales, salvo que sean redondas: «24 h», no «24,00 h»."""

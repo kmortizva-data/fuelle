@@ -1,0 +1,156 @@
+/* El folio del veredicto: una cara de A4 con la tipografía del curso.
+ *
+ * Vive aparte de `_base.css` porque es la única página del proyecto pensada para
+ * el papel: tamaños en puntos, una caja del ancho de un A4 y un bloque de
+ * impresión que quita todo lo que no se imprime. Los tokens y las fuentes salen
+ * de `_base.css`, así que el folio no inventa una segunda identidad visual.
+ */
+
+@page { size: A4; margin: 14mm 15mm; }
+
+.folio-body { background: var(--panel); }
+
+.folio {
+  max-width: 196mm;
+  margin: 20px auto;
+  padding: 15mm 16mm 11mm;
+  background: var(--stage);
+  border: 1px solid var(--rule);
+  font-size: 10.2pt;
+  line-height: 1.42;
+}
+
+.folio-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 18px;
+  border-bottom: 1.5px solid var(--ink);
+  padding-bottom: 6px;
+}
+.folio-brand {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 15pt;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.folio-brand span {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--data);
+  font-size: 7.6pt;
+  letter-spacing: .05em;
+  text-transform: none;
+  color: var(--ink-faint);
+}
+.folio-meta {
+  margin: 0;
+  text-align: right;
+  font-family: var(--data);
+  font-size: 7.6pt;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+
+.folio h1 {
+  margin: 11px 0 3px;
+  font-family: var(--display);
+  font-size: 19pt;
+  font-weight: 600;
+  line-height: 1.08;
+}
+.folio h2 {
+  margin: 11px 0 4px;
+  padding-top: 7px;
+  border-top: 1px solid var(--rule-soft);
+  font-family: var(--data);
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.folio p, .folio li { max-width: none; text-align: justify; }
+.folio p { margin: 0 0 5px; }
+.folio ol, .folio ul { margin: 0 0 6px; padding-left: 17px; }
+.folio li { margin-bottom: 3px; }
+.folio li::marker { color: var(--accent); font-family: var(--data); font-size: .82em; }
+
+.folio .table-wrap { margin: 5px 0 8px; max-width: none; }
+.folio table { width: 100%; border-collapse: collapse; font-size: 9.6pt; }
+.folio th, .folio td { padding: 3px 7px 3px 0; border-bottom: 1px solid var(--rule-soft); }
+.folio th {
+  font-family: var(--data);
+  font-size: 7.4pt;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  border-bottom-color: var(--rule);
+}
+.folio th + th, .folio td + td { width: 21%; text-align: right; font-family: var(--data); }
+
+.folio-pie {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 11px;
+  padding-top: 6px;
+  border-top: 1.5px solid var(--ink);
+  font-family: var(--data);
+  font-size: 7.4pt;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+
+/* Lo que solo tiene sentido en pantalla: el PDF ya es el papel. */
+.folio-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  justify-content: center;
+  margin: 0 auto 28px;
+  max-width: 196mm;
+  font-family: var(--data);
+  font-size: 11px;
+}
+.folio-acciones a {
+  padding: 6px 11px;
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.folio-acciones a:hover { border-color: var(--accent); color: var(--accent); }
+
+@media print {
+  .folio-body { background: #fff; }
+  .folio {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 9.7pt;
+    line-height: 1.38;
+  }
+  .folio-acciones { display: none; }
+  /* El aire entre secciones se aprieta en el papel, que es donde cuesta: el
+     tamaño de la letra no se toca, porque encogerla para que quepa es la trampa
+     que este folio no se permite. Medido: cinco secciones y trece viñetas dan
+     unos 45 px, que es casi todo lo que sobraba. */
+  .folio h1 { font-size: 18pt; margin: 8px 0 2px; }
+  .folio h2 { margin: 8px 0 3px; padding-top: 5px; }
+  .folio p { margin-bottom: 4px; }
+  .folio ol, .folio ul { margin-bottom: 5px; }
+  .folio li { margin-bottom: 2px; }
+  .folio .table-wrap { margin: 4px 0 6px; }
+  .folio-pie { margin-top: 8px; }
+  .folio h2, .folio table, .folio li, .folio-pie { break-inside: avoid; }
+}
+
+@media (max-width: 640px) {
+  .folio { padding: 22px 18px 18px; font-size: 15px; }
+  .folio h1 { font-size: 26px; }
+  .folio-head { flex-wrap: wrap; gap: 8px; }
+  .folio-meta { text-align: left; }
+  .folio table { font-size: 13.5px; }
+}

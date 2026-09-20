@@ -1,0 +1,26 @@
+{
+  "paginas": {
+    "es": "folio.html",
+    "en": "folio.en.html"
+  },
+  "pdf": {
+    "es": "veredicto.pdf",
+    "en": "verdict.pdf"
+  },
+  "palabras": {
+    "es": 553,
+    "en": 556
+  },
+  "cifras_del_folio": 24,
+  "rupturas": 8,
+  "impreso": {
+    "veredicto.pdf": {
+      "kb": 59.4,
+      "caras": 1
+    },
+    "verdict.pdf": {
+      "kb": 60.1,
+      "caras": 1
+    }
+  }
+}

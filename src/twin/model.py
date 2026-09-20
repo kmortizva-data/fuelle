@@ -189,6 +189,9 @@ def balance(con) -> dict:
         "bar_metidos": round(metidos, 1),
         "bar_gastados": round(gastados, 1),
         "descuadre": round(abs(metidos - gastados) / gastados, 4),
+        # Y en tanto por ciento, que es como se cita: el folio del módulo 31 y la
+        # prosa del 24 escriben «0,7 %», no «0,0073».
+        "descuadre_pct": round(abs(metidos - gastados) / gastados * 100, 1),
         "minutos_cargando": round(t_carga, 0),
         "minutos_en_vacio": round(t_vacio, 0),
         # La subida NETA por minuto de carga, ya descontado lo que se gasta

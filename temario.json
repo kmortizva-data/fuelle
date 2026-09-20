@@ -1045,10 +1045,10 @@
       "title_en": "Delivering, and saying what would break",
       "subtitle_en": "The one page verdict, the repo, and the honest part: what of all this would survive a real plant, and what would not",
       "cifra": {
-        "value": "por medir",
-        "label": "el veredicto del proyecto",
-        "value_en": "to be measured",
-        "label_en": "the project verdict"
+        "value": "8 cosas que se romperían",
+        "label": "lo que este proyecto no aguantaría en una planta de verdad, dicho en su propio folio",
+        "value_en": "8 things that would break",
+        "label_en": "what this project would not survive in a real plant, said on its own one page verdict"
       },
       "accent": {
         "dark": "#D7AC9D",
@@ -1057,7 +1057,11 @@
       "instrumento": "caratula",
       "interactivo": false,
       "reto": null,
-      "scripts": [],
+      "scripts": [
+        "src/entrega/folio.py",
+        "src/entrega/imprime.py",
+        "src/figures_module31.py"
+      ],
       "figuras": [
         "fig_m31_arco_del_proyecto"
       ]

@@ -21,6 +21,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from render_lesson import (  # noqa: E402
     COURSE_DIR, OUT_DIR, ROOT, TEMPLATES, UI, build_page, build_thread,
@@ -62,6 +63,10 @@ INDEX_UI = {
         "door_title": "El semestre entero, día a día, en una página",
         "door_sub": "Para quien no va a leer treinta y un módulos: una perilla, dos curvas "
                     "y el veredicto de cada día.",
+        "folio_kicker": "el folio",
+        "folio_title": "El veredicto en una cara de A4",
+        "folio_sub": "La pregunta, el método, la tabla, y lo que se rompería en una planta "
+                     "de verdad. También en PDF.",
     },
     "en": {
         "eyebrow": "· data engineering and digital twins, from scratch",
@@ -74,22 +79,32 @@ INDEX_UI = {
         "door_title": "The whole semester, day by day, on one page",
         "door_sub": "For anyone who will not read thirty one modules: one knob, two curves "
                     "and each day's verdict.",
+        "folio_kicker": "the one page verdict",
+        "folio_title": "The verdict on one side of A4",
+        "folio_sub": "The question, the method, the table, and what would break in a real "
+                     "plant. As a PDF too.",
     },
 }
 
 
 def build_door(lang: str) -> str:
-    """La puerta hacia el panel, justo debajo de la cabecera del índice.
+    """Las dos puertas de arriba del índice: el panel y el folio.
 
-    El panel existe para quien no va a leer el curso, así que no puede quedar al
-    final de una lista de treinta y un módulos: va arriba, antes que nada.
+    Las dos existen para quien no va a leer el curso, así que no pueden quedar al
+    final de una lista de treinta y un módulos: van arriba, antes que nada. El
+    panel es para mirar y el folio para decidir, y en ese orden.
     """
     strings = INDEX_UI[lang]
-    return (f'<a class="door" href="panel{suffix(lang)}.html">'
-            f'<span class="door-k">{html.escape(strings["door_kicker"])}</span>'
-            f'<span class="door-t">{html.escape(strings["door_title"])}</span>'
-            f'<span class="door-s">{html.escape(strings["door_sub"])}</span>'
-            f'<span class="door-a" aria-hidden="true">→</span></a>')
+    puertas = [("panel", "door_kicker", "door_title", "door_sub", f"panel{suffix(lang)}.html"),
+               ("folio", "folio_kicker", "folio_title", "folio_sub",
+                f"folio{suffix(lang)}.html")]
+    return "".join(
+        f'<a class="door{"" if cual == "panel" else " door-quiet"}" href="{href}">'
+        f'<span class="door-k">{html.escape(strings[kicker])}</span>'
+        f'<span class="door-t">{html.escape(strings[titulo])}</span>'
+        f'<span class="door-s">{html.escape(strings[sub])}</span>'
+        f'<span class="door-a" aria-hidden="true">→</span></a>'
+        for cual, kicker, titulo, sub, href in puertas)
 
 def build_toc(syllabus: dict, lang: str) -> str:
     """Cada módulo con su cifra, agrupados por parte y diciendo cuál está escrito."""
@@ -209,6 +224,12 @@ def main() -> None:
         panel = build_panel_page(lang)
         print(f"  {lang}  el panel  ->  {panel.relative_to(ROOT)} "
               f"({panel.stat().st_size:,} bytes)")
+
+    # Y el folio del veredicto, que se rehace con el sitio para que no se quede
+    # atrás cuando cambie una cifra. El PDF se imprime aparte, con un navegador.
+    from entrega import folio  # noqa: E402
+
+    folio.main()
 
 
 if __name__ == "__main__":
