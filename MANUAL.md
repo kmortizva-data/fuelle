@@ -45,7 +45,7 @@ juguete por `## El arco del proyecto`. Es la única excepción y el verificador 
 
 ### `Hazlo tú` es la sección que impide que esto sea un PDF
 
-Veinte de los treinta y cinco módulos la llevan, y el temario declara cuál. La regla es simple:
+Quince de los treinta y un módulos la llevan, y el temario declara cuál. La regla es simple:
 **el lector escribe algo y la página le contesta si está bien**, contra los datos reales del
 compresor. No es un cuestionario de opción múltiple, es la consulta corriendo de verdad.
 
@@ -184,7 +184,7 @@ El curso vive en **sala de control**: fondo grafito, rejilla de puntos discreta,
 líneas, números en monoespaciada de instrumento.
 
 - **Los colores no se eligen a ojo.** `src/site/palette.py` los genera en OKLCH y mide el
-  contraste de los treinta y cinco acentos sobre **los dos fondos** antes de dejarlos entrar en
+  contraste de los treinta y un acentos sobre **los dos fondos** antes de dejarlos entrar en
   `temario.json`. El croma se mantiene bajo a propósito: son colores de instrumento, no neón.
 - **Regla de forma, no negociable.** La serie medida va en línea continua y la simulada en
   discontinua. **El color nunca es la única pista.** La primera pareja de colores que probé
@@ -211,7 +211,7 @@ compresor, y **el tramo del grafo que se ilumina** para situar qué construye ca
 
 ### La consulta viva y el reto
 
-Veintiuno de los treinta y cinco módulos traen interacción, y veinte de ellos un reto
+Dieciséis de los treinta y un módulos traen interacción, y quince de ellos un reto
 comprobable. El motor SQL se descarga **solo cuando el lector lo pide**, nunca al cargar la
 página, y la lección se lee entera sin tocarlo.
 
