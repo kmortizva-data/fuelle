@@ -14,7 +14,7 @@ Code blocks are skipped, and so is anything inside a `salida` block, because tha
 program output and must not be edited.
 
 Usage:
-    python src/site/check_prose.py                 # every lesson, plus curso.md
+    python src/site/check_prose.py                 # every lesson in both languages
     python src/site/check_prose.py 2_Curso/m01_*.md
 
 Exits 1 when it finds something, so it works as a guard before committing.
@@ -121,6 +121,11 @@ def main() -> None:
     del_panel = not paths
     if not paths:
         paths = sorted(COURSE_DIR.glob(LESSON_GLOB))
+        # Y las lecciones inglesas, que hasta el módulo 31 no miraba nadie. Las dos listas
+        # de aquí son de frases españolas y no pueden saltar en inglés, pero la raya sí, y
+        # la raya vale en los dos idiomas. Veintiocho lecciones publicadas pasaron a la
+        # primera, así que la regla no traía deuda detrás.
+        paths += sorted((COURSE_DIR / "en").glob(LESSON_GLOB))
         # La portada, y el texto de la página propia del panel en los dos idiomas.
         paths += [p for p in (COURSE_DIR / "curso.md", COURSE_DIR / "panel.md",
                               COURSE_DIR / "en" / "panel.md")

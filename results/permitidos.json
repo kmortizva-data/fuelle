@@ -141,5 +141,12 @@
     "1.2": "el acumulado del mismo ejemplo de juguete tras tres tramos",
     "1.6": "el acumulado del mismo ejemplo de juguete tras cuatro tramos",
     "2.0": "el acumulado del mismo ejemplo de juguete al final, cinco por 0,4"
+  },
+  "m30_panel_en": {
+    "0.4": "the rounding toy example: five slots of 0.4 minutes of load, chosen so that rounding each one gives zero and rounding the running total does not",
+    "0.8": "the running total of the same toy example after two slots, 0.4 plus 0.4",
+    "1.2": "the running total of the same toy example after three slots",
+    "1.6": "the running total of the same toy example after four slots",
+    "2.0": "the running total of the same toy example at the end, five times 0.4"
   }
 }

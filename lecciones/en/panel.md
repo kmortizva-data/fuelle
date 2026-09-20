@@ -26,7 +26,8 @@ to show. That is why it answers instantly and needs no server: all 214 days trav
 single file.
 
 The full verdict, with its two counts and the rival the machine already carried, is in
-[module 28](m28_veredicto.en.html). All the code is on
+[module 28](m28_veredicto.en.html). How this page was built, and why it has no server, is in
+[module 30](m30_panel.en.html). All the code is on
 [GitHub](https://github.com/kmortizva-data/fuelle).
 
 The data is MetroPT-3, from the UCI repository, under a CC BY 4.0 licence. Davari, Veloso,
