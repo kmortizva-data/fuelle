@@ -1168,6 +1168,45 @@ nombre del fichero) y en las nueve copias. **Pendiente y declarado:** reescribir
 portafolio para que no quede rastro, y darle su propia guarda como la de Fuelle. Es un bloque
 propio: obliga a un empuje forzado sobre un sitio ya publicado.
 
+### Auditoría visual (2026-10-30): `AUDITORIA_VISUAL_2026-10-30.md`
+
+Pedida por Kevin en paralelo con la de Sílice. Solo lectura: las 39 figuras abiertas en oscuro,
+claro e inglés (117 PNG), las 31 lecciones, el índice, el panel y el folio. **Nada se cambió.**
+
+**Lo que ya está a nivel:** la piel. Las 39 figuras con la paleta del curso y cero colores fijos,
+dos temas y dos idiomas con guarda de cadenas sin traducir, 0 PNG huérfanos y 0 huellas viejas, y
+el panel como la mejor pieza del portafolio.
+
+**Lo que falla**, que es lo de Sílice menos la piel:
+
+| Qué | Medido |
+|---|---|
+| Ejemplos de juguete con dibujo | **0 de 31** |
+| Primera figura de cada lección | mediana al **48 %** del texto |
+| Lecciones sin ninguna figura | el **10** (la de muestra) y el 11 |
+| Publicado y falso, sin que ninguna puerta lo vea | **7** |
+| Defectos de colocación en figuras | unos 20, todos con su línea de script |
+
+**Los siete falsos** (fase 1 del informe): la figura española del 21 caducada desde el 2 de
+septiembre (solo se rehízo la inglesa); el pie del calendario del 8 invertido en tema claro; el
+resumen del 7 dice 25 y es 22; la nota de la perilla del 28 llama referencia a lo que son los días
+con avería; la perilla del 25 dice 7 arranques en las diez posiciones; el «martes» del 1 fue
+lunes; y la rejilla del 20 enciende 21 celdas para 12 guardas.
+
+**Tres hallazgos de maquinaria:** las figuras se dibujan en **Consolas** porque matplotlib no
+encuentra Plex Mono; los ticks de los ejes no pasan por `es()` (coma y punto en la misma figura);
+y **ninguna puerta compara un PNG con su JSON**, que es lo que dejó vivir al 21.
+
+**La decisión que el informe deja a Kevin:** qué significa `instrumento`. Hoy grafo y carátula son
+la misma barra en las 31 páginas, y la regla de un instrumento por lección bloquea tres perillas
+con parámetro real (cortes de amperios del 9, ficheros del 6, selectividad del 21).
+
+Propuesta en siete fases ordenadas por rendimiento: arreglar lo falso con una guarda PNG contra
+JSON, la piel común sin tocar los scripts, los pisados, perillas con escala, un SVG por juguete,
+la cifra dentro de la figura y las figuras que faltan, y perillas nuevas. **Nada empezado:
+espera el visto bueno de Kevin.** Las notas de los seis lectores están fuera del repo, en la
+carpeta de notas de sesión `fuelle_auditoria_visual`.
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo
