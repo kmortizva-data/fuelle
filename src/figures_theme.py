@@ -45,6 +45,28 @@ import figures_i18n  # noqa: E402
 # hace nada, así que la llamada va sin condiciones.
 figures_i18n.install()
 
+import functools  # noqa: E402
+
+import recetas  # noqa: E402
+from matplotlib.figure import Figure  # noqa: E402
+
+# Cada PNG que se escribe deja su receta: su propia huella y la de cada JSON de
+# results/ que leyó el script. Va encima del parche de idioma, para apuntar el
+# fichero que de verdad se escribió (el .en.png en la corrida inglesa).
+recetas.install()
+_savefig = Figure.savefig
+
+
+@functools.wraps(_savefig)
+def _savefig_con_receta(self, fname, *args, **kwargs):
+    salida = _savefig(self, fname, *args, **kwargs)
+    if isinstance(fname, (str, Path)):
+        recetas.note_written(figures_i18n.destino(fname))
+    return salida
+
+
+Figure.savefig = _savefig_con_receta
+
 sys.stdout.reconfigure(encoding="utf-8")
 
 PROJECT = Path(__file__).resolve().parents[1]

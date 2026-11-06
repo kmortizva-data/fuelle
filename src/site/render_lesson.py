@@ -497,6 +497,8 @@ def _pie(plantilla: str, pos: dict, coma: str) -> str:
 
 def _numero(v: float | int, coma: str) -> str:
     """El número tal como se escribe en el idioma de la página."""
+    if isinstance(v, float) and v == 0:
+        v = 0.0  # un -0.0 se escribiría «-0,0»
     return str(v).replace(".", coma) if coma != "." else str(v)
 
 
@@ -551,6 +553,12 @@ def perilla_block(lines: list[str]) -> str:
     # escribía «0.12 bar/min» y «15.3 %» en cuanto se movía el mando, porque los
     # números los arma el JavaScript y no `es()`.
     coma = "," if _lang == "es" else "."
+    # Lo mismo para la línea de puntos: casi siempre es una máquina de
+    # referencia, pero en el 28 es otra cosa (los días con avería) y el pie
+    # genérico la llamaba umbral.
+    referencia_nota = (datos.get("nota_referencia", {}).get(_lang)
+                       or ui("perilla_referencia")).format(
+        valor=_numero(referencia["valor"], coma), unidad=unidad)
     return (
         f'<figure class="perilla" data-perilla="../{ruta}" data-decimal="{coma}"'
         f'>'
@@ -570,7 +578,7 @@ def perilla_block(lines: list[str]) -> str:
         f"</label></div>"
         f'<p class="perilla-nota" data-plantilla="{html.escape(plantilla)}">'
         f"{html.escape(_pie(plantilla, inicial, coma))}</p>"
-        f'<p class="perilla-referencia-nota">{inline(ui("perilla_referencia").format(valor=_numero(referencia["valor"], coma), unidad=unidad))}</p>'
+        f'<p class="perilla-referencia-nota">{inline(referencia_nota)}</p>'
         f"</figure>"
     )
 

@@ -171,6 +171,16 @@ def segunda_ruta(con) -> None:
     """)
 
 
+def sin_cero_negativo(x: float, decimales: int) -> float:
+    """Redondea sin dejar un «-0,0», que se lee como un número con signo.
+
+    Sin fuga el residual de la simulación sale en -0,003, y redondeado a una
+    cifra su cociente contra el suelo quedaba en -0.0: la perilla escribía
+    «-0,0× el suelo de ruido». Sumar 0.0 convierte el cero negativo en cero.
+    """
+    return round(x, decimales) + 0.0
+
+
 def perilla_fuga(dep, suelo_sano: float) -> dict:
     """Módulo 27: mover el caudal de fuga y ver a partir de qué tamaño se nota.
 
@@ -198,8 +208,8 @@ def perilla_fuga(dep, suelo_sano: float) -> dict:
             "trazo": recorta(r["trabajo"], PUNTOS_DEL_TRAZO),
             "carga": round(r["carga"], 4),
             "arranques": r["arranques"],
-            "residual": round(residual, 3),
-            "veces_el_suelo": round(residual / suelo_sano, 1),
+            "residual": sin_cero_negativo(residual, 3),
+            "veces_el_suelo": sin_cero_negativo(residual / suelo_sano, 1),
         })
     residual_base = base["carga"] * dep.entrega - dep.consumo
     return {
@@ -221,8 +231,8 @@ def perilla_fuga(dep, suelo_sano: float) -> dict:
             "trazo": recorta(base["trabajo"], PUNTOS_DEL_TRAZO),
             "carga": round(base["carga"], 4),
             "arranques": base["arranques"],
-            "residual": round(residual_base, 3),
-            "veces_el_suelo": round(residual_base / suelo_sano, 1),
+            "residual": sin_cero_negativo(residual_base, 3),
+            "veces_el_suelo": sin_cero_negativo(residual_base / suelo_sano, 1),
         },
         "posiciones": series,
     }

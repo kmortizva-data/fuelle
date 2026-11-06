@@ -115,11 +115,13 @@
   },
   "m19_postgres": {
     "5432": "el puerto estándar de PostgreSQL. Es una constante del producto, no una medida, y este curso lo cita justo para explicar que NO lo usa",
-    "5433": "el puerto que usa este curso, elegido para no chocar con una instalación de verdad. Es una decisión escrita en postgresql.conf, no un resultado"
+    "5433": "el puerto que usa este curso, elegido para no chocar con una instalación de verdad. Es una decisión escrita en postgresql.conf, no un resultado",
+    "20": "«unos 20 s» de carga en el resumen: redondeo a propósito de segundos_en_cargar (mediana 18,89, de 18,54 a 19,3 en m19_postgres.json). Es un tiempo que se mueve entre corridas, y por eso la prosa no da el decimal"
   },
   "m19_postgres_en": {
     "5432": "PostgreSQL's standard port. A constant of the product rather than a measurement, quoted here precisely to explain that the course does not use it",
-    "5433": "the port this course uses, chosen so it never clashes with a real install. A decision written in postgresql.conf, not a result"
+    "5433": "the port this course uses, chosen so it never clashes with a real install. A decision written in postgresql.conf, not a result",
+    "20": "about 20 s of loading in the summary: a deliberate round of segundos_en_cargar (median 18.89, from 18.54 to 19.3 in m19_postgres.json). A timing that moves between runs, so the prose gives no decimal"
   },
   "m20_esquema": {
     "2019": "el año al que se manda la escritura imposible de la clave foránea, elegido por estar fuera del registro. Es una decisión del experimento, no una medida"

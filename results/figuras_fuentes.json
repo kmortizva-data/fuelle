@@ -1,0 +1,1122 @@
+{
+  "fig_m01_anatomia_del_compresor.claro.en.png": {
+    "png": "e4b2d0f50d46f3f3",
+    "fuentes": {
+      "m10_duty_cycle.json": "7947ed7ff97773ad",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m01_anatomia_del_compresor.claro.png": {
+    "png": "75e64cd48d594cde",
+    "fuentes": {
+      "m10_duty_cycle.json": "7947ed7ff97773ad",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m01_anatomia_del_compresor.oscuro.en.png": {
+    "png": "4c5b63f949ff3326",
+    "fuentes": {
+      "m10_duty_cycle.json": "7947ed7ff97773ad",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m01_anatomia_del_compresor.oscuro.png": {
+    "png": "fd99424a39fc635d",
+    "fuentes": {
+      "m10_duty_cycle.json": "7947ed7ff97773ad",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m01_las_cuatro_averias.claro.en.png": {
+    "png": "9241ed2a300d96c9",
+    "fuentes": {
+      "m10_duty_cycle.json": "7947ed7ff97773ad",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m01_las_cuatro_averias.claro.png": {
+    "png": "08fd03a142b9dae9",
+    "fuentes": {
+      "m10_duty_cycle.json": "7947ed7ff97773ad",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m01_las_cuatro_averias.oscuro.en.png": {
+    "png": "52eddf0a78e7c5cf",
+    "fuentes": {
+      "m10_duty_cycle.json": "7947ed7ff97773ad",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m01_las_cuatro_averias.oscuro.png": {
+    "png": "6f66599487ffc922",
+    "fuentes": {
+      "m10_duty_cycle.json": "7947ed7ff97773ad",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m02_analogica_vs_digital.claro.en.png": {
+    "png": "e4813516ad53db85",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m02_analogica_vs_digital.claro.png": {
+    "png": "4364bd922614a298",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m02_analogica_vs_digital.oscuro.en.png": {
+    "png": "f90e9d0ad08555a0",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m02_analogica_vs_digital.oscuro.png": {
+    "png": "b36e1906e5a0e4b0",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m03_cuatro_sitios.claro.en.png": {
+    "png": "ef7811c585044eb6",
+    "fuentes": {
+      "m03_donde_viven.json": "c094594021590259",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m03_cuatro_sitios.claro.png": {
+    "png": "8f07ffdf7f8f3702",
+    "fuentes": {
+      "m03_donde_viven.json": "c094594021590259",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m03_cuatro_sitios.oscuro.en.png": {
+    "png": "916ed2bca12e82e3",
+    "fuentes": {
+      "m03_donde_viven.json": "c094594021590259",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m03_cuatro_sitios.oscuro.png": {
+    "png": "32b8fefa97328fea",
+    "fuentes": {
+      "m03_donde_viven.json": "c094594021590259",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m04_bronce_particiones.claro.en.png": {
+    "png": "f566679350ebe9ef",
+    "fuentes": {
+      "m04_particiones.json": "d2f5d75d046699e1",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m04_bronce_particiones.claro.png": {
+    "png": "bd7e29976dfe759b",
+    "fuentes": {
+      "m04_particiones.json": "d2f5d75d046699e1",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m04_bronce_particiones.oscuro.en.png": {
+    "png": "e22e73bafed96e6c",
+    "fuentes": {
+      "m04_particiones.json": "d2f5d75d046699e1",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m04_bronce_particiones.oscuro.png": {
+    "png": "23afe5291e47d37f",
+    "fuentes": {
+      "m04_particiones.json": "d2f5d75d046699e1",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m05_idempotencia.claro.en.png": {
+    "png": "af11501a4e0ef6e0",
+    "fuentes": {
+      "m05_fingerprint.json": "7c4400dba5bde4eb",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m05_idempotencia.claro.png": {
+    "png": "e877c4e226a45351",
+    "fuentes": {
+      "m05_fingerprint.json": "7c4400dba5bde4eb",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m05_idempotencia.oscuro.en.png": {
+    "png": "129c7240c227f920",
+    "fuentes": {
+      "m05_fingerprint.json": "7c4400dba5bde4eb",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m05_idempotencia.oscuro.png": {
+    "png": "72b3f0f7f7068eda",
+    "fuentes": {
+      "m05_fingerprint.json": "7c4400dba5bde4eb",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m06_curva_de_particion.claro.en.png": {
+    "png": "ffab9227d774488e",
+    "fuentes": {
+      "m06_partition.json": "d3825aaf0469f021",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m06_curva_de_particion.claro.png": {
+    "png": "d50b78a23a094f38",
+    "fuentes": {
+      "m06_partition.json": "d3825aaf0469f021",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m06_curva_de_particion.oscuro.en.png": {
+    "png": "34310768ec80bd7e",
+    "fuentes": {
+      "m06_partition.json": "d3825aaf0469f021",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m06_curva_de_particion.oscuro.png": {
+    "png": "4d863b6f03e54a02",
+    "fuentes": {
+      "m06_partition.json": "d3825aaf0469f021",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m07_csv_vs_parquet.claro.en.png": {
+    "png": "40f301cbd4d54185",
+    "fuentes": {
+      "m07_formats.json": "5e90cf4dd3dba4fd",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m07_csv_vs_parquet.claro.png": {
+    "png": "a901c8d8ca86852a",
+    "fuentes": {
+      "m07_formats.json": "5e90cf4dd3dba4fd",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m07_csv_vs_parquet.oscuro.en.png": {
+    "png": "3ec9f2ea6db37f31",
+    "fuentes": {
+      "m07_formats.json": "5e90cf4dd3dba4fd",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m07_csv_vs_parquet.oscuro.png": {
+    "png": "7a7bda1e95426656",
+    "fuentes": {
+      "m07_formats.json": "5e90cf4dd3dba4fd",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m07_filas_vs_columnas.claro.en.png": {
+    "png": "7a1be4d13a8a0bb2",
+    "fuentes": {
+      "m07_formats.json": "5e90cf4dd3dba4fd",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m07_filas_vs_columnas.claro.png": {
+    "png": "fedda02501b7ef6d",
+    "fuentes": {
+      "m07_formats.json": "5e90cf4dd3dba4fd",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m07_filas_vs_columnas.oscuro.en.png": {
+    "png": "1059581a257abac0",
+    "fuentes": {
+      "m07_formats.json": "5e90cf4dd3dba4fd",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m07_filas_vs_columnas.oscuro.png": {
+    "png": "c15facc0dc653069",
+    "fuentes": {
+      "m07_formats.json": "5e90cf4dd3dba4fd",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m08_null_no_es_cero.claro.en.png": {
+    "png": "ec830576f209bdbf",
+    "fuentes": {
+      "m04_particiones.json": "d2f5d75d046699e1",
+      "m08_primera_consulta.json": "97b9e82bbd2b8d6e",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m08_null_no_es_cero.claro.png": {
+    "png": "081b4b96f9036e82",
+    "fuentes": {
+      "m04_particiones.json": "d2f5d75d046699e1",
+      "m08_primera_consulta.json": "97b9e82bbd2b8d6e",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m08_null_no_es_cero.oscuro.en.png": {
+    "png": "bcc7a897ee28b9a5",
+    "fuentes": {
+      "m04_particiones.json": "d2f5d75d046699e1",
+      "m08_primera_consulta.json": "97b9e82bbd2b8d6e",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m08_null_no_es_cero.oscuro.png": {
+    "png": "437c9574b45768bb",
+    "fuentes": {
+      "m04_particiones.json": "d2f5d75d046699e1",
+      "m08_primera_consulta.json": "97b9e82bbd2b8d6e",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m09_coma_flotante.claro.en.png": {
+    "png": "d25cf6ba72f41d89",
+    "fuentes": {
+      "m09_tipos.json": "8b2fdf4a4eef09c5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m09_coma_flotante.claro.png": {
+    "png": "101363c6a3d15c1a",
+    "fuentes": {
+      "m09_tipos.json": "8b2fdf4a4eef09c5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m09_coma_flotante.oscuro.en.png": {
+    "png": "06b7836e913a6d3e",
+    "fuentes": {
+      "m09_tipos.json": "8b2fdf4a4eef09c5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m09_coma_flotante.oscuro.png": {
+    "png": "bcbdf7385332b949",
+    "fuentes": {
+      "m09_tipos.json": "8b2fdf4a4eef09c5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m09_tres_estados.claro.en.png": {
+    "png": "9cc0b190386c6de4",
+    "fuentes": {
+      "m09_tipos.json": "8b2fdf4a4eef09c5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m09_tres_estados.claro.png": {
+    "png": "5e2ae9bff126e4bf",
+    "fuentes": {
+      "m09_tipos.json": "8b2fdf4a4eef09c5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m09_tres_estados.oscuro.en.png": {
+    "png": "df1a41dafc679f16",
+    "fuentes": {
+      "m09_tipos.json": "8b2fdf4a4eef09c5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m09_tres_estados.oscuro.png": {
+    "png": "472ff8a490823c18",
+    "fuentes": {
+      "m09_tipos.json": "8b2fdf4a4eef09c5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m12_join_que_multiplica.claro.en.png": {
+    "png": "54a9f2915609ad05",
+    "fuentes": {
+      "m12_join.json": "9b1ca67e767f6e89",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m12_join_que_multiplica.claro.png": {
+    "png": "499550ef8cb355bd",
+    "fuentes": {
+      "m12_join.json": "9b1ca67e767f6e89",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m12_join_que_multiplica.oscuro.en.png": {
+    "png": "c88f79777a461eb5",
+    "fuentes": {
+      "m12_join.json": "9b1ca67e767f6e89",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m12_join_que_multiplica.oscuro.png": {
+    "png": "3fc5a0c42666778b",
+    "fuentes": {
+      "m12_join.json": "9b1ca67e767f6e89",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m12_tipos_de_join.claro.en.png": {
+    "png": "7243ba3197b06fe0",
+    "fuentes": {
+      "m12_join.json": "9b1ca67e767f6e89",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m12_tipos_de_join.claro.png": {
+    "png": "e56ad02e43345fc0",
+    "fuentes": {
+      "m12_join.json": "9b1ca67e767f6e89",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m12_tipos_de_join.oscuro.en.png": {
+    "png": "c47a0d581650f9c5",
+    "fuentes": {
+      "m12_join.json": "9b1ca67e767f6e89",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m12_tipos_de_join.oscuro.png": {
+    "png": "ab87b91bdfa3bfc2",
+    "fuentes": {
+      "m12_join.json": "9b1ca67e767f6e89",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m13_lag_y_hueco.claro.en.png": {
+    "png": "e2345ee34f0f7e53",
+    "fuentes": {
+      "m13_ventanas.json": "c8050ddb4e9417d3",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m13_lag_y_hueco.claro.png": {
+    "png": "a65bfd3907186d1d",
+    "fuentes": {
+      "m13_ventanas.json": "c8050ddb4e9417d3",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m13_lag_y_hueco.oscuro.en.png": {
+    "png": "7b771de449b207b1",
+    "fuentes": {
+      "m13_ventanas.json": "c8050ddb4e9417d3",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m13_lag_y_hueco.oscuro.png": {
+    "png": "b0baa8915daa4dfb",
+    "fuentes": {
+      "m13_ventanas.json": "c8050ddb4e9417d3",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m14_huecos.claro.en.png": {
+    "png": "50a6802ff7d55f4b",
+    "fuentes": {
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m14_huecos.claro.png": {
+    "png": "96b2b6c5fdbc6728",
+    "fuentes": {
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m14_huecos.oscuro.en.png": {
+    "png": "99dbe82de9736aec",
+    "fuentes": {
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m14_huecos.oscuro.png": {
+    "png": "85e2e2e96036b629",
+    "fuentes": {
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m14_remuestreo.claro.en.png": {
+    "png": "82106764bf73cf8f",
+    "fuentes": {
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m14_remuestreo.claro.png": {
+    "png": "0bd4db1637fa60ce",
+    "fuentes": {
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m14_remuestreo.oscuro.en.png": {
+    "png": "c7e3e926fa0b64e4",
+    "fuentes": {
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m14_remuestreo.oscuro.png": {
+    "png": "136104e1c74e91d2",
+    "fuentes": {
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m15_tres_frecuencias.claro.en.png": {
+    "png": "26e81f5649502386",
+    "fuentes": {
+      "m15_clima.json": "b25c3c63a0863065",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m15_tres_frecuencias.claro.png": {
+    "png": "3ca1b07ad595c958",
+    "fuentes": {
+      "m15_clima.json": "b25c3c63a0863065",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m15_tres_frecuencias.oscuro.en.png": {
+    "png": "770f12dc8a018456",
+    "fuentes": {
+      "m15_clima.json": "b25c3c63a0863065",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m15_tres_frecuencias.oscuro.png": {
+    "png": "36e16775dda4ac36",
+    "fuentes": {
+      "m15_clima.json": "b25c3c63a0863065",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m16_contrato_roto.claro.en.png": {
+    "png": "295698bb88ff1bf1",
+    "fuentes": {
+      "m16_contrato.json": "af2c9c968c6dafd7",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m16_contrato_roto.claro.png": {
+    "png": "7a46b28140b1c188",
+    "fuentes": {
+      "m16_contrato.json": "af2c9c968c6dafd7",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m16_contrato_roto.oscuro.en.png": {
+    "png": "48fdc0d4f46cace4",
+    "fuentes": {
+      "m16_contrato.json": "af2c9c968c6dafd7",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m16_contrato_roto.oscuro.png": {
+    "png": "dcf46e87f862dbd9",
+    "fuentes": {
+      "m16_contrato.json": "af2c9c968c6dafd7",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m17_linaje_dbt.claro.en.png": {
+    "png": "668b3daf2f30e38c",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m17_linaje_dbt.claro.png": {
+    "png": "411fef4f718fa4b3",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m17_linaje_dbt.oscuro.en.png": {
+    "png": "9d8ec86f2361c6fc",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m17_linaje_dbt.oscuro.png": {
+    "png": "165bdc415bd9d808",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m18_delta_contra_iceberg.claro.en.png": {
+    "png": "9f400dcb79fb2ed3",
+    "fuentes": {
+      "m18_formatos.json": "a4a748035cadd181",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m18_delta_contra_iceberg.claro.png": {
+    "png": "3f79f393a2655924",
+    "fuentes": {
+      "m18_formatos.json": "a4a748035cadd181",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m18_delta_contra_iceberg.oscuro.en.png": {
+    "png": "24fa5ff14b59c620",
+    "fuentes": {
+      "m18_formatos.json": "a4a748035cadd181",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m18_delta_contra_iceberg.oscuro.png": {
+    "png": "7b51a8b3e20ad5ae",
+    "fuentes": {
+      "m18_formatos.json": "a4a748035cadd181",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m18_historial_de_versiones.claro.en.png": {
+    "png": "71e80201be9a5ae2",
+    "fuentes": {
+      "m18_formatos.json": "a4a748035cadd181",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m18_historial_de_versiones.claro.png": {
+    "png": "8e1a77a9b1400684",
+    "fuentes": {
+      "m18_formatos.json": "a4a748035cadd181",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m18_historial_de_versiones.oscuro.en.png": {
+    "png": "5cbf820ebb32a2e7",
+    "fuentes": {
+      "m18_formatos.json": "a4a748035cadd181",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m18_historial_de_versiones.oscuro.png": {
+    "png": "994711092da222af",
+    "fuentes": {
+      "m18_formatos.json": "a4a748035cadd181",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m19_fichero_vs_servicio.claro.en.png": {
+    "png": "05edfbed97aeb771",
+    "fuentes": {
+      "m19_postgres.json": "6455d00625c8feec",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m19_fichero_vs_servicio.claro.png": {
+    "png": "e722b249fe25b41f",
+    "fuentes": {
+      "m19_postgres.json": "6455d00625c8feec",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m19_fichero_vs_servicio.oscuro.en.png": {
+    "png": "e71e718760c73b19",
+    "fuentes": {
+      "m19_postgres.json": "6455d00625c8feec",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m19_fichero_vs_servicio.oscuro.png": {
+    "png": "6976f0f3e6839d13",
+    "fuentes": {
+      "m19_postgres.json": "6455d00625c8feec",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m20_esquema.claro.en.png": {
+    "png": "ec2aee097afc716c",
+    "fuentes": {
+      "m20_esquema.json": "461cfea156970ec7",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m20_esquema.claro.png": {
+    "png": "a7f638587784e37c",
+    "fuentes": {
+      "m20_esquema.json": "461cfea156970ec7",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m20_esquema.oscuro.en.png": {
+    "png": "189205611292e14e",
+    "fuentes": {
+      "m20_esquema.json": "461cfea156970ec7",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m20_esquema.oscuro.png": {
+    "png": "ce6cd414365fd3f9",
+    "fuentes": {
+      "m20_esquema.json": "461cfea156970ec7",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m21_indice_antes_despues.claro.en.png": {
+    "png": "20d9df87b664380f",
+    "fuentes": {
+      "m21_indices.json": "85fa6067225d97f8",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m21_indice_antes_despues.claro.png": {
+    "png": "a5841b5945bc3967",
+    "fuentes": {
+      "m21_indices.json": "85fa6067225d97f8",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m21_indice_antes_despues.oscuro.en.png": {
+    "png": "72f121e5ffbe811d",
+    "fuentes": {
+      "m21_indices.json": "85fa6067225d97f8",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m21_indice_antes_despues.oscuro.png": {
+    "png": "99855e446a6f68b0",
+    "fuentes": {
+      "m21_indices.json": "85fa6067225d97f8",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m22_copia_y_restauracion.claro.en.png": {
+    "png": "480a8aa8e7a51bc2",
+    "fuentes": {
+      "m19_postgres.json": "6455d00625c8feec",
+      "m22_copias.json": "7272ff0a6a87eb10",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m22_copia_y_restauracion.claro.png": {
+    "png": "699efd2770c2cfce",
+    "fuentes": {
+      "m19_postgres.json": "6455d00625c8feec",
+      "m22_copias.json": "7272ff0a6a87eb10",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m22_copia_y_restauracion.oscuro.en.png": {
+    "png": "a924cf5043e85ff6",
+    "fuentes": {
+      "m19_postgres.json": "6455d00625c8feec",
+      "m22_copias.json": "7272ff0a6a87eb10",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m22_copia_y_restauracion.oscuro.png": {
+    "png": "6a46f8bf598ff1d9",
+    "fuentes": {
+      "m19_postgres.json": "6455d00625c8feec",
+      "m22_copias.json": "7272ff0a6a87eb10",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m23_gemelo_y_residual.claro.en.png": {
+    "png": "7b2456fe54ab4e01",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m23_gemelo_y_residual.claro.png": {
+    "png": "ed1e8386426267fd",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m23_gemelo_y_residual.oscuro.en.png": {
+    "png": "184876ec007bd275",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m23_gemelo_y_residual.oscuro.png": {
+    "png": "52e83f12017738d8",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m24_balance_del_deposito.claro.en.png": {
+    "png": "11dd736f90838416",
+    "fuentes": {
+      "m24_fisica.json": "6784cfc7f7efd60e",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m24_balance_del_deposito.claro.png": {
+    "png": "e1e0effa3f266159",
+    "fuentes": {
+      "m24_fisica.json": "6784cfc7f7efd60e",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m24_balance_del_deposito.oscuro.en.png": {
+    "png": "aceb59b28a01d310",
+    "fuentes": {
+      "m24_fisica.json": "6784cfc7f7efd60e",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m24_balance_del_deposito.oscuro.png": {
+    "png": "468393aa1820e5eb",
+    "fuentes": {
+      "m24_fisica.json": "6784cfc7f7efd60e",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m25_ciclo_carga_vacio.claro.en.png": {
+    "png": "ed94935e5ce8d4db",
+    "fuentes": {
+      "m25_simular.json": "5283bd82f8d0296d",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m25_ciclo_carga_vacio.claro.png": {
+    "png": "b6a76cc2b6213829",
+    "fuentes": {
+      "m25_simular.json": "5283bd82f8d0296d",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m25_ciclo_carga_vacio.oscuro.en.png": {
+    "png": "2a5ac3366d39c780",
+    "fuentes": {
+      "m25_simular.json": "5283bd82f8d0296d",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m25_ciclo_carga_vacio.oscuro.png": {
+    "png": "d93afb20bf19e2f2",
+    "fuentes": {
+      "m25_simular.json": "5283bd82f8d0296d",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m25_paso_de_tiempo.claro.en.png": {
+    "png": "d865e520011c18e9",
+    "fuentes": {
+      "m25_simular.json": "5283bd82f8d0296d",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m25_paso_de_tiempo.claro.png": {
+    "png": "606a1b6c13606b78",
+    "fuentes": {
+      "m25_simular.json": "5283bd82f8d0296d",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m25_paso_de_tiempo.oscuro.en.png": {
+    "png": "27cca65746abc55c",
+    "fuentes": {
+      "m25_simular.json": "5283bd82f8d0296d",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m25_paso_de_tiempo.oscuro.png": {
+    "png": "e8238141a55938f2",
+    "fuentes": {
+      "m25_simular.json": "5283bd82f8d0296d",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_ajuste.claro.en.png": {
+    "png": "5f27c8341e2898bf",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_ajuste.claro.png": {
+    "png": "43f5a475befc67bd",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_ajuste.oscuro.en.png": {
+    "png": "ffb45396b982ca7a",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_ajuste.oscuro.png": {
+    "png": "5077e03b6caff6e9",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_gemelo_vs_real_sano.claro.en.png": {
+    "png": "a58600a6cd0cee15",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_gemelo_vs_real_sano.claro.png": {
+    "png": "e21f3c729661b8e6",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_gemelo_vs_real_sano.oscuro.en.png": {
+    "png": "8a52edb07c07589c",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_gemelo_vs_real_sano.oscuro.png": {
+    "png": "2006f2f7aba67dd0",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_ventana_sucia.claro.en.png": {
+    "png": "b3a330b37deddf96",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_ventana_sucia.claro.png": {
+    "png": "3c7119357e1fa3b3",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_ventana_sucia.oscuro.en.png": {
+    "png": "4d18346aaffaf76a",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m26_ventana_sucia.oscuro.png": {
+    "png": "9ac9464a3a220cb9",
+    "fuentes": {
+      "m26_calibrar.json": "9adf63e6da22d953",
+      "m26_ventana.json": "64a4b75185574df5",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m27_residual.claro.en.png": {
+    "png": "a5d8550a9e33f185",
+    "fuentes": {
+      "m27_residual.json": "57c0759752220c18",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m27_residual.claro.png": {
+    "png": "d39572b00fcb9dd0",
+    "fuentes": {
+      "m27_residual.json": "57c0759752220c18",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m27_residual.oscuro.en.png": {
+    "png": "19b8b3c38b778482",
+    "fuentes": {
+      "m27_residual.json": "57c0759752220c18",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m27_residual.oscuro.png": {
+    "png": "aa3eff7f09a8d0c7",
+    "fuentes": {
+      "m27_residual.json": "57c0759752220c18",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m28_antelacion_vs_falsas.claro.en.png": {
+    "png": "c974ee77ad0b302a",
+    "fuentes": {
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m28_antelacion_vs_falsas.claro.png": {
+    "png": "be113fc24bc4d68f",
+    "fuentes": {
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m28_antelacion_vs_falsas.oscuro.en.png": {
+    "png": "ed3fdf799d44d4c2",
+    "fuentes": {
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m28_antelacion_vs_falsas.oscuro.png": {
+    "png": "6a3b21cd9a4a7c74",
+    "fuentes": {
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m28_cuatro_averias.claro.en.png": {
+    "png": "9a8dc98e95e8797c",
+    "fuentes": {
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m28_cuatro_averias.claro.png": {
+    "png": "ef22abaeaee56193",
+    "fuentes": {
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m28_cuatro_averias.oscuro.en.png": {
+    "png": "4cc102c725931186",
+    "fuentes": {
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m28_cuatro_averias.oscuro.png": {
+    "png": "54802d6343b7b96a",
+    "fuentes": {
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m29_grafo_de_activos.claro.en.png": {
+    "png": "46bd55155120d10e",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m29_grafo_de_activos.claro.png": {
+    "png": "4ae49d606e31ae96",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m29_grafo_de_activos.oscuro.en.png": {
+    "png": "4c7259d52b15a65b",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m29_grafo_de_activos.oscuro.png": {
+    "png": "690c48346a7f3b89",
+    "fuentes": {
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m30_peso_del_semestre.claro.en.png": {
+    "png": "5a7e8ff72b3536d8",
+    "fuentes": {
+      "m30_panel.json": "e86bab49ea2509c2",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m30_peso_del_semestre.claro.png": {
+    "png": "7aaa529733fb7696",
+    "fuentes": {
+      "m30_panel.json": "e86bab49ea2509c2",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m30_peso_del_semestre.oscuro.en.png": {
+    "png": "9e90dc837b78df37",
+    "fuentes": {
+      "m30_panel.json": "e86bab49ea2509c2",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m30_peso_del_semestre.oscuro.png": {
+    "png": "c938f32944be09b2",
+    "fuentes": {
+      "m30_panel.json": "e86bab49ea2509c2",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m31_arco_del_proyecto.claro.en.png": {
+    "png": "becefa14657f398a",
+    "fuentes": {
+      "bronze.json": "8f913794fe1b2389",
+      "m01_raw.json": "668d0702c8f5b47e",
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "m17_dbt.json": "6f858b64eef17471",
+      "m19_postgres.json": "6455d00625c8feec",
+      "m27_residual.json": "57c0759752220c18",
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m31_arco_del_proyecto.claro.png": {
+    "png": "8a0b8bc4ec8e2d92",
+    "fuentes": {
+      "bronze.json": "8f913794fe1b2389",
+      "m01_raw.json": "668d0702c8f5b47e",
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "m17_dbt.json": "6f858b64eef17471",
+      "m19_postgres.json": "6455d00625c8feec",
+      "m27_residual.json": "57c0759752220c18",
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m31_arco_del_proyecto.oscuro.en.png": {
+    "png": "972a88345985e8e4",
+    "fuentes": {
+      "bronze.json": "8f913794fe1b2389",
+      "m01_raw.json": "668d0702c8f5b47e",
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "m17_dbt.json": "6f858b64eef17471",
+      "m19_postgres.json": "6455d00625c8feec",
+      "m27_residual.json": "57c0759752220c18",
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  },
+  "fig_m31_arco_del_proyecto.oscuro.png": {
+    "png": "a8d5c110e012bf92",
+    "fuentes": {
+      "bronze.json": "8f913794fe1b2389",
+      "m01_raw.json": "668d0702c8f5b47e",
+      "m14_plata.json": "ba1548aeb2ae18dc",
+      "m17_dbt.json": "6f858b64eef17471",
+      "m19_postgres.json": "6455d00625c8feec",
+      "m27_residual.json": "57c0759752220c18",
+      "m28_veredicto.json": "38434fd9f0a28579",
+      "palette.json": "53c57f5c1fa6ac79"
+    }
+  }
+}

@@ -67,7 +67,7 @@ de un umbral, arranca y comprime. Cuando llega arriba, para. Y vuelta a empezar.
 
 {{FIG:fig_m01_anatomia_del_compresor}}
 
-Ahí está la máquina entera en dos horas de un martes cualquiera. La presión baja despacio,
+Ahí está la máquina entera en dos horas de un lunes cualquiera. La presión baja despacio,
 porque el tren va consumiendo aire. Toca el umbral, el compresor arranca, y la presión sube casi
 en vertical.
 

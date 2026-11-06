@@ -291,6 +291,18 @@ def perilla_umbral(serie: list[dict], barrido: list[dict],
             "en": "at this threshold it catches {detecta} failures out of four, "
                   "and wakes someone on {falsas} days for nothing",
         },
+        # La línea de puntos NO es un umbral: son los días con avería de verdad,
+        # acumulados. El pie genérico de las perillas decía «la referencia, con
+        # 1,15 bar/min» y se leía como si el 1,15 fuese la línea. El número de
+        # días sale del propio trazo, no de la prosa.
+        "nota_referencia": {
+            "es": f"la línea de puntos son los {len(dias_de_suceso)} días con avería "
+                  "de verdad, acumulados; el mando arranca en {valor} {unidad}, el "
+                  "umbral más alto que aún los pilla todos",
+            "en": f"the dotted line is the {len(dias_de_suceso)} days with a real "
+                  "failure, accumulated; the knob starts at {valor} {unidad}, the "
+                  "highest threshold that still catches them all",
+        },
         "referencia": {
             "valor": elegido, "trazo": ideal,
             "carga": 0.0, "arranques": 0, "detecta": 4, "falsas": 0,

@@ -6,7 +6,7 @@ module: 7
 
 - CSV guarda fila tras fila. Parquet guarda cada columna por separado, y eso lo cambia todo.
 - Preguntar por una columna sale **54 veces** más rápido en Parquet que en el CSV.
-- La ventaja **se encoge** cuando la pregunta usa más columnas: de 54 veces a **25**.
+- La ventaja **se encoge** cuando la pregunta usa más columnas: de 54 veces a **22**.
 - El peso de un Parquet no está en las filas: la columna `timestamp` es el **30,4 %** del fichero.
 - Las mismas 1.516.948 filas ocupan **16,84 MB con 17 columnas y 0,03 MB con 2**.
 

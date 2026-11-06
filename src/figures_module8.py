@@ -101,7 +101,11 @@ def main() -> None:
             for lado in ("left", "bottom"):
                 ax.spines[lado].set_visible(False)
             ax.tick_params(length=0)
-            ax.set_xlabel("cada casilla es un día y cuanto más clara más saltó la alarma; "
+            # El acento se pinta con más opacidad cuanto más salta la alarma, y
+            # eso aclara la casilla sobre grafito pero la oscurece sobre papel.
+            # El pie decía «más clara» en los dos temas y en el claro era al revés.
+            tono = "clara" if theme == "oscuro" else "oscura"
+            ax.set_xlabel(f"cada casilla es un día y cuanto más {tono} más saltó la alarma; "
                           "el aspa es un día que no existe")
 
             fig.tight_layout(pad=0.6)

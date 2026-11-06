@@ -6,7 +6,7 @@ module: 7
 
 - CSV stores row after row. Parquet stores each column apart, and that changes everything.
 - Asking for one column comes out **54 times** faster in Parquet than in the CSV.
-- The advantage **shrinks** when the question uses more columns: from 54 times to **25**.
+- The advantage **shrinks** when the question uses more columns: from 54 times to **22**.
 - A Parquet's weight is not in the rows: the `timestamp` column is **30.4 %** of the file.
 - The same 1,516,948 rows take **16.84 MB with 17 columns and 0.03 MB with 2**.
 

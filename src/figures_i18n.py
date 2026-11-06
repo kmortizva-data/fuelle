@@ -158,6 +158,8 @@ TRADUCCIONES: dict[str, str] = {
     "ene": "jan", "abr": "apr", "ago": "aug", "dic": "dec",
     "cada casilla es un día y cuanto más clara más saltó la alarma; el aspa es un día que no existe":
         "each cell is a day, the lighter the more the alarm fired;\nthe cross is a day that does not exist",
+    "cada casilla es un día y cuanto más oscura más saltó la alarma; el aspa es un día que no existe":
+        "each cell is a day, the darker the more the alarm fired;\nthe cross is a day that does not exist",
 
     # --- módulo 9, tipos y decisiones ----------------------------------
     "corriente del motor, en amperios (los cortes en trazo discontinuo)":
@@ -383,6 +385,11 @@ PATTERNS: list[tuple[str, str]] = [
     (r"^([\d.,]+) falsas/mes$", r"\1 false/month"),
     # El umbral que elige el barrido del módulo 28, que cambia con los datos.
     (r"^umbral ([\d.,]+)$", r"threshold \1"),
+    # El pie de la rejilla del módulo 20, con las cuentas leídas del JSON.
+    (r"^(\d+) casillas encendidas para (\d+) guardas: las (\d+) de no vacio no son "
+     r"guardas del catalogo, y (\d+) condicion vigila dos columnas$",
+     r"\1 cells lit for \2 guards: the \3 not null are not guards in the catalogue, "
+     r"and \4 check covers two columns"),
 
     # Las etiquetas que llevan una cifra medida dentro. Van por patrón y no una a
     # una a propósito: `es()` ya devuelve el número en inglés, así que fijarlo en

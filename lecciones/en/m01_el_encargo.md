@@ -64,7 +64,7 @@ it starts and compresses. When it reaches the top, it stops. And round again.
 
 {{FIG:fig_m01_anatomia_del_compresor}}
 
-There is the whole machine over two hours of an ordinary Tuesday. Pressure falls slowly, because
+There is the whole machine over two hours of an ordinary Monday. Pressure falls slowly, because
 the train keeps consuming air. It touches the threshold, the compressor starts, and pressure rises
 almost vertically. Afterwards the motor keeps turning a while without compressing anything, which
 is what the datasheet calls running offloaded, and that is why the current sits around 4 A instead

@@ -205,8 +205,66 @@ def check(path: Path, known: set, excepciones: dict) -> list[str]:
     return problems
 
 
+# La cabecera de cada lección, en los dos idiomas.
+RESUMEN = re.compile(r"^## (?:En 30 segundos|In 30 seconds)\n(.*?)^## ", re.S | re.M)
+# «dos partes numerados `#1`»: una etiqueta, no una cantidad.
+ETIQUETA = re.compile(r"#\d+")
+
+
+def own_numbers(module: int, temario: dict) -> set:
+    """Los números que puede citar la cabecera de un módulo: los de SUS resultados.
+
+    Con el redondeo a entero incluido, porque la cabecera resume («unos 20 s»
+    por 19,3, «95 veces» por 95,4), y con los hechos verificados del temario.
+    """
+    out: set = set()
+    for f in RESULTS.glob(f"m{module:02d}_*.json"):
+        harvest(json.loads(io.open(f, encoding="utf-8").read()), out)
+    out |= {str(round(float(v))) for v in list(out) if re.fullmatch(r"\d+\.\d+", v)}
+    harvest(temario.get("_hechos_verificados", {}), out)
+    module_entry = next((m for m in temario["modules"] if m["number"] == module), {})
+    harvest(module_entry.get("cifra", {}), out)
+    return out
+
+
+def headline(path: Path, temario: dict, excepciones: dict) -> list[str]:
+    """La negrita del «En 30 segundos» tiene que salir de los resultados de SU módulo.
+
+    La regla general mira si el número existe en algún fichero de results/, y
+    un «25» existe en muchos. Así pasó la puerta el resumen del módulo 7, que
+    decía «de 54 veces a 25» cuando su propio JSON dice 21,6 (22 redondeado):
+    el 25 era de otra corrida. La cabecera es lo que más se lee y lo que menos se
+    revisa, así que aquí la vara es más estrecha. Medido antes de activarla: con
+    el redondeo a entero, los hechos del temario y las etiquetas `#N` fuera, las
+    62 lecciones pasan, y con el 25 de vuelta en el 7 caza las dos ediciones.
+    """
+    text = io.open(path, encoding="utf-8").read()
+    section = RESUMEN.search(text)
+    if not section:
+        return []
+    lang = "en" if path.parent.name == "en" else "es"
+    own = own_numbers(int(path.name[1:3]), temario)
+    permitidos = {canonical(k, "en") or k
+                  for k in excepciones.get(clave(path), {})}
+    problems = []
+    for trozo in NEGRITA.findall(section.group(1)):
+        for m in NUMBER.finditer(ETIQUETA.sub(" ", DATE.sub(" ", trozo))):
+            crudo = m.group()
+            value = (canonical(crudo, lang)
+                     or _trim(crudo.replace(".", "").replace(",", ".") if lang == "es"
+                              else crudo.replace(",", "")))
+            if value in own or value in permitidos:
+                continue
+            problems.append(
+                f"{path.name}  «{crudo}» en el resumen no sale de los resultados de "
+                f"su módulo (results/m{path.name[1:3]}_*.json)"
+            )
+    return problems
+
+
 def main() -> None:
     known = measured()
+    temario = json.loads(io.open(PROJECT / "temario.json", encoding="utf-8").read())
     excepciones = allowed()
     lecciones = sorted(LESSONS.glob("m[0-9][0-9]_*.md"))
     lecciones += sorted((LESSONS / "en").glob("m[0-9][0-9]_*.md"))
@@ -217,7 +275,7 @@ def main() -> None:
     print(f"  {len(known)} números medidos en results/ y en el temario")
     problems = []
     for path in lecciones:
-        found = check(path, known, excepciones)
+        found = check(path, known, excepciones) + headline(path, temario, excepciones)
         etiqueta = path.stem + (" (en)" if path.parent.name == "en" else "")
         print(f"  {etiqueta:<26} {'verde' if not found else f'{len(found)} sin respaldo'}")
         problems += found

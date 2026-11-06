@@ -1207,6 +1207,40 @@ la cifra dentro de la figura y las figuras que faltan, y perillas nuevas. **Nada
 espera el visto bueno de Kevin.** Las notas de los seis lectores están fuera del repo, en la
 carpeta de notas de sesión `fuelle_auditoria_visual`.
 
+### Fase 1 de la auditoría HECHA (2026-11-06): lo publicado y falso
+
+Kevin: «Sí, lo falso primero». Los siete falsos del informe, más el cero negativo del 27.
+**Sin subir.**
+
+| Defecto | Arreglo |
+|---|---|
+| m21: figura española caducada (0,2943 donde el JSON dice 0,2925) | redibujada desde `m21_indices.json` |
+| m08: el pie dice «más clara» también en tema claro | «más oscura» en claro, en los dos idiomas |
+| m07: el resumen dice 25 veces | 22, el 21,6 de su JSON |
+| m28: la nota llama referencia a los días con avería | `nota_referencia` en el JSON, con los 7 días contados del trazo |
+| m25: la perilla dice 7 arranques en las diez posiciones | simulada a 8 horas, como la tabla: 15, 14 y 13 |
+| m01: «un martes» | lunes, el 10 de febrero de 2020 |
+| m20: 21 casillas para 12 guardas sin explicar | total por columna y una línea que lo cuadra, comprobada contra el JSON |
+| m27: «-0,0×» | `sin_cero_negativo()` en el origen y en `_numero()` |
+
+**La guarda nueva, en `check_lesson`: cada PNG tiene receta** (`src/recetas.py`,
+`results/figuras_fuentes.json`): la huella del propio PNG y la huella canónica de cada
+`results/*.json` que leyó su script. **Por contenido y no por fecha**, a propósito: la guarda de
+fechas que pedía el encargo acusa a 24 figuras correctas, porque la reconstrucción del 29
+reescribió sus JSON con el mismo contenido. Probada dos veces: con los PNG españoles viejos del 21
+devueltos marca esos dos y solo esos, y cambiando el JSON después de dibujar marca los cuatro.
+**No ve** lo que no es `results/*.json`: el lago (1 y 2), el manifest de dbt (17) y Dagster (29).
+
+**Sembrar las recetas obligó a redibujar las 156.** Solo cambiaron bytes el 21 español (el
+caducado), el 17 español y los cuatro del 29, que dibujan de dbt y Dagster y salen iguales a la vista.
+
+**`check_numbers` aprieta la cabecera:** la negrita del «En 30 segundos» tiene que salir de los
+resultados de SU módulo, con redondeo a entero. Caza el 25 en las dos ediciones. Un solo falso
+positivo, el «unos 20 s» del 19, declarado en `permitidos.json` con su razón.
+
+**Seguimiento, no hecho:** `build_site.py` reescribe `results/m31_folio.json` y se lleva el bloque
+`impreso` que deja `imprime.py`. Se devolvió a mano antes del commit.
+
 ## Riesgos declarados
 
 1. **1,5 millones de filas no son big data.** Es una tabla mediana. El curso lo dice en el módulo

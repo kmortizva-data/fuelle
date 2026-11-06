@@ -212,8 +212,13 @@ def perilla_valle(dep: Deposito) -> dict:
 
 
 def perilla_paso(dep: Deposito) -> dict:
-    """Módulo 25: mover el paso de tiempo y ver cuándo la simulación se rompe."""
-    minutos = 4 * 60
+    """Módulo 25: mover el paso de tiempo y ver cuándo la simulación se rompe.
+
+    El mismo turno de HORAS que la tabla de la lección. Con cuatro horas caben
+    siete ciclos y ningún paso llega a perder uno, así que la perilla enseñaba
+    7 arranques en las diez posiciones mientras la lección contaba de 15 a 13.
+    """
+    minutos = HORAS * 60
     patron = avanza(dep, dep.consumo, minutos, PASO_FINO)
     series = []
     for segundos in PASOS:

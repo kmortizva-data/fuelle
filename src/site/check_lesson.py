@@ -29,6 +29,9 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(ROOT / "src"))
+
+import recetas  # noqa: E402
 COURSE_DIR = ROOT / "lecciones"
 
 # A lesson file is m<NN>_<slug>.md. The pattern is this strict because Windows
@@ -91,12 +94,37 @@ def figure_files(body: str) -> list[str]:
                 fichero = ROOT / "figuras" / f"{name}.{theme}{sufijo}.png"
                 if not fichero.exists():
                     faltan.append(fichero.name)
-    if not faltan:
+    if faltan:
+        quien = ("src/figures_build_en.py" if all(".en." in f for f in faltan)
+                 else f"src/figures_module{match.group(1)}.py")
+        return [f"faltan {len(faltan)} ficheros de figura ({', '.join(faltan[:3])}"
+                f"{'...' if len(faltan) > 3 else ''}). Corre {quien}"]
+    return stale_figures(module)
+
+
+def stale_figures(module: dict) -> list[str]:
+    """Ningún PNG puede contar algo distinto de los resultados de los que sale.
+
+    La figura española del 21 enseñó 0,2943 s durante dos meses mientras su JSON
+    decía 0,2925: se rehízo la inglesa y la española no. Existir no basta, así que
+    cada PNG se compara con su receta (src/recetas.py): su propia huella y la de
+    cada JSON que leyó su script. Por contenido y no por fecha, porque la
+    reconstrucción del 29 reescribió dos docenas de JSON idénticos y una guarda de
+    fechas acusa a 24 figuras correctas.
+    """
+    recipes = recetas.load()
+    problems = []
+    for name in module.get("figuras", []):
+        for theme in ("claro", "oscuro"):
+            for sufijo in ("", ".en"):
+                png = ROOT / "figuras" / f"{name}.{theme}{sufijo}.png"
+                problems += recetas.stale(png, recipes)
+    if not problems:
         return []
-    quien = ("src/figures_build_en.py" if all(".en." in f for f in faltan)
-             else f"src/figures_module{match.group(1)}.py")
-    return [f"faltan {len(faltan)} ficheros de figura ({', '.join(faltan[:3])}"
-            f"{'...' if len(faltan) > 3 else ''}). Corre {quien}"]
+    ingles = all(".en." in p.split(" ")[0] for p in problems)
+    quien = ("src/figures_build_en.py" if ingles
+             else f"src/figures_module{module['number']}.py y src/figures_build_en.py")
+    return [f"{p}. Corre {quien}" for p in problems]
 
 
 def promised_figure(path: str, body: str) -> list[str]:
